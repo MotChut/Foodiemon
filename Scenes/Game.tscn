@@ -6,12 +6,12 @@
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_5tian"]
+[sub_resource type="Sky" id="Sky_e2skk"]
 sky_material = SubResource("ProceduralSkyMaterial_grcev")
 
 [sub_resource type="Environment" id="Environment_c7vi6"]
 background_mode = 2
-sky = SubResource("Sky_5tian")
+sky = SubResource("Sky_e2skk")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -36,6 +36,7 @@ shadow_enabled = true
 shadow_opacity = 0.8
 
 [node name="Player" parent="." instance=ExtResource("1_wrtc5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.22632, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_u8hnu")

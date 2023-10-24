@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch0pnw6f33m55"]
+
+[ext_resource type="Script" path="res://Scenes/Map/ProceduralGeneration.cs" id="1_cway7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_05kvn"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5tian"]
+sky_material = SubResource("ProceduralSkyMaterial_05kvn")
+
+[sub_resource type="Environment" id="Environment_yk2k6"]
+background_mode = 2
+sky = SubResource("Sky_5tian")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="ProceduralGeneration" type="Node3D"]
+script = ExtResource("1_cway7")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_yk2k6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.8
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 75, 75)
+v_offset = 10.0
+projection = 1
+current = true
+size = 200.0
+far = 1000.0

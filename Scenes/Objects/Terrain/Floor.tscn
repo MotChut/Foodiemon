@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwr1e78kxrfwd"]
+
+[ext_resource type="PackedScene" uid="uid://6f5n8plhjlno" path="res://Scenes/Objects/Terrain/Terrain.tscn" id="1_738p7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pevb7"]
+albedo_color = Color(0.45098, 0.568627, 0.266667, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s3kf0"]
+material = SubResource("StandardMaterial3D_pevb7")
+
+[node name="Floor" instance=ExtResource("1_738p7")]
+
+[node name="Mesh" parent="." index="0"]
+mesh = SubResource("BoxMesh_s3kf0")
