@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "FiK3LPt56vfmkBKEVOJRc2K27a/xIWVf8M631U4BlUoyltupdoM/QX5ja7zQKpAku4JlzpNVL6p6J9QP2drU2A==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Kiet\\Documents\\GitHub\\Foodiemon\\Foodiemon.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Kiet\\.nuget\\packages\\godot.sourcegenerators\\4.1.1\\godot.sourcegenerators.4.1.1.nupkg.sha512",
+    "C:\\Users\\Kiet\\.nuget\\packages\\godotsharp\\4.1.1\\godotsharp.4.1.1.nupkg.sha512",
+    "C:\\Users\\Kiet\\.nuget\\packages\\godotsharpeditor\\4.1.1\\godotsharpeditor.4.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,55 @@
+[gd_scene load_steps=8 format=3 uid="uid://bwxcxddwbb4wr"]
+
+[ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Player/Player.tscn" id="1_wrtc5"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_grcev"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5tian"]
+sky_material = SubResource("ProceduralSkyMaterial_grcev")
+
+[sub_resource type="Environment" id="Environment_c7vi6"]
+background_mode = 2
+sky = SubResource("Sky_5tian")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kp2x"]
+albedo_color = Color(0.541176, 0.596078, 0.427451, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u8hnu"]
+material = SubResource("StandardMaterial3D_1kp2x")
+size = Vector2(20, 20)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jrabk"]
+data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[node name="Game" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c7vi6")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+shadow_opacity = 0.8
+
+[node name="Player" parent="." instance=ExtResource("1_wrtc5")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_u8hnu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_jrabk")
+
+[node name="Pivot" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 75, 75)
+projection = 1
+size = 20.0
+far = 1000.0

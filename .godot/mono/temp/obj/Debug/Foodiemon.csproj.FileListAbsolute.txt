@@ -1,0 +1,17 @@
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\Foodiemon.deps.json
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\Foodiemon.runtimeconfig.json
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\Foodiemon.dll
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\Foodiemon.pdb
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\GodotSharp.dll
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\GodotSharpEditor.dll
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.csproj.AssemblyReference.cache
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.AssemblyInfoInputs.cache
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.AssemblyInfo.cs
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.csproj.CoreCompileInputs.cache
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.csproj.CopyComplete
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.dll
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\refint\Foodiemon.dll
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.pdb
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.genruntimeconfig.cache
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\ref\Foodiemon.dll
