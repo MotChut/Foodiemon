@@ -1,0 +1,8 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1698130684
+icon.svg::CompressedTexture2D::8403530608082025044::1698130227::1698130686::1::::<><>::
+::res://Scenes/::1698130227
+Game.tscn::PackedScene::3978218602523986825::1698130227::0::1::::<><>::uid://cadar5emaw6s6::::res://Scenes/Player/Player.tscn
+::res://Scenes/Player/::1698130227
+Player.cs::CSharpScript::-1::1698130227::0::1::::<><>::
+Player.tscn::PackedScene::4779066441570612911::1698130227::0::1::::<><>::res://Scenes/Player/Player.cs
