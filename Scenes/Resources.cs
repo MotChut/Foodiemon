@@ -3,13 +3,20 @@ using System;
 
 public partial class Resources : Node
 {
+	public enum Entities
+	{
+		Player, 
+		Chicpea,
+		Dukapa
+	}
+	
 	public enum TerrainType {
-		FLOOR,
-		WATER
+		FLOOR
 	}
 
-	public const int TILE_SIZE = 1;
+	public const int TILE_SIZE = 10;
 
-	public const string FLOOR_SCENE = "res://Scenes/Objects/Terrain/Floor.tscn";
-	public const string WATER_SCENE = "res://Scenes/Objects/Terrain/Water.tscn";
+	public const string FLOOR_SCENE = "res://Scenes/Environment/Terrain/Floor.tscn";
+
+	public const string TREE_SCENE = "res://Scenes/Environment/Object/Tree.tscn";
 }

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwr1e78kxrfwd"]
+
+[ext_resource type="PackedScene" uid="uid://6f5n8plhjlno" path="res://Scenes/Environment/Terrain/Terrain.tscn" id="1_q660v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejymt"]
+albedo_color = Color(0.25098, 0.47451, 0.352941, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s3kf0"]
+material = SubResource("StandardMaterial3D_ejymt")
+size = Vector3(10, 1, 10)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bybb3"]
+data = PackedVector3Array(-5, 0.5, 5, 5, 0.5, 5, -5, -0.5, 5, 5, 0.5, 5, 5, -0.5, 5, -5, -0.5, 5, 5, 0.5, -5, -5, 0.5, -5, 5, -0.5, -5, -5, 0.5, -5, -5, -0.5, -5, 5, -0.5, -5, 5, 0.5, 5, 5, 0.5, -5, 5, -0.5, 5, 5, 0.5, -5, 5, -0.5, -5, 5, -0.5, 5, -5, 0.5, -5, -5, 0.5, 5, -5, -0.5, -5, -5, 0.5, 5, -5, -0.5, 5, -5, -0.5, -5, 5, 0.5, 5, -5, 0.5, 5, 5, 0.5, -5, -5, 0.5, 5, -5, 0.5, -5, 5, 0.5, -5, -5, -0.5, 5, 5, -0.5, 5, -5, -0.5, -5, 5, -0.5, 5, 5, -0.5, -5, -5, -0.5, -5)
+
+[node name="Floor" instance=ExtResource("1_q660v")]
+meshSize = Vector3(10, 1, 10)
+
+[node name="Mesh" parent="." index="0"]
+mesh = SubResource("BoxMesh_s3kf0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mesh" index="0"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/StaticBody3D" index="0"]
+shape = SubResource("ConcavePolygonShape3D_bybb3")

@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4ivfnd65wb85"]
+
+[ext_resource type="Script" path="res://Scenes/Components/Camera.cs" id="1_80p3q"]
+
+[node name="Camera" type="Node3D"]
+transform = Transform3D(0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0)
+script = ExtResource("1_80p3q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 10, 10)
+projection = 1
+current = true
+fov = 10.0
+size = 20.0
+far = 25.0

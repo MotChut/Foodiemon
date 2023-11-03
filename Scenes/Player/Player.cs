@@ -3,7 +3,7 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
-	public const float Speed = 10.0f;
+	public const float Speed = 15.0f;
 	public const float JumpVelocity = 4.5f;
 	public const float AngularAccel = 8.0f;
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -11,11 +11,11 @@ public partial class Player : CharacterBody3D
 
 	Vector3 lastDirection = Vector3.Zero;
 
-
+	Node3D sprite;
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// sprite = GetNode<Node3D>("Sprite");
+		sprite = GetNode<Node3D>("Sprite");
 		// collisionShape3D = GetNode<CollisionShape3D>("CollisionShape3D");
 
 		Vector3 velocity = Velocity;
@@ -41,7 +41,7 @@ public partial class Player : CharacterBody3D
 			velocity.Z = Mathf.MoveToward(Velocity.Z, 0, Speed);
 		}
 
-		Velocity = velocity.Rotated(Vector3.Up, GetParent().GetNode<Node3D>("Pivot").Rotation.Y);
+		Velocity = velocity.Rotated(Vector3.Up, GetParent().GetNode<Node3D>("Camera").Rotation.Y);
 		MoveAndSlide();
 		
 		RotateToDirection((float)delta);
@@ -49,13 +49,13 @@ public partial class Player : CharacterBody3D
 
 	void RotateToDirection(float delta)
 	{
-		// sprite.Rotation = GetFacingDirection(sprite, delta);
+		sprite.Rotation = GetFacingDirection(sprite, delta);
 		// collisionShape3D.Rotation = GetFacingDirection(collisionShape3D ,delta);
 	}
 
 	Vector3 GetFacingDirection(Node3D o, float delta)
 	{
-		Vector3 rotatedDirection = lastDirection.Rotated(Vector3.Up, GetParent().GetNode<Node3D>("Pivot").Rotation.Y);
+		Vector3 rotatedDirection = lastDirection.Rotated(Vector3.Up, GetParent().GetNode<Node3D>("Camera").Rotation.Y);
 		Vector3 r = new Vector3(o.Rotation.X, 
 							Mathf.LerpAngle(o.Rotation.Y, Mathf.Atan2(rotatedDirection.X, rotatedDirection.Z), delta * AngularAccel), 
 							o.Rotation.Z);
