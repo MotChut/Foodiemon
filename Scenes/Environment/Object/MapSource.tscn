@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://l70rw43trewg"]
+
+[ext_resource type="PackedScene" uid="uid://y30e118lvqio" path="res://Scenes/Environment/Object/Object.tscn" id="1_vs12q"]
+[ext_resource type="Script" path="res://Scenes/Environment/Object/MapSource.cs" id="2_pt5ne"]
+
+[node name="MapSource" instance=ExtResource("1_vs12q")]
+script = ExtResource("2_pt5ne")
+minResources = 0
+maxResources = 0
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]

@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cp5b45n7ma2om"]
+
+[ext_resource type="PackedScene" uid="uid://y30e118lvqio" path="res://Scenes/Environment/Object/Object.tscn" id="1_xseeg"]
+[ext_resource type="Material" uid="uid://dcuqaxf8s0n7s" path="res://Scenes/Shaders/MovableGrass.tres" id="2_mvmvm"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_xj44j"]
+material = ExtResource("2_mvmvm")
+size = Vector3(0.4, 0.6, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l55tw"]
+material = ExtResource("2_mvmvm")
+size = Vector3(0.4, 0.6, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v07t4"]
+material = ExtResource("2_mvmvm")
+size = Vector3(0.4, 0.6, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j0hbq"]
+material = ExtResource("2_mvmvm")
+size = Vector3(0.4, 0.6, 0.4)
+
+[node name="MovableGrass" instance=ExtResource("1_xseeg")]
+objectSize = Vector3(1, 0.6, 1)
+
+[node name="Mesh" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0.3)
+mesh = SubResource("BoxMesh_xj44j")
+
+[node name="Mesh2" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0.3)
+mesh = SubResource("BoxMesh_l55tw")
+
+[node name="Mesh3" type="MeshInstance3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, -0.3)
+mesh = SubResource("BoxMesh_v07t4")
+
+[node name="Mesh4" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -0.3)
+mesh = SubResource("BoxMesh_j0hbq")

@@ -1,4 +1,7 @@
+res://Scenes/Shaders
 res://Scenes/Environment/Object
+res://Scenes/AI
+res://Scenes/Entities
 res://Scenes/Components/DayNightCycle
 res://Scenes/Components
 res://Scenes/Player

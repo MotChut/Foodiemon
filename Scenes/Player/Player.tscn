@@ -256,8 +256,8 @@ _data = {
 "Idle_001": SubResource("Animation_1gn5g")
 }
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2f2iy"]
-points = PackedVector3Array(-0.118827, 1.01315, -0.341056, 0.0974812, 1.23509, 0.417897, 0.150624, 1.25883, 0.385802, 0.1662, -0.000406384, 0.00261149, 0.3795, 1.26818, -0.07954, -0.366542, 1.25952, 0.168664, 0.0461312, 1.92041, -0.207477, -0.16387, 0.0296768, 0.0324714, -0.374908, 1.26634, -0.106744, 0.286831, 1.09607, -0.266891, 0.313981, 1.23187, 0.277293, -0.122405, 1.26209, 0.38965, 0.0689217, 0.390196, -0.211612, -0.0438011, 1.83034, -0.027413, 0.0946245, 0.96, 0.379742, -0.0438011, 1.83034, -0.267526, -0.285677, 1.20586, -0.268123, -0.253534, 1.01343, 0.300625, -0.151503, 0.0715621, -0.0507, 0.123671, 1.23218, -0.348883, 0.359928, 1.01295, 0.138761, 0.1662, -0.000406384, -0.0574374, -0.0902786, 0.96, 0.372252, -0.354749, 1.01253, -0.125661, 0.283, 1.06716, 0.300956, -0.363622, 1.09511, 0.167583, 0.0461312, 1.80026, 0.00261149, 0.358941, 1.01281, -0.0999706, -0.260423, 1.34533, 0.280322, -0.0672414, 0.466938, -0.241358, 0.373631, 1.2634, 0.115215, -0.123028, 1.23593, -0.354133)
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_mem0p"]
+radius = 0.4
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_3f0jv")
@@ -440,4 +440,14 @@ libraries = {
 }
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("ConvexPolygonShape3D_2f2iy")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_mem0p")
+
+[node name="Node3D" type="Sprite3D" parent="."]
+
+[node name="CanvasLayer" type="SubViewport" parent="Node3D"]
+
+[node name="Label" type="Label" parent="Node3D/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

@@ -9,9 +9,14 @@ public partial class Resources : Node
 		Chicpea,
 		Dukapa
 	}
+
+	public enum RegionType {
+
+	}
 	
 	public enum TerrainType {
-		FLOOR
+		FLOOR,
+		FOREST,
 	}
 
 	public const int TILE_SIZE = 10;
