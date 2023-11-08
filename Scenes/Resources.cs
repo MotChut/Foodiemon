@@ -24,4 +24,5 @@ public partial class Resources : Node
 	public const string FLOOR_SCENE = "res://Scenes/Environment/Terrain/Floor.tscn";
 
 	public const string TREE_SCENE = "res://Scenes/Environment/Object/Tree.tscn";
+	public const string MOVABLEGRASS_SCENE = "res://Scenes/Environment/Object/MovableGrass.tscn";
 }

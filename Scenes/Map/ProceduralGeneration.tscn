@@ -1,20 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://ch0pnw6f33m55"]
+[gd_scene load_steps=9 format=3 uid="uid://ch0pnw6f33m55"]
 
 [ext_resource type="Script" path="res://Scenes/Map/ProceduralGeneration.cs" id="1_cway7"]
 [ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Player/Player.tscn" id="2_5861x"]
 [ext_resource type="PackedScene" uid="uid://hn4pgblhccso" path="res://Scenes/Environment/Terrain/Ocean.tscn" id="2_q0d2n"]
 [ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="3_grltg"]
+[ext_resource type="PackedScene" uid="uid://cegsmtph48v0n" path="res://Scenes/Environment/Object/MovableGrass.tscn" id="5_b5uvv"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wak12"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3spq1"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_sv7a6"]
-sky_material = SubResource("ProceduralSkyMaterial_wak12")
+[sub_resource type="Sky" id="Sky_y7b38"]
+sky_material = SubResource("ProceduralSkyMaterial_3spq1")
 
-[sub_resource type="Environment" id="Environment_ciihf"]
-background_color = Color(0.537255, 0.541176, 0.819608, 1)
-sky = SubResource("Sky_sv7a6")
+[sub_resource type="Environment" id="Environment_d3q31"]
+background_mode = 2
+sky = SubResource("Sky_y7b38")
 tonemap_mode = 2
 glow_enabled = true
 
@@ -23,12 +24,11 @@ script = ExtResource("1_cway7")
 nRegion = 10
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_ciihf")
+environment = SubResource("Environment_d3q31")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
-directional_shadow_pancake_size = 0.0
 
 [node name="Ocean" parent="." instance=ExtResource("2_q0d2n")]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
@@ -41,5 +41,8 @@ transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 
 [node name="Camera" parent="." instance=ExtResource("3_grltg")]
+
+[node name="MovableGrass" parent="." instance=ExtResource("5_b5uvv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -151.046, 125, 1021.56)
 
 [editable path="Camera"]

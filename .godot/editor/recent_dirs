@@ -1,5 +1,6 @@
-res://Scenes/Shaders
+res://Scenes/Map
 res://Scenes/Environment/Object
+res://Scenes/Shaders
 res://Scenes/AI
 res://Scenes/Entities
 res://Scenes/Components/DayNightCycle

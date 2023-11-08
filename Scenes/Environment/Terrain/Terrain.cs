@@ -13,7 +13,7 @@ public partial class Terrain : Node3D
 	int chance = 5;
 	Random rnd;
 	Node3D objectList;
-	PackedScene treeScene = (PackedScene)ResourceLoader.Load(TREE_SCENE);
+	PackedScene movableGrassScene = (PackedScene)ResourceLoader.Load(MOVABLEGRASS_SCENE);
 
 	public override void _Ready()
 	{
@@ -31,12 +31,12 @@ public partial class Terrain : Node3D
 				int random = rnd.Next(100);
 				if (random < chance)
 				{
-					if (!IsNotSurrounded(new Vector2I(i, j))) continue;
-					Object tree = (Object)treeScene.Instantiate();
-					tree.Position = new Vector3(i - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, meshSize.Y / 2 + OBJECT_OFFSET, 
+					//if (!IsNotSurrounded(new Vector2I(i, j))) continue;
+					Object grass = (Object)movableGrassScene.Instantiate();
+					grass.Position = new Vector3(i - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, meshSize.Y / 2, 
 												j - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
-					tree.Name = i.ToString() + "," + j.ToString();
-					objectList.AddChild(tree);
+					grass.Name = i.ToString() + "," + j.ToString();
+					objectList.AddChild(grass);
 				}
 			}
 	}
