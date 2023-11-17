@@ -274,6 +274,7 @@ _data = {
 radius = 0.4
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
 script = ExtResource("1_3f0jv")
 maxSpd = 6.0
 accel = 3.0

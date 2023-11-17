@@ -2,6 +2,7 @@ using Godot;
 using static Resources;
 using System;
 using System.Collections.Generic;
+using System.Security.AccessControl;
 
 public partial class ProceduralGeneration : Node3D
 {
@@ -32,7 +33,6 @@ public partial class ProceduralGeneration : Node3D
 	[Export] int nRegion = 7;
 
 	List<Region> regions = new List<Region>();
-	List<VisibleOnScreenNotifier3D> visibleList = new List<VisibleOnScreenNotifier3D>();
 
 	#endregion
 
@@ -78,7 +78,7 @@ public partial class ProceduralGeneration : Node3D
 	{
 		List<Vector2> tree = new List<Vector2>();
 	
-		Region region = new Region();
+		Region region = new Region(RegionType.Forest);
 		tree.Add(Vector2.Zero);
 		regions.Add(region);
 
@@ -93,7 +93,7 @@ public partial class ProceduralGeneration : Node3D
 				if(newCell != new Vector2(-1, -1))
 				{
 					tree.Add(newCell);
-					Region newRegion = new Region();
+					Region newRegion = new Region(RegionType.Forest);
 					regions[tree.IndexOf(selectedCell)].AddNeighbor(newRegion, newCell - selectedCell);
 					regions.Add(newRegion);
 					break;

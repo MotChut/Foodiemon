@@ -1,3 +1,49 @@
-[gd_scene format=3 uid="uid://cy56tjjelcoqb"]
+[gd_scene load_steps=7 format=3 uid="uid://cy56tjjelcoqb"]
+
+[ext_resource type="Script" path="res://Scenes/Environment/Object/MapSource.cs" id="1_nrmaa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a88l4"]
+albedo_color = Color(0.929412, 0.439216, 0.32549, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_3ky52"]
+material = SubResource("StandardMaterial3D_a88l4")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_itd21"]
+height = 1.0
+radius = 1.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_a1w4s"]
+viewport_path = NodePath("InteractiveNotice/SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_u7x1l"]
+font_size = 48
 
 [node name="BerryBush" type="Node3D"]
+script = ExtResource("1_nrmaa")
+minResources = 6
+maxResources = 8
+isInteractive = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_3ky52")
+
+[node name="DetectArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectArea"]
+shape = SubResource("CylinderShape3D_itd21")
+
+[node name="InteractiveNotice" type="Sprite3D" parent="."]
+visible = false
+billboard = 1
+texture = SubResource("ViewportTexture_a1w4s")
+
+[node name="SubViewport" type="SubViewport" parent="InteractiveNotice"]
+transparent_bg = true
+size = Vector2i(40, 288)
+
+[node name="Label" type="Label" parent="InteractiveNotice/SubViewport"]
+offset_right = 40.0
+offset_bottom = 48.0
+text = "E"
+label_settings = SubResource("LabelSettings_u7x1l")
+horizontal_alignment = 1

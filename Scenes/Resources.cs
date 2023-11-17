@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Resources : Node
 {
@@ -11,12 +10,12 @@ public partial class Resources : Node
 	}
 
 	public enum RegionType {
-
+		Forest
 	}
 	
 	public enum TerrainType {
-		FLOOR,
-		FOREST,
+		Floor,
+		Forest,
 	}
 
 	public const int TILE_SIZE = 10;

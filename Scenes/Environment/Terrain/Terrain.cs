@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using static Object;
 using static Resources;
 
 public partial class Terrain : Node3D

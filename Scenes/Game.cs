@@ -15,4 +15,9 @@ public partial class Game : Node3D
 	{
 		(grassMaterial as ShaderMaterial).SetShaderParameter("character_position", player.GlobalTransform.Origin);
 	}
+
+    public Camera3D GetCamera()
+    {
+        return GetNode<Camera3D>("Camera/Camera3D");
+    }
 }

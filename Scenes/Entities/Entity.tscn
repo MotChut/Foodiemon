@@ -3,4 +3,15 @@
 [ext_resource type="Script" path="res://Scenes/Entities/Entity.cs" id="1_ja4sq"]
 
 [node name="Entity" type="CharacterBody3D"]
+collision_layer = 4
 script = ExtResource("1_ja4sq")
+
+[node name="Raycasts" type="Node3D" parent="."]
+
+[node name="Trackers" type="Node3D" parent="."]
+
+[node name="PreyTracker" type="Area3D" parent="Trackers"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/PreyTracker"]

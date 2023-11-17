@@ -11,7 +11,13 @@ public partial class Player : Entity
 	Node3D sprite;
 	AnimationPlayer animationPlayer;
 
-	public override void _PhysicsProcess(double delta)
+
+    public override void _Ready()
+    {
+        
+    }
+
+    public override void _PhysicsProcess(double delta)
 	{
 		sprite = GetNode<Node3D>("Sprite");
 		animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");

@@ -2,6 +2,7 @@ using Godot;
 using Godot.Collections;
 using System;
 using System.Collections.Generic;
+using static Resources;
 
 public partial class Region : Node
 {
@@ -18,28 +19,30 @@ public partial class Region : Node
 	}
 
 	const int MAX_NEIGHBORS = 3;
-	List<Vector2> cells = new List<Vector2>();
-	Region nextRegion;
+	List<Vector2> terrains = new List<Vector2>();
 	List<Neighbor> neighbors = new List<Neighbor>();
+	Region nextRegion;
+	RegionType regionType;
 
-	public override void _Ready()
+	public Region(RegionType regionType)
 	{
-		
+		this.regionType = regionType;
 	}
+	
 
 	public void AddCell(Vector2 cell)
 	{
-		cells.Add(cell);
+		terrains.Add(cell);
 	}
 
 	public Vector2 GetFirstCell()
 	{
-		return cells[0];
+		return terrains[0];
 	}
 
 	public List<Vector2> GetAllCells()
 	{
-		return cells;
+		return terrains;
 	}
 
 	public bool CanBeAdded()
@@ -65,11 +68,11 @@ public partial class Region : Node
 	public Vector2 GetRandomCell()
 	{
 		Random rnd = new Random();
-		return cells[rnd.Next(cells.Count)];
+		return terrains[rnd.Next(terrains.Count)];
 	}
 
 	public bool HasCell(Vector2 cell)
 	{
-		return cells.Contains(cell);
+		return terrains.Contains(cell);
 	}
 }
