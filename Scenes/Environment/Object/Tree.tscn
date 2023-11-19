@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bva7oh0d71emj"]
+[gd_scene load_steps=5 format=3 uid="uid://bva7oh0d71emj"]
+
+[ext_resource type="Script" path="res://Scenes/Environment/Object/Object.cs" id="1_15cih"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4lst"]
 albedo_color = Color(0.372549, 0.141176, 0.0666667, 1)
@@ -9,6 +11,9 @@ material = SubResource("StandardMaterial3D_l4lst")
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bex83"]
 
 [node name="Tree" type="Node3D"]
+script = ExtResource("1_15cih")
+objectSize = Vector3(1, 1, 1)
+isBlock = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

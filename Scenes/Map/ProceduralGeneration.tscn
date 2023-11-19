@@ -6,29 +6,36 @@
 [ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="3_grltg"]
 [ext_resource type="PackedScene" uid="uid://cegsmtph48v0n" path="res://Scenes/Environment/Object/MovableGrass.tscn" id="5_b5uvv"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3spq1"]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_a4tdl"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_y7b38"]
-sky_material = SubResource("ProceduralSkyMaterial_3spq1")
+[sub_resource type="Sky" id="Sky_0uxtq"]
+sky_material = SubResource("ProceduralSkyMaterial_a4tdl")
 
-[sub_resource type="Environment" id="Environment_d3q31"]
-background_mode = 2
-sky = SubResource("Sky_y7b38")
+[sub_resource type="Environment" id="Environment_sd7cf"]
+background_mode = 1
+background_color = Color(0.301961, 0.301961, 0.301961, 1)
+sky = SubResource("Sky_0uxtq")
 tonemap_mode = 2
+ssao_enabled = true
+ssao_intensity = 10.0
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.01
 
 [node name="ProceduralGeneration" type="Node3D"]
 script = ExtResource("1_cway7")
 nRegion = 10
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_d3q31")
+environment = SubResource("Environment_sd7cf")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+transform = Transform3D(-0.866025, -0.286788, 0.409576, 0, 0.819152, 0.573576, -0.5, 0.496731, -0.709407, 0, 0, 0)
+light_color = Color(0.992157, 0.658824, 0.462745, 1)
 shadow_enabled = true
+shadow_normal_bias = 1.0
 
 [node name="Ocean" parent="." instance=ExtResource("2_q0d2n")]
 transform = Transform3D(100, 0, 0, 0, 1, 0, 0, 0, 100, 0, 0, 0)

@@ -1,14 +1,13 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using static Resources;
 
 public partial class Entity : CharacterBody3D
 {
 	[Export] public int nRaycasts = 32;
 	[Export] public float raycastLength = 1.5f;
-	[Export] protected float rotAngle = 0.05f;
+	[Export] protected float rotAngle = 0.03f;
 	[Export] public float minSpd;
 	[Export] public float maxSpd;
 	[Export] protected float accel;
@@ -20,7 +19,7 @@ public partial class Entity : CharacterBody3D
 	[Export] public Entities entityType;
 
 	protected float speed;
-	public Entity target = null;
+	public Player target = null;
 
 	//protected int workPoint;
 
@@ -50,6 +49,8 @@ public partial class Entity : CharacterBody3D
     public override void _Ready()
     {
         raycastsNode = GetNode<Node3D>("Raycasts");
+
+		target = GetParent().GetParent().GetNode<Player>("Player");
 		
 		Init();
 		GenerateRaycasts();
@@ -59,8 +60,7 @@ public partial class Entity : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-		if(target == null) Wander();
-		else Chase();
+		Chase();
     }
 
 	void Init()

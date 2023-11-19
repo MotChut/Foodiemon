@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 public partial class Resources : Node
@@ -10,18 +11,18 @@ public partial class Resources : Node
 	}
 
 	public enum RegionType {
-		Forest
+		ForestRegion
 	}
 	
 	public enum TerrainType {
-		Floor,
-		Forest,
+		Floor, // Plain, only has passable objects
+		Trees, // Trees,...
+		ChicpeaBase // Base of Chicpeas
 	}
 
 	public const int TILE_SIZE = 10;
 
-	public const string FLOOR_SCENE = "res://Scenes/Environment/Terrain/Floor.tscn";
-
+	public const string ForestRegion_Scene = "res://Scenes/Environment/Terrain/ForestRegion.tscn";
 	public const string TREE_SCENE = "res://Scenes/Environment/Object/Tree.tscn";
 	public const string MOVABLEGRASS_SCENE = "res://Scenes/Environment/Object/MovableGrass.tscn";
 }

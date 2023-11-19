@@ -3,7 +3,9 @@ using System;
 
 public partial class Object : Node3D
 {
-	[Export] Vector3 objectSize;
+	const float regainFormSpd = 10;
+
+	[Export] public Vector3 objectSize;
 	[Export] public bool isInteractive;
 	[Export] public bool isBlock;
 	bool isWithin = false;
@@ -14,10 +16,12 @@ public partial class Object : Node3D
 
 	public override void _Ready()
 	{
-		detectArea = GetNode<Area3D>("DetectArea");
-
-		detectArea.Connect("body_entered", new Callable(this, "DetectArea_Enter"));
-		detectArea.Connect("body_exited", new Callable(this, "DetectArea_Exit"));
+		if(isInteractive)
+		{
+			detectArea = GetNode<Area3D>("DetectArea");
+			detectArea.Connect("body_entered", new Callable(this, "DetectArea_Enter"));
+			detectArea.Connect("body_exited", new Callable(this, "DetectArea_Exit"));
+		}
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -30,7 +34,7 @@ public partial class Object : Node3D
 		}
 		else
 		{
-			RotationDegrees = RotationDegrees.MoveToward(Vector3.Zero, 10);
+			RotationDegrees = RotationDegrees.MoveToward(Vector3.Zero, regainFormSpd);
 		}
     }
 

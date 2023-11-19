@@ -1,11 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://6f5n8plhjlno"]
+[gd_scene load_steps=3 format=3 uid="uid://6f5n8plhjlno"]
 
 [ext_resource type="Script" path="res://Scenes/Environment/Terrain/Terrain.cs" id="1_lmwni"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sobcu"]
+size = Vector3(10, 1, 10)
 
 [node name="Terrain" type="Node3D"]
 visible = false
 script = ExtResource("1_lmwni")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Mesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/StaticBody3D"]
+shape = SubResource("BoxShape3D_sobcu")
 
 [node name="ObjectList" type="Node3D" parent="."]

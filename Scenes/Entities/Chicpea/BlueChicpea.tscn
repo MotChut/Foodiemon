@@ -1,6 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0po1cpmd37vl"]
+[gd_scene load_steps=6 format=3 uid="uid://d0po1cpmd37vl"]
 
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_bm42e"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_nml0q"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4k50"]
 albedo_color = Color(0.486275, 0.580392, 0.941176, 1)
@@ -8,14 +10,9 @@ albedo_color = Color(0.486275, 0.580392, 0.941176, 1)
 [sub_resource type="SphereMesh" id="SphereMesh_y5tuw"]
 material = SubResource("StandardMaterial3D_d4k50")
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_g508i"]
-
 [sub_resource type="SphereMesh" id="SphereMesh_s7c4b"]
 radius = 0.25
 height = 0.5
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1lrfr"]
-points = PackedVector3Array(0.5, 0.5, 0, -0.5, 0.5, 0, -5, 0.5, -10, 5, 0.5, -10)
 
 [node name="BlueChicpea" instance=ExtResource("1_bm42e")]
 collision_mask = 7
@@ -23,13 +20,13 @@ minSpd = 2.0
 maxSpd = 3.0
 entityType = 1
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_nml0q")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_y5tuw")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("SphereShape3D_g508i")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
@@ -40,6 +37,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Trackers" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-
-[node name="CollisionShape3D" parent="Trackers/EyeSign" index="0"]
-shape = SubResource("ConvexPolygonShape3D_1lrfr")

@@ -2,7 +2,6 @@ using Godot;
 using static Resources;
 using System;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 
 public partial class ProceduralGeneration : Node3D
 {
@@ -31,15 +30,17 @@ public partial class ProceduralGeneration : Node3D
 	// int iterations = 8;
 	Random rnd;
 	[Export] int nRegion = 7;
+	[Export] int chicpeaRegionMax = 2;
+	[Export] int chicpeaMapMax = 10;
+	[Export] int chicpeaRate = 20;
 
 	List<Region> regions = new List<Region>();
 
 	#endregion
 
 	#region Nodes
-	PackedScene floorScene = (PackedScene)ResourceLoader.Load(FLOOR_SCENE);
-	Node3D terrainNode;
-	Node3D visiblerNode;
+	public Node3D terrainNode;
+	public Node3D visiblerNode;
 	Node3D camera;
 
 	#endregion
@@ -78,7 +79,7 @@ public partial class ProceduralGeneration : Node3D
 	{
 		List<Vector2> tree = new List<Vector2>();
 	
-		Region region = new Region(RegionType.Forest);
+		Region region = new Region(this, RegionType.ForestRegion);
 		tree.Add(Vector2.Zero);
 		regions.Add(region);
 
@@ -93,7 +94,7 @@ public partial class ProceduralGeneration : Node3D
 				if(newCell != new Vector2(-1, -1))
 				{
 					tree.Add(newCell);
-					Region newRegion = new Region(RegionType.Forest);
+					Region newRegion = new Region(this, RegionType.ForestRegion);
 					regions[tree.IndexOf(selectedCell)].AddNeighbor(newRegion, newCell - selectedCell);
 					regions.Add(newRegion);
 					break;
@@ -199,23 +200,7 @@ public partial class ProceduralGeneration : Node3D
 	{
 		foreach(Region region in regions)
 		{
-			List<Vector2> list = region.GetAllCells();
-			foreach(Vector2 cell in list)
-			{
-				Terrain terrain = (Terrain)floorScene.Instantiate();
-				terrain.Position = new Vector3(cell.X * TILE_SIZE, 0, cell.Y * TILE_SIZE);
-				terrain.Name = cell.X.ToString() + "," + cell.Y.ToString();
-				terrainNode.AddChild(terrain);
-
-                VisibleOnScreenNotifier3D visibleOnScreenNotifier3D = new VisibleOnScreenNotifier3D
-                {
-                    Aabb = new Aabb(new Vector3(TILE_SIZE / -2, -0.5f, TILE_SIZE / -2), new Vector3(TILE_SIZE, 1, TILE_SIZE)),
-                    Position = terrain.Position
-                };
-                visibleOnScreenNotifier3D.Connect("screen_entered", new Callable(terrain, "show"));
-				visibleOnScreenNotifier3D.Connect("screen_exited", new Callable(terrain, "hide"));
-				visiblerNode.AddChild(visibleOnScreenNotifier3D);
-			}
+			region.GenerateTerrain();
 		}
 	}
 
