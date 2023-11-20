@@ -1,8 +1,8 @@
 [gd_scene load_steps=9 format=3 uid="uid://ch0pnw6f33m55"]
 
 [ext_resource type="Script" path="res://Scenes/Map/ProceduralGeneration.cs" id="1_cway7"]
-[ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Player/Player.tscn" id="2_5861x"]
-[ext_resource type="PackedScene" uid="uid://hn4pgblhccso" path="res://Scenes/Environment/Terrain/Ocean.tscn" id="2_q0d2n"]
+[ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Entities/Player/Player.tscn" id="2_5861x"]
+[ext_resource type="PackedScene" uid="uid://hn4pgblhccso" path="res://Scenes/Environment/Ocean/Ocean.tscn" id="2_q0d2n"]
 [ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="3_grltg"]
 [ext_resource type="PackedScene" uid="uid://cegsmtph48v0n" path="res://Scenes/Environment/Object/MovableGrass.tscn" id="5_b5uvv"]
 

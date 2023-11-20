@@ -8,8 +8,8 @@ public partial class ProceduralGeneration : Node3D
 	[Export] int CAMERA_SPEED = 400;
 
 	#region Constants
-	const int MIN_REGION_SIZE = 100;
-	const int MAX_REGION_SIZE = 200;
+	const int MIN_REGION_SIZE = 50;
+	const int MAX_REGION_SIZE = 100;
 	const int MIN_DISTANCE = 1;
 	const int MAX_DISTANCE = 4;
 	List<Vector2> availableDirection4 = new List<Vector2>() 
@@ -29,7 +29,7 @@ public partial class ProceduralGeneration : Node3D
 	// int noiseDensity = 42;
 	// int iterations = 8;
 	Random rnd;
-	[Export] int nRegion = 7;
+	[Export] int nRegion = 4;
 	[Export] int chicpeaRegionMax = 2;
 	[Export] int chicpeaMapMax = 10;
 	[Export] int chicpeaRate = 20;
@@ -50,7 +50,7 @@ public partial class ProceduralGeneration : Node3D
 		terrainNode = GetNode<Node3D>("Terrain");
 		visiblerNode = GetNode<Node3D>("Visibler");
 		//camera = GetNode<Node3D>("Pivot");
-
+		proGen = this;
 		rnd = new Random();
 		GeneratePseudoTree();
 		// GenerateNoiseGrid();
@@ -79,7 +79,7 @@ public partial class ProceduralGeneration : Node3D
 	{
 		List<Vector2> tree = new List<Vector2>();
 	
-		Region region = new Region(this, RegionType.ForestRegion);
+		Region region = new Region(RegionType.ForestRegion);
 		tree.Add(Vector2.Zero);
 		regions.Add(region);
 
@@ -94,7 +94,7 @@ public partial class ProceduralGeneration : Node3D
 				if(newCell != new Vector2(-1, -1))
 				{
 					tree.Add(newCell);
-					Region newRegion = new Region(this, RegionType.ForestRegion);
+					Region newRegion = new Region(RegionType.ForestRegion);
 					regions[tree.IndexOf(selectedCell)].AddNeighbor(newRegion, newCell - selectedCell);
 					regions.Add(newRegion);
 					break;

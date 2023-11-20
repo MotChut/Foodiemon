@@ -50,7 +50,7 @@ public partial class Entity : CharacterBody3D
     {
         raycastsNode = GetNode<Node3D>("Raycasts");
 
-		target = GetParent().GetParent().GetNode<Player>("Player");
+		//target = GetParent().GetParent().GetNode<Player>("Player");
 		
 		Init();
 		GenerateRaycasts();
@@ -60,7 +60,7 @@ public partial class Entity : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-		Chase();
+		//Chase();
     }
 
 	void Init()

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "terraintype": "Floor",
+    "objectrate": 2,
+    "movablegrass": 6,
+    "tree": 2,
+    "berrybush": 1
+  },
+  {
+    "id": 1,
+    "terraintype": "Trees",
+    "objectrate": 2,
+    "movablegrass": 2,
+    "tree": 6,
+    "berrybush": 1
+  },
+  {
+    "id": 2,
+    "terraintype": "ChicpeaBase",
+    "objectrate": 1,
+    "movablegrass": 1,
+    "tree": 1,
+    "berrybush": 0
+  }
+]

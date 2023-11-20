@@ -1,5 +1,7 @@
 using Godot;
-using System;
+using static Utils;
+using static Resources;
+using System.Collections.Generic;
 
 public partial class Game : Node3D
 {
@@ -9,6 +11,7 @@ public partial class Game : Node3D
     public override void _Ready()
     {
         player = GetNode<Player>("Player");
+        
     }
 
     public override void _Process(double delta)

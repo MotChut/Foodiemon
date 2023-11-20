@@ -25,12 +25,10 @@ public partial class Region : Node
 	List<Neighbor> neighbors = new List<Neighbor>();
 	Region nextRegion;
 	RegionType regionType;
-	ProceduralGeneration proGen;
 	PackedScene packedScene;
 
-	public Region(ProceduralGeneration proGen, RegionType regionType)
+	public Region(RegionType regionType)
 	{
-		this.proGen = proGen;
 		this.regionType = regionType;
 		CreatePackedScene();
 		GenerateTerrainWeight();
@@ -51,9 +49,9 @@ public partial class Region : Node
 		switch(regionType)
 		{
 			case RegionType.ForestRegion:
-			terrainWeights.Add(TerrainType.Floor, 2);
-			terrainWeights.Add(TerrainType.Trees, 1);
-			//terrainWeights.Add(TerrainType.ChicpeaBase, 10);
+			terrainWeights.Add(TerrainType.Floor, 10);
+			terrainWeights.Add(TerrainType.Trees, 5);
+			terrainWeights.Add(TerrainType.ChicpeaBase, 1);
 			break;
 		}
 	}

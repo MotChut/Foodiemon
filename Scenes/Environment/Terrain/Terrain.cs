@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Resources;
+using static Utils;
 
 public partial class Terrain : Node3D
 {
@@ -13,8 +14,9 @@ public partial class Terrain : Node3D
 	int objectRate;
 	Random rnd;
 	Node3D objectList;
-	PackedScene movableGrassScene = (PackedScene)ResourceLoader.Load(MOVABLEGRASS_SCENE);
 	public TerrainType terrainType;
+	TerrainSettings terrainSettings;
+	EntitySettings entitySettings;
 	
 	Godot.Collections.Dictionary<string, int> objectTypes = new Godot.Collections.Dictionary<string, int>(){};
 	List<int> rates = new List<int>();
@@ -23,39 +25,18 @@ public partial class Terrain : Node3D
 	{
 		objectList = GetNode<Node3D>("ObjectList");
 		rnd = new Random();
-		GenerateObjectWeight();
-		rates = GenerateObjectRate();
+		terrainSettings = TerrainSettingsList[(int)terrainType];
+		// Check if the terrain spawns entities instead of objects
+		if(EntitiesTerrainType.Contains(terrainType))
+		{
+			entitySettings = EntitySettingsList[EntitiesTerrainType.IndexOf(terrainType)];
+			GenerateEntityBase();
+		}
+
 		GenerateObject();
 	}
 
-	void GenerateObjectWeight()
-	{
-		switch(terrainType)
-		{
-			case TerrainType.Floor:
-			objectRate = 5;
-			objectTypes.Add(MOVABLEGRASS_SCENE, 1);
-			//objectTypes.Add(TerrainType.ChicpeaBase, 10);
-			break;
-			case TerrainType.Trees:
-			objectRate = 5;
-			objectTypes.Add(TREE_SCENE, 1);
-			break;
-		}
-	}
-
-	List<int> GenerateObjectRate()
-	{
-		List<int> rates = new List<int>();
-		int temp = 0;
-		rates.Add(temp);
-		foreach(var obj in objectTypes)
-		{
-			temp += obj.Value;
-			rates.Add(temp);
-		}
-		return rates;
-	}
+	#region Objects
 
 	void GenerateObject()
 	{
@@ -63,9 +44,9 @@ public partial class Terrain : Node3D
 			for(int j = 0; j < TILE_SIZE; j++)
 			{
                 int random = rnd.Next(100);
-                if (random < objectRate) // having object
+                if (random < terrainSettings.objectRate) // having object
 				{
-					PackedScene packedScene = (PackedScene)ResourceLoader.Load(RollObject());
+					PackedScene packedScene = RollObject();
 					Object obj = (Object)packedScene.Instantiate();
 					if(obj.isBlock)
 						if(!IsNotSurrounded(new Vector2I(i, j))) continue;
@@ -78,33 +59,113 @@ public partial class Terrain : Node3D
 			}
 	}
 
-	string RollObject()
+	PackedScene RollObject()
 	{
-		GD.Print(rates[rates.Count - 1]);
-		int random = rnd.Next(rates[rates.Count - 1]);
+		int random = rnd.Next(terrainSettings.rates[terrainSettings.rates.Count - 1]);
 		int result = 0;
 
-		for(int i = 1; i < rates.Count; i++)
+		for(int i = 1; i < terrainSettings.rates.Count; i++)
 		{
-			if(random >= rates[i - 1] && random < rates[i])
+			if(random >= terrainSettings.rates[i - 1] && random < terrainSettings.rates[i])
 			{
 				result = i - 1;
 				break;
 			}
 		}
 		
-		return objectTypes.Keys.ElementAt(result);
+		return SceneDictionary.Values.ElementAt(result);
 	}
 
-	void GenerateEntity()
+
+	#endregion
+
+	void GenerateEntityBase()
 	{
+		GenerateHouse();
+		GenerateSources();
+		GenerateEntities();
+	}
+
+	void GenerateHouse()
+	{
+		int x =  rnd.Next(TILE_SIZE / 4, TILE_SIZE * 3 / 4);
+		int z =  rnd.Next(TILE_SIZE / 4, TILE_SIZE * 3 / 4);
+		PackedScene packedScene = entitySettings.houseScene;
+		Object house = (Object)packedScene.Instantiate();
+		house.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
+									z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+		house.Name = x.ToString() + "," + z.ToString();
+		objectList.AddChild(house);
+	}
+
+	void GenerateSources()
+	{
+		int nFoodSource = rnd.Next(entitySettings.minFoodSource, entitySettings.maxFoodSource);
+		while(nFoodSource > 0)
+		{
+			int x =  rnd.Next(TILE_SIZE);
+			int z =  rnd.Next(TILE_SIZE);
+			if (objectList.HasNode(x.ToString() + "," + z.ToString())) continue;
+			else
+			{
+				PackedScene packedScene = entitySettings.foodSourceScene;
+				Object foodSource = (Object)packedScene.Instantiate();
+				foodSource.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
+									z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+				foodSource.Name = x.ToString() + "," + z.ToString();
+				objectList.AddChild(foodSource);
+				nFoodSource -= 1;
+			}
+		}
+	}
+
+	void GenerateEntities()
+	{
+		// Spawn Leader
+		while(true)
+		{
+			// Check if position is available
+			int x =  rnd.Next(TILE_SIZE);
+			int z =  rnd.Next(TILE_SIZE);
+			Node node = objectList.GetNodeOrNull(x.ToString() + "," + z.ToString());
+			if(node != null) if((node as Object).isBlock) continue;
+			else continue;
+
+			// Spawn if possible
+			PackedScene packedScene = entitySettings.leaderScene;
+			Entity leader = (Entity)packedScene.Instantiate();
+			leader.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
+								z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+			//leader.Name = x.ToString() + "," + z.ToString();
+			objectList.AddChild(leader);
+			break;
+		}
 		
+		int nEntities = rnd.Next(entitySettings.minEntities, entitySettings.maxEntities);
+		while(nEntities > 0)
+		{
+			// Check if position is available
+			int x =  rnd.Next(TILE_SIZE);
+			int z =  rnd.Next(TILE_SIZE);
+			Node node = objectList.GetNodeOrNull(x.ToString() + "," + z.ToString());
+			if(node != null) if((node as Object).isBlock) continue;
+			else continue;
+	
+			// Spawn if possible
+			PackedScene packedScene = entitySettings.entityScene;
+			Entity entity = (Entity)packedScene.Instantiate();
+			entity.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
+								z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+			//entity.Name = x.ToString() + "," + z.ToString();
+			objectList.AddChild(entity);
+			nEntities -= 1;
+		}
 	}
 
 	bool IsNotSurrounded(Vector2I o)
 	{
-		for(int i = (int)(o.X - 1); i < o.X + 2; i++)
-			for(int j = (int)(o.Y - 1); j < o.Y + 2; j++)
+		for(int i = o.X - 1; i < o.X + 2; i++)
+			for(int j = o.Y - 1; j < o.Y + 2; j++)
 			{
 				if (objectList.HasNode(i.ToString() + "," + j.ToString())) return false;
 			}

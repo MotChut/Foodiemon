@@ -1,0 +1,14 @@
+[
+  {
+    "id": 0,
+    "terraintype": "ChicpeaBase",
+    "house": "res://Scenes/Entities/Chicpea/ChicpeaHouse.tscn",
+    "foodsource": "res://Scenes/Environment/Object/BerryBush.tscn",
+    "minfoodsource": 6,
+    "maxfoodsource": 10,
+    "leader": "res://Scenes/Entities/Chicpea/BlueChicpea.tscn",
+    "entity": "res://Scenes/Entities/Chicpea/Chicpea.tscn",
+    "minentities": 3,
+    "maxentities": 5
+  }
+]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cadar5emaw6s6"]
 
-[ext_resource type="Script" path="res://Scenes/Player/Player.cs" id="1_3f0jv"]
+[ext_resource type="Script" path="res://Scenes/Entities/Player/Player.cs" id="1_3f0jv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3c8b"]
 resource_name = "Material.001"

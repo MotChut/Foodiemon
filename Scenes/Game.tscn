@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://bwxcxddwbb4wr"]
 
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_u01k3"]
-[ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Player/Player.tscn" id="1_wrtc5"]
+[ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Entities/Player/Player.tscn" id="1_wrtc5"]
 [ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="2_04dq4"]
 [ext_resource type="Material" uid="uid://dcuqaxf8s0n7s" path="res://Scenes/Shaders/MovableGrass.tres" id="2_js272"]
 [ext_resource type="PackedScene" uid="uid://cy56tjjelcoqb" path="res://Scenes/Environment/Object/BerryBush.tscn" id="4_vkxi2"]
