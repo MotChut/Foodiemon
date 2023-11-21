@@ -275,7 +275,9 @@ radius = 0.4
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_3f0jv")
+objectSize = Vector3(1, 1.4, 1)
 maxSpd = 6.0
 accel = 3.0
 friction = 3.0

@@ -9,18 +9,25 @@ public partial class TerrainSettings : Node
 	public int movableGrass = 0;
 	public int tree = 0;
 	public int berryBush = 0;
-	public List<int> weights = new List<int>();
 	public List<int> rates = new List<int>();
 
-	public void GetWeights()
+	public void Init()
 	{
+		GetRate();
+	}
+
+	List<int> GetWeights()
+	{
+		List<int> weights = new List<int>();
 		weights.Add(movableGrass);
 		weights.Add(tree);
 		weights.Add(berryBush);
+		return weights;
 	}
 
-	public void GetRate()
+	void GetRate()
 	{
+		List<int> weights = GetWeights();
 		int temp = 0;
 		rates.Add(temp);
 		foreach(int w in weights)

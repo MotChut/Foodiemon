@@ -1,7 +1,4 @@
 using Godot;
-using static Utils;
-using static Resources;
-using System.Collections.Generic;
 
 public partial class Game : Node3D
 {

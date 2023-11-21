@@ -2,9 +2,10 @@
   {
     "id": 0,
     "regiontype": "Forest",
-    "chicpea": 5,
-    "floor": 10,
+    "path": "res://Scenes/Environment/Terrain/ForestRegion.tscn",
+    "chicpeamax": 10,
+    "floor": 5,
     "trees": 5,
-    "chicpeabase": 1
+    "chicpeabase": 5
   }
 ]

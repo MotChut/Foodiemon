@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cn1648f6p2ako"]
+[gd_scene load_steps=7 format=3 uid="uid://cn1648f6p2ako"]
 
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_nqom0"]
 [ext_resource type="Script" path="res://Scenes/Entities/Chicpea/Chicpea.cs" id="2_c8ney"]
@@ -8,6 +8,10 @@ albedo_color = Color(0.894118, 0.752941, 0.45098, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_tljmh"]
 material = SubResource("StandardMaterial3D_8ql6b")
+
+[sub_resource type="SphereMesh" id="SphereMesh_dy8d5"]
+radius = 0.25
+height = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_5ewlk"]
 
@@ -23,12 +27,16 @@ entityType = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_tljmh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="1"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+mesh = SubResource("SphereMesh_dy8d5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("SphereShape3D_5ewlk")
 
-[node name="Raycasts" parent="." index="2"]
+[node name="Raycasts" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Trackers" parent="." index="3"]
+[node name="Trackers" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

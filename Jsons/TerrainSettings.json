@@ -2,24 +2,24 @@
   {
     "id": 0,
     "terraintype": "Floor",
-    "objectrate": 2,
-    "movablegrass": 6,
-    "tree": 2,
+    "objectrate": 10,
+    "movablegrass": 10,
+    "tree": 1,
     "berrybush": 1
   },
   {
     "id": 1,
     "terraintype": "Trees",
-    "objectrate": 2,
+    "objectrate": 5,
     "movablegrass": 2,
-    "tree": 6,
+    "tree": 10,
     "berrybush": 1
   },
   {
     "id": 2,
     "terraintype": "ChicpeaBase",
-    "objectrate": 1,
-    "movablegrass": 1,
+    "objectrate": 5,
+    "movablegrass": 2,
     "tree": 1,
     "berrybush": 0
   }

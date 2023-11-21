@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scenes/Environment/Terrain/Terrain.cs" id="1_lmwni"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_sobcu"]
-size = Vector3(10, 1, 10)
+size = Vector3(20, 1, 20)
 
 [node name="Terrain" type="Node3D"]
 visible = false

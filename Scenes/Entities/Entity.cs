@@ -5,6 +5,7 @@ using static Resources;
 
 public partial class Entity : CharacterBody3D
 {
+	[Export] public Vector3 objectSize;
 	[Export] public int nRaycasts = 32;
 	[Export] public float raycastLength = 1.5f;
 	[Export] protected float rotAngle = 0.03f;
@@ -33,6 +34,8 @@ public partial class Entity : CharacterBody3D
 
 
 	public Node3D raycastsNode;
+	public Node3D trackersNode;
+	Area3D preyTracker;
 
 
 	// Practice
@@ -48,14 +51,19 @@ public partial class Entity : CharacterBody3D
 
     public override void _Ready()
     {
+		// Get Nodes
         raycastsNode = GetNode<Node3D>("Raycasts");
-
-		//target = GetParent().GetParent().GetNode<Player>("Player");
+        trackersNode = GetNode<Node3D>("Trackers");
+		preyTracker = GetNode<Area3D>("Trackers/PreyTracker");
 		
-		Init();
+		Init(); // Generate Stats
+		
+		// Steering Behaviors
 		GenerateRaycasts();
-
 		steer = new SteeringBehavior(this);
+
+		// Trackers
+		preyTracker.Connect("body_entered", new Callable(this, "PreyEnter"));
     }
 
     public override void _PhysicsProcess(double delta)
@@ -112,85 +120,4 @@ public partial class Entity : CharacterBody3D
             raycastsNode.AddChild(rayCast3D);
 		}
 	}
-
-	/*
-    
-
-	void SetInterest()
-	{
-		Vector3 direction = GlobalPosition.DirectionTo(player.GlobalPosition);
-		for(int i = 0; i < nRaycasts; i++)
-		{
-			float d = rayDirections[i].Dot(direction);
-			interest[i] = Math.Max(0, d);
-			//if((GlobalPosition - player.GlobalPosition).Length() < 1) isStopped = true;
-		}
-
-		string s = "";
-		foreach(float i in interest) s = s + i.ToString() + ", ";
-		GD.Print(s);
-	}
-
-	void SetDefaultInterest()
-	{
-		for(int i = 0; i < nRaycasts; i++)
-		{
-			float d = rayDirections[i].Dot(Transform.Basis.Z) * raycastLength;
-			interest[i] = Math.Max(0, d);
-			//if((GlobalPosition - player.GlobalPosition).Length() < 1) isStopped = true;
-		}
-	}
-
-	bool CollisionWithin()
-	{
-		foreach(RayCast3D rayCast3D in raycastsNode.GetChildren())
-		{
-			if(rayCast3D.IsColliding()) return true;
-		}
-		return false;
-	}
-
-	void SetDanger()
-	{
-		PhysicsDirectSpaceState3D spaceState = GetWorld3D().DirectSpaceState;
-		for(int i = 0; i < nRaycasts; i++)
-		{
-			PhysicsRayQueryParameters3D states = PhysicsRayQueryParameters3D.Create(Position, 
-				Position + rayDirections[i].Rotated(Vector3.Up, Rotation.Y) * raycastLength);
-			states.Exclude = new Godot.Collections.Array<Rid>(){ GetRid() };
-			
-			Godot.Collections.Dictionary result = spaceState.IntersectRay(states);
-			if (result.Count > 0)
-			{
-				danger[i] = 1 - GlobalPosition.DistanceTo(((Node3D)result["collider"]).GlobalPosition);
-			}
-			else danger[i] = 0;
-			// RayCast3D cast = (RayCast3D)raycastsNode.GetChild(i);
-			// if(cast.IsColliding())
-			// {
-			// 	danger[i] = 1;
-			// 	//(cast.GetCollider() as Node3D).GlobalPosition.DistanceTo(GlobalPosition);
-			// }
-			// else danger[i] = 0;
-		}
-		
-	}
-
-	void ChooseDirection()
-	{
-		for(int i = 0; i < nRaycasts; i++)
-		{
-			if(danger[i] >= interest[i]) interest[i] = 0;
-			else interest[i] -= danger[i];
-		}
-		
-		chosenDir = Vector3.Zero;
-		for(int i = 0; i < nRaycasts; i++)
-		{
-			chosenDir += rayDirections[i] * interest[i];
-		}
-		chosenDir = chosenDir.Normalized();
-	}
-
-	*/
 }

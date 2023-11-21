@@ -8,10 +8,10 @@ public partial class ProceduralGeneration : Node3D
 	[Export] int CAMERA_SPEED = 400;
 
 	#region Constants
-	const int MIN_REGION_SIZE = 50;
-	const int MAX_REGION_SIZE = 100;
 	const int MIN_DISTANCE = 1;
-	const int MAX_DISTANCE = 4;
+	const int MAX_DISTANCE = 3;
+	const int MIN_REGION = 3;
+	const int MAX_REGION = 6;
 	List<Vector2> availableDirection4 = new List<Vector2>() 
 	{
 		new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1)
@@ -29,10 +29,7 @@ public partial class ProceduralGeneration : Node3D
 	// int noiseDensity = 42;
 	// int iterations = 8;
 	Random rnd;
-	[Export] int nRegion = 4;
-	[Export] int chicpeaRegionMax = 2;
-	[Export] int chicpeaMapMax = 10;
-	[Export] int chicpeaRate = 20;
+	[Export] int nRegion = 5;
 
 	List<Region> regions = new List<Region>();
 
@@ -70,6 +67,7 @@ public partial class ProceduralGeneration : Node3D
 		if(Input.IsActionJustPressed("reset"))
 		{
 			GetTree().ReloadCurrentScene();
+			GetTree().Root.GetNode<Resources>("Resources").Generate();
 		}
     }
 
@@ -79,6 +77,7 @@ public partial class ProceduralGeneration : Node3D
 	{
 		List<Vector2> tree = new List<Vector2>();
 	
+		nRegion = rnd.Next(MIN_REGION, MAX_REGION + 1);
 		Region region = new Region(RegionType.ForestRegion);
 		tree.Add(Vector2.Zero);
 		regions.Add(region);
@@ -159,9 +158,9 @@ public partial class ProceduralGeneration : Node3D
 		do
 		{
 			if (currentPos.X < point2.X) currentPos.X += 1;
-			if (currentPos.Y < point2.Y) currentPos.Y += 1;
-			if (currentPos.X > point2.X) currentPos.X -= 1;
-			if (currentPos.Y > point2.Y) currentPos.Y -= 1;
+			else if (currentPos.Y < point2.Y) currentPos.Y += 1;
+			else if (currentPos.X > point2.X) currentPos.X -= 1;
+			else if (currentPos.Y > point2.Y) currentPos.Y -= 1;
 			
 			if (IsAvailableCell(currentPos))
 			{

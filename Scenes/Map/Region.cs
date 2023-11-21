@@ -21,59 +21,26 @@ public partial class Region : Node
 
 	Godot.Collections.Dictionary<TerrainType, int> terrainWeights = new Godot.Collections.Dictionary<TerrainType, int>(){};
 
+	Random rnd;
 	List<Vector2> terrains = new List<Vector2>();
 	List<Neighbor> neighbors = new List<Neighbor>();
 	Region nextRegion;
 	RegionType regionType;
 	PackedScene packedScene;
+	RegionSettings regionSettings;
 
 	public Region(RegionType regionType)
 	{
 		this.regionType = regionType;
-		CreatePackedScene();
-		GenerateTerrainWeight();
-	}
-
-	void CreatePackedScene()
-	{
-		switch(regionType)
-		{
-			case RegionType.ForestRegion:
-			packedScene = (PackedScene)ResourceLoader.Load(ForestRegion_Scene);
-			break;
-		}
-	}
-
-	void GenerateTerrainWeight()
-	{
-		switch(regionType)
-		{
-			case RegionType.ForestRegion:
-			terrainWeights.Add(TerrainType.Floor, 10);
-			terrainWeights.Add(TerrainType.Trees, 5);
-			terrainWeights.Add(TerrainType.ChicpeaBase, 1);
-			break;
-		}
-	}
-
-	List<int> GenerateTerrainRate()
-	{
-		List<int> rates = new List<int>();
-		int temp = 0;
-		rates.Add(temp);
-		foreach(var terrain in terrainWeights)
-		{
-			temp += terrain.Value;
-			rates.Add(temp);
-		}
-		return rates;
+		regionSettings = RegionSettingsList[(int)regionType];
+		rnd = new Random();
 	}
 
 	public void GenerateTerrain()
 	{
 		foreach(Vector2 cell in terrains)
 		{
-			Terrain terrain = (Terrain)packedScene.Instantiate();
+			Terrain terrain = (Terrain)regionSettings.terrain.Instantiate();
 			terrain.terrainType = RollTerrain();
 			terrain.Position = new Vector3(cell.X * TILE_SIZE, 0, cell.Y * TILE_SIZE);
 			terrain.Name = cell.X.ToString() + "," + cell.Y.ToString();
@@ -92,21 +59,34 @@ public partial class Region : Node
 	
 	TerrainType RollTerrain()
 	{
-		List<int> rates = GenerateTerrainRate();
-		Random rnd = new Random();
-		int random = rnd.Next(rates[rates.Count - 1]);
 		int result = 0;
-
-		for(int i = 1; i < rates.Count; i++)
+		while(true)
 		{
-			if(random >= rates[i - 1] && random < rates[i])
+			int random = rnd.Next(regionSettings.rates[regionSettings.rates.Count - 1]);
+
+			for(int i = 1; i < regionSettings.rates.Count; i++)
 			{
-				result = i - 1;
-				break;
+				if(random >= regionSettings.rates[i - 1] && random < regionSettings.rates[i]) // Suitable Rate
+				{
+					int index = EntitiesTerrainType.IndexOf((TerrainType)(i - 1));
+					if(EntitiesTerrainType.Contains((TerrainType)(i - 1)))
+					{
+						if(regionSettings.distanceCount < regionSettings.averageDistance && regionSettings.firstSpawn) break;
+						regionSettings.firstSpawn = true;
+						regionSettings.distanceCount = 0;
+						bool r = regionSettings.SetTypeControlByIndex(index, regionSettings.entityTypesControl[index] + 1);
+						if(!r) break;
+					}
+					
+					result = i - 1;
+					break;
+				}
 			}
+
+			if(result != 0) break;
 		}
-		
-		return terrainWeights.Keys.ElementAt(result);
+		regionSettings.distanceCount++;
+		return (TerrainType)result;
 	}
 
 	#region Utils

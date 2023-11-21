@@ -7,8 +7,9 @@ using System;
 
 public partial class Resources : Node
 {
-	
-	public const int TILE_SIZE = 10;
+	public const int MIN_REGION_SIZE = 15;
+	public const int MAX_REGION_SIZE = 20;
+	public const int TILE_SIZE = 20;
 	public const string EntitySettingsJson = "res://Jsons/EntitySettings.json";
 	public const string TerrainSettingsJson = "res://Jsons/TerrainSettings.json";
 	public const string RegionSettingsJson = "res://Jsons/RegionSettings.json";
@@ -32,8 +33,8 @@ public partial class Resources : Node
 	{
 		TerrainType.ChicpeaBase
 	};
-	
-	public static Dictionary<string, PackedScene> SceneDictionary = new Dictionary<string, PackedScene>()
+
+	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
 	{
 		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/MovableGrass.tscn"),
 		["Tree"] =(PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Tree.tscn"),
@@ -41,16 +42,21 @@ public partial class Resources : Node
 	};
 	public static List<EntitySettings> EntitySettingsList = new List<EntitySettings>(){};
 	public static List<TerrainSettings> TerrainSettingsList = new List<TerrainSettings>(){};
-	public static List<int> TerrainObjectRates = new List<int>(){};
-
+	public static List<RegionSettings> RegionSettingsList = new List<RegionSettings>(){};
 
 	// Loading Section
 
     public override void _Ready()
     {
-        LoadEntitySettings();
-		LoadTerrainSettings();
+        Generate();
     }
+
+	public void Generate()
+	{
+		LoadEntitySettings();
+		LoadTerrainSettings();
+		LoadRegionSettings();
+	}
 
 	void LoadEntitySettings()
     {
@@ -70,22 +76,18 @@ public partial class Resources : Node
 
 		foreach(TerrainSettings terrainSettings in TerrainSettingsList)
 		{
-			terrainSettings.GetWeights();
-			terrainSettings.GetRate();
+			terrainSettings.Init();
 		}
     }
 
-	void GenerateObjectRate()
-	{
-		// foreach(var terrain in TerrainSettings)
-		// {
-		// 	int temp = 0;
-		// 	rates.Add(temp);
-		// 	foreach(var obj in objectTypes)
-		// 	{
-		// 		temp += obj.Value;
-		// 		rates.Add(temp);
-		// 	}
-		// }
-	}
+	void LoadRegionSettings()
+    {
+        var jsonString = FileAccess.GetFileAsString(RegionSettingsJson);
+        RegionSettingsList = JsonConvert.DeserializeObject<List<RegionSettings>>(jsonString); 
+
+		foreach(RegionSettings regionSettings in RegionSettingsList)
+		{
+			regionSettings.Init();
+		}
+    }
 }

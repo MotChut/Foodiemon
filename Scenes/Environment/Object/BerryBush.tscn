@@ -22,6 +22,7 @@ font_size = 48
 script = ExtResource("1_nrmaa")
 minResources = 6
 maxResources = 8
+objectSize = Vector3(1, 1, 1)
 isInteractive = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

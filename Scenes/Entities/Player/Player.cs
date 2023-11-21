@@ -3,7 +3,6 @@ using System;
 
 public partial class Player : Entity
 {
-	public float speed = 0f;
 	public const float JumpVelocity = 4.5f;
 	public const float AngularAccel = 8.0f;
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
