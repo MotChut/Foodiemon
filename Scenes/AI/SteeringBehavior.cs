@@ -18,9 +18,7 @@ public partial class SteeringBehavior : Node
 
     public Vector3 Wander()
     {
-        entity.rnd = new Random();
-        List<Vector3> directions = new List<Vector3>(entity.pack.directionPoints.Keys);
-        return directions[entity.rnd.Next(directions.Count)];
+        return entity.pack.ChooseWanderDirection();
     }
 
     public Vector3 Evade()

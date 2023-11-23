@@ -36,10 +36,10 @@ public partial class Resources : Node
 
 	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
 	{
-		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/MovableGrass.tscn"),
-		["Tree"] =(PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Tree.tscn"),
-		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/BerryBush.tscn"),
-		["Mound"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Mound.tscn")
+		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Decorations/MovableGrass.tscn"),
+		["Tree"] =(PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Tree.tscn"),
+		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/BerryBush.tscn"),
+		["Mound"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Mound.tscn")
 	};
 
 	#endregion
@@ -57,9 +57,10 @@ public partial class Resources : Node
 		CurrentTime = time;
 		if(time == GameTime.Day)
 			TriggerPlanTask();
+		UpdateCurrentTask();
 	}
 
-	public static void TriggerPlanTask()
+	static void TriggerPlanTask()
 	{
 		foreach(Pack pack in PackList)
 		{
@@ -67,6 +68,16 @@ public partial class Resources : Node
 		}
 	}
 
+	static void UpdateCurrentTask()
+	{
+		foreach(Pack pack in PackList)
+		{
+			foreach(Entity entity in new List<Entity>(pack.entities.Keys))
+			{
+				entity.UpdateCurrentTask();
+			}
+		}
+	}
 
 	// Generated Parts
 	public static List<StatsSettings> StatsSettingsList = new List<StatsSettings>(){};
@@ -86,7 +97,6 @@ public partial class Resources : Node
 	public void Generate()
 	{
 		PackList = new List<Pack>();
-		SetCurrentTime(GameTime.Day);
 		LoadStatsSettings();
 		LoadEntitySettings();
 		LoadTerrainSettings();

@@ -3,7 +3,14 @@ using static Resources;
 
 public partial class DayNightCycle : Node3D
 {
-	public void SetToDay()
+	AnimationPlayer animationPlayer;
+    public override void _Ready()
+    {
+        animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+		animationPlayer.Advance(100);
+    }
+
+    public void SetToDay()
 	{
 		SetCurrentTime(GameTime.Day);
 	}

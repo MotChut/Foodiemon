@@ -10,7 +10,7 @@ script = ExtResource("1_cway7")
 nRegion = 10
 
 [node name="Player" parent="." instance=ExtResource("2_5861x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 maxSpd = 16.0
 
 [node name="Ocean" parent="." instance=ExtResource("2_q0d2n")]

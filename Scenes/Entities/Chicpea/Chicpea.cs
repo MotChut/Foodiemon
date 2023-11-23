@@ -5,8 +5,6 @@ using static Resources;
 
 public partial class Chicpea : Entity
 {
-	[Export] bool isLeader = false;
-
     public override void _Ready()
     {
         base._Ready();
@@ -27,22 +25,17 @@ public partial class Chicpea : Entity
     {
         foreach(Entity chicpea in new List<Entity>(pack.entities.Keys))
         {
-            switch(CurrentTime)
-            {
-                case GameTime.Day:
-                GiveTask((Chicpea)chicpea, Task.Explore);
-                break;
-                case GameTime.Noon:
-                GiveTask((Chicpea)chicpea, Task.Explore);
-                break;
-            }
-            
+            chicpea.tasks = new List<Task>(3){ Task.Idle, Task.Idle, Task.Idle };
+            GiveTask((Chicpea)chicpea, GameTime.Day, Task.Explore);
+            GiveTask((Chicpea)chicpea, GameTime.Noon, Task.GoHome);
+            GiveTask((Chicpea)chicpea, GameTime.Night, Task.HomeRest);
+            chicpea.UpdateCurrentTask();
         }
     }
 
-    public override void GiveTask(Chicpea chicpea, Task task)
+    public override void GiveTask(Chicpea chicpea, GameTime time, Task task)
     {
-        chicpea.currentTask = task;
+        chicpea.tasks[(int)time] = task;
     }
 
     public override void ReceiveTask()
@@ -57,6 +50,14 @@ public partial class Chicpea : Entity
             case Task.Explore:
             if(wanderDir == Vector3.Zero) wanderDir = steer.Wander();
             Wander();
+            break;
+            case Task.GoHome:
+            case Task.HomeRest:
+            case Task.ForceHome:
+            targetPos = pack.structures[0].GlobalPosition;
+            Chase();
+            break;
+            case Task.Idle:
             break;
         }
     }

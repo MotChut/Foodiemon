@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cy56tjjelcoqb"]
 
-[ext_resource type="Script" path="res://Scenes/Environment/Object/MapSource.cs" id="1_nrmaa"]
+[ext_resource type="Script" path="res://Scenes/Environment/Object/Sources/MapSource.cs" id="1_nrmaa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a88l4"]
 albedo_color = Color(0.929412, 0.439216, 0.32549, 1)
@@ -23,7 +23,6 @@ script = ExtResource("1_nrmaa")
 minResources = 6
 maxResources = 8
 objectSize = Vector3(1, 1, 1)
-isInteractive = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

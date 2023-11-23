@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Entities/Player/Player.tscn" id="1_wrtc5"]
 [ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="2_04dq4"]
 [ext_resource type="Material" uid="uid://dcuqaxf8s0n7s" path="res://Shaders/MovableGrass.tres" id="2_qwo6m"]
-[ext_resource type="PackedScene" uid="uid://cy56tjjelcoqb" path="res://Scenes/Environment/Object/BerryBush.tscn" id="4_vkxi2"]
-[ext_resource type="PackedScene" uid="uid://cegsmtph48v0n" path="res://Scenes/Environment/Object/MovableGrass.tscn" id="5_rwxem"]
+[ext_resource type="PackedScene" uid="uid://cy56tjjelcoqb" path="res://Scenes/Environment/Object/Sources/BerryBush.tscn" id="4_vkxi2"]
+[ext_resource type="PackedScene" uid="uid://cegsmtph48v0n" path="res://Scenes/Environment/Object/Decorations/MovableGrass.tscn" id="5_rwxem"]
 [ext_resource type="PackedScene" uid="uid://d0po1cpmd37vl" path="res://Scenes/Entities/Chicpea/BlueChicpea.tscn" id="8_mgpqk"]
-[ext_resource type="PackedScene" uid="uid://bva7oh0d71emj" path="res://Scenes/Environment/Object/Tree.tscn" id="9_dhubh"]
+[ext_resource type="PackedScene" uid="uid://bva7oh0d71emj" path="res://Scenes/Environment/Object/Obstacles/Tree.tscn" id="9_dhubh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1kp2x"]
 albedo_color = Color(0.541176, 0.596078, 0.427451, 1)

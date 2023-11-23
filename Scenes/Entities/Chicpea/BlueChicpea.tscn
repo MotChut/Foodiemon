@@ -21,8 +21,8 @@ points = PackedVector3Array(0, 0, 0, 8, 0, -1, -8, 0, -1, 6, 0, -6, -6, 0, -6, 5
 [node name="BlueChicpea" instance=ExtResource("1_bm42e")]
 collision_mask = 7
 script = ExtResource("2_3ll0y")
-isLeader = true
 objectSize = Vector3(1, 1, 1)
+isLeader = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
