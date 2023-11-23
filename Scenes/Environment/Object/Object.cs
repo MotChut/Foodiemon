@@ -30,6 +30,7 @@ public partial class Object : Node3D
 		{
 			Vector3 toTarget = entityWithin.GlobalTransform.Origin - GlobalTransform.Origin;
 			toTarget = new Vector3(-toTarget.X, toTarget.Y -0.3f, -toTarget.Z);
+			if((GlobalTransform.Origin - toTarget.Normalized()).Dot(Vector3.Up) > 0.001f) return;
 			GlobalTransform = GlobalTransform.LookingAt(GlobalTransform.Origin - toTarget.Normalized(), Vector3.Up);
 		}
 		else

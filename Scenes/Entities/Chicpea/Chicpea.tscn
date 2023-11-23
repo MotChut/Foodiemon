@@ -22,6 +22,7 @@ points = PackedVector3Array(0, 0, 0, 8, 0, -1, -8, 0, -1, 6, 0, -6, -6, 0, -6, 5
 collision_mask = 7
 script = ExtResource("2_c8ney")
 isLeader = false
+objectSize = Vector3(1, 1, 1)
 entityType = 1
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]

@@ -9,8 +9,6 @@ public partial class Terrain : Node3D
 {
 	[Export] Vector3 meshSize;
 
-	const float OBJECT_OFFSET = 1.5f;
-
 	int objectRate;
 	Random rnd;
 	Node3D objectList;
@@ -113,8 +111,8 @@ public partial class Terrain : Node3D
 		int z =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
 		PackedScene packedScene = entitySettings.houseScene;
 		Object house = (Object)packedScene.Instantiate();
-		house.Position = new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
-									z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
+		house.Position = new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
+									z - (TILE_SIZE - 1) / 2.0f);
 		house.Name = x.ToString() + "," + z.ToString();
 		objectList.AddChild(house);
 		MarkCells(new Vector2I(x, z), new Vector2(house.objectSize.X, house.objectSize.Z));
@@ -132,8 +130,8 @@ public partial class Terrain : Node3D
 			PackedScene packedScene = entitySettings.foodSourceScene;
 			Object foodSource = (Object)packedScene.Instantiate();
 			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Z))) continue;
-			foodSource.Position = new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
-								z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
+			foodSource.Position = new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
+								z - (TILE_SIZE - 1) / 2.0f);
 			foodSource.Name = x.ToString() + "," + z.ToString();
 			objectList.AddChild(foodSource);
 			MarkCells(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Z));
@@ -162,8 +160,8 @@ public partial class Terrain : Node3D
 
 			//leader.Name = x.ToString() + "," + z.ToString();
 			proGen.entityNode.AddChild(leader);
-			leader.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
-								z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
+			leader.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
+								z - (TILE_SIZE - 1) / 2.0f);
 			MarkCells(new Vector2I(x, z), new Vector2(leader.objectSize.X, leader.objectSize.Z));
 			pack.entities.Add(leader, 0);
 			pack.leader = leader;
@@ -189,8 +187,8 @@ public partial class Terrain : Node3D
 
 			//entity.Name = x.ToString() + "," + z.ToString();
 			proGen.entityNode.AddChild(entity);
-			entity.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
-								z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
+			entity.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
+								z - (TILE_SIZE - 1) / 2.0f);
 			MarkCells(new Vector2I(x, z), new Vector2(entity.objectSize.X, entity.objectSize.Z));
 			pack.entities.Add(entity, 0);
 			entity.pack = pack;
