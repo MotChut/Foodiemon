@@ -10,8 +10,8 @@ script = ExtResource("1_ja4sq")
 
 [node name="Trackers" type="Node3D" parent="."]
 
-[node name="PreyTracker" type="Area3D" parent="Trackers"]
+[node name="Vision" type="Area3D" parent="Trackers"]
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/PreyTracker"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/Vision"]

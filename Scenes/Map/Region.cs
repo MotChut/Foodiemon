@@ -56,6 +56,44 @@ public partial class Region : Node
 			proGen.visiblerNode.AddChild(visibleOnScreenNotifier3D);
 		}
 	}
+
+	public void GenerateBlockers()
+	{
+		foreach(Vector2 terrain in terrains)
+		{
+			List<Vector2> dirList = new List<Vector2>();
+			if(!proGen.terrainNode.HasNode((terrain.X - 1).ToString() + "," + terrain.Y.ToString())
+				&& !proGen.blockerNode.HasNode((terrain.X - 1).ToString() + "," + terrain.Y.ToString())) 
+				dirList.Add(new Vector2(terrain.X - 1, terrain.Y));
+			if(!proGen.terrainNode.HasNode((terrain.X + 1).ToString() + "," + terrain.Y.ToString())
+				&& !proGen.blockerNode.HasNode((terrain.X + 1).ToString() + "," + terrain.Y.ToString())) 
+				dirList.Add(new Vector2(terrain.X + 1, terrain.Y));
+			if(!proGen.terrainNode.HasNode(terrain.X.ToString() + "," + (terrain.Y - 1).ToString())
+				&& !proGen.blockerNode.HasNode(terrain.X.ToString() + "," + (terrain.Y - 1).ToString()))  
+				dirList.Add(new Vector2(terrain.X, terrain.Y - 1));
+			if(!proGen.terrainNode.HasNode(terrain.X.ToString() + "," + (terrain.Y + 1).ToString())
+				&& !proGen.blockerNode.HasNode(terrain.X.ToString() + "," + (terrain.Y + 1).ToString())) 
+				dirList.Add(new Vector2(terrain.X, terrain.Y + 1));
+			
+			foreach(Vector2 dir in dirList)
+			{
+                StaticBody3D staticBody3D = new StaticBody3D
+                {
+                    Position = new Vector3(dir.X * TILE_SIZE, 1, dir.Y * TILE_SIZE),
+					Name = dir.X.ToString() + "," + dir.Y.ToString()
+                };
+                proGen.blockerNode.AddChild(staticBody3D);
+				CollisionShape3D collisionShape3D = new CollisionShape3D
+				{
+					Shape = new BoxShape3D
+					{
+						Size = new Vector3(TILE_SIZE, 1, TILE_SIZE)
+					}
+				};
+				staticBody3D.AddChild(collisionShape3D);
+			}
+		}
+	}
 	
 	TerrainType RollTerrain()
 	{

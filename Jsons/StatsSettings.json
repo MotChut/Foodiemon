@@ -1,0 +1,30 @@
+[
+  {
+    "id": 0,
+    "entitytype": "BlueChicpea",
+    "nraycasts": "32",
+    "raycastlength": "1.5",
+    "rotangle": "0.03",
+    "minspd": "2.5",
+    "maxspd": "3.5",
+    "accel": "0",
+    "friction": "0",
+    "maxhp": "1",
+    "attackpoint": "1",
+    "attackspd": "1"
+  },
+  {
+    "id": 1,
+    "entitytype": "Chicpea",
+    "nraycasts": "32",
+    "raycastlength": "1.5",
+    "rotangle": "0.03",
+    "minspd": "2.5",
+    "maxspd": "3.5",
+    "accel": "0",
+    "friction": "0",
+    "maxhp": "1",
+    "attackpoint": "1",
+    "attackspd": "1"
+  }
+]

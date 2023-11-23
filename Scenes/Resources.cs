@@ -1,24 +1,24 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Godot;
-using System.Reflection;
-using System.Linq;
-using System;
+
 
 public partial class Resources : Node
 {
+	#region Constants
 	public const int MIN_REGION_SIZE = 15;
 	public const int MAX_REGION_SIZE = 20;
 	public const int TILE_SIZE = 20;
 	public const string EntitySettingsJson = "res://Jsons/EntitySettings.json";
 	public const string TerrainSettingsJson = "res://Jsons/TerrainSettings.json";
 	public const string RegionSettingsJson = "res://Jsons/RegionSettings.json";
+	public const string StatsSettingsJson = "res://Jsons/StatsSettings.json";
 	public const string ForestRegion_Scene = "res://Scenes/Environment/Terrain/ForestRegion.tscn";
 	public static ProceduralGeneration proGen;
 
 	public enum Entities
 	{
-		Player, Chicpea, Dukapa
+		BlueChicpea, Chicpea
 	}
 
 	public enum RegionType {
@@ -38,24 +38,65 @@ public partial class Resources : Node
 	{
 		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/MovableGrass.tscn"),
 		["Tree"] =(PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Tree.tscn"),
-		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/BerryBush.tscn")
+		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/BerryBush.tscn"),
+		["Mound"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Mound.tscn")
 	};
+
+	#endregion
+
+	#region Game Progress
+	// Game Control
+	public enum GameTime
+	{
+		Day, Noon, Night
+	}
+	public static GameTime CurrentTime = GameTime.Day;
+
+	public static void SetCurrentTime(GameTime time)	
+	{
+		CurrentTime = time;
+		if(time == GameTime.Day)
+			TriggerPlanTask();
+	}
+
+	public static void TriggerPlanTask()
+	{
+		foreach(Pack pack in PackList)
+		{
+			pack.leader.PlanTask();
+		}
+	}
+
+
+	// Generated Parts
+	public static List<StatsSettings> StatsSettingsList = new List<StatsSettings>(){};
 	public static List<EntitySettings> EntitySettingsList = new List<EntitySettings>(){};
 	public static List<TerrainSettings> TerrainSettingsList = new List<TerrainSettings>(){};
 	public static List<RegionSettings> RegionSettingsList = new List<RegionSettings>(){};
-
+	public static List<Pack> PackList = new List<Pack>();
+	
+	
 	// Loading Section
-
     public override void _Ready()
     {
+		
         Generate();
     }
 
 	public void Generate()
 	{
+		PackList = new List<Pack>();
+		SetCurrentTime(GameTime.Day);
+		LoadStatsSettings();
 		LoadEntitySettings();
 		LoadTerrainSettings();
 		LoadRegionSettings();
+	}
+
+	void LoadStatsSettings()
+	{
+		var jsonString = FileAccess.GetFileAsString(StatsSettingsJson);
+        StatsSettingsList = JsonConvert.DeserializeObject<List<StatsSettings>>(jsonString); 
 	}
 
 	void LoadEntitySettings()
@@ -90,4 +131,6 @@ public partial class Resources : Node
 			regionSettings.Init();
 		}
     }
+
+	#endregion
 }

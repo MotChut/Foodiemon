@@ -10,7 +10,7 @@ public partial class Object : Node3D
 	[Export] public bool isBlock;
 	bool isWithin = false;
 
-	Entity entityWithin;
+	Node3D entityWithin;
 
 	Area3D detectArea;
 
@@ -40,19 +40,13 @@ public partial class Object : Node3D
 
     void DetectArea_Enter(Node3D body)
 	{
-		if (body is Entity)
-		{
-			isWithin = true;
-			entityWithin = body as Entity;
-		}
+		isWithin = true;
+		entityWithin = body;
 	}
 
 	void DetectArea_Exit(Node3D body)
 	{
-		if (body is Entity)
-		{
-			isWithin = false;
-			entityWithin = null;
-		}
+		isWithin = false;
+		entityWithin = null;
 	}
 }

@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://dcuqaxf8s0n7s"]
 
-[ext_resource type="Shader" path="res://Scenes/Shaders/MovableGrass.gdshader" id="1_3ua7g"]
+[ext_resource type="Shader" path="res://Shaders/MovableGrass.gdshader" id="1_3ua7g"]
 
 [sub_resource type="Curve" id="Curve_glcdw"]
 _data = [Vector2(0, 0), 0.0, 3.41488, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

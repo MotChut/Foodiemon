@@ -9,7 +9,7 @@ public partial class Terrain : Node3D
 {
 	[Export] Vector3 meshSize;
 
-	const float OBJECT_OFFSET = 0.5f;
+	const float OBJECT_OFFSET = 1.5f;
 
 	int objectRate;
 	Random rnd;
@@ -56,14 +56,14 @@ public partial class Terrain : Node3D
 					PackedScene packedScene = RollObject();
 					Object obj = (Object)packedScene.Instantiate();
 					// Check if the position is suitable
-					if(!IsAvailableCell(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Y))) continue;
+					if(!IsAvailableCell(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z))) continue;
 					if(obj.isBlock)
-						if(!IsNotSurrounded(new Vector2I(i, j))) continue;
-					obj.Position = new Vector3(i - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
-												j - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+						if(!IsNotSurrounded(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z))) continue;
+					obj.Position = new Vector3(i - (TILE_SIZE - 1) / 2.0f, 0.5f, 
+												j - (TILE_SIZE - 1) / 2.0f);
 					obj.Name = i.ToString() + "," + j.ToString();
 					objectList.AddChild(obj);
-					MarkCells(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Y));
+					MarkCells(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z));
 					continue;
 				}
 			}
@@ -100,25 +100,28 @@ public partial class Terrain : Node3D
 
 	void GenerateEntityBase()
 	{
-		GenerateHouse();
-		GenerateSources();
-		GenerateEntities();
+		Pack pack = new Pack();
+		PackList.Add(pack);
+		GenerateHouse(pack);
+		GenerateSources(pack);
+		GenerateEntities(pack);
 	}
 
-	void GenerateHouse() // Generate first so required no checking
+	void GenerateHouse(Pack pack) // Generate first so required no checking
 	{
 		int x =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
 		int z =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
 		PackedScene packedScene = entitySettings.houseScene;
 		Object house = (Object)packedScene.Instantiate();
-		house.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
-									z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+		house.Position = new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
+									z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
 		house.Name = x.ToString() + "," + z.ToString();
 		objectList.AddChild(house);
-		MarkCells(new Vector2I(x, z), new Vector2(house.objectSize.X, house.objectSize.Y));
+		MarkCells(new Vector2I(x, z), new Vector2(house.objectSize.X, house.objectSize.Z));
+		pack.structures.Add(house);
 	}
 
-	void GenerateSources() // Generate second so required no break when not finding possible cell
+	void GenerateSources(Pack pack) // Generate second so required no break when not finding possible cell
 	{
 		int nFoodSource = rnd.Next(entitySettings.minFoodSource, entitySettings.maxFoodSource + 1);
 		while(nFoodSource > 0)
@@ -128,17 +131,18 @@ public partial class Terrain : Node3D
 
 			PackedScene packedScene = entitySettings.foodSourceScene;
 			Object foodSource = (Object)packedScene.Instantiate();
-			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Y))) continue;
-			foodSource.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
-								z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
+			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Z))) continue;
+			foodSource.Position = new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
+								z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
 			foodSource.Name = x.ToString() + "," + z.ToString();
 			objectList.AddChild(foodSource);
-			MarkCells(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Y));
+			MarkCells(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Z));
+			pack.foodSources.Add((MapSource)foodSource, 0);
 			nFoodSource -= 1;
 		}
 	}
 
-	void GenerateEntities()
+	void GenerateEntities(Pack pack)
 	{
 		// Spawn Leader
 		while(true)
@@ -154,13 +158,16 @@ public partial class Terrain : Node3D
 			PackedScene packedScene = entitySettings.leaderScene;
 			Entity leader = (Entity)packedScene.Instantiate();
 
-			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(leader.objectSize.X, leader.objectSize.Y))) continue;
+			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(leader.objectSize.X, leader.objectSize.Z))) continue;
 
-			leader.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
-								z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
 			//leader.Name = x.ToString() + "," + z.ToString();
-			objectList.AddChild(leader);
-			MarkCells(new Vector2I(x, z), new Vector2(leader.objectSize.X, leader.objectSize.Y));
+			proGen.entityNode.AddChild(leader);
+			leader.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
+								z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
+			MarkCells(new Vector2I(x, z), new Vector2(leader.objectSize.X, leader.objectSize.Z));
+			pack.entities.Add(leader, 0);
+			pack.leader = leader;
+			leader.pack = pack;
 			break;
 		}
 		
@@ -178,32 +185,36 @@ public partial class Terrain : Node3D
 			PackedScene packedScene = entitySettings.entityScene;
 			Entity entity = (Entity)packedScene.Instantiate();
 
-			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(entity.objectSize.X, entity.objectSize.Y))) continue;
+			if(!IsAvailableCell(new Vector2I(x, z), new Vector2(entity.objectSize.X, entity.objectSize.Z))) continue;
 
-			entity.Position = new Vector3(x - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET, 0.5f, 
-								z - (TILE_SIZE - 2) / 2 - OBJECT_OFFSET);
 			//entity.Name = x.ToString() + "," + z.ToString();
-			objectList.AddChild(entity);
-			MarkCells(new Vector2I(x, z), new Vector2(entity.objectSize.X, entity.objectSize.Y));
+			proGen.entityNode.AddChild(entity);
+			entity.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET, 0.5f, 
+								z - (TILE_SIZE - 2) / 2.0f - OBJECT_OFFSET);
+			MarkCells(new Vector2I(x, z), new Vector2(entity.objectSize.X, entity.objectSize.Z));
+			pack.entities.Add(entity, 0);
+			entity.pack = pack;
 			nEntities -= 1;
 		}
 	}
 
-	bool IsNotSurrounded(Vector2I o)
+	bool IsNotSurrounded(Vector2I o, Vector2 size)
 	{
-		for(int i = o.X - 1; i < o.X + 2; i++)
-			for(int j = o.Y - 1; j < o.Y + 2; j++)
+		for(int i = o.X - 1; i < o.X + 2 + size.X; i++)
+			for(int j = o.Y - 1; j < o.Y + 2 + size.Y; j++)
 			{
-				if (objectList.HasNode(i.ToString() + "," + j.ToString())) return false;
+				if (i >= TILE_SIZE - 1 || j >= TILE_SIZE - 1 
+				|| i < 0 || j < 0
+				|| matrix[i, j] == 1) return false;
 			}
 		return true;
 	}
 
 	bool IsAvailableCell(Vector2I pos, Vector2 size)
-	{
+	{	
 		for(int x = pos.X; x < pos.X + size.X; x++)
 			for(int z = pos.Y; z < pos.Y + size.Y; z++)
-				if(x >= TILE_SIZE || z >= TILE_SIZE || matrix[x, z] == 1)
+				if(x >= TILE_SIZE - 1 || z >= TILE_SIZE - 1 || matrix[x, z] == 1)
 					return false;
 		return true;
 	}

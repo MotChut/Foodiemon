@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scenes/Environment/Object/Object.cs" id="1_15cih"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4lst"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ohil"]
 albedo_color = Color(0.372549, 0.141176, 0.0666667, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_a6buv"]
-material = SubResource("StandardMaterial3D_l4lst")
+material = SubResource("StandardMaterial3D_6ohil")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bex83"]
 

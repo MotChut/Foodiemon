@@ -277,13 +277,6 @@ radius = 0.4
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_3f0jv")
-objectSize = Vector3(1, 1.4, 1)
-maxSpd = 6.0
-accel = 3.0
-friction = 3.0
-maxHp = 3
-attackPoint = 1
-attackSpd = 1
 
 [node name="Sprite" type="Node3D" parent="."]
 

@@ -6,7 +6,6 @@
 size = Vector3(20, 1, 20)
 
 [node name="Terrain" type="Node3D"]
-visible = false
 script = ExtResource("1_lmwni")
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
@@ -17,3 +16,5 @@ script = ExtResource("1_lmwni")
 shape = SubResource("BoxShape3D_sobcu")
 
 [node name="ObjectList" type="Node3D" parent="."]
+
+[node name="Blockers" type="Node3D" parent="."]

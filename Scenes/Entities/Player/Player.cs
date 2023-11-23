@@ -1,8 +1,11 @@
 using Godot;
 using System;
 
-public partial class Player : Entity
+public partial class Player : CharacterBody3D
 {
+	[Export] public float maxSpd = 6.0f;
+	[Export] public float accel = 3.0f;
+	[Export] public float friction = 3.0f;
 	public const float JumpVelocity = 4.5f;
 	public const float AngularAccel = 8.0f;
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
@@ -10,17 +13,23 @@ public partial class Player : Entity
 	Node3D sprite;
 	AnimationPlayer animationPlayer;
 
+	public enum States
+	{
+		Idle, Walk
+	}
+
+	public States currentState = States.Idle;
+	public Vector3 lastDirection = Vector3.Zero;
+
 
     public override void _Ready()
     {
-        
+		sprite = GetNode<Node3D>("Sprite");
+		animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
     }
 
     public override void _PhysicsProcess(double delta)
 	{
-		sprite = GetNode<Node3D>("Sprite");
-		animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
-
 		#region Movement
 		Vector3 velocity = Velocity;
 		Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
@@ -39,10 +48,9 @@ public partial class Player : Entity
 		}
 
 		Velocity = velocity;
+		RotateToDirection((float)delta);
 		MoveAndSlide();
 		
-		RotateToDirection((float)delta);
-
 		#endregion
 		
 	}

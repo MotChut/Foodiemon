@@ -37,7 +37,9 @@ public partial class ProceduralGeneration : Node3D
 
 	#region Nodes
 	public Node3D terrainNode;
+	public Node3D blockerNode;
 	public Node3D visiblerNode;
+	public Node3D entityNode;
 	Node3D camera;
 
 	#endregion
@@ -45,14 +47,13 @@ public partial class ProceduralGeneration : Node3D
 	public override void _Ready()
 	{
 		terrainNode = GetNode<Node3D>("Terrain");
+		blockerNode = GetNode<Node3D>("Blocker");
 		visiblerNode = GetNode<Node3D>("Visibler");
+		entityNode = GetNode<Node3D>("Entities");
 		//camera = GetNode<Node3D>("Pivot");
 		proGen = this;
 		rnd = new Random();
 		GeneratePseudoTree();
-		// GenerateNoiseGrid();
-		// CellularAutomata();
-		// GenerateTerrain();
 	}
 
     public override void _PhysicsProcess(double delta)
@@ -66,8 +67,9 @@ public partial class ProceduralGeneration : Node3D
 
 		if(Input.IsActionJustPressed("reset"))
 		{
-			GetTree().ReloadCurrentScene();
 			GetTree().Root.GetNode<Resources>("Resources").Generate();
+			GetTree().ReloadCurrentScene();
+			
 		}
     }
 
@@ -201,6 +203,16 @@ public partial class ProceduralGeneration : Node3D
 		{
 			region.GenerateTerrain();
 		}
+
+		GenerateBlockers();
+	}
+
+	void GenerateBlockers()
+	{
+		foreach(Region region in regions)
+		{
+			region.GenerateBlockers();
+		}
 	}
 
 	Vector2 FindNeighborFirstCell(Vector2 cell, Vector2 dir)
@@ -213,79 +225,5 @@ public partial class ProceduralGeneration : Node3D
 		}
 	}
 
-	#endregion
-
-
-
-	#region Cellular Automata
-	/*
-	
-    void GenerateNoiseGrid()
-	{		
-		for (int i = 0; i < HEIGHT; i++)
-			for (int j = 0; j < WIDTH; j++)
-			{
-				if (i == 0 || j == 0 || i == HEIGHT - 1 || j == WIDTH - 1)
-					matrix[i, j] = TerrainType.WATER;
-				else 
-				{
-					int random = (int)(GD.Randi() % 100 + 1);
-					matrix[i, j] = (random > noiseDensity) ? TerrainType.FLOOR : TerrainType.WATER;
-				}	
-			}
-	}
-
-	void CellularAutomata()
-	{
-		for (int time = 0; time < iterations; time++)
-		{
-			SmoothMap();
-		}
-	}
-
-	void SmoothMap()
-	{
-		for (int i = 0; i < HEIGHT; i++)
-			for (int j = 0; j < WIDTH; j++)
-			{
-				int blockCount = GetSurroundingBlockCount(i, j);
-				if (blockCount > 4) matrix[i, j] = TerrainType.WATER;
-				else if (blockCount < 4) matrix[i, j] = TerrainType.FLOOR;
-			}
-	}
-
-	int GetSurroundingBlockCount(int gridX, int gridY)
-	{
-		int blockCount = 0;
-		for (int x = gridX - 1; x <= gridX + 1; x++)
-			for (int y = gridY - 1; y <= gridY + 1; y++)
-				if (IsWithinMatrix(x, y))
-				{
-					if (x != gridX || y != gridY)
-						if (matrix[x, y] == TerrainType.WATER) 
-							blockCount++;
-				}
-				else blockCount++;
-		return blockCount;
-	}
-
-	bool IsWithinMatrix(int x, int y)
-	{
-		return x >= 0 && x < HEIGHT && y >= 0 && y < WIDTH;
-	}
-
-	void GenerateTerrain()
-	{
-		for (int i = 0; i < HEIGHT; i++)
-			for (int j = 0; j < WIDTH; j++)
-			{
-				Terrain terrain = (matrix[i, j] == TerrainType.FLOOR) ? (Terrain)floorScene.Instantiate() : (Terrain)waterScene.Instantiate();
-				terrain.Position = new Vector3(i * TILE_SIZE, 0, j * TILE_SIZE);
-				terrainNode.AddChild(terrain);
-			}
-	}
-
-	
-	*/
 	#endregion
 }

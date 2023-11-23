@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://d0po1cpmd37vl"]
+[gd_scene load_steps=8 format=3 uid="uid://d0po1cpmd37vl"]
 
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_bm42e"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_nml0q"]
+[ext_resource type="Script" path="res://Scenes/Entities/Chicpea/Chicpea.cs" id="2_3ll0y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4k50"]
 albedo_color = Color(0.486275, 0.580392, 0.941176, 1)
@@ -14,27 +13,27 @@ material = SubResource("StandardMaterial3D_d4k50")
 radius = 0.25
 height = 0.5
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ecv5n"]
+
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ixleu"]
-points = PackedVector3Array(0, 0, 0, 8, 0, -3, -8, 0, -3, 6, 0, -6, -6, 0, -6, 5, 0, -7, -4, 0, -7, 0, 0, -8, 7.5, 0, -4.5, -7.5, 0, -4.5)
+points = PackedVector3Array(0, 0, 0, 8, 0, -1, -8, 0, -1, 6, 0, -6, -6, 0, -6, 5, 0, -7, -4, 0, -7, 0, 0, -8, 7.5, 0, -4.5, -7.5, 0, -4.5)
 
 [node name="BlueChicpea" instance=ExtResource("1_bm42e")]
 collision_mask = 7
-objectSize = Vector3(1, 1, 1)
-minSpd = 2.0
-maxSpd = 3.0
-entityType = 1
+script = ExtResource("2_3ll0y")
+isLeader = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("SphereShape3D_nml0q")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="1"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("SphereMesh_y5tuw")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="2"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
 mesh = SubResource("SphereMesh_s7c4b")
+
+[node name="BodyCollision" type="CollisionShape3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("SphereShape3D_ecv5n")
 
 [node name="Raycasts" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -42,5 +41,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="Trackers" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="CollisionShape3D" parent="Trackers/PreyTracker" index="0"]
+[node name="CollisionShape3D" parent="Trackers/Vision" index="0"]
 shape = SubResource("ConvexPolygonShape3D_ixleu")

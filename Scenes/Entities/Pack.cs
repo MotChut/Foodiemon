@@ -4,15 +4,11 @@ using Godot;
 public partial class Pack : Node
 {
     const int nDirections = 16;
-	List<Entity> entities = new List<Entity>();
-    Dictionary<Object, float> foodSources = new Dictionary<Object, float>()
-    {
-
-    };
-    Dictionary<Vector3, float> directionPoints = new Dictionary<Vector3, float>()
-    {
-
-    };
+	public List<Object> structures = new List<Object>();
+    public Dictionary<Entity, float> entities = new Dictionary<Entity, float>();
+    public Dictionary<MapSource, float> foodSources = new Dictionary<MapSource, float>();
+    public Dictionary<Vector3, float> directionPoints = new Dictionary<Vector3, float>();
+    public Entity leader = null;
     
     public Pack()
     {
@@ -26,5 +22,10 @@ public partial class Pack : Node
 			float angle = (float)(i * Mathf.Pi / nDirections);
 			directionPoints.Add(Vector3.Right.Rotated(Vector3.Up, angle), 0);
         }
+    }
+
+    public void UpdateDirectionPoint(Vector3 dir, float point)
+    {
+        
     }
 }

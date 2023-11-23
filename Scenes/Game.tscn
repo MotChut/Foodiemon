@@ -1,10 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bwxcxddwbb4wr"]
+[gd_scene load_steps=12 format=3 uid="uid://bwxcxddwbb4wr"]
 
 [ext_resource type="Script" path="res://Scenes/Game.cs" id="1_u01k3"]
 [ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Entities/Player/Player.tscn" id="1_wrtc5"]
 [ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="2_04dq4"]
-[ext_resource type="Material" uid="uid://dcuqaxf8s0n7s" path="res://Scenes/Shaders/MovableGrass.tres" id="2_js272"]
-[ext_resource type="PackedScene" uid="uid://bspcva7a6qk4p" path="res://Scenes/Components/DayNightCycle/DayNightCycle.tscn" id="4_uiea1"]
+[ext_resource type="Material" uid="uid://dcuqaxf8s0n7s" path="res://Shaders/MovableGrass.tres" id="2_qwo6m"]
 [ext_resource type="PackedScene" uid="uid://cy56tjjelcoqb" path="res://Scenes/Environment/Object/BerryBush.tscn" id="4_vkxi2"]
 [ext_resource type="PackedScene" uid="uid://cegsmtph48v0n" path="res://Scenes/Environment/Object/MovableGrass.tscn" id="5_rwxem"]
 [ext_resource type="PackedScene" uid="uid://d0po1cpmd37vl" path="res://Scenes/Entities/Chicpea/BlueChicpea.tscn" id="8_mgpqk"]
@@ -22,14 +21,12 @@ data = PackedVector3Array(25, 0, 25, -25, 0, 25, 25, 0, -25, -25, 0, 25, -25, 0,
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_u01k3")
-grassMaterial = ExtResource("2_js272")
+grassMaterial = ExtResource("2_qwo6m")
 
 [node name="Player" parent="." instance=ExtResource("1_wrtc5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 0, 5.15942)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5)
 accel = 0.25
 friction = 0.25
-
-[node name="DayNightCycle" parent="." instance=ExtResource("4_uiea1")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_u8hnu")
@@ -212,6 +209,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
 
 [node name="BlueChicpea" parent="Entities" instance=ExtResource("8_mgpqk")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 10)
+isLeader = false
 
 [node name="Obstacles" type="Node3D" parent="."]
 
