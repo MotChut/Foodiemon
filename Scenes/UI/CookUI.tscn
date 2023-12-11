@@ -1,0 +1,330 @@
+[gd_scene load_steps=7 format=3 uid="uid://drvotatijjc56"]
+
+[ext_resource type="Script" path="res://Scenes/UI/CookUI.cs" id="1_rv6yb"]
+[ext_resource type="PackedScene" uid="uid://2223d1dfhmfj" path="res://Scenes/UI/IngredientButton.tscn" id="2_jmx26"]
+[ext_resource type="Texture2D" uid="uid://65hhpumcmtvu" path="res://Assets/Fruits and Vegetables/Apple Green.png" id="3_dctdk"]
+[ext_resource type="Texture2D" uid="uid://cx5xogols2jtg" path="res://Assets/Fruits and Vegetables/Apple Red.png" id="4_tqes5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ajs4w"]
+font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygqro"]
+bg_color = Color(0.647059, 0.647059, 0.647059, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CookUI" type="CanvasLayer"]
+script = ExtResource("1_rv6yb")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Header" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/margin_left = 64
+
+[node name="Panel" type="Panel" parent="VBox/Header"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBox/Header/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "      Cook"
+vertical_alignment = 1
+
+[node name="Body" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_right = 64
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBox/Body"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Body/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FoodName" type="Label" parent="VBox/Body/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+text = "What will we have~?"
+label_settings = SubResource("LabelSettings_ajs4w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Cook" type="Panel" parent="VBox/Body/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="VBox" type="VBoxContainer" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pot" type="Control" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="PotTex" type="TextureRect" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/Pot"]
+clip_contents = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/Pot"]
+
+[node name="IngredientLabel" type="Label" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+text = "    Ingredients"
+vertical_alignment = 1
+
+[node name="IngredientBtns" type="MarginContainer" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="Panel" type="Panel" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ygqro")
+
+[node name="HBox" type="HBoxContainer" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CookedIngredient1" type="Button" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox/CookedIngredient1"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="CookedIngredient2" type="Button" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox/CookedIngredient2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="CookedIngredient3" type="Button" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox/CookedIngredient3"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="CookedIngredient4" type="Button" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox/CookedIngredient4"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="CookedIngredient5" type="Button" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox/CookedIngredient5"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="IngedientName" type="Label" parent="VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBox/Body/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="FoodName" type="Label" parent="VBox/Body/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.1
+label_settings = SubResource("LabelSettings_ajs4w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Inventories" type="Panel" parent="VBox/Body/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.9
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.7
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="GridContainer" type="GridContainer" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 8
+
+[node name="IngredientButton" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
+layout_mode = 2
+
+[node name="IngredientButton2" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
+layout_mode = 2
+
+[node name="Texture" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton2" index="0"]
+texture = ExtResource("3_dctdk")
+
+[node name="IngredientButton3" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
+layout_mode = 2
+
+[node name="Texture" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton3" index="0"]
+texture = ExtResource("4_tqes5")
+
+[node name="Description" type="Label" parent="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Footer" type="Control" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.2
+
+[node name="CookBtn" type="Button" parent="VBox/Footer"]
+clip_contents = true
+custom_minimum_size = Vector2(224, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -32.0
+offset_right = 112.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00199, 1)
+text = "Cook"
+
+[editable path="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton2"]
+[editable path="VBox/Body/HBoxContainer/VBoxContainer2/Inventories/VBoxContainer/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton3"]

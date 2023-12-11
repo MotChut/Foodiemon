@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://2223d1dfhmfj"]
+
+[ext_resource type="Script" path="res://Scenes/UI/IngredientButton.cs" id="1_7ey2d"]
+[ext_resource type="Texture2D" uid="uid://pkbvirtjlnqn" path="res://Assets/Fruits and Vegetables/Acorn.png" id="1_vu71g"]
+
+[node name="IngredientButton" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(48, 48)
+offset_right = 48.0
+offset_bottom = 48.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+script = ExtResource("1_7ey2d")
+
+[node name="Texture" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_vu71g")
+expand_mode = 1
