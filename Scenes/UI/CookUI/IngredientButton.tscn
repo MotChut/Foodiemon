@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://2223d1dfhmfj"]
 
-[ext_resource type="Script" path="res://Scenes/UI/IngredientButton.cs" id="1_7ey2d"]
+[ext_resource type="Script" path="res://Scenes/UI/CookUI/IngredientButton.cs" id="1_1py85"]
 [ext_resource type="Texture2D" uid="uid://pkbvirtjlnqn" path="res://Assets/Fruits and Vegetables/Acorn.png" id="1_vu71g"]
 
 [node name="IngredientButton" type="Button"]
@@ -10,7 +10,7 @@ offset_right = 48.0
 offset_bottom = 48.0
 size_flags_horizontal = 0
 size_flags_vertical = 4
-script = ExtResource("1_7ey2d")
+script = ExtResource("1_1py85")
 
 [node name="Texture" type="TextureRect" parent="."]
 texture_filter = 1

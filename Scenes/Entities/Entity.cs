@@ -1,13 +1,16 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static Resources;
 
 public partial class Entity : CharacterBody3D
 {
 	[Export] public Vector3 objectSize;
 	[Export] public Entities entityType;
-	[Export] bool isLeader = false;	
+	[Export] public int nFormation;
+	[Export] public bool isLeader = false;	
+	public Vector3 followOffset = Vector3.Zero;
 
 	public enum States
 	{
@@ -15,28 +18,47 @@ public partial class Entity : CharacterBody3D
 	}
 	public enum Task
     {
-        Idle, Explore, GoHome, ForceHome, HomeRest
+        Idle, Continue, Explore, FollowExplore,
+		CollectFood, CollectMaterial, RetrieveResource, CollectFoodHome,
+		GoHome, ForceHome, HomeRest
     }
-    public Task currentTask = Task.Idle;
-	public States currentState = States.Idle;
-	public List<Task> tasks = new List<Task>(3){ Task.Idle, Task.Idle, Task.Idle };
+	
+	// Local
+	#region Local
 	public StatsSettings statsSettings;
-	public float speed;
+	public Dictionary<string, string> appearances = new Dictionary<string, string>();
+	public Dictionary<string, List<string>> gout = new Dictionary<string, List<string>>();
+	public List<Task> tasks = new List<Task>(3){ Task.Idle, Task.Idle, Task.Idle };
+    public Task currentTask = Task.Idle;
+	public States currentState = States.Walk;
+	public bool isHome = false;
+	[Export] public int currentHunger;
+	public bool isKid = false;
+	public bool isPregnant = false;
+	public float workPoint = 0;
+	public int broughtFoods = 0;
+	public int currentEstrous = 0;
+	public int countEstrous = 0;
+	public int currentPregnant = 0;
+	public int currentGrow = 0;
+
 	public Node3D target = null;
 	public Vector3 targetPos = Vector3.Zero;
-	public Vector3 wanderDir = Vector3.Zero;
-	public float maxExploreDistance = 0;
 	public SteeringBehavior steer;
 	List<Vector3> rayDirections = new List<Vector3>();
 	Vector3 currentDir = Vector3.Zero;
-	public Vector3 lastDir = Vector3.Zero;
+	Vector3 lastDir = Vector3.Zero;
+
+	[Export] public float speed;
 	Vector3 velocity;
 	public Random rnd;
     public Pack pack;
 
+	#endregion
+
 	// Nodes
 	public Node3D raycastsNode, trackersNode, timersNode;
-	Area3D vision;
+	Area3D vision, self;
 	Timer exploreTimer;
 
     public override void _Ready()
@@ -47,17 +69,26 @@ public partial class Entity : CharacterBody3D
         trackersNode = GetNode<Node3D>("Trackers");
         timersNode = GetNode<Node3D>("Timers");
 		vision = trackersNode.GetNode<Area3D>("Vision");
+		self = trackersNode.GetNode<Area3D>("Self");
 		exploreTimer = timersNode.GetNode<Timer>("ExploreTimer");
-		
-		Init(); // Generate Stats
-		
+
+		// Stats
+		statsSettings = StatsSettingsList[(int)entityType];
+		Random random = new Random();
+		speed = (float)(random.NextDouble() * 
+				(statsSettings.maxSpd - statsSettings.minSpd) + statsSettings.minSpd);
+		currentHunger = statsSettings.maxHunger;
+
 		// Steering Behaviors
 		GenerateRaycasts();
 		steer = new SteeringBehavior(this);
 
 		// Trackers
-		vision.Connect("body_entered", new Callable(this, "VisionEntered"));
-		vision.Connect("body_exited", new Callable(this, "VisionExited"));
+		vision.Connect("body_entered", new Callable(this, "VisionEntered_Body"));
+		vision.Connect("body_exited", new Callable(this, "VisionExited_Body"));
+		vision.Connect("area_entered", new Callable(this, "VisionEntered_Area"));
+		self.Connect("area_entered", new Callable(this, "SelfEntered_Area"));
+		self.Connect("area_exited", new Callable(this, "SelfExited_Area"));
 
 		exploreTimer.Connect("timeout", new Callable(this, "ExploreTimeout"));
     }
@@ -68,20 +99,15 @@ public partial class Entity : CharacterBody3D
 		if(targetPos != Vector3.Zero) Chase();
     }
 
-	void Init()
+	public virtual void GenerateAppearance(){}
+	public virtual void GenerateGout(){}
+
+	public virtual void UpdateCurrentTask()
 	{
-		statsSettings = StatsSettingsList[(int)entityType];
-		Random random = new Random();
-		speed = (float)(random.NextDouble() * 
-				(statsSettings.maxSpd - statsSettings.minSpd) + statsSettings.minSpd);
+		SetCurrentTask(tasks[(int)CurrentTime]);
 	}
 
 	#region Steering Behaviors
-	public void UpdateCurrentTask()
-	{
-		currentTask = tasks[(int)CurrentTime];
-	}
-
 	public void Chase()
 	{
 		currentDir = Vector3.Zero;
@@ -93,7 +119,7 @@ public partial class Entity : CharacterBody3D
 	public void Wander()
 	{
 		currentDir = Vector3.Zero;
-		currentDir += wanderDir;
+		currentDir += pack.wanderDir;
 		currentDir += steer.Evade();
 		Move();
 		UpdateMaxWanderDistance();
@@ -102,9 +128,9 @@ public partial class Entity : CharacterBody3D
 	void UpdateMaxWanderDistance()
 	{
 		Vector3 housePos = pack.structures[0].GlobalPosition;
-		if(housePos.DistanceTo(GlobalPosition) > maxExploreDistance)
+		if(housePos.DistanceTo(GlobalPosition) > pack.maxExploreDistance)
 		{
-			maxExploreDistance = housePos.DistanceTo(GlobalPosition);
+			pack.maxExploreDistance = housePos.DistanceTo(GlobalPosition);
 			exploreTimer.Stop();
 		}
 		else if(exploreTimer.IsStopped()) exploreTimer.Start();
@@ -116,9 +142,9 @@ public partial class Entity : CharacterBody3D
 		currentDir.Z = Mathf.Lerp(lastDir.Z, currentDir.Z, statsSettings.rotAngle);
 		currentDir = currentDir.Normalized();
 		LookAt(new Vector3(currentDir.X + GlobalPosition.X, GlobalPosition.Y, currentDir.Z + GlobalPosition.Z), Vector3.Up);
-        velocity = currentDir * speed;
-		velocity.Clamp(Vector3.Zero, new Vector3(1, 0, 1) * speed);
-		Velocity = velocity;
+        velocity = currentDir * speed * ((float)currentHunger / statsSettings.maxHunger);
+		velocity.Clamp(Vector3.Zero, new Vector3(1, 0, 1) * speed * (currentHunger / statsSettings.maxHunger));
+		Velocity = velocity + new Vector3(0, -10, 0);
 		MoveAndSlide();
 		lastDir = currentDir;
 	}
@@ -128,7 +154,7 @@ public partial class Entity : CharacterBody3D
 		if(statsSettings.nRaycasts == 0) return;
 		for(int i = 0; i < statsSettings.nRaycasts; i++)
 		{
-			float angle = (float)(i * Math.PI / statsSettings.nRaycasts);
+			float angle = (float)(i * 2 * Math.PI / statsSettings.nRaycasts);
 			rayDirections.Add(Vector3.Right.Rotated(Vector3.Up, angle));
             RayCast3D rayCast3D = new RayCast3D
             {
@@ -144,14 +170,18 @@ public partial class Entity : CharacterBody3D
 	#endregion
 
 	#region Signals
-	void VisionEntered(Node3D body)
+	void VisionEntered_Body(Node3D body)
 	{
 		target = body;
 	}
-	void VisionExited(Node3D body)
+	void VisionExited_Body(Node3D body)
 	{
 		target = null;
 	}
+	public virtual void VisionEntered_Area(Area3D area3D){}
+	public virtual void SelfEntered_Area(Area3D area3D){}
+	public virtual void SelfExited_Area(Area3D area3D){}
+
 	void KeepTrackOfTarget()
 	{
 		PhysicsDirectSpaceState3D state = GetWorld3D().DirectSpaceState;
@@ -163,24 +193,123 @@ public partial class Entity : CharacterBody3D
         if((Node3D)result["collider"] == target)
 			targetPos = target.GlobalPosition;
 	}
-
 	void ExploreTimeout()
 	{
-		currentTask = Task.ForceHome;
+		pack.directionPoints[pack.wanderDir] = 0;
+		SetCurrentTask(Task.ForceHome);
 	}
 
 	#endregion
 
-	#region Task Handler
-	public virtual void SetPack(Pack pack){}
-
-    public virtual void PlanTask(){}
-
-    public virtual void GiveTask(Chicpea chicpea, GameTime time, Task task){}
-
-    public virtual void ReceiveTask(){}
-
+	#region Task Handler Virtual
+	public virtual void SetCurrentTask(Task task){}
+    public virtual void IntoGroups(){}
+    public virtual void PlanTasks(){}
+	public virtual void TaskByGroup(Task task, Entity entity){}
+    public virtual void GiveTask(Entity entity, GameTime time, Task task){}
     public virtual void TaskHandler(){}
 
 	#endregion
+
+	public async void WaitFormation()
+    {
+		currentState = States.Idle;
+        await ToSignal(GetTree().CreateTimer(5), "timeout");
+		currentState = States.Walk;
+    }
+
+	public void ConsumeFood()
+	{
+		if(statsSettings.nConsume > ((EntityBase)pack.structures[0]).foods)
+		{
+			Starve();
+		}
+		else 
+		{
+			if(currentHunger < statsSettings.maxHunger) currentHunger += 1;
+			((EntityBase)pack.structures[0]).foods -= statsSettings.nConsume;
+		}
+	}
+
+	public void Starve()
+	{
+		currentHunger -= 1;
+		if(currentHunger <= 0)
+		{ 
+			pack.entities.Remove(this);
+			QueueFree();
+		}
+	}
+
+	public int CountGoutMatches(Entity entity)
+    {
+        int count = 0;
+        for(int i = 0; i < gout.Keys.Count; i++)
+        {
+            List<string> goutList = gout.Values.ToList()[i];
+            List<string> keyList = gout.Keys.ToList();
+            if(goutList.Contains(entity.appearances[keyList[i]])) count++;
+        }
+
+        return count;
+    }
+	public void EstrousPregnancy()
+    {
+        if(!isPregnant)
+        {
+            if(currentEstrous == statsSettings.estrousCycle)
+            {
+                currentEstrous = 0;
+                Mating();
+            }
+            else currentEstrous++;
+        }
+        // Handle Pregnancy
+        else
+        {
+            if(currentPregnant == statsSettings.pregnantDuration)
+            {
+                GiveBirth();
+            }
+            else currentPregnant++;
+        }
+    }
+	public void Mating()
+	{
+		List<Entity> entities = new List<Entity>(pack.entities);
+        while(entities.Count > 0)
+        {
+            Entity entity = entities[rnd.Next(entities.Count)];
+            if(!entity.isKid && !entity.isPregnant && CountGoutMatches(entity) >= 2 && entity.CountGoutMatches(this) >= 2)
+            {
+                // 1 random entity will be pregnant
+				if(rnd.NextDouble() <= 0.5f) isPregnant = true;
+				else entity.isPregnant = true;
+				break;
+            }
+            else entities.Remove(entity);
+        }
+	}
+	public virtual void GiveBirth(){}
+	public void GrowUp()
+	{
+		currentGrow++;
+		if(currentGrow == statsSettings.growDuration)
+		{ 
+			Scale = Vector3.One;
+			currentGrow = 0;
+			isKid = false;
+		}
+		else 
+		{
+			Scale = Scale + 
+			(Vector3.One - new Vector3(statsSettings.kidSize, statsSettings.kidSize, statsSettings.kidSize))
+			/ statsSettings.growDuration;
+		}
+	}
+
+	public void UpdateTargetPos()
+    {
+        targetPos = pack.leader.GlobalPosition + followOffset;
+    }
 }

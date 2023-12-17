@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://078pf2p6ibe"]
+
+[ext_resource type="Script" path="res://Scenes/Environment/Object/Object.cs" id="1_g7j3m"]
+[ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="1_s1i7e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g0sl3"]
+render_priority = 0
+shader = ExtResource("1_s1i7e")
+shader_parameter/albedo = Color(0.396078, 0.396078, 0.396078, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = false
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 8.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
+
+[sub_resource type="BoxMesh" id="BoxMesh_nof13"]
+material = SubResource("ShaderMaterial_g0sl3")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0osmf"]
+
+[node name="Rock1" type="Node3D"]
+script = ExtResource("1_g7j3m")
+objectSize = Vector3(1, 1, 1)
+isBlock = true
+
+[node name="Circle_002" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+layers = 512
+mesh = SubResource("BoxMesh_nof13")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_0osmf")

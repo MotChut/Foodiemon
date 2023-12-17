@@ -74,7 +74,7 @@ public partial class RegionSettings : Node
 
     void CreateAverageDistance()
     {
-        averageDistance = 24;
+        averageDistance = 12;
     }
 
     public bool SetTypeControlByIndex(int key, int value)

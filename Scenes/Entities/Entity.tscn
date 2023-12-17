@@ -10,9 +10,15 @@ script = ExtResource("1_ja4sq")
 
 [node name="Trackers" type="Node3D" parent="."]
 
+[node name="Self" type="Area3D" parent="Trackers"]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/Self"]
+
 [node name="Vision" type="Area3D" parent="Trackers"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 10
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/Vision"]
 

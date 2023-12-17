@@ -1,42 +1,105 @@
-[gd_scene load_steps=13 format=3 uid="uid://cn1648f6p2ako"]
+[gd_scene load_steps=17 format=3 uid="uid://cn1648f6p2ako"]
 
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_nqom0"]
 [ext_resource type="Script" path="res://Scenes/Entities/Chicpea/Chicpea.cs" id="2_c8ney"]
 [ext_resource type="Texture2D" uid="uid://ebw1retbqexj" path="res://Assets/chicpea_eye.png" id="3_llga8"]
+[ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="3_n005j"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f2xom"]
-resource_name = "lop long phu.001"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.760784, 1, 0.392157, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udubo"]
+render_priority = 0
+shader = ExtResource("3_n005j")
+shader_parameter/albedo = Color(0.760784, 1, 0.392157, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = false
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 16.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrohk"]
-resource_name = "da"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.945098, 0.913725, 0.427451, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4tw74"]
+render_priority = 0
+shader = ExtResource("3_n005j")
+shader_parameter/albedo = Color(0.945098, 0.913725, 0.427451, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = false
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 16.0
+shader_parameter/rim_color = Color(1, 1, 1, 0.0196078)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r3mex"]
-resource_name = "cai mao"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.251284, 0.850259, 0.241696, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jpm7x"]
+render_priority = 0
+shader = ExtResource("3_n005j")
+shader_parameter/albedo = Color(0.25098, 0.85098, 0.243137, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = false
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 16.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uvhu4"]
-resource_name = "cai mo"
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.754005, 0.250267, 0.207866, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfhwx"]
+render_priority = 0
+shader = ExtResource("3_n005j")
+shader_parameter/albedo = Color(0.752941, 0.25098, 0.207843, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = false
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 8.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sf7om"]
-resource_name = "Material.001"
-transparency = 2
-alpha_scissor_threshold = 0.0
-alpha_antialiasing_mode = 0
-cull_mode = 2
-vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("3_llga8")
-texture_repeat = false
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3iu4a"]
+render_priority = 0
+shader = ExtResource("3_n005j")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/clamp_diffuse_to_max = false
+shader_parameter/cuts = 3
+shader_parameter/wrap = 0.0
+shader_parameter/steepness = 1.0
+shader_parameter/use_attenuation = true
+shader_parameter/use_specular = false
+shader_parameter/specular_strength = 1.0
+shader_parameter/specular_shininess = 16.0
+shader_parameter/use_rim = false
+shader_parameter/rim_width = 8.0
+shader_parameter/rim_color = Color(1, 1, 1, 1)
+shader_parameter/use_ramp = false
+shader_parameter/use_borders = false
+shader_parameter/border_width = 0.01
+shader_parameter/albedo_texture = ExtResource("3_llga8")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b62c0"]
 _surfaces = [{
@@ -90,7 +153,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_vpdn7"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_j6w1x"]
 resource_name = "chicpea_Roundcube_001"
 _surfaces = [{
 "aabb": AABB(-0.871393, 0.270774, -0.625779, 1.74279, 1.11554, 1.26482),
@@ -99,7 +162,7 @@ _surfaces = [{
 "index_count": 756,
 "index_data": PackedByteArray(24, 0, 0, 0, 11, 0, 24, 0, 7, 0, 0, 0, 20, 0, 1, 0, 15, 0, 20, 0, 5, 0, 1, 0, 28, 0, 61, 0, 10, 0, 28, 0, 64, 0, 61, 0, 6, 0, 71, 0, 72, 0, 6, 0, 73, 0, 71, 0, 8, 0, 18, 0, 4, 0, 8, 0, 23, 0, 18, 0, 12, 0, 77, 0, 14, 0, 23, 0, 17, 0, 18, 0, 23, 0, 22, 0, 17, 0, 21, 0, 15, 0, 16, 0, 21, 0, 20, 0, 15, 0, 15, 0, 2, 0, 16, 0, 7, 0, 57, 0, 9, 0, 7, 0, 58, 0, 57, 0, 18, 0, 66, 0, 4, 0, 18, 0, 70, 0, 66, 0, 19, 0, 51, 0, 50, 0, 19, 0, 28, 0, 51, 0, 13, 0, 20, 0, 21, 0, 13, 0, 11, 0, 20, 0, 12, 0, 22, 0, 23, 0, 12, 0, 14, 0, 22, 0, 11, 0, 5, 0, 20, 0, 11, 0, 0, 0, 5, 0, 36, 0, 74, 0, 76, 0, 36, 0, 34, 0, 74, 0, 27, 0, 54, 0, 53, 0, 27, 0, 24, 0, 54, 0, 87, 0, 31, 0, 81, 0, 87, 0, 36, 0, 31, 0, 83, 0, 45, 0, 78, 0, 83, 0, 46, 0, 45, 0, 78, 0, 44, 0, 82, 0, 78, 0, 45, 0, 44, 0, 86, 0, 39, 0, 80, 0, 86, 0, 47, 0, 39, 0, 87, 0, 47, 0, 86, 0, 87, 0, 48, 0, 47, 0, 79, 0, 46, 0, 83, 0, 79, 0, 42, 0, 46, 0, 37, 0, 40, 0, 39, 0, 38, 0, 42, 0, 41, 0, 38, 0, 44, 0, 45, 0, 38, 0, 45, 0, 46, 0, 37, 0, 47, 0, 48, 0, 37, 0, 48, 0, 43, 0, 37, 0, 39, 0, 47, 0, 38, 0, 46, 0, 42, 0, 51, 0, 49, 0, 50, 0, 51, 0, 52, 0, 49, 0, 49, 0, 19, 0, 50, 0, 49, 0, 75, 0, 19, 0, 28, 0, 52, 0, 51, 0, 28, 0, 33, 0, 52, 0, 33, 0, 49, 0, 52, 0, 33, 0, 30, 0, 49, 0, 56, 0, 53, 0, 54, 0, 56, 0, 55, 0, 53, 0, 74, 0, 34, 0, 56, 0, 29, 0, 53, 0, 55, 0, 29, 0, 27, 0, 53, 0, 34, 0, 55, 0, 56, 0, 34, 0, 29, 0, 55, 0, 60, 0, 58, 0, 59, 0, 60, 0, 57, 0, 58, 0, 27, 0, 59, 0, 24, 0, 27, 0, 60, 0, 59, 0, 9, 0, 60, 0, 27, 0, 9, 0, 57, 0, 60, 0, 24, 0, 58, 0, 7, 0, 24, 0, 59, 0, 58, 0, 61, 0, 63, 0, 62, 0, 61, 0, 64, 0, 63, 0, 10, 0, 62, 0, 6, 0, 10, 0, 61, 0, 62, 0, 6, 0, 63, 0, 19, 0, 6, 0, 62, 0, 63, 0, 19, 0, 64, 0, 28, 0, 19, 0, 63, 0, 64, 0, 17, 0, 3, 0, 18, 0, 3, 0, 70, 0, 18, 0, 3, 0, 68, 0, 70, 0, 1, 0, 69, 0, 15, 0, 1, 0, 65, 0, 69, 0, 69, 0, 2, 0, 15, 0, 69, 0, 67, 0, 2, 0, 73, 0, 19, 0, 12, 0, 73, 0, 6, 0, 19, 0, 85, 0, 42, 0, 79, 0, 85, 0, 41, 0, 42, 0, 74, 0, 11, 0, 76, 0, 74, 0, 24, 0, 11, 0, 76, 0, 11, 0, 13, 0, 77, 0, 32, 0, 14, 0, 77, 0, 35, 0, 32, 0, 19, 0, 77, 0, 12, 0, 19, 0, 75, 0, 77, 0, 31, 0, 76, 0, 13, 0, 31, 0, 36, 0, 76, 0, 75, 0, 35, 0, 77, 0, 75, 0, 30, 0, 35, 0, 24, 0, 56, 0, 54, 0, 24, 0, 74, 0, 56, 0, 30, 0, 75, 0, 49, 0, 84, 0, 29, 0, 80, 0, 84, 0, 25, 0, 29, 0, 40, 0, 80, 0, 39, 0, 40, 0, 84, 0, 80, 0, 26, 0, 79, 0, 33, 0, 26, 0, 85, 0, 79, 0, 33, 0, 83, 0, 30, 0, 33, 0, 79, 0, 83, 0, 36, 0, 86, 0, 34, 0, 36, 0, 87, 0, 86, 0, 34, 0, 80, 0, 29, 0, 34, 0, 86, 0, 80, 0, 35, 0, 82, 0, 32, 0, 35, 0, 78, 0, 82, 0, 30, 0, 78, 0, 35, 0, 30, 0, 83, 0, 78, 0, 48, 0, 81, 0, 43, 0, 48, 0, 87, 0, 81, 0, 103, 0, 0, 0, 7, 0, 103, 0, 90, 0, 0, 0, 99, 0, 1, 0, 5, 0, 99, 0, 94, 0, 1, 0, 107, 0, 140, 0, 143, 0, 107, 0, 10, 0, 140, 0, 6, 0, 148, 0, 149, 0, 6, 0, 72, 0, 148, 0, 8, 0, 97, 0, 102, 0, 8, 0, 4, 0, 97, 0, 91, 0, 93, 0, 153, 0, 102, 0, 96, 0, 101, 0, 102, 0, 97, 0, 96, 0, 100, 0, 94, 0, 99, 0, 100, 0, 95, 0, 94, 0, 94, 0, 95, 0, 88, 0, 7, 0, 136, 0, 137, 0, 7, 0, 9, 0, 136, 0, 97, 0, 66, 0, 147, 0, 97, 0, 4, 0, 66, 0, 98, 0, 130, 0, 107, 0, 98, 0, 129, 0, 130, 0, 92, 0, 99, 0, 90, 0, 92, 0, 100, 0, 99, 0, 91, 0, 101, 0, 93, 0, 91, 0, 102, 0, 101, 0, 90, 0, 5, 0, 0, 0, 90, 0, 99, 0, 5, 0, 115, 0, 150, 0, 113, 0, 115, 0, 152, 0, 150, 0, 106, 0, 133, 0, 103, 0, 106, 0, 132, 0, 133, 0, 163, 0, 110, 0, 115, 0, 163, 0, 157, 0, 110, 0, 159, 0, 124, 0, 125, 0, 159, 0, 154, 0, 124, 0, 154, 0, 123, 0, 124, 0, 154, 0, 158, 0, 123, 0, 162, 0, 118, 0, 126, 0, 162, 0, 156, 0, 118, 0, 163, 0, 126, 0, 127, 0, 163, 0, 162, 0, 126, 0, 155, 0, 125, 0, 121, 0, 155, 0, 159, 0, 125, 0, 116, 0, 118, 0, 119, 0, 117, 0, 120, 0, 121, 0, 117, 0, 124, 0, 123, 0, 117, 0, 125, 0, 124, 0, 116, 0, 127, 0, 126, 0, 116, 0, 122, 0, 127, 0, 116, 0, 126, 0, 118, 0, 117, 0, 121, 0, 125, 0, 130, 0, 128, 0, 131, 0, 130, 0, 129, 0, 128, 0, 128, 0, 98, 0, 151, 0, 128, 0, 129, 0, 98, 0, 107, 0, 131, 0, 112, 0, 107, 0, 130, 0, 131, 0, 112, 0, 128, 0, 109, 0, 112, 0, 131, 0, 128, 0, 135, 0, 132, 0, 134, 0, 135, 0, 133, 0, 132, 0, 150, 0, 135, 0, 113, 0, 108, 0, 132, 0, 106, 0, 108, 0, 134, 0, 132, 0, 113, 0, 134, 0, 108, 0, 113, 0, 135, 0, 134, 0, 139, 0, 137, 0, 136, 0, 139, 0, 138, 0, 137, 0, 106, 0, 138, 0, 139, 0, 106, 0, 103, 0, 138, 0, 9, 0, 139, 0, 136, 0, 9, 0, 106, 0, 139, 0, 103, 0, 137, 0, 138, 0, 103, 0, 7, 0, 137, 0, 140, 0, 142, 0, 143, 0, 140, 0, 141, 0, 142, 0, 10, 0, 141, 0, 140, 0, 10, 0, 6, 0, 141, 0, 6, 0, 142, 0, 141, 0, 6, 0, 98, 0, 142, 0, 98, 0, 143, 0, 142, 0, 98, 0, 107, 0, 143, 0, 96, 0, 97, 0, 89, 0, 89, 0, 147, 0, 145, 0, 89, 0, 97, 0, 147, 0, 1, 0, 146, 0, 65, 0, 1, 0, 94, 0, 146, 0, 146, 0, 88, 0, 144, 0, 146, 0, 94, 0, 88, 0, 149, 0, 98, 0, 6, 0, 149, 0, 91, 0, 98, 0, 161, 0, 121, 0, 120, 0, 161, 0, 155, 0, 121, 0, 150, 0, 90, 0, 103, 0, 150, 0, 152, 0, 90, 0, 152, 0, 92, 0, 90, 0, 153, 0, 111, 0, 114, 0, 153, 0, 93, 0, 111, 0, 98, 0, 153, 0, 151, 0, 98, 0, 91, 0, 153, 0, 110, 0, 152, 0, 115, 0, 110, 0, 92, 0, 152, 0, 151, 0, 114, 0, 109, 0, 151, 0, 153, 0, 114, 0, 103, 0, 135, 0, 150, 0, 103, 0, 133, 0, 135, 0, 109, 0, 128, 0, 151, 0, 160, 0, 108, 0, 104, 0, 160, 0, 156, 0, 108, 0, 119, 0, 156, 0, 160, 0, 119, 0, 118, 0, 156, 0, 105, 0, 155, 0, 161, 0, 105, 0, 112, 0, 155, 0, 112, 0, 159, 0, 155, 0, 112, 0, 109, 0, 159, 0, 115, 0, 162, 0, 163, 0, 115, 0, 113, 0, 162, 0, 113, 0, 156, 0, 162, 0, 113, 0, 108, 0, 156, 0, 114, 0, 158, 0, 154, 0, 114, 0, 111, 0, 158, 0, 109, 0, 154, 0, 159, 0, 109, 0, 114, 0, 154, 0, 127, 0, 157, 0, 163, 0, 127, 0, 122, 0, 157, 0),
 "lods": [0.129035, PackedByteArray(46, 1, 102, 1, 34, 1, 102, 1, 69, 0, 2, 0, 69, 0, 67, 0, 34, 1, 46, 1, 36, 1, 102, 1, 56, 1, 46, 1, 34, 1, 47, 1, 94, 1, 36, 1, 36, 0, 46, 1, 56, 1, 34, 0, 46, 1, 36, 0, 36, 0, 56, 1, 107, 1, 70, 1, 36, 0, 107, 1, 36, 0, 70, 1, 76, 1, 63, 1, 76, 1, 70, 1, 61, 1, 76, 1, 111, 1, 36, 0, 111, 1, 59, 1, 59, 1, 111, 1, 54, 1, 46, 1, 59, 1, 93, 1, 59, 1, 89, 1, 93, 1, 47, 1, 93, 1, 87, 1, 50, 1, 47, 1, 87, 1, 50, 1, 94, 1, 47, 1, 50, 1, 87, 1, 85, 1, 91, 1, 85, 1, 87, 1, 53, 1, 50, 1, 85, 1, 50, 1, 95, 1, 94, 1, 60, 1, 53, 1, 90, 1, 40, 1, 95, 1, 50, 1, 95, 1, 37, 1, 94, 1, 40, 1, 37, 1, 95, 1, 109, 1, 48, 1, 53, 1, 109, 1, 53, 1, 112, 1, 67, 1, 109, 1, 112, 1, 67, 1, 112, 1, 77, 1, 62, 1, 66, 1, 77, 1, 37, 1, 41, 1, 169, 1, 37, 1, 169, 1, 171, 1, 122, 1, 37, 1, 171, 1, 125, 1, 122, 1, 171, 1, 125, 1, 171, 1, 173, 1, 40, 1, 125, 1, 173, 1, 40, 1, 173, 1, 170, 1, 173, 1, 172, 1, 170, 1, 125, 1, 162, 1, 122, 1, 125, 1, 159, 1, 162, 1, 129, 1, 159, 1, 125, 1, 122, 1, 162, 1, 168, 1, 167, 1, 162, 1, 161, 1, 137, 1, 164, 1, 129, 1, 183, 1, 129, 1, 123, 1, 183, 1, 186, 1, 129, 1, 143, 1, 186, 1, 183, 1, 186, 1, 141, 1, 150, 1, 136, 1, 130, 1, 186, 1, 136, 1, 168, 1, 165, 1, 138, 1, 168, 1, 136, 1, 138, 1, 136, 1, 187, 1, 121, 1, 168, 1, 138, 1, 138, 1, 187, 1, 149, 1, 138, 1, 92, 0, 121, 1, 110, 0, 92, 0, 138, 1, 149, 1, 110, 0, 138, 1, 92, 0, 113, 1, 121, 1, 149, 1, 182, 1, 110, 0, 149, 1, 146, 1, 182, 1, 139, 1, 146, 1, 149, 1, 121, 1, 113, 1, 103, 1, 121, 1, 103, 1, 38, 1, 146, 0, 113, 1, 144, 0, 103, 1, 88, 0, 146, 0, 51, 1, 96, 1, 42, 1, 43, 1, 51, 1, 81, 1, 51, 1, 99, 1, 96, 1, 96, 1, 99, 1, 97, 1, 42, 1, 96, 1, 97, 1, 51, 1, 33, 0, 83, 1, 51, 1, 83, 1, 51, 0, 82, 1, 83, 1, 78, 1, 51, 0, 49, 0, 44, 1, 44, 1, 100, 1, 52, 1, 44, 1, 98, 1, 101, 1, 42, 1, 98, 1, 104, 1, 104, 1, 98, 1, 44, 1, 42, 1, 104, 1, 175, 1, 42, 1, 175, 1, 174, 1, 174, 1, 175, 1, 177, 1, 126, 1, 42, 1, 174, 1, 126, 1, 174, 1, 177, 1, 126, 1, 130, 0, 157, 1, 155, 1, 152, 1, 157, 1, 126, 1, 131, 0, 133, 1, 124, 1, 133, 1, 185, 1, 133, 1, 158, 1, 153, 1, 133, 1, 153, 1, 131, 1, 153, 1, 118, 1, 131, 1, 156, 1, 118, 1, 153, 1, 118, 1, 178, 1, 175, 1, 118, 1, 132, 1, 131, 1, 118, 1, 115, 1, 132, 1, 131, 1, 132, 1, 180, 1, 135, 1, 131, 1, 180, 1, 132, 1, 158, 0, 180, 1, 180, 1, 158, 0, 147, 1, 180, 1, 147, 1, 144, 1, 115, 1, 116, 1, 132, 1, 115, 1, 120, 1, 116, 1, 149, 0, 115, 1, 118, 1, 120, 1, 114, 1, 116, 1, 149, 0, 118, 1, 104, 1, 104, 1, 118, 1, 176, 1, 104, 1, 148, 0, 149, 0, 104, 1, 73, 0, 71, 0, 73, 0, 104, 1, 44, 1, 73, 0, 44, 1, 12, 0, 120, 1, 97, 0, 114, 1, 39, 1, 97, 0, 120, 1, 114, 1, 97, 0, 147, 0, 114, 1, 147, 0, 145, 0, 97, 0, 66, 0, 147, 0, 39, 1, 66, 0, 97, 0, 39, 1, 18, 0, 66, 0, 18, 0, 70, 0, 66, 0, 39, 1, 45, 1, 18, 0, 35, 1, 70, 0, 18, 0, 45, 1, 35, 1, 18, 0, 35, 1, 68, 0, 70, 0, 45, 1, 57, 1, 35, 1, 12, 0, 57, 1, 45, 1, 44, 1, 57, 1, 12, 0, 44, 1, 55, 1, 57, 1, 79, 1, 55, 1, 44, 1, 55, 1, 108, 1, 57, 1, 58, 1, 55, 1, 79, 1, 55, 1, 105, 1, 108, 1, 105, 1, 72, 1, 108, 1, 108, 1, 72, 1, 71, 1, 64, 1, 71, 1, 74, 1, 58, 1, 80, 1, 84, 1, 58, 1, 106, 1, 55, 1, 49, 1, 106, 1, 58, 1, 49, 1, 110, 1, 106, 1, 110, 1, 68, 1, 106, 1, 106, 1, 68, 1, 73, 1, 65, 1, 75, 1, 69, 1, 92, 1, 88, 1, 86, 1, 29, 0, 53, 0, 55, 0, 117, 1, 154, 1, 127, 1, 184, 1, 181, 1, 145, 1, 134, 1, 181, 1, 184, 1, 117, 0, 120, 0, 148, 1, 140, 1, 151, 1, 142, 1, 166, 1, 160, 1, 163, 1, 108, 0, 134, 0, 132, 0, 119, 1, 128, 1, 179, 1), 0.239001, PackedByteArray(218, 0, 208, 0, 227, 0, 218, 0, 227, 0, 238, 0, 227, 0, 221, 0, 238, 0, 227, 0, 208, 0, 242, 0, 242, 0, 69, 0, 2, 0, 227, 0, 242, 0, 206, 0, 69, 0, 67, 0, 206, 0, 31, 0, 227, 0, 206, 0, 229, 0, 227, 0, 31, 0, 227, 0, 229, 0, 233, 0, 228, 0, 233, 0, 223, 0, 28, 0, 240, 0, 212, 0, 28, 0, 226, 0, 51, 0, 212, 0, 240, 0, 244, 0, 212, 0, 244, 0, 27, 1, 3, 1, 212, 0, 27, 1, 3, 1, 130, 0, 10, 1, 217, 0, 246, 0, 226, 0, 217, 0, 250, 0, 246, 0, 246, 0, 250, 0, 232, 0, 1, 1, 10, 1, 33, 1, 10, 1, 30, 1, 33, 1, 33, 1, 30, 1, 16, 1, 244, 0, 73, 0, 71, 0, 73, 0, 244, 0, 213, 0, 244, 0, 148, 0, 149, 0, 149, 0, 253, 0, 244, 0, 244, 0, 241, 0, 213, 0, 213, 0, 241, 0, 220, 0, 213, 0, 220, 0, 236, 0, 244, 0, 253, 0, 28, 1, 253, 0, 4, 1, 28, 1, 253, 0, 21, 1, 4, 1, 21, 1, 253, 0, 9, 1, 253, 0, 8, 1, 9, 1, 9, 1, 8, 1, 29, 1, 8, 1, 20, 1, 29, 1, 253, 0, 254, 0, 8, 1, 29, 1, 19, 1, 15, 1, 255, 0, 252, 0, 8, 1, 252, 0, 254, 0, 147, 0, 252, 0, 147, 0, 145, 0, 254, 0, 66, 0, 147, 0, 8, 0, 66, 0, 254, 0, 8, 0, 214, 0, 66, 0, 214, 0, 70, 0, 66, 0, 207, 0, 70, 0, 214, 0, 207, 0, 68, 0, 70, 0, 215, 0, 224, 0, 207, 0, 213, 0, 224, 0, 214, 0, 245, 0, 231, 0, 224, 0, 213, 0, 225, 0, 224, 0, 225, 0, 247, 0, 224, 0, 237, 0, 225, 0, 213, 0, 230, 0, 248, 0, 234, 0, 222, 0, 219, 0, 239, 0, 249, 0, 216, 0, 222, 0, 249, 0, 222, 0, 235, 0, 211, 0, 209, 0, 219, 0, 209, 0, 211, 0, 25, 1, 211, 0, 2, 1, 26, 1, 22, 1, 26, 1, 2, 1, 5, 1, 22, 1, 2, 1, 32, 1, 5, 1, 0, 1, 13, 1, 5, 1, 31, 1, 13, 1, 31, 1, 18, 1, 31, 1, 14, 1, 18, 1, 24, 1, 11, 1, 210, 0, 11, 1, 243, 0, 210, 0, 11, 1, 251, 0, 243, 0, 243, 0, 251, 0, 146, 0, 146, 0, 251, 0, 144, 0, 7, 1, 251, 0, 11, 1, 17, 1, 7, 1, 11, 1, 12, 1, 23, 1, 6, 1, 138, 0, 135, 0, 113, 0), 0.485124, PackedByteArray(171, 0, 164, 0, 182, 0, 173, 0, 171, 0, 182, 0, 173, 0, 182, 0, 177, 0, 183, 0, 186, 0, 177, 0, 186, 0, 67, 0, 177, 0, 188, 0, 73, 0, 71, 0, 73, 0, 188, 0, 167, 0, 188, 0, 148, 0, 149, 0, 149, 0, 189, 0, 188, 0, 188, 0, 166, 0, 167, 0, 188, 0, 189, 0, 166, 0, 167, 0, 166, 0, 172, 0, 189, 0, 194, 0, 166, 0, 172, 0, 175, 0, 167, 0, 167, 0, 175, 0, 180, 0, 194, 0, 189, 0, 199, 0, 189, 0, 198, 0, 199, 0, 199, 0, 198, 0, 205, 0, 189, 0, 190, 0, 198, 0, 198, 0, 190, 0, 201, 0, 198, 0, 201, 0, 145, 0, 190, 0, 66, 0, 201, 0, 8, 0, 66, 0, 190, 0, 8, 0, 168, 0, 66, 0, 168, 0, 187, 0, 66, 0, 167, 0, 179, 0, 168, 0, 179, 0, 187, 0, 168, 0, 179, 0, 185, 0, 187, 0, 178, 0, 169, 0, 174, 0, 170, 0, 181, 0, 176, 0, 193, 0, 197, 0, 165, 0, 197, 0, 184, 0, 165, 0, 195, 0, 197, 0, 193, 0, 197, 0, 195, 0, 203, 0, 184, 0, 197, 0, 146, 0, 146, 0, 197, 0, 144, 0, 202, 0, 196, 0, 191, 0, 192, 0, 200, 0, 204, 0)],
-"material": SubResource("StandardMaterial3D_f2xom"),
+"material": SubResource("ShaderMaterial_udubo"),
 "name": "lop long phu.001",
 "primitive": 3,
 "vertex_count": 444,
@@ -111,7 +174,7 @@ _surfaces = [{
 "index_count": 228,
 "index_data": PackedByteArray(1, 0, 17, 0, 18, 0, 1, 0, 2, 0, 17, 0, 0, 0, 16, 0, 3, 0, 0, 0, 20, 0, 16, 0, 9, 0, 13, 0, 7, 0, 13, 0, 11, 0, 31, 0, 13, 0, 9, 0, 11, 0, 6, 0, 4, 0, 12, 0, 6, 0, 0, 0, 4, 0, 6, 0, 10, 0, 8, 0, 10, 0, 12, 0, 30, 0, 10, 0, 6, 0, 12, 0, 1, 0, 13, 0, 5, 0, 1, 0, 7, 0, 13, 0, 16, 0, 28, 0, 24, 0, 16, 0, 20, 0, 28, 0, 21, 0, 22, 0, 29, 0, 21, 0, 14, 0, 22, 0, 23, 0, 26, 0, 25, 0, 23, 0, 27, 0, 26, 0, 24, 0, 29, 0, 22, 0, 24, 0, 28, 0, 29, 0, 15, 0, 27, 0, 23, 0, 15, 0, 19, 0, 27, 0, 20, 0, 29, 0, 28, 0, 20, 0, 21, 0, 29, 0, 19, 0, 26, 0, 27, 0, 19, 0, 18, 0, 26, 0, 18, 0, 25, 0, 26, 0, 18, 0, 17, 0, 25, 0, 7, 0, 18, 0, 19, 0, 7, 0, 1, 0, 18, 0, 9, 0, 19, 0, 15, 0, 9, 0, 7, 0, 19, 0, 6, 0, 20, 0, 0, 0, 6, 0, 21, 0, 20, 0, 8, 0, 21, 0, 6, 0, 8, 0, 14, 0, 21, 0, 1, 0, 43, 0, 2, 0, 1, 0, 44, 0, 43, 0, 0, 0, 42, 0, 46, 0, 0, 0, 3, 0, 42, 0, 39, 0, 35, 0, 33, 0, 35, 0, 57, 0, 37, 0, 35, 0, 39, 0, 57, 0, 32, 0, 4, 0, 0, 0, 32, 0, 38, 0, 4, 0, 36, 0, 32, 0, 34, 0, 32, 0, 56, 0, 38, 0, 32, 0, 36, 0, 56, 0, 1, 0, 39, 0, 33, 0, 1, 0, 5, 0, 39, 0, 42, 0, 54, 0, 46, 0, 42, 0, 50, 0, 54, 0, 47, 0, 48, 0, 40, 0, 47, 0, 55, 0, 48, 0, 49, 0, 52, 0, 53, 0, 49, 0, 51, 0, 52, 0, 50, 0, 55, 0, 54, 0, 50, 0, 48, 0, 55, 0, 41, 0, 53, 0, 45, 0, 41, 0, 49, 0, 53, 0, 46, 0, 55, 0, 47, 0, 46, 0, 54, 0, 55, 0, 45, 0, 52, 0, 44, 0, 45, 0, 53, 0, 52, 0, 44, 0, 51, 0, 43, 0, 44, 0, 52, 0, 51, 0, 33, 0, 44, 0, 1, 0, 33, 0, 45, 0, 44, 0, 35, 0, 45, 0, 33, 0, 35, 0, 41, 0, 45, 0, 32, 0, 46, 0, 47, 0, 32, 0, 0, 0, 46, 0, 34, 0, 47, 0, 40, 0, 34, 0, 32, 0, 47, 0),
 "lods": [0.122499, PackedByteArray(80, 0, 2, 0, 17, 0, 80, 0, 91, 0, 2, 0, 101, 0, 98, 0, 91, 0, 80, 0, 17, 0, 87, 0, 94, 0, 98, 0, 99, 0, 92, 0, 99, 0, 80, 0, 92, 0, 95, 0, 100, 0, 90, 0, 95, 0, 92, 0, 39, 0, 90, 0, 92, 0, 80, 0, 39, 0, 92, 0, 90, 0, 39, 0, 57, 0, 90, 0, 57, 0, 37, 0, 80, 0, 5, 0, 39, 0, 80, 0, 13, 0, 5, 0, 13, 0, 11, 0, 31, 0, 13, 0, 79, 0, 11, 0, 80, 0, 19, 0, 13, 0, 79, 0, 13, 0, 19, 0, 19, 0, 80, 0, 88, 0, 79, 0, 19, 0, 88, 0, 80, 0, 87, 0, 88, 0, 79, 0, 88, 0, 84, 0, 84, 0, 88, 0, 86, 0, 3, 0, 28, 0, 16, 0, 3, 0, 42, 0, 54, 0, 16, 0, 89, 0, 85, 0, 85, 0, 89, 0, 83, 0, 42, 0, 96, 0, 102, 0, 96, 0, 103, 0, 102, 0, 89, 0, 81, 0, 82, 0, 81, 0, 14, 0, 82, 0, 81, 0, 89, 0, 78, 0, 81, 0, 10, 0, 14, 0, 10, 0, 81, 0, 12, 0, 10, 0, 12, 0, 30, 0, 81, 0, 4, 0, 12, 0, 81, 0, 78, 0, 4, 0, 32, 0, 4, 0, 78, 0, 32, 0, 78, 0, 102, 0, 32, 0, 38, 0, 4, 0, 32, 0, 56, 0, 38, 0, 32, 0, 36, 0, 56, 0, 32, 0, 102, 0, 55, 0, 36, 0, 32, 0, 40, 0, 40, 0, 32, 0, 55, 0, 55, 0, 48, 0, 40, 0, 18, 0, 52, 0, 43, 0, 97, 0, 93, 0, 104, 0), 0.156137, PackedByteArray(68, 0, 66, 0, 72, 0, 18, 0, 51, 0, 66, 0, 71, 0, 68, 0, 72, 0, 71, 0, 13, 0, 69, 0, 13, 0, 71, 0, 11, 0, 13, 0, 11, 0, 31, 0, 68, 0, 13, 0, 5, 0, 68, 0, 5, 0, 39, 0, 68, 0, 39, 0, 74, 0, 68, 0, 74, 0, 76, 0, 39, 0, 73, 0, 74, 0, 73, 0, 77, 0, 74, 0, 73, 0, 39, 0, 57, 0, 73, 0, 57, 0, 37, 0, 70, 0, 4, 0, 12, 0, 10, 0, 70, 0, 12, 0, 10, 0, 12, 0, 30, 0, 70, 0, 67, 0, 4, 0, 70, 0, 24, 0, 67, 0, 56, 0, 4, 0, 67, 0, 56, 0, 38, 0, 4, 0, 56, 0, 67, 0, 75, 0, 56, 0, 75, 0, 40, 0, 36, 0, 56, 0, 40, 0), 0.20252, PackedByteArray(13, 0, 11, 0, 31, 0, 13, 0, 63, 0, 11, 0, 63, 0, 13, 0, 5, 0, 63, 0, 5, 0, 39, 0, 63, 0, 39, 0, 65, 0, 64, 0, 65, 0, 60, 0, 61, 0, 4, 0, 12, 0, 58, 0, 61, 0, 12, 0, 58, 0, 12, 0, 30, 0, 56, 0, 4, 0, 61, 0, 56, 0, 38, 0, 4, 0, 59, 0, 56, 0, 62, 0)],
-"material": SubResource("StandardMaterial3D_xrohk"),
+"material": SubResource("ShaderMaterial_4tw74"),
 "name": "da",
 "primitive": 3,
 "vertex_count": 105,
@@ -123,7 +186,7 @@ _surfaces = [{
 "index_count": 48,
 "index_data": PackedByteArray(4, 0, 6, 0, 1, 0, 4, 0, 8, 0, 6, 0, 3, 0, 7, 0, 2, 0, 3, 0, 9, 0, 7, 0, 2, 0, 8, 0, 4, 0, 2, 0, 7, 0, 8, 0, 0, 0, 9, 0, 3, 0, 0, 0, 5, 0, 9, 0, 12, 0, 6, 0, 8, 0, 12, 0, 1, 0, 6, 0, 11, 0, 7, 0, 9, 0, 11, 0, 10, 0, 7, 0, 10, 0, 8, 0, 7, 0, 10, 0, 12, 0, 8, 0, 0, 0, 9, 0, 5, 0, 0, 0, 11, 0, 9, 0),
 "lods": [0.156261, PackedByteArray(3, 0, 0, 0, 14, 0, 16, 0, 14, 0, 0, 0, 16, 0, 15, 0, 14, 0, 15, 0, 13, 0, 14, 0, 14, 0, 13, 0, 4, 0, 15, 0, 12, 0, 13, 0)],
-"material": SubResource("StandardMaterial3D_r3mex"),
+"material": SubResource("ShaderMaterial_jpm7x"),
 "name": "cai mao",
 "primitive": 3,
 "vertex_count": 17,
@@ -134,7 +197,7 @@ _surfaces = [{
 "format": 4127,
 "index_count": 12,
 "index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 4, 0, 3, 0, 2, 0, 0, 0, 1, 0, 5, 0, 4, 0, 5, 0, 3, 0),
-"material": SubResource("StandardMaterial3D_uvhu4"),
+"material": SubResource("ShaderMaterial_cfhwx"),
 "name": "cai mo",
 "primitive": 3,
 "vertex_count": 6,
@@ -145,7 +208,7 @@ _surfaces = [{
 "format": 4127,
 "index_count": 30,
 "index_data": PackedByteArray(6, 0, 0, 0, 4, 0, 6, 0, 8, 0, 0, 0, 8, 0, 2, 0, 0, 0, 8, 0, 1, 0, 2, 0, 5, 0, 3, 0, 7, 0, 12, 0, 0, 0, 13, 0, 12, 0, 4, 0, 0, 0, 13, 0, 10, 0, 9, 0, 13, 0, 0, 0, 10, 0, 11, 0, 7, 0, 3, 0),
-"material": SubResource("StandardMaterial3D_sf7om"),
+"material": SubResource("ShaderMaterial_3iu4a"),
 "name": "Material.001",
 "primitive": 3,
 "vertex_count": 14,
@@ -154,11 +217,22 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b62c0")
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_47pxv"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8muiv"]
+radius = 0.4
+height = 1.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bw2en"]
+radius = 0.4
 height = 1.0
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ixleu"]
 points = PackedVector3Array(0, 0, 0, 8, 0, -1, -8, 0, -1, 6, 0, -6, -6, 0, -6, 5, 0, -7, -4, 0, -7, 0, 0, -8, 7.5, 0, -4.5, -7.5, 0, -4.5)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_sv173"]
+viewport_path = NodePath("InteractiveNotice/SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_a0x3d"]
+font_size = 48
 
 [node name="Chicpea" instance=ExtResource("1_nqom0")]
 collision_mask = 7
@@ -167,16 +241,16 @@ objectSize = Vector3(1, 1, 1)
 entityType = 1
 
 [node name="Sprite" type="Node3D" parent="." index="0"]
-transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="Roundcube_001" type="MeshInstance3D" parent="Sprite" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-mesh = SubResource("ArrayMesh_vpdn7")
+mesh = SubResource("ArrayMesh_j6w1x")
 skeleton = NodePath("")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("CapsuleShape3D_47pxv")
+shape = SubResource("CapsuleShape3D_8muiv")
 
 [node name="Raycasts" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -184,5 +258,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="Trackers" parent="." index="3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
+[node name="CollisionShape3D" parent="Trackers/Self" index="0"]
+shape = SubResource("CapsuleShape3D_bw2en")
+
 [node name="CollisionShape3D" parent="Trackers/Vision" index="0"]
 shape = SubResource("ConvexPolygonShape3D_ixleu")
+
+[node name="ExploreTimer" parent="Timers" index="0"]
+wait_time = 10.0
+
+[node name="InteractiveNotice" type="Sprite3D" parent="." index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_sv173")
+
+[node name="SubViewport" type="SubViewport" parent="InteractiveNotice" index="0"]
+transparent_bg = true
+size = Vector2i(288, 288)
+
+[node name="Label" type="Label" parent="InteractiveNotice/SubViewport" index="0"]
+offset_right = 288.0
+offset_bottom = 70.0
+text = "E"
+label_settings = SubResource("LabelSettings_a0x3d")
+horizontal_alignment = 1

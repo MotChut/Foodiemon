@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv0cjmroueusj"]
+
+[ext_resource type="Script" path="res://Scenes/UI/PlayerHUD/PlayerHUD.cs" id="1_8h4gp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_y76ra"]
+font_size = 24
+
+[node name="PlayerHUD" type="CanvasLayer"]
+script = ExtResource("1_8h4gp")
+
+[node name="FPS" type="Label" parent="."]
+offset_left = 33.0
+offset_top = 29.0
+offset_right = 609.0
+offset_bottom = 310.0
+label_settings = SubResource("LabelSettings_y76ra")

@@ -5,7 +5,10 @@ using Godot;
 
 public partial class Resources : Node
 {
+	public static int NUMBER_OF_DAYS = 0;
+
 	#region Constants
+	public const float SPEED_SCALE = 1f;
 	public const int MIN_REGION_SIZE = 15;
 	public const int MAX_REGION_SIZE = 20;
 	public const int TILE_SIZE = 20;
@@ -33,13 +36,17 @@ public partial class Resources : Node
 	{
 		TerrainType.ChicpeaBase
 	};
-
 	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
 	{
 		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Decorations/MovableGrass.tscn"),
 		["Tree"] =(PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Tree.tscn"),
 		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/BerryBush.tscn"),
-		["Mound"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Mound.tscn")
+		["Rock1"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Rock1.tscn"),
+		["GrassBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassBush.tscn"),
+	};
+	public static Dictionary<Entities, PackedScene> EntitySceneDictionary = new Dictionary<Entities, PackedScene>()
+	{
+		[Entities.Chicpea] = (PackedScene)ResourceLoader.Load("res://Scenes/Entities/Chicpea/Chicpea.tscn")
 	};
 
 	#endregion
@@ -54,9 +61,15 @@ public partial class Resources : Node
 
 	public static void SetCurrentTime(GameTime time)	
 	{
+		if(CurrentTime == GameTime.Night && time == GameTime.Day) NUMBER_OF_DAYS += 1;
+
 		CurrentTime = time;
+		
 		if(time == GameTime.Day)
+		{
 			TriggerPlanTask();
+		}
+			
 		UpdateCurrentTask();
 	}
 
@@ -64,7 +77,9 @@ public partial class Resources : Node
 	{
 		foreach(Pack pack in PackList)
 		{
-			pack.leader.PlanTask();
+			if(pack.entities.Count <= 0) continue;
+			pack.PackConsumeFoods();
+			pack.leader.IntoGroups();
 		}
 	}
 
@@ -72,7 +87,7 @@ public partial class Resources : Node
 	{
 		foreach(Pack pack in PackList)
 		{
-			foreach(Entity entity in new List<Entity>(pack.entities.Keys))
+			foreach(Entity entity in pack.entities)
 			{
 				entity.UpdateCurrentTask();
 			}

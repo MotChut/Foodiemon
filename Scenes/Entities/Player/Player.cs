@@ -47,6 +47,7 @@ public partial class Player : CharacterBody3D
 			velocity = velocity.MoveToward(Vector3.Zero, friction);
 		}
 
+		velocity += new Vector3(0, -10, 0);
 		Velocity = velocity;
 		RotateToDirection((float)delta);
 		MoveAndSlide();
