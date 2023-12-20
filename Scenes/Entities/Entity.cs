@@ -9,12 +9,13 @@ public partial class Entity : CharacterBody3D
 	[Export] public Vector3 objectSize;
 	[Export] public Entities entityType;
 	[Export] public int nFormation;
-	[Export] public bool isLeader = false;	
+	[Export] public bool isLeader = false;
+	[Export] public float waitFormationTime;
 	public Vector3 followOffset = Vector3.Zero;
 
 	public enum States
 	{
-		Idle, Walk
+		Idle, Walk, Hurt
 	}
 	public enum Task
     {
@@ -31,6 +32,8 @@ public partial class Entity : CharacterBody3D
 	public List<Task> tasks = new List<Task>(3){ Task.Idle, Task.Idle, Task.Idle };
     public Task currentTask = Task.Idle;
 	public States currentState = States.Walk;
+	public Vector3 attackSourcePos;
+	public float attackSourceKnock;
 	public bool isHome = false;
 	[Export] public int currentHunger;
 	public bool isKid = false;
@@ -59,7 +62,7 @@ public partial class Entity : CharacterBody3D
 	// Nodes
 	public Node3D raycastsNode, trackersNode, timersNode;
 	Area3D vision, self;
-	Timer exploreTimer;
+	Timer exploreTimer, invincibleTimer, knockbackTimer;
 
     public override void _Ready()
     {
@@ -71,6 +74,8 @@ public partial class Entity : CharacterBody3D
 		vision = trackersNode.GetNode<Area3D>("Vision");
 		self = trackersNode.GetNode<Area3D>("Self");
 		exploreTimer = timersNode.GetNode<Timer>("ExploreTimer");
+		invincibleTimer = timersNode.GetNode<Timer>("InvincibleTimer");
+		knockbackTimer = timersNode.GetNode<Timer>("KnockbackTimer");
 
 		// Stats
 		statsSettings = StatsSettingsList[(int)entityType];
@@ -91,6 +96,7 @@ public partial class Entity : CharacterBody3D
 		self.Connect("area_exited", new Callable(this, "SelfExited_Area"));
 
 		exploreTimer.Connect("timeout", new Callable(this, "ExploreTimeout"));
+		knockbackTimer.Connect("timeout", new Callable(this, "KnockbackTimeout"));
     }
 
     public override void _PhysicsProcess(double delta)
@@ -211,36 +217,7 @@ public partial class Entity : CharacterBody3D
 
 	#endregion
 
-	public async void WaitFormation()
-    {
-		currentState = States.Idle;
-        await ToSignal(GetTree().CreateTimer(5), "timeout");
-		currentState = States.Walk;
-    }
-
-	public void ConsumeFood()
-	{
-		if(statsSettings.nConsume > ((EntityBase)pack.structures[0]).foods)
-		{
-			Starve();
-		}
-		else 
-		{
-			if(currentHunger < statsSettings.maxHunger) currentHunger += 1;
-			((EntityBase)pack.structures[0]).foods -= statsSettings.nConsume;
-		}
-	}
-
-	public void Starve()
-	{
-		currentHunger -= 1;
-		if(currentHunger <= 0)
-		{ 
-			pack.entities.Remove(this);
-			QueueFree();
-		}
-	}
-
+	#region Mating
 	public int CountGoutMatches(Entity entity)
     {
         int count = 0;
@@ -308,8 +285,64 @@ public partial class Entity : CharacterBody3D
 		}
 	}
 
+	#endregion
+	
+	public async void WaitFormation()
+    {
+		SetState(States.Idle);
+        await ToSignal(GetTree().CreateTimer(waitFormationTime), "timeout");
+		SetState(States.Walk);
+    }
+	public void ConsumeFood()
+	{
+		if(statsSettings.nConsume > ((EntityBase)pack.structures[0]).foods)
+		{
+			Starve();
+		}
+		else 
+		{
+			if(currentHunger < statsSettings.maxHunger) currentHunger += 1;
+			((EntityBase)pack.structures[0]).foods -= statsSettings.nConsume;
+		}
+	}
+	public void Starve()
+	{
+		currentHunger -= 1;
+		if(currentHunger <= 0)
+		{ 
+			pack.entities.Remove(this);
+			QueueFree();
+		}
+	}
+	
 	public void UpdateTargetPos()
     {
         targetPos = pack.leader.GlobalPosition + followOffset;
     }
+	void SetState(States state)
+	{
+		currentState = state;
+		//animationPlayer.Play(Enum.GetName(state));
+	}
+	public void GetHit(Vector3 source, float knockStr)
+	{
+		if(invincibleTimer.IsStopped())
+		{
+			attackSourcePos = source;
+			attackSourceKnock = knockStr;
+			invincibleTimer.Start();
+			knockbackTimer.Start();
+			SetState(States.Hurt);
+		}
+	}
+	public void KnockbackTimeout()
+	{
+		SetState(States.Walk);
+	}
+	public void KnockBack()
+	{
+		velocity = attackSourcePos.DirectionTo(GlobalPosition) * attackSourceKnock;
+		Velocity = velocity + new Vector3(0, -10, 0);
+		MoveAndSlide();
+	}
 }

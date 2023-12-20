@@ -32,6 +32,11 @@ public partial class Resources : Node
 		Floor, Trees, ChicpeaBase
 	}
 
+	public enum MaterialType 
+	{
+		Berry, Twig, Flint, CutGrass
+	}
+
 	public static List<TerrainType> EntitiesTerrainType = new List<TerrainType>()
 	{
 		TerrainType.ChicpeaBase
@@ -43,6 +48,10 @@ public partial class Resources : Node
 		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/BerryBush.tscn"),
 		["Rock1"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Rock1.tscn"),
 		["GrassBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassBush.tscn"),
+	};
+	public static Dictionary<string, PackedScene> MaterialSceneDictionary = new Dictionary<string, PackedScene>()
+	{
+		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Decorations/MovableGrass.tscn")
 	};
 	public static Dictionary<Entities, PackedScene> EntitySceneDictionary = new Dictionary<Entities, PackedScene>()
 	{

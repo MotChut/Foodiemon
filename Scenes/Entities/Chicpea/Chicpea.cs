@@ -56,9 +56,18 @@ public partial class Chicpea : Entity
 
     public override void _PhysicsProcess(double delta)
     {
-        if(currentTask == Task.FollowExplore) UpdateTargetPos();
-        if(currentState != States.Idle)
-            TaskHandler();
+        if(currentState == States.Hurt)
+        {
+            KnockBack();
+        }
+        else
+        {
+            if(currentTask == Task.FollowExplore) UpdateTargetPos();
+            if(currentState != States.Idle)
+                TaskHandler();
+        }
+        
+            
         GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentTask.ToString();
     }
 
@@ -71,6 +80,7 @@ public partial class Chicpea : Entity
         {
             Visible = true;
             GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", false);
+            if(isLeader) WaitFormation();
         }
         else if(CurrentTime == GameTime.Night && isHome)
         {

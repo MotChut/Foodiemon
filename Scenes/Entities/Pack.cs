@@ -11,7 +11,6 @@ public partial class Pack : Node
     const int nDirections = 16;
 	public List<Object> structures = new List<Object>();
     public List<Entity> entities = new List<Entity>();
-    public List<Entity> isHomeEnetities = new List<Entity>();
     public Dictionary<Task, List<Entity>> groups = new Dictionary<Task, List<Entity>>();
     public List<MapSource> foodSources = new List<MapSource>();
 	public List<MapSource> materialSources = new List<MapSource>();
