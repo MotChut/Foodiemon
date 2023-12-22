@@ -154,18 +154,18 @@ script = ExtResource("1_vys88")
 environment = SubResource("Environment_p8eqm")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.499999, -0.296199, 0.813799, 0, 0.939693, 0.34202, -0.866026, 0.17101, -0.469845, 0, 0, 0)
-visible = false
-light_color = Color(0.788235, 0.775163, 0.877124, 1)
+transform = Transform3D(-1, -8.67084e-07, 2.38229e-06, 0, 0.939693, 0.34202, -2.53518e-06, 0.34202, -0.939693, 0, 0, 0)
+layers = 2
 shadow_enabled = true
 shadow_normal_bias = 1.0
-shadow_opacity = 0.733333
+shadow_opacity = 0.8
 
 [node name="Moon" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.602636, 0.699151, -0.384733, 0, 0.482112, 0.87611, 0.798017, 0.527975, -0.290538, 0, 0, 0)
-light_color = Color(0.027451, 0.0196078, 0.0823529, 1)
+transform = Transform3D(-1, 8.67084e-07, -2.38229e-06, 0, 0.939693, 0.34202, 2.53518e-06, 0.342021, -0.939693, 0, 0, 0)
+visible = false
+layers = 2
 shadow_enabled = true
-shadow_opacity = 0.733333
+shadow_opacity = 0.8
 directional_shadow_pancake_size = 0.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

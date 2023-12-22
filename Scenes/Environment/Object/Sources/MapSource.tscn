@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://wc5roxvbcsm6"]
+
+[ext_resource type="Script" path="res://Scenes/Environment/Object/Sources/MapSource.cs" id="1_w75bg"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2hpgb"]
+viewport_path = NodePath("InteractiveNotice/SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_sgv8n"]
+font_size = 48
+
+[node name="MapSource" type="Node3D"]
+script = ExtResource("1_w75bg")
+
+[node name="Sources" type="Node3D" parent="."]
+
+[node name="SelfArea" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelfArea"]
+
+[node name="DetectArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectArea"]
+
+[node name="InteractiveNotice" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 3)
+billboard = 1
+texture = SubResource("ViewportTexture_2hpgb")
+
+[node name="SubViewport" type="SubViewport" parent="InteractiveNotice"]
+transparent_bg = true
+size = Vector2i(288, 288)
+
+[node name="Label" type="Label" parent="InteractiveNotice/SubViewport"]
+offset_right = 288.0
+offset_bottom = 70.0
+text = "E"
+label_settings = SubResource("LabelSettings_sgv8n")
+horizontal_alignment = 1
+
+[node name="RegrowTimer" type="Timer" parent="."]
+one_shot = true

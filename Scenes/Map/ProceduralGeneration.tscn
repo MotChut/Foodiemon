@@ -1,16 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch0pnw6f33m55"]
+[gd_scene load_steps=6 format=3 uid="uid://ch0pnw6f33m55"]
 
 [ext_resource type="Script" path="res://Scenes/Map/ProceduralGeneration.cs" id="1_cway7"]
 [ext_resource type="PackedScene" uid="uid://cadar5emaw6s6" path="res://Scenes/Entities/Player/Player.tscn" id="2_5861x"]
 [ext_resource type="PackedScene" uid="uid://hn4pgblhccso" path="res://Scenes/Environment/Ocean/Ocean.tscn" id="2_q0d2n"]
-[ext_resource type="PackedScene" uid="uid://d4ivfnd65wb85" path="res://Scenes/Components/Camera.tscn" id="3_grltg"]
+[ext_resource type="PackedScene" uid="uid://46xcvyjw68io" path="res://Scenes/Components/Camera/Camera.tscn" id="4_t6t8l"]
+[ext_resource type="PackedScene" uid="uid://cv0cjmroueusj" path="res://Scenes/UI/PlayerHUD/PlayerHUD.tscn" id="5_y2vui"]
 
 [node name="ProceduralGeneration" type="Node3D"]
 script = ExtResource("1_cway7")
 nRegion = 10
 
 [node name="Player" parent="." instance=ExtResource("2_5861x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 maxSpd = 16.0
 
 [node name="Ocean" parent="." instance=ExtResource("2_q0d2n")]
@@ -24,6 +24,6 @@ transform = Transform3D(75, 0, 0, 0, 1, 0, 0, 0, 75, 0, 0, 0)
 
 [node name="Visibler" type="Node3D" parent="."]
 
-[node name="Camera" parent="." instance=ExtResource("3_grltg")]
+[node name="Camera" parent="." instance=ExtResource("4_t6t8l")]
 
-[editable path="Camera"]
+[node name="PlayerHUD" parent="." instance=ExtResource("5_y2vui")]

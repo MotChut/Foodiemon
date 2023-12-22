@@ -2,16 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Godot;
+using static Entity;
 
 public partial class Pack : Node
 {
-    const int nDirections = 32;
+	bool justSpawn = true;
+	public float maxExploreDistance = 0;
+    const int nDirections = 16;
 	public List<Object> structures = new List<Object>();
-    public Dictionary<Entity, float> entities = new Dictionary<Entity, float>();
-    public Dictionary<MapSource, float> foodSources = new Dictionary<MapSource, float>();
+    public List<Entity> entities = new List<Entity>();
+    public Dictionary<Task, List<Entity>> groups = new Dictionary<Task, List<Entity>>();
+    public List<MapSource> foodSources = new List<MapSource>();
+	public List<MapSource> materialSources = new List<MapSource>();
+    public Dictionary<MapSource, float> natureFoodSources = new Dictionary<MapSource, float>();
     public Dictionary<Vector3, float> directionPoints = new Dictionary<Vector3, float>();
     public List<int> directionRates = new List<int>();
     public Entity leader = null;
+	public Entity exploreLeader;
+	public Vector3 wanderDir = Vector3.Zero;
+
+	public int foods = 0;
+
     
     public Pack()
     {
@@ -62,5 +73,40 @@ public partial class Pack : Node
 		}
 		
 		return directionPoints.Keys.ToList<Vector3>()[result];
+	}
+
+	public Vector3 ChooseResourceTarget()
+	{
+		List<MapSource> availableSources = new List<MapSource>();
+		foreach(MapSource mapSource in foodSources)
+		{
+			if(mapSource.GetCurrentResources() > 0)
+			{
+				availableSources.Add(mapSource);
+			}
+		}
+		Random rnd = new Random();
+		return availableSources[rnd.Next(availableSources.Count)].GlobalPosition;
+	}
+
+	public void PackConsumeFoods()
+	{
+		if(justSpawn)
+		{
+			justSpawn = false;
+			return;
+		}
+		foreach(Entity entity in entities)
+        {
+			if(entity.statsSettings.nConsume > ((EntityBase)entity.pack.structures[0]).foods)
+			{
+				entity.Starve();
+			}
+			else
+			{
+				if(entity.currentHunger < entity.statsSettings.maxHunger) entity.currentHunger += 1;
+				((EntityBase)structures[0]).foods -= entity.statsSettings.nConsume;
+			}
+        }
 	}
 }

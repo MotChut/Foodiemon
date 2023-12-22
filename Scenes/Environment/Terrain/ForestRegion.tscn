@@ -3,13 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://6f5n8plhjlno" path="res://Scenes/Environment/Terrain/Terrain.tscn" id="1_1d31h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejymt"]
-albedo_color = Color(0.541176, 0.596078, 0.427451, 1)
+albedo_color = Color(0.588235, 0.521569, 0.32549, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_s3kf0"]
 material = SubResource("StandardMaterial3D_ejymt")
 size = Vector3(20, 1, 20)
 
 [node name="ForestRegion" instance=ExtResource("1_1d31h")]
+visible = false
 
 [node name="Mesh" parent="." index="0"]
 mesh = SubResource("BoxMesh_s3kf0")

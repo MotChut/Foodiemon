@@ -4,8 +4,8 @@
     "regiontype": "Forest",
     "path": "res://Scenes/Environment/Terrain/ForestRegion.tscn",
     "chicpeamax": 10,
-    "floor": 5,
-    "trees": 5,
+    "floor": 1,
+    "trees": 1,
     "chicpeabase": 5
   }
 ]

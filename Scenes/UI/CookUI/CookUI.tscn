@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://drvotatijjc56"]
 
-[ext_resource type="Script" path="res://Scenes/UI/CookUI.cs" id="1_rv6yb"]
-[ext_resource type="PackedScene" uid="uid://2223d1dfhmfj" path="res://Scenes/UI/IngredientButton.tscn" id="2_jmx26"]
+[ext_resource type="Script" path="res://Scenes/UI/CookUI/CookUI.cs" id="1_rv6yb"]
+[ext_resource type="PackedScene" uid="uid://2223d1dfhmfj" path="res://Scenes/UI/CookUI/IngredientButton.tscn" id="2_jmx26"]
 [ext_resource type="Texture2D" uid="uid://65hhpumcmtvu" path="res://Assets/Fruits and Vegetables/Apple Green.png" id="3_dctdk"]
 [ext_resource type="Texture2D" uid="uid://cx5xogols2jtg" path="res://Assets/Fruits and Vegetables/Apple Red.png" id="4_tqes5"]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5vufvv6y3jln"]
+[gd_scene load_steps=8 format=3 uid="uid://5vufvv6y3jln"]
 
 [ext_resource type="Script" path="res://Scenes/Environment/Object/EntityBase.cs" id="1_wxqjq"]
 
@@ -12,14 +12,20 @@ size = Vector3(2, 2, 2)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cg8e5"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_uqdca"]
-height = 0.001
-radius = 3.0
+[sub_resource type="BoxShape3D" id="BoxShape3D_uq8cy"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5ewfd"]
+viewport_path = NodePath("InteractiveNotice/SubViewport")
+
+[sub_resource type="LabelSettings" id="LabelSettings_8opa2"]
+font_size = 48
 
 [node name="ChicpeaHouse" type="Node3D"]
 script = ExtResource("1_wxqjq")
 entityTypes = PackedStringArray("BlueChicpea", "Chicpea")
 objectSize = Vector3(2, 2, 2)
+extend = 2
 isBlock = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -27,16 +33,33 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, 0.5)
 mesh = SubResource("PrismMesh_xl3le")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_cg8e5")
 
-[node name="DetectArea" type="Area3D" parent="MeshInstance3D"]
+[node name="SelfArea" type="Area3D" parent="MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
-collision_layer = 0
-collision_mask = 4
+collision_layer = 8
+collision_mask = 0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/DetectArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -1, -0.5)
-shape = SubResource("CylinderShape3D_uqdca")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/SelfArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
+shape = SubResource("BoxShape3D_uq8cy")
+
+[node name="InteractiveNotice" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+texture = SubResource("ViewportTexture_5ewfd")
+
+[node name="SubViewport" type="SubViewport" parent="InteractiveNotice"]
+transparent_bg = true
+size = Vector2i(288, 288)
+
+[node name="Label" type="Label" parent="InteractiveNotice/SubViewport"]
+offset_right = 288.0
+offset_bottom = 70.0
+text = "E"
+label_settings = SubResource("LabelSettings_8opa2")
+horizontal_alignment = 1

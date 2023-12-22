@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1dim43q6tf4p"]
+
+[ext_resource type="Texture2D" uid="uid://65hhpumcmtvu" path="res://Assets/Fruits and Vegetables/Apple Green.png" id="1_85gmq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_e52r4"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Material" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
+texture = SubResource("ViewportTexture_e52r4")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+
+[node name="Sprite2D" type="TextureRect" parent="Sprite3D/SubViewport"]
+texture_filter = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_85gmq")
+expand_mode = 1

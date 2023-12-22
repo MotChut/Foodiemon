@@ -1,9 +1,7 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using static Resources;
-using static Utils;
 
 public partial class Terrain : Node3D
 {
@@ -28,7 +26,7 @@ public partial class Terrain : Node3D
 		if(EntitiesTerrainType.Contains(terrainType))
 		{
 			entitySettings = EntitySettingsList[EntitiesTerrainType.IndexOf(terrainType)];
-			GenerateEntityBase();
+			GenerateEntityBase(terrainType);
 		}
 
 		GenerateObject();
@@ -57,23 +55,16 @@ public partial class Terrain : Node3D
 					if(!IsAvailableCell(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z))) continue;
 					if(obj.isBlock)
 						if(!IsNotSurrounded(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z))) continue;
-					obj.Position = new Vector3(i - (TILE_SIZE - 1) / 2.0f, 0.5f, 
+					obj.Position = new Vector3(i - (TILE_SIZE - 1) / 2.0f, 0.50001f, 
 												j - (TILE_SIZE - 1) / 2.0f);
 					obj.Name = i.ToString() + "," + j.ToString();
+					if(obj is MapSource) obj.GetNode<Sprite3D>("InteractiveNotice").RotationDegrees = new Vector3(0, rnd.Next(360), 0);
+					else obj.RotationDegrees = new Vector3(0, rnd.Next(360), 0);
 					objectList.AddChild(obj);
 					MarkCells(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z));
 					continue;
 				}
 			}
-	}
-
-	bool IsAvailableCell(Vector2I pos, Vector2I size)
-	{
-		bool result = true;
-		for(int i = pos.X; i < pos.X + size.X; i++)
-			for(int j = pos.Y; j < pos.Y + size.Y; j++)
-				if(matrix[i, j] == 1) result = false;
-		return result;
 	}
 
 	PackedScene RollObject()
@@ -96,9 +87,16 @@ public partial class Terrain : Node3D
 
 	#endregion
 
-	void GenerateEntityBase()
+	void GenerateEntityBase(TerrainType type)
 	{
-		Pack pack = new Pack();
+		Pack pack = null;
+		switch(type)
+		{
+			case TerrainType.ChicpeaBase:
+			pack = new ChicpeaPack();
+			break;
+		}
+		
 		PackList.Add(pack);
 		GenerateHouse(pack);
 		GenerateSources(pack);
@@ -115,7 +113,7 @@ public partial class Terrain : Node3D
 									z - (TILE_SIZE - 1) / 2.0f);
 		house.Name = x.ToString() + "," + z.ToString();
 		objectList.AddChild(house);
-		MarkCells(new Vector2I(x, z), new Vector2(house.objectSize.X, house.objectSize.Z));
+		MarkCells(new Vector2I(x, z), new Vector2(house.objectSize.X, house.objectSize.Z), house.extend);
 		pack.structures.Add(house);
 	}
 
@@ -133,9 +131,10 @@ public partial class Terrain : Node3D
 			foodSource.Position = new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
 								z - (TILE_SIZE - 1) / 2.0f);
 			foodSource.Name = x.ToString() + "," + z.ToString();
+			foodSource.GetNode<Sprite3D>("InteractiveNotice").RotationDegrees = new Vector3(0, rnd.Next(360), 0);
 			objectList.AddChild(foodSource);
 			MarkCells(new Vector2I(x, z), new Vector2(foodSource.objectSize.X, foodSource.objectSize.Z));
-			pack.foodSources.Add((MapSource)foodSource, 0);
+			pack.foodSources.Add((MapSource)foodSource);
 			nFoodSource -= 1;
 		}
 	}
@@ -163,7 +162,7 @@ public partial class Terrain : Node3D
 			leader.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
 								z - (TILE_SIZE - 1) / 2.0f);
 			MarkCells(new Vector2I(x, z), new Vector2(leader.objectSize.X, leader.objectSize.Z));
-			pack.entities.Add(leader, 0);
+			pack.entities.Add(leader);
 			pack.leader = leader;
 			leader.pack = pack;
 			break;
@@ -190,7 +189,7 @@ public partial class Terrain : Node3D
 			entity.GlobalPosition = GlobalPosition + new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
 								z - (TILE_SIZE - 1) / 2.0f);
 			MarkCells(new Vector2I(x, z), new Vector2(entity.objectSize.X, entity.objectSize.Z));
-			pack.entities.Add(entity, 0);
+			pack.entities.Add(entity);
 			entity.pack = pack;
 			nEntities -= 1;
 		}
@@ -208,6 +207,15 @@ public partial class Terrain : Node3D
 		return true;
 	}
 
+	bool IsAvailableCell(Vector2I pos, Vector2I size)
+	{
+		bool result = true;
+		for(int i = pos.X; i < pos.X + size.X; i++)
+			for(int j = pos.Y; j < pos.Y + size.Y; j++)
+				if(matrix[i, j] == 1) result = false;
+		return result;
+	}
+
 	bool IsAvailableCell(Vector2I pos, Vector2 size)
 	{	
 		for(int x = pos.X; x < pos.X + size.X; x++)
@@ -217,10 +225,10 @@ public partial class Terrain : Node3D
 		return true;
 	}
 
-	void MarkCells(Vector2I pos, Vector2 size)
+	void MarkCells(Vector2I pos, Vector2 size, int extend = 0)
 	{
-		for(int x = pos.X; x < pos.X + size.X; x++)
-			for(int z = pos.Y; z < pos.Y + size.Y; z++)
+		for(int x = pos.X - extend; x < pos.X + size.X + extend; x++)
+			for(int z = pos.Y - extend; z < pos.Y + size.Y + extend; z++)
 				matrix[x, z] = 1;
 	}
 }

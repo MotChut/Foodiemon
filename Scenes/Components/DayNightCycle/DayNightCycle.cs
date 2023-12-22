@@ -7,7 +7,8 @@ public partial class DayNightCycle : Node3D
     public override void _Ready()
     {
         animationPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-		animationPlayer.Advance(100);
+		animationPlayer.SpeedScale = SPEED_SCALE;
+		animationPlayer.Advance(50 / SPEED_SCALE);
     }
 
     public void SetToDay()

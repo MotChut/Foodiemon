@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using Godot;
 
 public partial class SteeringBehavior : Node
@@ -34,7 +32,7 @@ public partial class SteeringBehavior : Node
                 direction -= ray.GlobalPosition.DirectionTo(ray.GetCollisionPoint()) * interest;
             }
         }
-        
+
         return direction;
     }
 }
