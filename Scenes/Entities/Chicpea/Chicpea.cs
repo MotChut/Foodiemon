@@ -69,25 +69,31 @@ public partial class Chicpea : Entity
         
             
         GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentTask.ToString();
+        if(isPregnant) GetNode<Label>("InteractiveNotice/SubViewport/Label").Modulate = new Color("#964943");
+        else GetNode<Label>("InteractiveNotice/SubViewport/Label").Modulate = new Color("#ffffff");
     }
 
     #endregion
 
     #region Tasks Related
-    public override void UpdateCurrentTask()
+    public override async void UpdateCurrentTask()
     {
+        if(tasks[(int)CurrentTime] == Task.Continue) return;
+
+        if(isBusy) savedTask = tasks[(int)CurrentTime];
+        else SetCurrentTask(tasks[(int)CurrentTime]);
+
         if(CurrentTime == GameTime.Day)
         {
             Visible = true;
-            GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", false);
             if(isLeader) WaitFormation();
+            await ToSignal(GetTree().CreateTimer(1), "timeout");
+            GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", false);
         }
         else if(CurrentTime == GameTime.Night && isHome)
         {
             HomeRest((EntityBase)pack.structures[0]);
         }
-        if(tasks[(int)CurrentTime] == Task.Continue) return;
-        SetCurrentTask(tasks[(int)CurrentTime]);
     }
 
     public override void SetCurrentTask(Task task)
@@ -96,15 +102,35 @@ public partial class Chicpea : Entity
         
         switch(task)
         {   
+            case Task.CollectNatureFood:
+            targetPos = pack.ChooseNaturalTarget();
+            break;
             case Task.CollectFood:
             targetPos = pack.ChooseResourceTarget();
             break;
+            case Task.CollectMaterial:
+            Vector3 t = pack.ChooseMaterialTarget();
+            if(t == new Vector3(0, -100, 0))
+            {
+                SetCurrentTask(Task.CollectNatureFood);
+                return;
+            }
+            targetPos = t;
+            break;
+            case Task.RetrieveResourceHome:
             case Task.RetrieveResource:
             case Task.GoHome:
             case Task.ForceHome:
             case Task.HomeRest:
-            target = null;
-            targetPos = pack.structures[0].GlobalPosition;
+            if(isHome && CurrentTime == GameTime.Night)
+            {
+                HomeRest((EntityBase)pack.structures[0]);
+            }
+            else
+            {
+                target = null;
+                targetPos = pack.structures[0].GlobalPosition;
+            }
             break;
             case Task.Explore:
             pack.wanderDir = steer.Wander();
@@ -116,8 +142,7 @@ public partial class Chicpea : Entity
             if(followOffset == Vector3.Zero) followOffset = new Vector3(xOffset, 0, zOffset);
             target = pack.leader;
             break;
-            default:
-            break;
+
         }
 
         currentTask = task;
@@ -193,7 +218,7 @@ public partial class Chicpea : Entity
             break;
             case Task.CollectFood:
             GiveTask(chicpea, GameTime.Day, Task.CollectFood);
-            GiveTask(chicpea, GameTime.Noon, Task.CollectFood);
+            GiveTask(chicpea, GameTime.Noon, Task.Continue);
             GiveTask(chicpea, GameTime.Night, Task.HomeRest);
             break;
         }
@@ -221,8 +246,9 @@ public partial class Chicpea : Entity
             break;
 
             case Task.CollectFood:
-            case Task.CollectFoodHome:
+            case Task.CollectMaterialHome:
             case Task.RetrieveResource:
+            case Task.RetrieveResourceHome:
             case Task.GoHome:
             case Task.ForceHome:
             case Task.HomeRest:
@@ -243,52 +269,90 @@ public partial class Chicpea : Entity
 		if(body is MapSource)
 		{
             MapSource mapSource = (MapSource)body;
-            if(new List<Task>(){Task.CollectFood, Task.CollectFoodHome, Task.CollectMaterial}.Contains(currentTask))
+            if(new List<Task>(){Task.CollectFood, Task.CollectMaterialHome, Task.CollectMaterial}.Contains(currentTask))
 			{
-                SetCurrentTask(Task.Idle);
-                int amount;
+                isBusy = true;
+                int amount = 0;
+                Task task = Task.Idle;
+                if(currentTask == Task.CollectFood) task = Task.RetrieveResource;
+                else if(currentTask == Task.CollectMaterialHome) task = Task.RetrieveResourceHome;
 
-                if (mapSource.GetCurrentResources() == 0)
-                { 
-                    SetCurrentTask(Task.GoHome);
-                    return;
+                if(mapSource.GetCurrentResources() == 0)
+                {
+                    if(currentTask == Task.CollectFood)
+                    { 
+                        SetCurrentTask(Task.GoHome);
+                        return;
+                    }
+                    else if(currentTask == Task.CollectMaterial)
+                    {
+                        SetCurrentTask(Task.CollectMaterial);
+                        return;
+                    }
                 }
 				else if(mapSource.GetCurrentResources() < statsSettings.collectableMax)
 					amount = statsSettings.collectableMax - mapSource.GetCurrentResources();
 				else 
 					amount = statsSettings.collectableMax;
 
+                SetCurrentTask(Task.Idle);  
 				mapSource.CollectResource(amount);
                 LookAt(mapSource.GlobalPosition);
                 await ToSignal(GetTree().CreateTimer(FOOD_COLLECT_TIME), "timeout");
-                broughtFoods = amount;
-                if(currentTask != Task.HomeRest && CurrentTime != GameTime.Night)
-                    SetCurrentTask(Task.RetrieveResource);
+                broughtType = mapSource.resourceType;
+                broughtAmount = amount;
+                CarryMaterial();
+                SetCurrentTask(task);
+                isBusy = false;
 			}
         }
         else if(body is EntityBase)
         {
             EntityBase entityBase = (EntityBase)body;
+            Task task = Task.Idle;
             if(entityBase != pack.structures[0]) return;
             isHome = true;
             if(currentTask == Task.HomeRest)
             {
                 HomeRest(entityBase);
             }
-            else if(currentTask == Task.RetrieveResource)
+            else if(new List<Task>(){ Task.RetrieveResource, Task.RetrieveResourceHome }.Contains(currentTask))
             {
+                if(currentTask == Task.RetrieveResource) task = Task.CollectFood;
+                else if(currentTask == Task.RetrieveResourceHome) task = Task.CollectMaterial;
+
                 SetCurrentTask(Task.Idle);
-                entityBase.ReceiveFood(broughtFoods);
-                broughtFoods = 0;
-                SetCurrentTask(Task.CollectFood);
-            }
+                if(FoodMaterialType.Contains(broughtType))
+                {
+                    entityBase.ReceiveFood(broughtAmount);
+                }
+                else
+                {
+                    entityBase.ReceiveMaterial(broughtType, broughtAmount);
+                }
+                
+                if(broughtAmount > 0) DropMaterial();
+                if(savedTask != Task.Idle)
+                {
+                    SetCurrentTask(savedTask);
+                    savedTask = Task.Idle;
+                }
+                else SetCurrentTask(task);
+            }            
             else if(currentTask == Task.ForceHome)
             {
+                pack.maxExploreDistance = 0;
                 SetCurrentTask(Task.Idle);
-                if(isLeader) SetCurrentTask(Task.Explore);
-                else SetCurrentTask(Task.FollowExplore);
+                if(CurrentTime == GameTime.Day)
+                {
+                    if(isLeader) SetCurrentTask(Task.Explore);
+                    else SetCurrentTask(Task.FollowExplore);
+                }
+                else if(CurrentTime == GameTime.Noon)
+                {
+                    SetCurrentTask(Task.CollectMaterial);
+                }
             }
-           
         }
     }
 
@@ -312,22 +376,33 @@ public partial class Chicpea : Entity
 			{
 				if(!pack.natureFoodSources.Keys.ToList().Contains(mapSource)) // Check if the list already contains
 				{
-					pack.natureFoodSources.Add(mapSource, 1);
+					pack.natureFoodSources.Add(mapSource, pack.structures[0].GlobalPosition.DistanceTo(mapSource.GlobalPosition));
 				}
                 if(CurrentTime != GameTime.Night && currentTask == Task.GoHome && mapSource.GetCurrentResources() > 0)
                 {
                     target = null;
                     targetPos = mapSource.GlobalPosition;
-                    SetCurrentTask(Task.CollectFoodHome);
+                    SetCurrentTask(Task.CollectMaterialHome);
                 }
 			}
+            else // Materials
+            {
+                if(!pack.materialSources.Keys.ToList().Contains(mapSource)) // Check if the list already contains
+				{
+					pack.materialSources.Add(mapSource, pack.structures[0].GlobalPosition.DistanceTo(mapSource.GlobalPosition));
+				}
+                if(CurrentTime != GameTime.Night && currentTask == Task.GoHome && mapSource.GetCurrentResources() > 0)
+                {
+                    target = null;
+                    targetPos = mapSource.GlobalPosition;
+                    SetCurrentTask(Task.CollectMaterialHome);
+                }
+            }
 		}
         
     }
 
     #endregion
-
-    
 
     void SetFormation()
     {
@@ -355,8 +430,18 @@ public partial class Chicpea : Entity
     public void HomeRest(EntityBase entityBase)
     {
         // Disappearing from screen
-        entityBase.ReceiveFood(broughtFoods);
-        broughtFoods = 0;
+        if(broughtAmount > 0)
+        {
+            if(FoodMaterialType.Contains(broughtType))
+            {
+                entityBase.ReceiveFood(broughtAmount);
+            }
+            else
+            {
+                entityBase.ReceiveMaterial(broughtType, broughtAmount);
+            }
+            DropMaterial();
+        }
         GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", true);
         ConsumeFood(); // Handle Eating
         EstrousPregnancy(); // Handle Estrous Cycle
@@ -370,10 +455,13 @@ public partial class Chicpea : Entity
     {
         PackedScene packedScene = EntitySceneDictionary[Entities.Chicpea];
         Chicpea chicpea = (Chicpea)packedScene.Instantiate();
+        isPregnant = false;
         GetParent().AddChild(chicpea);
         chicpea.GlobalPosition = GlobalPosition;
         chicpea.Scale = new Vector3(statsSettings.kidSize, statsSettings.kidSize, statsSettings.kidSize);
         chicpea.isKid = true;
+        chicpea.Visible = false;
+        chicpea.GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", true);
         pack.entities.Add(chicpea);
         chicpea.pack = pack;
     }

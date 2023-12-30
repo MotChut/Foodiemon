@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody3D
 {
-	[Export] public float maxSpd = 6.0f;
+	[Export] public float maxSpd = 3.0f;
+	[Export] public float dodgeSpd = 12.0f;
 	[Export] public float accel = 3.0f;
 	[Export] public float friction = 3.0f;
 	public const float JumpVelocity = 4.5f;
@@ -12,16 +14,22 @@ public partial class Player : CharacterBody3D
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
 	float angular = AngularAccel;
+	int attack = 1;
 
-	Node3D sprite, areas;
+	Node3D sprite, areas, timers;
 	AnimationPlayer animationPlayer;
 	Camera3D camera;
 	Area3D attackArea;
+	Timer dodgeTimer;
 
 	public enum States
 	{
 		Idle, Walk, Attack, Dodge
 	}
+	List<States> notInteruptedStates = new List<States>()
+	{
+		States.Attack, States.Dodge
+	};
 
 	public States currentState = States.Idle;
 	public Vector3 lastDirection = Vector3.Zero;
@@ -31,19 +39,27 @@ public partial class Player : CharacterBody3D
     {
 		sprite = GetNode<Node3D>("Sprite");
 		areas = GetNode<Node3D>("Areas");
+		timers = GetNode<Node3D>("Timers");
 		attackArea = areas.GetNode<Area3D>("AttackArea");
 		animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
 		camera = GetParent().GetNode<Camera>("Camera").GetNode<Camera3D>("Camera3D");
+		dodgeTimer = timers.GetNode<Timer>("DodgeTimer");
+
+		dodgeTimer.Connect("timeout", new Callable(this, "DodgeTimeout"));
     }
 
     public override void _PhysicsProcess(double delta)
 	{
 		#region Movement
-		if(currentState != States.Attack && Input.IsActionJustPressed("attack"))
+		if(!notInteruptedStates.Contains(currentState) && Input.IsActionJustPressed("dodge"))
+		{
+			Dodge();
+		}
+		else if(!notInteruptedStates.Contains(currentState) && Input.IsActionJustPressed("attack"))
 		{
 			Attack();
 		}
-		else if(currentState != States.Attack)
+		else if(!notInteruptedStates.Contains(currentState))
 		{
 			Vector3 velocity = Velocity;
 			Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
@@ -66,6 +82,16 @@ public partial class Player : CharacterBody3D
 			
 			MoveAndSlide();
 		}
+
+		if(currentState == States.Dodge)
+		{
+			Vector3 velocity = dodgeSpd * lastDirection;
+			velocity += new Vector3(0, -10, 0);
+			Velocity = velocity;
+			
+			MoveAndSlide();
+		}
+
 		RotateToDirection((float)delta);
 		
 		#endregion
@@ -126,8 +152,21 @@ public partial class Player : CharacterBody3D
 			if(target is Entity)
 			{
 				Entity e = target as Entity;
-				e.GetHit(GlobalPosition, 3);
+				e.GetHit(GlobalPosition, 3, attack);
 			}
 		}
+	}
+
+	void Dodge()
+	{
+		if(dodgeTimer.IsStopped())
+		{
+			dodgeTimer.Start();
+			SetState(States.Dodge);
+		}
+	}
+	void DodgeTimeout()
+	{
+		SetState(States.Idle);
 	}
 }

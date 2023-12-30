@@ -1,15 +1,47 @@
-[gd_scene load_steps=3 format=3 uid="uid://2223d1dfhmfj"]
+[gd_scene load_steps=9 format=3 uid="uid://2223d1dfhmfj"]
 
 [ext_resource type="Script" path="res://Scenes/UI/CookUI/IngredientButton.cs" id="1_1py85"]
 [ext_resource type="Texture2D" uid="uid://pkbvirtjlnqn" path="res://Assets/Fruits and Vegetables/Acorn.png" id="1_vu71g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0cdh5"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy1d"]
+bg_color = Color(1, 0.960784, 0.886275, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wim53"]
+bg_color = Color(1, 0.890196, 0.678431, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwjds"]
+
+[sub_resource type="SystemFont" id="SystemFont_1u8f3"]
+font_names = PackedStringArray("Montserrat")
+font_weight = 500
+
+[sub_resource type="LabelSettings" id="LabelSettings_4qsu0"]
+font = SubResource("SystemFont_1u8f3")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="IngredientButton" type="Button"]
 clip_contents = true
 custom_minimum_size = Vector2(48, 48)
 offset_right = 48.0
 offset_bottom = 48.0
-size_flags_horizontal = 0
+pivot_offset = Vector2(24, 24)
+size_flags_horizontal = 4
 size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0cdh5")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4hy1d")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wim53")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gwjds")
 script = ExtResource("1_1py85")
 
 [node name="Texture" type="TextureRect" parent="."]
@@ -22,3 +54,20 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_vu71g")
 expand_mode = 1
+
+[node name="Amount" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "0
+"
+label_settings = SubResource("LabelSettings_4qsu0")
+horizontal_alignment = 2
+metadata/_edit_use_anchors_ = true

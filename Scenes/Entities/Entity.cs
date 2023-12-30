@@ -20,7 +20,7 @@ public partial class Entity : CharacterBody3D
 	public enum Task
     {
         Idle, Continue, Explore, FollowExplore,
-		CollectFood, CollectMaterial, RetrieveResource, CollectFoodHome,
+		CollectFood, CollectMaterial, RetrieveResource, RetrieveResourceHome, CollectMaterialHome, CollectNatureFood,
 		GoHome, ForceHome, HomeRest
     }
 	
@@ -30,16 +30,20 @@ public partial class Entity : CharacterBody3D
 	public Dictionary<string, string> appearances = new Dictionary<string, string>();
 	public Dictionary<string, List<string>> gout = new Dictionary<string, List<string>>();
 	public List<Task> tasks = new List<Task>(3){ Task.Idle, Task.Idle, Task.Idle };
+	public Task savedTask = Task.Idle;
     public Task currentTask = Task.Idle;
 	public States currentState = States.Walk;
 	public Vector3 attackSourcePos;
 	public float attackSourceKnock;
+	public int hp;
 	public bool isHome = false;
 	[Export] public int currentHunger;
+	public bool isBusy = false;
 	public bool isKid = false;
 	public bool isPregnant = false;
 	public float workPoint = 0;
-	public int broughtFoods = 0;
+	public MaterialType? broughtType;
+	public int broughtAmount = 0;
 	public int currentEstrous = 0;
 	public int countEstrous = 0;
 	public int currentPregnant = 0;
@@ -63,6 +67,7 @@ public partial class Entity : CharacterBody3D
 	public Node3D raycastsNode, trackersNode, timersNode;
 	Area3D vision, self;
 	Timer exploreTimer, invincibleTimer, knockbackTimer;
+	Marker3D carryPoint;
 
     public override void _Ready()
     {
@@ -76,6 +81,7 @@ public partial class Entity : CharacterBody3D
 		exploreTimer = timersNode.GetNode<Timer>("ExploreTimer");
 		invincibleTimer = timersNode.GetNode<Timer>("InvincibleTimer");
 		knockbackTimer = timersNode.GetNode<Timer>("KnockbackTimer");
+		carryPoint = GetNode<Marker3D>("CarryPoint");
 
 		// Stats
 		statsSettings = StatsSettingsList[(int)entityType];
@@ -83,6 +89,7 @@ public partial class Entity : CharacterBody3D
 		speed = (float)(random.NextDouble() * 
 				(statsSettings.maxSpd - statsSettings.minSpd) + statsSettings.minSpd);
 		currentHunger = statsSettings.maxHunger;
+		hp = statsSettings.maxHp;
 
 		// Steering Behaviors
 		GenerateRaycasts();
@@ -147,11 +154,13 @@ public partial class Entity : CharacterBody3D
 		currentDir.X = Mathf.Lerp(lastDir.X, currentDir.X, statsSettings.rotAngle);
 		currentDir.Z = Mathf.Lerp(lastDir.Z, currentDir.Z, statsSettings.rotAngle);
 		currentDir = currentDir.Normalized();
-		LookAt(new Vector3(currentDir.X + GlobalPosition.X, GlobalPosition.Y, currentDir.Z + GlobalPosition.Z), Vector3.Up);
+		if(!GlobalTransform.Origin.IsEqualApprox(new Vector3(currentDir.X + GlobalPosition.X, GlobalPosition.Y, currentDir.Z + GlobalPosition.Z)))
+			LookAt(new Vector3(currentDir.X + GlobalPosition.X, GlobalPosition.Y, currentDir.Z + GlobalPosition.Z), Vector3.Up);
         velocity = currentDir * speed * ((float)currentHunger / statsSettings.maxHunger);
 		velocity.Clamp(Vector3.Zero, new Vector3(1, 0, 1) * speed * (currentHunger / statsSettings.maxHunger));
 		Velocity = velocity + new Vector3(0, -10, 0);
 		MoveAndSlide();
+		if(GlobalPosition.Y <= 0.5f) GlobalPosition = new Vector3(GlobalPosition.X, 0.5f, GlobalPosition.Z);
 		lastDir = currentDir;
 	}
 
@@ -295,14 +304,14 @@ public partial class Entity : CharacterBody3D
     }
 	public void ConsumeFood()
 	{
-		if(statsSettings.nConsume > ((EntityBase)pack.structures[0]).foods)
+		if(statsSettings.nConsume > ((EntityBase)pack.structures[0]).pack.foods)
 		{
 			Starve();
 		}
 		else 
 		{
 			if(currentHunger < statsSettings.maxHunger) currentHunger += 1;
-			((EntityBase)pack.structures[0]).foods -= statsSettings.nConsume;
+			((EntityBase)pack.structures[0]).pack.foods -= statsSettings.nConsume;
 		}
 	}
 	public void Starve()
@@ -310,9 +319,15 @@ public partial class Entity : CharacterBody3D
 		currentHunger -= 1;
 		if(currentHunger <= 0)
 		{ 
-			pack.entities.Remove(this);
-			QueueFree();
+			Die();
 		}
+	}
+
+	public void Die()
+	{
+		
+		pack.entities.Remove(this);
+		QueueFree();
 	}
 	
 	public void UpdateTargetPos()
@@ -324,10 +339,16 @@ public partial class Entity : CharacterBody3D
 		currentState = state;
 		//animationPlayer.Play(Enum.GetName(state));
 	}
-	public void GetHit(Vector3 source, float knockStr)
+	public void GetHit(Vector3 source, float knockStr, int dmg)
 	{
 		if(invincibleTimer.IsStopped())
 		{
+			hp -= dmg;
+			if(hp <= 0)
+			{ 
+				Die();
+				return;
+			}
 			attackSourcePos = source;
 			attackSourceKnock = knockStr;
 			invincibleTimer.Start();
@@ -344,5 +365,18 @@ public partial class Entity : CharacterBody3D
 		velocity = attackSourcePos.DirectionTo(GlobalPosition) * attackSourceKnock;
 		Velocity = velocity + new Vector3(0, -10, 0);
 		MoveAndSlide();
+	}
+	public void CarryMaterial()
+	{
+		Material material = (Material)MaterialSceneDictionary[broughtType].Instantiate();
+		material.Position = carryPoint.Position;
+		material.Name = "Material";
+		AddChild(material);
+	}
+	public void DropMaterial()
+	{
+		broughtType = null;
+		broughtAmount = 0;
+		GetNode<Material>("Material").QueueFree();
 	}
 }

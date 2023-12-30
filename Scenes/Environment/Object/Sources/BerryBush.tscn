@@ -175,7 +175,6 @@ skeleton = NodePath("")
 
 [node name="SelfArea" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-collision_mask = 4
 
 [node name="CollisionShape3D" parent="SelfArea" index="0"]
 shape = SubResource("SphereShape3D_7jlbl")
@@ -189,6 +188,10 @@ shape = SubResource("CylinderShape3D_or2q5")
 [node name="InteractiveNotice" parent="." index="4"]
 layers = 512
 texture = SubResource("ViewportTexture_c5opg")
+
+[node name="Label" parent="InteractiveNotice/SubViewport" index="0"]
+text = "
+"
 
 [node name="RegrowTimer" parent="." index="5"]
 wait_time = 10.0

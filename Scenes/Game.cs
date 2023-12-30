@@ -3,7 +3,6 @@ using Godot;
 public partial class Game : Node3D
 {
 	Player player;
-	[Export] Material grassMaterial;
 
     public override void _Ready()
     {
@@ -13,7 +12,6 @@ public partial class Game : Node3D
 
     public override void _Process(double delta)
 	{
-		(grassMaterial as ShaderMaterial).SetShaderParameter("character_position", player.GlobalTransform.Origin);
 	}
 
     public Camera3D GetCamera()

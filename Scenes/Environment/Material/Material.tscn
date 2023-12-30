@@ -1,18 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1dim43q6tf4p"]
+[gd_scene load_steps=4 format=3 uid="uid://d1dim43q6tf4p"]
 
 [ext_resource type="Texture2D" uid="uid://65hhpumcmtvu" path="res://Assets/Fruits and Vegetables/Apple Green.png" id="1_85gmq"]
+[ext_resource type="Script" path="res://Scenes/Environment/Material/Material.cs" id="1_wbwea"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_e52r4"]
 viewport_path = NodePath("Sprite3D/SubViewport")
 
 [node name="Material" type="Node3D"]
+script = ExtResource("1_wbwea")
 
 [node name="Sprite3D" type="Sprite3D" parent="."]
+offset = Vector2(0, 32)
 billboard = 1
 texture = SubResource("ViewportTexture_e52r4")
 
 [node name="SubViewport" type="SubViewport" parent="Sprite3D"]
 transparent_bg = true
+size = Vector2i(64, 64)
 
 [node name="Sprite2D" type="TextureRect" parent="Sprite3D/SubViewport"]
 texture_filter = 1

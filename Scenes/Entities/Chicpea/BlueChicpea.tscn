@@ -268,7 +268,6 @@ shape = SubResource("ConvexPolygonShape3D_ixleu")
 
 [node name="InteractiveNotice" type="Sprite3D" parent="." index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_nwkk1")
 
@@ -282,3 +281,6 @@ offset_bottom = 70.0
 text = "E"
 label_settings = SubResource("LabelSettings_uyvci")
 horizontal_alignment = 1
+
+[node name="CarryPoint" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

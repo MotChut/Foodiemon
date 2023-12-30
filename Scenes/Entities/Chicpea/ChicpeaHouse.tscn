@@ -23,7 +23,6 @@ font_size = 48
 
 [node name="ChicpeaHouse" type="Node3D"]
 script = ExtResource("1_wxqjq")
-entityTypes = PackedStringArray("BlueChicpea", "Chicpea")
 objectSize = Vector3(2, 2, 2)
 extend = 2
 isBlock = true
@@ -49,7 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.5, -0.5)
 shape = SubResource("BoxShape3D_uq8cy")
 
 [node name="InteractiveNotice" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 billboard = 1
 texture = SubResource("ViewportTexture_5ewfd")
 

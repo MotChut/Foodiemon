@@ -1,13 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cn1648f6p2ako"]
+[gd_scene load_steps=17 format=3 uid="uid://cn1648f6p2ako"]
 
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_nqom0"]
 [ext_resource type="Script" path="res://Scenes/Entities/Chicpea/Chicpea.cs" id="2_c8ney"]
 [ext_resource type="Texture2D" uid="uid://ebw1retbqexj" path="res://Assets/chicpea_eye.png" id="3_llga8"]
 [ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="3_n005j"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt365"]
-transparency = 1
-albedo_color = Color(0.901961, 0, 0.137255, 0.737255)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_udubo"]
 render_priority = 0
@@ -249,7 +245,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 
 [node name="Roundcube_001" type="MeshInstance3D" parent="Sprite" index="0"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
-material_overlay = SubResource("StandardMaterial3D_bt365")
 mesh = SubResource("ArrayMesh_j6w1x")
 skeleton = NodePath("")
 
@@ -279,11 +274,13 @@ texture = SubResource("ViewportTexture_sv173")
 
 [node name="SubViewport" type="SubViewport" parent="InteractiveNotice" index="0"]
 transparent_bg = true
-size = Vector2i(288, 288)
+size = Vector2i(640, 288)
 
 [node name="Label" type="Label" parent="InteractiveNotice/SubViewport" index="0"]
-offset_right = 288.0
+offset_right = 640.0
 offset_bottom = 70.0
-text = "E"
 label_settings = SubResource("LabelSettings_a0x3d")
 horizontal_alignment = 1
+
+[node name="CarryPoint" parent="." index="6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)

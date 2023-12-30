@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Godot;
+using System.Linq;
 
 
 public partial class Resources : Node
@@ -36,10 +37,13 @@ public partial class Resources : Node
 	{
 		Berry, Twig, Flint, CutGrass
 	}
-
 	public static List<TerrainType> EntitiesTerrainType = new List<TerrainType>()
 	{
 		TerrainType.ChicpeaBase
+	};
+	public static List<MaterialType?> FoodMaterialType = new List<MaterialType?>()
+	{
+		MaterialType.Berry
 	};
 	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
 	{
@@ -48,10 +52,14 @@ public partial class Resources : Node
 		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/BerryBush.tscn"),
 		["Rock1"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Rock1.tscn"),
 		["GrassBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassBush.tscn"),
+		["Flint"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/Flint.tscn")
 	};
-	public static Dictionary<string, PackedScene> MaterialSceneDictionary = new Dictionary<string, PackedScene>()
+	public static Dictionary<MaterialType?, PackedScene> MaterialSceneDictionary = new Dictionary<MaterialType?, PackedScene>()
 	{
-		["MovableGrass"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Decorations/MovableGrass.tscn")
+		[MaterialType.Berry] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Material/Berry.tscn"),
+		[MaterialType.Twig] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Material/Twig.tscn"),
+		[MaterialType.Flint] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Material/Flint.tscn"),
+		[MaterialType.CutGrass] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Material/CutGrass.tscn")
 	};
 	public static Dictionary<Entities, PackedScene> EntitySceneDictionary = new Dictionary<Entities, PackedScene>()
 	{
@@ -96,8 +104,9 @@ public partial class Resources : Node
 	{
 		foreach(Pack pack in PackList)
 		{
-			foreach(Entity entity in pack.entities)
+			foreach(Entity entity in pack.entities.ToList())
 			{
+				if(entity == null) continue;
 				entity.UpdateCurrentTask();
 			}
 		}
@@ -114,7 +123,6 @@ public partial class Resources : Node
 	// Loading Section
     public override void _Ready()
     {
-		
         Generate();
     }
 

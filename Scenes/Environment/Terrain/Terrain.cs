@@ -58,7 +58,7 @@ public partial class Terrain : Node3D
 					obj.Position = new Vector3(i - (TILE_SIZE - 1) / 2.0f, 0.50001f, 
 												j - (TILE_SIZE - 1) / 2.0f);
 					obj.Name = i.ToString() + "," + j.ToString();
-					if(obj is MapSource) obj.GetNode<Sprite3D>("InteractiveNotice").RotationDegrees = new Vector3(0, rnd.Next(360), 0);
+					if(obj is MapSource) obj.GetNode<Node3D>("Sprite").RotationDegrees = new Vector3(0, rnd.Next(360), 0);
 					else obj.RotationDegrees = new Vector3(0, rnd.Next(360), 0);
 					objectList.AddChild(obj);
 					MarkCells(new Vector2I(i, j), new Vector2(obj.objectSize.X, obj.objectSize.Z));
@@ -108,10 +108,11 @@ public partial class Terrain : Node3D
 		int x =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
 		int z =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
 		PackedScene packedScene = entitySettings.houseScene;
-		Object house = (Object)packedScene.Instantiate();
+		EntityBase house = (EntityBase)packedScene.Instantiate();
 		house.Position = new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
 									z - (TILE_SIZE - 1) / 2.0f);
 		house.Name = x.ToString() + "," + z.ToString();
+		house.pack = pack;
 		objectList.AddChild(house);
 		MarkCells(new Vector2I(x, z), new Vector2(house.objectSize.X, house.objectSize.Z), house.extend);
 		pack.structures.Add(house);

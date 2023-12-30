@@ -7,17 +7,19 @@
     "tree": 1,
     "berrybush": 1,
     "rock1": 1,
-    "grassbush": 1
+    "grassbush": 1,
+    "flint": 1
   },
   {
     "id": 1,
     "terraintype": "Trees",
-    "objectrate": 5,
+    "objectrate": 10,
     "movablegrass": 2,
     "tree": 10,
     "berrybush": 1,
     "rock1": 1,
-    "grassbush": 1
+    "grassbush": 1,
+    "flint": 1
   },
   {
     "id": 2,
@@ -27,6 +29,7 @@
     "tree": 1,
     "berrybush": 0,
     "rock1": 0,
-    "grassbush": 1
+    "grassbush": 1,
+    "flint": 1
   }
 ]

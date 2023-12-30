@@ -6,7 +6,7 @@ public partial class MapSource : Object
 {
 	[Export] float TotalRegrowTime;
 	[Export] public bool isFoodSource;
-	[Export] string resourceType;
+	[Export] public MaterialType resourceType;
 	[Export] int minResources;
 	[Export] int maxResources;
 	int resources;

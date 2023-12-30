@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Godot;
 using static Entity;
+using static Resources;
 
 public partial class Pack : Node
 {
@@ -13,16 +14,15 @@ public partial class Pack : Node
     public List<Entity> entities = new List<Entity>();
     public Dictionary<Task, List<Entity>> groups = new Dictionary<Task, List<Entity>>();
     public List<MapSource> foodSources = new List<MapSource>();
-	public List<MapSource> materialSources = new List<MapSource>();
+	public Dictionary<MapSource, float> materialSources = new Dictionary<MapSource, float>();
     public Dictionary<MapSource, float> natureFoodSources = new Dictionary<MapSource, float>();
     public Dictionary<Vector3, float> directionPoints = new Dictionary<Vector3, float>();
     public List<int> directionRates = new List<int>();
     public Entity leader = null;
 	public Entity exploreLeader;
 	public Vector3 wanderDir = Vector3.Zero;
-
 	public int foods = 0;
-
+	public Dictionary<MaterialType?, int> materials = new Dictionary<MaterialType?, int>();
     
     public Pack()
     {
@@ -89,6 +89,36 @@ public partial class Pack : Node
 		return availableSources[rnd.Next(availableSources.Count)].GlobalPosition;
 	}
 
+	public Vector3 ChooseMaterialTarget()
+	{
+		List<MapSource> availableSources = new List<MapSource>();
+		materialSources.OrderBy(i => i.Value).ToList();
+		foreach(MapSource material in materialSources.Keys.ToList())
+		{
+			if(material.GetCurrentResources() > 0)
+			{
+				availableSources.Add(material);
+			}
+		}
+		if(availableSources.Count == 0) return new Vector3(0, -100, 0);
+		return availableSources.First().GlobalPosition;
+	}
+
+	public Vector3 ChooseNaturalTarget()
+	{
+		List<MapSource> availableSources = new List<MapSource>();
+		natureFoodSources.OrderBy(i => i.Value).ToList();
+		foreach(MapSource material in natureFoodSources.Keys.ToList())
+		{
+			if(material.GetCurrentResources() > 0)
+			{
+				availableSources.Add(material);
+			}
+		}
+		if(availableSources.Count == 0) return new Vector3(0, -100, 0);
+		return availableSources.First().GlobalPosition;
+	}
+
 	public void PackConsumeFoods()
 	{
 		if(justSpawn)
@@ -96,16 +126,17 @@ public partial class Pack : Node
 			justSpawn = false;
 			return;
 		}
-		foreach(Entity entity in entities)
+		foreach(Entity entity in new List<Entity>(entities))
         {
-			if(entity.statsSettings.nConsume > ((EntityBase)entity.pack.structures[0]).foods)
+			if(entity == null) return;
+			if(entity.statsSettings.nConsume > foods)
 			{
 				entity.Starve();
 			}
 			else
 			{
 				if(entity.currentHunger < entity.statsSettings.maxHunger) entity.currentHunger += 1;
-				((EntityBase)structures[0]).foods -= entity.statsSettings.nConsume;
+				foods -= entity.statsSettings.nConsume;
 			}
         }
 	}

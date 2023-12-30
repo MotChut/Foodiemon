@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bstuusaw7bfll"]
+
+[ext_resource type="PackedScene" uid="uid://d1dim43q6tf4p" path="res://Scenes/Environment/Material/Material.tscn" id="1_v0hb2"]
+[ext_resource type="Texture2D" uid="uid://bu6dg5afrxia6" path="res://Assets/Fruits and Vegetables/Blueberries.png" id="2_1d8tl"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_is4wl"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[node name="Berry" instance=ExtResource("1_v0hb2")]
+isFood = true
+
+[node name="Sprite3D" parent="." index="0"]
+texture = SubResource("ViewportTexture_is4wl")
+
+[node name="Sprite2D" parent="Sprite3D/SubViewport" index="0"]
+texture = ExtResource("2_1d8tl")

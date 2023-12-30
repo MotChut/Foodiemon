@@ -1,21 +1,28 @@
 using Godot;
-using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 public partial class CookUI : CanvasLayer
 {
+	const int SIZEX = 1280;
+	const int SIZEY = 720;
 	public int MAX_INGREDIENTS = 5;
 	List<Button> ingredientLists = new List<Button>();
 	int assignedIngredients = 0;
+	BoxContainer container;
 
 	public override void _Ready()
 	{
-		HBoxContainer hBoxContainer = GetNode<HBoxContainer>("VBox/Body/HBoxContainer/VBoxContainer/Cook/VBox/IngredientBtns/Panel/HBox");
+		container = GetNode<BoxContainer>("Container/VBox");
+		HBoxContainer hBoxContainer = GetNode<HBoxContainer>("Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox");
 		foreach(Button button in hBoxContainer.GetChildren())
 		{
 			ingredientLists.Add(button);
 			button.Pressed += () => RemoveIngredient(button);
 		}
+
+		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
+		Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
 	}
 
 	public int GetCurrentIngredients()

@@ -1,17 +1,28 @@
+using System.Collections.Generic;
 using Godot;
+using static Resources;
+
 
 public partial class EntityBase : Object
 {
-	[Export] public string[] entityTypes;
-	public int foods = 0;
+	public Pack pack;
+
 
     public override void _PhysicsProcess(double delta)
     {
-        GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = foods.ToString();
+        GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = 
+			"Food: " + pack.foods + "\n" +
+			"Twigs: " + pack.materials[MaterialType.Twig] + "\n" +
+			"Flints: " + pack.materials[MaterialType.Flint] + "\n" +
+			"CutGrass: " + pack.materials[MaterialType.CutGrass];
     }
 
 	public void ReceiveFood(int amount)
 	{
-		foods += amount;
+		pack.foods += amount;
+	}
+	public void ReceiveMaterial(MaterialType? type, int amount)
+	{
+		pack.materials[type] += amount;
 	}
 }
