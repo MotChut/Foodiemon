@@ -7,6 +7,7 @@ public partial class IngredientButton : Button
 	Label amountLabel;
 	CookUI cookUI;
 	int amount = 0;
+	string description;
 
 	public override void _Ready()
 	{
@@ -22,13 +23,18 @@ public partial class IngredientButton : Button
 
 	public void SetTexture(Texture2D texture2D)
 	{	
-		
+		textureRect.Texture = texture2D;
 	}
 
 	public void SetAmount(int n)
 	{
 		amount = n;
 		UpdateAmount();
+	}
+
+	public void SetDescription(string s)
+	{
+		description = s;
 	}
 
 	public void UpdateAmount(int n = 0)
@@ -46,6 +52,7 @@ public partial class IngredientButton : Button
 	void MouseEnter()
 	{
 		Scale = new Vector2(1.2f, 1.2f);
+		GetTree().Root.GetNode<CookUI>("CookUI").UpdateIngredientDescription(description);
 	}
 
 	void MouseLeave()

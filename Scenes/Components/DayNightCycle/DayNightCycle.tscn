@@ -13,11 +13,8 @@ sky_material = SubResource("ProceduralSkyMaterial_djwkv")
 background_mode = 1
 background_color = Color(0.301961, 0.301961, 0.301961, 1)
 sky = SubResource("Sky_bg8qk")
-tonemap_mode = 2
-ssao_enabled = true
 ssao_intensity = 10.0
 glow_enabled = true
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.01
 
 [sub_resource type="Animation" id="Animation_gwh14"]

@@ -13,6 +13,7 @@ public partial class RegionSettings : Node
 	public int floor = 0;
 	public int trees = 0;
 	public int chicpeaBase = 0;
+	public int grassLand = 0;
 
 
     // Local
@@ -46,7 +47,8 @@ public partial class RegionSettings : Node
         {
             floor,
             trees,
-            chicpeaBase
+            chicpeaBase,
+            grassLand
         };
 	}
 

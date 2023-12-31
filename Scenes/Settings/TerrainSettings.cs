@@ -12,6 +12,7 @@ public partial class TerrainSettings : Node
 	public int rock1 = 0;
 	public int grassBush = 0;
 	public int flint = 0;
+	public int grassSource = 0;
 	public List<int> rates = new List<int>();
 
 	public void Init()
@@ -23,7 +24,7 @@ public partial class TerrainSettings : Node
 	{
 		List<int> weights = new List<int>
         {
-            movableGrass, tree, berryBush, rock1, grassBush, flint
+            movableGrass, tree, berryBush, rock1, grassBush, flint, grassSource
         };
 		return weights;
 	}

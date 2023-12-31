@@ -3,7 +3,6 @@
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_bm42e"]
 [ext_resource type="Script" path="res://Scenes/Entities/Chicpea/Chicpea.cs" id="2_3ll0y"]
 [ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="3_4nax0"]
-[ext_resource type="Texture2D" uid="uid://ebw1retbqexj" path="res://Assets/chicpea_eye.png" id="4_bn6wn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_415bd"]
 render_priority = 0
@@ -81,6 +80,9 @@ shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_juvcr"]
+load_path = "res://.godot/imported/chicpea_eye.png-d0a2f98385fbe3fa597975fc93f810fa.s3tc.ctex"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uxxnt"]
 render_priority = 0
 shader = ExtResource("3_4nax0")
@@ -99,7 +101,7 @@ shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
-shader_parameter/albedo_texture = ExtResource("4_bn6wn")
+shader_parameter/albedo_texture = SubResource("CompressedTexture2D_juvcr")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_eyn72"]
 _surfaces = [{
@@ -241,6 +243,8 @@ objectSize = Vector3(1, 1, 1)
 nFormation = 16
 isLeader = true
 waitFormationTime = 2.0
+currentHunger = 0
+speed = 0.0
 
 [node name="Sprite" type="Node3D" parent="." index="0"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)

@@ -252,7 +252,7 @@ radius = 0.15
 [node name="Tree" type="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 script = ExtResource("1_15cih")
-objectSize = Vector3(1, 1, 1)
+objectSize = Vector3(2, 2, 2)
 isBlock = true
 
 [node name="Sprite" type="MeshInstance3D" parent="."]

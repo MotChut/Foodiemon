@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scenes/Environment/Object/EntityBase.cs" id="1_wxqjq"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sxxlv"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qhq3h"]
 albedo_color = Color(0.211765, 0.313726, 0.572549, 1)
 
 [sub_resource type="PrismMesh" id="PrismMesh_xl3le"]
-material = SubResource("StandardMaterial3D_sxxlv")
+material = SubResource("StandardMaterial3D_qhq3h")
 size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cg8e5"]
@@ -54,11 +54,20 @@ texture = SubResource("ViewportTexture_5ewfd")
 
 [node name="SubViewport" type="SubViewport" parent="InteractiveNotice"]
 transparent_bg = true
-size = Vector2i(288, 288)
+size = Vector2i(999, 999)
 
 [node name="Label" type="Label" parent="InteractiveNotice/SubViewport"]
-offset_right = 288.0
-offset_bottom = 70.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -144.0
+offset_top = -35.0
+offset_right = 144.0
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "E"
 label_settings = SubResource("LabelSettings_8opa2")
 horizontal_alignment = 1

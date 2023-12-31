@@ -9,7 +9,8 @@ public partial class Resources : Node
 	public static int NUMBER_OF_DAYS = 0;
 
 	#region Constants
-	public const float SPEED_SCALE = 1f;
+	public static string NextPath = "";
+	public const float SPEED_SCALE = 0.5f;
 	public const int MIN_REGION_SIZE = 15;
 	public const int MAX_REGION_SIZE = 20;
 	public const int TILE_SIZE = 20;
@@ -18,6 +19,8 @@ public partial class Resources : Node
 	public const string RegionSettingsJson = "res://Jsons/RegionSettings.json";
 	public const string StatsSettingsJson = "res://Jsons/StatsSettings.json";
 	public const string ForestRegion_Scene = "res://Scenes/Environment/Terrain/ForestRegion.tscn";
+	public const string ProceduralGeneration_Path = "res://Scenes/Map/ProceduralGeneration.tscn";
+	public const string LoadingScene_Path = "res://Scenes/UI/Loading/Loading.tscn";
 	public static ProceduralGeneration proGen;
 
 	public enum Entities
@@ -30,12 +33,12 @@ public partial class Resources : Node
 	}
 	
 	public enum TerrainType {
-		Floor, Trees, ChicpeaBase
+		Floor, Trees, ChicpeaBase, GrassLand
 	}
 
 	public enum MaterialType 
 	{
-		Berry, Twig, Flint, CutGrass
+		Berry, Twig, Flint, CutGrass, ChicNugget, ChicEgg, ChicLeg
 	}
 	public static List<TerrainType> EntitiesTerrainType = new List<TerrainType>()
 	{
@@ -43,7 +46,21 @@ public partial class Resources : Node
 	};
 	public static List<MaterialType?> FoodMaterialType = new List<MaterialType?>()
 	{
-		MaterialType.Berry
+		MaterialType.Berry, MaterialType.ChicNugget, MaterialType.ChicEgg, MaterialType.ChicLeg
+	};
+	public static Dictionary<MaterialType?, Texture2D> FoodMaterialAsset = new Dictionary<MaterialType?, Texture2D>()
+	{
+		[MaterialType.Berry] = (Texture2D)GD.Load("res://Assets/FoodIngredients/Berry.png"),
+		[MaterialType.ChicNugget] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicNugget.png"),
+		[MaterialType.ChicLeg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicLeg.png"),
+		[MaterialType.ChicEgg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png")
+	};
+	public static Dictionary<MaterialType?, string> FoodMaterialDescription = new Dictionary<MaterialType?, string>()
+	{
+		[MaterialType.Berry] = "This is a cool fresh berry, barely hatched from the bush!",
+		[MaterialType.ChicNugget] = "This is nugget that makes u nutttttt!",
+		[MaterialType.ChicLeg] = "Big juicy Chicpea Leg!",
+		[MaterialType.ChicEgg] = "Delicious extra protein!"
 	};
 	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
 	{
@@ -52,7 +69,8 @@ public partial class Resources : Node
 		["BerryBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/BerryBush.tscn"),
 		["Rock1"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Rock1.tscn"),
 		["GrassBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassBush.tscn"),
-		["Flint"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/Flint.tscn")
+		["Flint"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/Flint.tscn"),
+		["GrassSource"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassSource.tscn")
 	};
 	public static Dictionary<MaterialType?, PackedScene> MaterialSceneDictionary = new Dictionary<MaterialType?, PackedScene>()
 	{
@@ -100,6 +118,15 @@ public partial class Resources : Node
 		}
 	}
 
+	static void ForceGroups()
+	{
+		foreach(Pack pack in PackList)
+		{
+			if(pack.entities.Count <= 0) continue;
+			pack.leader.IntoGroups();
+		}
+	}
+
 	static void UpdateCurrentTask()
 	{
 		foreach(Pack pack in PackList)
@@ -126,8 +153,12 @@ public partial class Resources : Node
         Generate();
     }
 
-	public void Generate()
+	public static void Generate()
 	{
+		StatsSettingsList = new List<StatsSettings>(){};
+		EntitySettingsList = new List<EntitySettings>(){};
+		TerrainSettingsList = new List<TerrainSettings>(){};
+		RegionSettingsList = new List<RegionSettings>(){};
 		PackList = new List<Pack>();
 		LoadStatsSettings();
 		LoadEntitySettings();
@@ -135,13 +166,13 @@ public partial class Resources : Node
 		LoadRegionSettings();
 	}
 
-	void LoadStatsSettings()
+	static void LoadStatsSettings()
 	{
 		var jsonString = FileAccess.GetFileAsString(StatsSettingsJson);
         StatsSettingsList = JsonConvert.DeserializeObject<List<StatsSettings>>(jsonString); 
 	}
 
-	void LoadEntitySettings()
+	static void LoadEntitySettings()
     {
         var jsonString = FileAccess.GetFileAsString(EntitySettingsJson);
         EntitySettingsList = JsonConvert.DeserializeObject<List<EntitySettings>>(jsonString); 
@@ -152,7 +183,7 @@ public partial class Resources : Node
 		}
     }
 
-	void LoadTerrainSettings()
+	static void LoadTerrainSettings()
     {
         var jsonString = FileAccess.GetFileAsString(TerrainSettingsJson);
         TerrainSettingsList = JsonConvert.DeserializeObject<List<TerrainSettings>>(jsonString); 
@@ -163,7 +194,7 @@ public partial class Resources : Node
 		}
     }
 
-	void LoadRegionSettings()
+	static void LoadRegionSettings()
     {
         var jsonString = FileAccess.GetFileAsString(RegionSettingsJson);
         RegionSettingsList = JsonConvert.DeserializeObject<List<RegionSettings>>(jsonString); 

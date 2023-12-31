@@ -67,7 +67,7 @@ public partial class ProceduralGeneration : Node3D
 
 		if(Input.IsActionJustPressed("reset"))
 		{
-			GetTree().Root.GetNode<Resources>("Resources").Generate();
+			Generate();
 			GetTree().ReloadCurrentScene();
 			
 		}

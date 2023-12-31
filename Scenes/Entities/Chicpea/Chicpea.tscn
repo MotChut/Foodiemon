@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://6sh277sh87vu" path="res://Scenes/Entities/Entity.tscn" id="1_nqom0"]
 [ext_resource type="Script" path="res://Scenes/Entities/Chicpea/Chicpea.cs" id="2_c8ney"]
-[ext_resource type="Texture2D" uid="uid://ebw1retbqexj" path="res://Assets/chicpea_eye.png" id="3_llga8"]
 [ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="3_n005j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_udubo"]
@@ -81,6 +80,9 @@ shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_juvcr"]
+load_path = "res://.godot/imported/chicpea_eye.png-d0a2f98385fbe3fa597975fc93f810fa.s3tc.ctex"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3iu4a"]
 render_priority = 0
 shader = ExtResource("3_n005j")
@@ -99,7 +101,7 @@ shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
-shader_parameter/albedo_texture = ExtResource("3_llga8")
+shader_parameter/albedo_texture = SubResource("CompressedTexture2D_juvcr")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_b62c0"]
 _surfaces = [{
@@ -277,8 +279,13 @@ transparent_bg = true
 size = Vector2i(640, 288)
 
 [node name="Label" type="Label" parent="InteractiveNotice/SubViewport" index="0"]
-offset_right = 640.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_right = 320.0
 offset_bottom = 70.0
+grow_horizontal = 2
 label_settings = SubResource("LabelSettings_a0x3d")
 horizontal_alignment = 1
 

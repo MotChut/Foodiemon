@@ -57,7 +57,7 @@ size = Vector3(2.5, 1, 2)
 
 [node name="Rock1" type="Node3D"]
 script = ExtResource("1_g7j3m")
-objectSize = Vector3(2, 2, 2)
+objectSize = Vector3(3, 2, 3)
 isBlock = true
 
 [node name="Sprite" type="MeshInstance3D" parent="."]

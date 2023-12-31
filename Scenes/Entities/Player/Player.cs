@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using static Resources;
 
 public partial class Player : CharacterBody3D
 {
@@ -13,11 +14,19 @@ public partial class Player : CharacterBody3D
 	public const float AttackAngularAccel = 15.0f;
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
+	public bool canCook = false;
+	public bool canSmith = false;
+	public bool canTeleport = false;
+
 	float angular = AngularAccel;
 	int attack = 1;
+	float knockForce = 3;
 
 	Node3D sprite, areas, timers;
-	AnimationPlayer animationPlayer;
+	AnimationPlayer effectPlayer;
+	AnimationTree animationTree;
+	AnimatedSprite2D effectSprite;
+	Sprite3D effectNode;
 	Camera3D camera;
 	Area3D attackArea;
 	Timer dodgeTimer;
@@ -41,7 +50,10 @@ public partial class Player : CharacterBody3D
 		areas = GetNode<Node3D>("Areas");
 		timers = GetNode<Node3D>("Timers");
 		attackArea = areas.GetNode<Area3D>("AttackArea");
-		animationPlayer = GetNode<AnimationPlayer>("Sprite/AnimationPlayer");
+		effectNode = GetNode<Sprite3D>("Effects/AttackEffect");
+		effectPlayer = GetNode<AnimationPlayer>("Effects/AttackEffect/SubViewport/AnimationPlayer");
+		effectSprite = GetNode<AnimatedSprite2D>("Effects/AttackEffect/SubViewport/AnimatedSprite2D");
+		animationTree = GetNode<AnimationTree>("AnimationTree");
 		camera = GetParent().GetNode<Camera>("Camera").GetNode<Camera3D>("Camera3D");
 		dodgeTimer = timers.GetNode<Timer>("DodgeTimer");
 
@@ -50,6 +62,20 @@ public partial class Player : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
 	{
+		#region Interact
+		if(Input.IsActionJustPressed("interact"))
+		{
+			if(canTeleport)
+			{
+				canTeleport = false;
+				NextPath = ProceduralGeneration_Path;
+				GetTree().ChangeSceneToFile(LoadingScene_Path);
+				return;
+			}
+		}
+
+		#endregion
+
 		#region Movement
 		if(!notInteruptedStates.Contains(currentState) && Input.IsActionJustPressed("dodge"))
 		{
@@ -68,12 +94,20 @@ public partial class Player : CharacterBody3D
 			if(direction != Vector3.Zero)
 			{
 				if (direction != lastDirection) lastDirection = direction;
-				if (currentState != States.Walk) SetState(States.Walk);
+				if (currentState != States.Walk) 
+				{
+					SetState(States.Walk);
+					animationTree.Set("parameters/Movement/transition_request", "walk");
+				}
 				velocity = velocity.MoveToward(maxSpd * direction, accel);
 			}
 			else
 			{
-				if(currentState != States.Idle) SetState(States.Idle);
+				if(currentState != States.Idle)
+				{
+					SetState(States.Idle);
+					animationTree.Set("parameters/Movement/transition_request", "idle");
+				}
 				velocity = velocity.MoveToward(Vector3.Zero, friction);
 			}
 
@@ -102,6 +136,7 @@ public partial class Player : CharacterBody3D
 	{
 		sprite.Rotation = GetFacingDirection(sprite, delta);
 		areas.Rotation = sprite.Rotation;
+		effectNode.Rotation = new Vector3(effectNode.Rotation.X, sprite.Rotation.Y + 90, effectNode.Rotation.Z);
 	}
 
 	Vector3 GetFacingDirection(Node3D o, float delta)
@@ -116,7 +151,11 @@ public partial class Player : CharacterBody3D
 	void SetState(States state)
 	{
 		currentState = state;
-		animationPlayer.Play(Enum.GetName(state));
+	}
+
+	void PlayEffect()
+	{
+		effectSprite.Play(currentState.ToString());
 	}
 
 	async void Attack()
@@ -136,9 +175,9 @@ public partial class Player : CharacterBody3D
 			lastDirection = GlobalPosition.DirectionTo((Vector3)result["position"]);
 			var difference = Mathf.Abs(Mathf.Wrap(Mathf.Atan2(lastDirection.X, lastDirection.Z) - sprite.Rotation.Y, 0.0f, Mathf.Tau));
    			var distance = Mathf.Abs(Mathf.Wrap(2.0 * difference, 0.0f, Mathf.Tau) - difference);
-			await ToSignal(GetTree().CreateTimer(distance * 0.1), "timeout");
+			await ToSignal(GetTree().CreateTimer(distance * 0.05f), "timeout");
+			effectPlayer.Play(currentState.ToString());
 			DealDamage();
-			SetState(States.Idle);
 			angular = AngularAccel;
 		}
 		
@@ -152,7 +191,7 @@ public partial class Player : CharacterBody3D
 			if(target is Entity)
 			{
 				Entity e = target as Entity;
-				e.GetHit(GlobalPosition, 3, attack);
+				e.GetHit(GlobalPosition, knockForce, attack);
 			}
 		}
 	}

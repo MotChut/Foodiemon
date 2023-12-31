@@ -2,34 +2,49 @@
   {
     "id": 0,
     "terraintype": "Floor",
-    "objectrate": 10,
+    "objectrate": 5,
     "movablegrass": 10,
     "tree": 1,
     "berrybush": 1,
     "rock1": 1,
     "grassbush": 1,
-    "flint": 1
+    "flint": 3,
+    "grasssource": 1
   },
   {
     "id": 1,
     "terraintype": "Trees",
     "objectrate": 10,
-    "movablegrass": 2,
+    "movablegrass": 10,
     "tree": 10,
     "berrybush": 1,
     "rock1": 1,
     "grassbush": 1,
-    "flint": 1
+    "flint": 3,
+    "grasssource": 1
   },
   {
     "id": 2,
     "terraintype": "ChicpeaBase",
     "objectrate": 5,
-    "movablegrass": 2,
+    "movablegrass": 5,
     "tree": 1,
     "berrybush": 0,
     "rock1": 0,
     "grassbush": 1,
-    "flint": 1
+    "flint": 1,
+    "grasssource": 1
+  },
+  {
+    "id": 3,
+    "terraintype": "GrassLand",
+    "objectrate": 5,
+    "movablegrass": 5,
+    "tree": 2,
+    "berrybush": 0,
+    "rock1": 1,
+    "grassbush": 0,
+    "flint": 2,
+    "grasssource": 4
   }
 ]

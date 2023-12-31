@@ -14,7 +14,8 @@ public partial class EntityBase : Object
 			"Food: " + pack.foods + "\n" +
 			"Twigs: " + pack.materials[MaterialType.Twig] + "\n" +
 			"Flints: " + pack.materials[MaterialType.Flint] + "\n" +
-			"CutGrass: " + pack.materials[MaterialType.CutGrass];
+			"CutGrass: " + pack.materials[MaterialType.CutGrass] + "\n" + 
+			"Material Sources: " + pack.materialSources.Count.ToString();
     }
 
 	public void ReceiveFood(int amount)

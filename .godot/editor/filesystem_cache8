@@ -1,52 +1,225 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1699424317
+::res://::1703998201
 icon.svg::CompressedTexture2D::8403530608082025044::1694940008::1698132524::1::::<><>::
-::res://Assets/::1699428160
-grass_1.glb::PackedScene::871788421521457893::1699423858::1699424318::1::::<><>::
-grass_2.glb::PackedScene::6595209015237167371::1699426438::1699426443::1::::<><>::uid://r63la73sb20o::::res://Assets/grass_2_noisse.png
-grass_3.glb::PackedScene::5655912627928477143::1699428160::1699428164::1::::<><>::uid://bclq3cb0t2qx7::::res://Assets/grass_3_noisse.png
-model3.glb::PackedScene::3812236982183864795::1699423028::1699423033::1::::<><>::
-grass_2_noisse.png::CompressedTexture2D::1258925822482877044::1699426442::1699426443::1::::<><>::
-grass_3_noisse.png::CompressedTexture2D::2550528108131285078::1699428163::1699428164::1::::<><>::
-::res://Scenes/::1699428151
-Game.cs::CSharpScript::-1::1699351895::0::1::::<><>::
-Game.tscn::PackedScene::3978218602523986825::1699428151::0::1::::<><>::res://Scenes/Game.cs<>uid://cadar5emaw6s6::::res://Scenes/Player/Player.tscn<>uid://d4ivfnd65wb85::::res://Scenes/Components/Camera.tscn<>uid://dcuqaxf8s0n7s::::res://Scenes/Shaders/MovableGrass.tres<>uid://cn1648f6p2ako::::res://Scenes/Entities/Chicpea.tscn<>uid://cy56tjjelcoqb::::res://Scenes/Environment/Object/BerryBush.tscn<>uid://cegsmtph48v0n::::res://Scenes/Environment/Object/MovableGrass.tscn
-Resources.cs::CSharpScript::-1::1699334005::0::1::::<><>::
-::res://Scenes/AI/::1699332362
+Montserrat-VariableFont_wght_0.ttf::FontFile::926328436868501563::1681360988::1703938617::1::::<><>::
+MotleyForcesRegular-w1rZ3.ttf::FontFile::6852599012374244560::1670096114::1703933012::1::::<><>::
+::res://Assets/::1703986446
+chicpea.glb::PackedScene::4581973939860779328::1703941986::1703941986::1::::<><>::
+chicpea_eye.png::CompressedTexture2D::284202856729992599::1703941986::1703941986::1::::<><>::
+chicpea_xanh.glb::PackedScene::2169027231773181350::1703941986::1703941986::1::::<><>::
+chicpea_xanh_eye.png::CompressedTexture2D::6902629735060351626::1703941986::1703941986::1::::<><>::
+grass_1.glb::PackedScene::871788421521457893::1703941986::1703941986::1::::<><>::
+grass_2.glb::PackedScene::6595209015237167371::1703941986::1703941986::1::::<><>::
+grass_2_noisse.png::CompressedTexture2D::1258925822482877044::1703941986::1703941986::1::::<><>::
+grass_3.glb::PackedScene::5655912627928477143::1703941986::1703941986::1::::<><>::
+grass_3_noisse.png::CompressedTexture2D::2550528108131285078::1703941986::1703941986::1::::<><>::
+model3.glb::PackedScene::3812236982183864795::1703941986::1703941986::1::::<><>::
+::res://Assets/2D/::1703989490
+Smear 01 Horizontal 1.png::CompressedTexture2D::5460255988849680829::1703989488::1703989490::1::::<><>::
+::res://Assets/Environment/::1703941986
+bush.glb::PackedScene::3354930804186766764::1703941986::1703941986::1::::<><>::
+cay cao.glb::PackedScene::7542308503206606905::1703941986::1703941986::1::::<><>::
+cay cao_cay.png::CompressedTexture2D::7235067430861892106::1703941986::1703941986::1::::<><>::
+grass nhon.glb::PackedScene::2534910600665513501::1703941986::1703941986::1::::<><>::
+rock.glb::PackedScene::2624304124799128507::1703941986::1703941986::1::::<><>::
+::res://Assets/FoodIngredients/::1703967469
+Berry.png::CompressedTexture2D::8448979558715302631::1703967387::1703967469::1::::<><>::
+ChicEgg.png::CompressedTexture2D::863106783498663852::1703967420::1703967469::1::::<><>::
+ChicLeg.png::CompressedTexture2D::2417180459747435274::1703967446::1703967469::1::::<><>::
+ChicNugget.png::CompressedTexture2D::353861670171036130::1703967467::1703967469::1::::<><>::
+::res://Assets/Fruits and Vegetables/::1703962010
+Acorn.png::CompressedTexture2D::1073575098100077033::1703941986::1703941986::1::::<><>::
+Apple Green.png::CompressedTexture2D::2238223824202229290::1703941986::1703941986::1::::<><>::
+Apple Red.png::CompressedTexture2D::6450537932923316104::1703941986::1703941986::1::::<><>::
+Apple Yellow.png::CompressedTexture2D::2213738352381844069::1703941986::1703941986::1::::<><>::
+Aubergine.png::CompressedTexture2D::7731337593481142342::1703941986::1703941986::1::::<><>::
+Avocado.png::CompressedTexture2D::3730585631703729415::1703941986::1703941986::1::::<><>::
+Banana.png::CompressedTexture2D::10540959861756396::1703941986::1703941986::1::::<><>::
+Beet Golden.png::CompressedTexture2D::1849520146437731886::1703941986::1703941986::1::::<><>::
+Beet.png::CompressedTexture2D::8800562752329733682::1703941986::1703941986::1::::<><>::
+Blueberries.png::CompressedTexture2D::3854387708522642983::1703941986::1703941986::1::::<><>::
+Broccoli.png::CompressedTexture2D::6704511158926822526::1703941986::1703941986::1::::<><>::
+Cabbage Green.png::CompressedTexture2D::6988770132200911622::1703941986::1703941986::1::::<><>::
+Cabbage Red.png::CompressedTexture2D::7926433943065895166::1703941986::1703941986::1::::<><>::
+Canteloupe.png::CompressedTexture2D::4103008989455821694::1703941986::1703941986::1::::<><>::
+Carrot.png::CompressedTexture2D::4313033847219360188::1703941986::1703941986::1::::<><>::
+Cauliflower.png::CompressedTexture2D::2333692242219901434::1703941986::1703941986::1::::<><>::
+Celery.png::CompressedTexture2D::7357170182212058035::1703941986::1703941986::1::::<><>::
+Cherry.png::CompressedTexture2D::1857065930560515954::1703941986::1703941986::1::::<><>::
+Chili Pepper.png::CompressedTexture2D::6186329626291432135::1703941986::1703941986::1::::<><>::
+Coconut.png::CompressedTexture2D::6012344870614477709::1703941986::1703941986::1::::<><>::
+Corn.png::CompressedTexture2D::4440589909272147603::1703941986::1703941986::1::::<><>::
+Cranberries.png::CompressedTexture2D::641306869077925791::1703941986::1703941986::1::::<><>::
+Crookneck.png::CompressedTexture2D::5136675175662075989::1703941986::1703941986::1::::<><>::
+Cucumber.png::CompressedTexture2D::2356971013845564688::1703941986::1703941986::1::::<><>::
+Garlic.png::CompressedTexture2D::7032675058055467654::1703941986::1703941986::1::::<><>::
+Ginger.png::CompressedTexture2D::4575374424314165025::1703941986::1703941986::1::::<><>::
+Grapefruit.png::CompressedTexture2D::5725015543522409258::1703941986::1703941986::1::::<><>::
+Grapes Green.png::CompressedTexture2D::8266130979289755230::1703941986::1703941986::1::::<><>::
+Grapes Purple.png::CompressedTexture2D::4472199686627814827::1703941986::1703941986::1::::<><>::
+Grapes Red.png::CompressedTexture2D::2500686654041405498::1703941986::1703941986::1::::<><>::
+Grapes White.png::CompressedTexture2D::8648791598921868638::1703941986::1703941986::1::::<><>::
+Honeydew.png::CompressedTexture2D::3018523446778939206::1703941986::1703941986::1::::<><>::
+Jalapeno.png::CompressedTexture2D::8877422864408146630::1703941986::1703941986::1::::<><>::
+Kale.png::CompressedTexture2D::8871572042820562900::1703941986::1703941986::1::::<><>::
+Lemon.png::CompressedTexture2D::1040603859285480112::1703941986::1703941986::1::::<><>::
+Lettuce.png::CompressedTexture2D::320654174988961105::1703941986::1703941986::1::::<><>::
+Lime.png::CompressedTexture2D::6440276009493098911::1703941986::1703941986::1::::<><>::
+Mango.png::CompressedTexture2D::869563449137699042::1703941986::1703941986::1::::<><>::
+Mushroom Poison.png::CompressedTexture2D::4659050816633784589::1703941986::1703941986::1::::<><>::
+Mushroom Red.png::CompressedTexture2D::7181696202848172183::1703941986::1703941986::1::::<><>::
+Mushroom White.png::CompressedTexture2D::7425311633646039145::1703941986::1703941986::1::::<><>::
+Onion Green.png::CompressedTexture2D::6859569901843877578::1703941986::1703941986::1::::<><>::
+Onion Red.png::CompressedTexture2D::3986830955257030890::1703941986::1703941986::1::::<><>::
+Onion White.png::CompressedTexture2D::6331792405642622218::1703941986::1703941986::1::::<><>::
+Orange.png::CompressedTexture2D::2507294851548352370::1703941986::1703941986::1::::<><>::
+Peach.png::CompressedTexture2D::7533630630420880999::1703941986::1703941986::1::::<><>::
+Pear.png::CompressedTexture2D::4668422588762772632::1703941986::1703941986::1::::<><>::
+Peas.png::CompressedTexture2D::1864656308761914490::1703941986::1703941986::1::::<><>::
+Pepper Green.png::CompressedTexture2D::5283188126068862761::1703941986::1703941986::1::::<><>::
+Pepper Orange.png::CompressedTexture2D::2221344778771990070::1703941986::1703941986::1::::<><>::
+Pepper Red.png::CompressedTexture2D::127597126376229290::1703941986::1703941986::1::::<><>::
+Pepper Yellow.png::CompressedTexture2D::9217387017773388149::1703941986::1703941986::1::::<><>::
+Potato.png::CompressedTexture2D::8581213446342326522::1703941986::1703941986::1::::<><>::
+Pumpkin.png::CompressedTexture2D::6324376858921656564::1703941986::1703941986::1::::<><>::
+Radish.png::CompressedTexture2D::706840194792809851::1703941986::1703941986::1::::<><>::
+Raspberries.png::CompressedTexture2D::3874693469491605485::1703941986::1703941986::1::::<><>::
+Rutabaga.png::CompressedTexture2D::5164705718436040560::1703941986::1703941986::1::::<><>::
+Shallot.png::CompressedTexture2D::983691576986752696::1703941986::1703941986::1::::<><>::
+Spinach.png::CompressedTexture2D::7325803567205096819::1703941986::1703941986::1::::<><>::
+Squash.png::CompressedTexture2D::79307412319735248::1703941986::1703941986::1::::<><>::
+Strawberries.png::CompressedTexture2D::4620910689673819648::1703941986::1703941986::1::::<><>::
+Tomato.png::CompressedTexture2D::1040597550857112703::1703941986::1703941986::1::::<><>::
+Turmeric.png::CompressedTexture2D::6287203842973185994::1703941986::1703941986::1::::<><>::
+Turnip.png::CompressedTexture2D::8414437228617759500::1703941986::1703941986::1::::<><>::
+Watermelon.png::CompressedTexture2D::5881082912649900983::1703941986::1703941986::1::::<><>::
+Wheat.png::CompressedTexture2D::7552099438669701521::1703941986::1703941986::1::::<><>::
+Wild Berries.png::CompressedTexture2D::6702006827191771427::1703941986::1703941986::1::::<><>::
+Wild Herb.png::CompressedTexture2D::2174060400313371180::1703941986::1703941986::1::::<><>::
+Yam.png::CompressedTexture2D::8505809436815684939::1703941986::1703941986::1::::<><>::
+Zucchini.png::CompressedTexture2D::5904253316114343765::1703941986::1703941986::1::::<><>::
+::res://Assets/Tools/::1703941986
+Axe.png::CompressedTexture2D::8114490237564491188::1703941986::1703941986::1::::<><>::
+Hammer.png::CompressedTexture2D::2276127070052245761::1703941986::1703941986::1::::<><>::
+Hoe.png::CompressedTexture2D::605129794435368845::1703941986::1703941986::1::::<><>::
+Pick.png::CompressedTexture2D::4063585812857315413::1703941986::1703941986::1::::<><>::
+Scythe.png::CompressedTexture2D::2927338602927521357::1703941986::1703941986::1::::<><>::
+Seed Bag.png::CompressedTexture2D::873374717211630925::1703941986::1703941986::1::::<><>::
+Shovel.png::CompressedTexture2D::139368775073222723::1703941986::1703941986::1::::<><>::
+Watering Can.png::CompressedTexture2D::5215034174226409045::1703941986::1703941986::1::::<><>::
+::res://Assets/UI/::1703966688
+Cook button.png::CompressedTexture2D::8528573065704974394::1703941986::1703941986::1::::<><>::
+Cook button_hover.png::CompressedTexture2D::7498223260201006146::1703941986::1703941991::1::::<><>::
+Cook button_pressed.png::CompressedTexture2D::8227264606279001187::1703941986::1703941991::1::::<><>::
+Cook left.png::CompressedTexture2D::9168322815128291950::1703941986::1703941986::1::::<><>::
+Cook right.png::CompressedTexture2D::6062344218039595245::1703941986::1703941986::1::::<><>::
+::res://Assets/UI/Ếch/::1703941986
+Ếch1.png::CompressedTexture2D::1654436977526653390::1703941986::1703941986::1::::<><>::
+Ếch2.png::CompressedTexture2D::8900927235450463133::1703941986::1703941986::1::::<><>::
+::res://Jsons/::1700624450
+EntitySettings.json::JSON::-1::1701241429::0::1::::<><>::
+RegionSettings.json::JSON::-1::1703918271::0::1::::<><>::
+StatsSettings.json::JSON::-1::1703091695::0::1::::<><>::
+TerrainSettings.json::JSON::-1::1703993924::0::1::::<><>::
+::res://Scenes/::1702461823
+Game.cs::CSharpScript::-1::1703146777::0::1::::<><>::
+Game.tscn::PackedScene::3978218602523986825::1702461823::0::1::::<><>::res://Scenes/Game.cs<>uid://cadar5emaw6s6
+Resources.cs::CSharpScript::-1::1703993256::0::1::::<><>::
+::res://Scenes/AI/::1699758156
 AIPoints.cs::CSharpScript::-1::1698993758::0::1::::<><>::
 SocialMemory.cs::CSharpScript::-1::1699180926::0::1::::<><>::
-::res://Scenes/Components/::1699428086
-Camera.cs::CSharpScript::-1::1698685227::0::1::::<><>::
-Camera.tscn::PackedScene::9212538213319761076::1699428086::0::1::::<><>::res://Scenes/Components/Camera.cs
-::res://Scenes/Components/DayNightCycle/::1698991300
-DayNightCycle.tscn::PackedScene::3680944520621925505::1698991300::0::1::::<><>::
-::res://Scenes/Entities/::1699428086
-Chicpea.cs::CSharpScript::-1::1699338052::0::1::::<><>::
-Chicpea.tscn::PackedScene::5740905913509361226::1699428086::0::1::::<><>::uid://6sh277sh87vu::::res://Scenes/Entities/Entity.tscn<>res://Scenes/Entities/Chicpea.cs
-Entity.cs::CSharpScript::-1::1699425493::0::1::::<><>::
-Entity.tscn::PackedScene::2213487918746349974::1699428086::0::1::::<><>::res://Scenes/Entities/Entity.cs
-Pack.cs::CSharpScript::-1::1699338047::0::1::::<><>::
-::res://Scenes/Environment/::1698927092
-::res://Scenes/Environment/Object/::1699428086
-MapSource.cs::CSharpScript::-1::1699341632::0::1::::<><>::
-MovableGrass.tscn::PackedScene::5067098365333188267::1699428086::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>uid://r63la73sb20o::::res://Assets/grass_2_noisse.png
-Object.cs::CSharpScript::-1::1699425186::0::1::::<><>::
-BerryBush.tscn::PackedScene::6521221590990653785::1699428086::0::1::::<><>::
-::res://Scenes/Environment/Terrain/::1699424162
-Floor.tscn::PackedScene::3967257182747892347::1699025666::0::1::::<><>::uid://6f5n8plhjlno
-Ocean.tres::VisualShader::1494189796005549193::1699424162::0::1::::<><>::
-Ocean.tscn::PackedScene::519946713161935514::1698991209::0::1::::<><>::uid://ca33csh8sek3e
-Terrain.cs::CSharpScript::-1::1699025663::0::1::::<><>::
-Terrain.tscn::PackedScene::2188022523605192268::1699025666::0::1::::<><>::res://Scenes/Environment/Terrain/Terrain.cs
-WaterShader.tres::VisualShader::4832348549642672900::1699424162::0::1::::<><>::
-::res://Scenes/Map/::1699423475
-ProceduralGeneration.cs::CSharpScript::-1::1699025431::0::1::::<><>::
-ProceduralGeneration.tscn::PackedScene::5316707890584533834::1699423475::0::1::::<><>::res://Scenes/Map/ProceduralGeneration.cs<>uid://cadar5emaw6s6
-Region.cs::CSharpScript::-1::1698927244::0::1::::<><>::
-::res://Scenes/Player/::1699428086
-Player.cs::CSharpScript::-1::1699428147::0::1::::<><>::
-Player.tscn::PackedScene::4779066441570612911::1699428086::0::1::::<><>::res://Scenes/Player/Player.cs
+SteeringBehavior.cs::CSharpScript::-1::1701282191::0::1::::<><>::
+::res://Scenes/Components/::1703953598
+::res://Scenes/Components/Camera/::1703942168
+Camera.cs::CSharpScript::-1::1702550369::0::1::::<><>::
+Camera.tscn::PackedScene::2100873378805464730::1703942168::0::1::::<><>::res://Scenes/Components/Camera/Camera.cs
+::res://Scenes/Components/DayNightCycle/::1703993925
+DayNightCycle.cs::CSharpScript::-1::1702571007::0::1::::<><>::
+DayNightCycle.tscn::PackedScene::3680944520621925505::1703993925::0::1::::<><>::res://Scenes/Components/DayNightCycle/DayNightCycle.cs
+::res://Scenes/Entities/::1703264483
+Entity.cs::CSharpScript::-1::1703274685::0::1::::<><>::
+Entity.tscn::PackedScene::2213487918746349974::1703264483::0::1::::<><>::res://Scenes/Entities/Entity.cs
+Pack.cs::CSharpScript::-1::1703760797::0::1::::<><>::
 TestModel.tscn::PackedScene::7294172849251288781::1698142949::0::1::::<><>::uid://0qwv2pus5gmv
-::res://Scenes/Shaders/::1699428151
-MovableGrass.gdshader::Shader::-1::1699428151::0::1::::<><>::
-MovableGrass.tres::ShaderMaterial::7341899982606324046::1699424373::0::1::::<><>::res://Scenes/Shaders/MovableGrass.gdshader
+::res://Scenes/Entities/Chicpea/::1703994060
+BlueChicpea.tscn::PackedScene::8945845405650406053::1703942168::0::1::::<><>::uid://6sh277sh87vu
+Chicpea.cs::CSharpScript::-1::1703960880::0::1::::<><>::
+Chicpea.gdshader::Shader::-1::1703994060::0::1::::<><>::
+Chicpea.tscn::PackedScene::5740905913509361226::1703993925::0::1::::<><>::uid://6sh277sh87vu::::res://Scenes/Entities/Entity.tscn<>res://Scenes/Entities/Chicpea/Chicpea.cs<>res://Shaders/Toon.gdshader
+ChicpeaHouse.tscn::PackedScene::2150241647674007847::1703993925::0::1::::<><>::res://Scenes/Environment/Object/EntityBase.cs
+ChicpeaPack.cs::CSharpScript::-1::1703148691::0::1::::<><>::
+::res://Scenes/Entities/Player/::1703993925
+Player.cs::CSharpScript::-1::1703992638::0::1::::<><>::
+Player.tscn::PackedScene::4779066441570612911::1703993925::0::1::::<><>::res://Scenes/Entities/Player/Player.cs<>uid://cj18va36opovd::::res://Assets/2D/Smear 01 Horizontal 1.png
+Smear 01 Horizontal 1.png::CompressedTexture2D::2297709306240671117::1703986971::1703986971::1::::<><>::
+::res://Scenes/Environment/::1702811615
+::res://Scenes/Environment/Material/::1703274914
+Berry.tscn::PackedScene::3690294048700937053::1703273178::0::1::::<><>::uid://d1dim43q6tf4p
+CutGrass.tscn::PackedScene::7635326065205989751::1703264483::0::1::::<><>::uid://d1dim43q6tf4p
+Flint.tscn::PackedScene::6229198613032156799::1703264483::0::1::::<><>::uid://d1dim43q6tf4p
+Material.cs::CSharpScript::-1::1703151821::0::1::::<><>::
+Material.tscn::PackedScene::8990873851600139525::1703274914::0::1::::<><>::uid://65hhpumcmtvu
+Twig.tscn::PackedScene::8709474931359097200::1703150209::0::1::::<><>::uid://d1dim43q6tf4p
+::res://Scenes/Environment/Object/::1700725874
+EntityBase.cs::CSharpScript::-1::1703986113::0::1::::<><>::
+Object.cs::CSharpScript::-1::1702617829::0::1::::<><>::
+::res://Scenes/Environment/Object/Decorations/::1702616317
+GrassLike.cs::CSharpScript::-1::1700913133::0::1::::<><>::
+MovableGrass.tscn::PackedScene::5067098365333188267::1702616317::0::1::::<><>::res://Scenes/Environment/Object/Decorations/GrassLike.cs<>res://Shaders/Toon.gdshader<>uid://bclq3cb0t2qx7
+::res://Scenes/Environment/Object/Obstacles/::1703993925
+Mound.tscn::PackedScene::5011113289183900134::1700798870::0::1::::<><>::res://Scenes/Environment/Object/Object.cs
+Rock1.tscn::PackedScene::53612115641186254::1703993925::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>res://Shaders/Toon.gdshader
+Tree.tscn::PackedScene::3862354751438633889::1703993925::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>res://Shaders/Toon.gdshader
+::res://Scenes/Environment/Object/Sources/::1703993926
+BerryBush.tscn::PackedScene::3005890921038821814::1703993925::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn<>res://Shaders/Toon.gdshader
+Flint.tscn::PackedScene::4762335129849423341::1703993926::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn<>res://Shaders/Toon.gdshader
+GrassBush.tscn::PackedScene::5253431606515765350::1703993925::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn<>res://Shaders/Toon.gdshader
+GrassSource.tscn::PackedScene::5908031492376733735::1703993925::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn
+MapSource.cs::CSharpScript::-1::1703152551::0::1::::<><>::
+MapSource.tscn::PackedScene::1550135955637192831::1703274915::0::1::::<><>::res://Scenes/Environment/Object/Sources/MapSource.cs
+::res://Scenes/Environment/Ocean/::1701754455
+Ocean.tscn::PackedScene::519946713161935514::1701754455::0::1::::<><>::uid://ca33csh8sek3e
+::res://Scenes/Environment/Terrain/::1703981642
+ForestRegion.tscn::PackedScene::3967257182747892347::1703981642::0::1::::<><>::uid://6f5n8plhjlno
+Terrain.cs::CSharpScript::-1::1703274142::0::1::::<><>::
+Terrain.tscn::PackedScene::2188022523605192268::1700701348::0::1::::<><>::res://Scenes/Environment/Terrain/Terrain.cs
+::res://Scenes/Map/::1703993925
+ProceduralGeneration.cs::CSharpScript::-1::1703958622::0::1::::<><>::
+ProceduralGeneration.tscn::PackedScene::5316707890584533834::1703993925::0::1::::<><>::res://Scenes/Map/ProceduralGeneration.cs<>uid://cadar5emaw6s6::::res://Scenes/Entities/Player/Player.tscn<>uid://hn4pgblhccso::::res://Scenes/Environment/Ocean/Ocean.tscn<>uid://46xcvyjw68io::::res://Scenes/Components/Camera/Camera.tscn<>uid://cv0cjmroueusj::::res://Scenes/UI/PlayerHUD/PlayerHUD.tscn<>uid://bspcva7a6qk4p::::res://Scenes/Components/DayNightCycle/DayNightCycle.tscn
+Region.cs::CSharpScript::-1::1700633132::0::1::::<><>::
+::res://Scenes/Map/Home/::1703993925
+Home.tscn::PackedScene::5975930426455706127::1703993925::0::1::::<><>::uid://hn4pgblhccso::::res://Scenes/Environment/Ocean/Ocean.tscn<>uid://bva7oh0d71emj::::res://Scenes/Environment/Object/Obstacles/Tree.tscn<>uid://cegsmtph48v0n::::res://Scenes/Environment/Object/Decorations/MovableGrass.tscn<>uid://cadar5emaw6s6::::res://Scenes/Entities/Player/Player.tscn<>uid://078pf2p6ibe::::res://Scenes/Environment/Object/Obstacles/Rock1.tscn<>uid://46xcvyjw68io::::res://Scenes/Components/Camera/Camera.tscn<>uid://bv4ct70b3y3n6::::res://Scenes/Map/Home/Kitchen/Kitchen.tscn<>uid://b4mcmjjg4iavh::::res://Scenes/Map/Home/Blacksmith/Blacksmith.tscn<>uid://4gi584yg5hpp::::res://Scenes/Map/Home/Portal/Portal.tscn<>uid://bspcva7a6qk4p::::res://Scenes/Components/DayNightCycle/DayNightCycle.tscn
+::res://Scenes/Map/Home/Blacksmith/::1703954373
+Blacksmith.cs::CSharpScript::-1::1703943721::0::1::::<><>::
+Blacksmith.tscn::PackedScene::4446813032682221665::1703954373::0::1::::<><>::res://Scenes/Map/Home/Blacksmith/Blacksmith.cs
+::res://Scenes/Map/Home/Kitchen/::1703954373
+Kitchen.cs::CSharpScript::-1::1703943623::0::1::::<><>::
+Kitchen.tscn::PackedScene::3920410438480384553::1703954373::0::1::::<><>::res://Scenes/Map/Home/Kitchen/Kitchen.cs
+::res://Scenes/Map/Home/Portal/::1703981976
+Portal.cs::CSharpScript::-1::1703949700::0::1::::<><>::
+Portal.tscn::PackedScene::2048403820956115129::1703981976::0::1::::<><>::res://Scenes/Map/Home/Portal/Portal.cs
+::res://Scenes/Settings/::1700623273
+EntitySettings.cs::CSharpScript::-1::1700462902::0::1::::<><>::
+RegionSettings.cs::CSharpScript::-1::1702783990::0::1::::<><>::
+StatsSettings.cs::CSharpScript::-1::1702539534::0::1::::<><>::
+TerrainSettings.cs::CSharpScript::-1::1703981594::0::1::::<><>::
+::res://Scenes/UI/::1703949800
+::res://Scenes/UI/CookUI/::1703981976
+CookUI.cs::CSharpScript::-1::1703963712::0::1::::<><>::
+CookUI.tscn::PackedScene::8396708323471183931::1703981976::0::1::::<><>::res://Scenes/UI/CookUI/CookUI.cs<>uid://d3vg64p6rs3b3
+IngredientButton.cs::CSharpScript::-1::1703963737::0::1::::<><>::
+IngredientButton.tscn::PackedScene::1952526536498762315::1703981976::0::1::::<><>::res://Scenes/UI/CookUI/IngredientButton.cs<>uid://dsm0purohvjfb
+::res://Scenes/UI/Loading/::1703981976
+Loading.cs::CSharpScript::-1::1703954069::0::1::::<><>::
+Loading.tscn::PackedScene::2241194465272870446::1703981976::0::1::::<><>::res://Scenes/UI/Loading/Loading.cs<>uid://xtolnu1jcsxy
+::res://Scenes/UI/PlayerHUD/::1703088724
+PlayerHUD.cs::CSharpScript::-1::1702804898::0::1::::<><>::
+PlayerHUD.tscn::PackedScene::6298554690971933981::1703088724::0::1::::<><>::res://Scenes/UI/PlayerHUD/PlayerHUD.cs
+::res://Shaders/::1703994060
+MovableGrass.gdshader::Shader::-1::1703994060::0::1::::<><>::
+MovableGrass.tres::ShaderMaterial::7341899982606324046::1702461318::0::1::::<><>::res://Shaders/MovableGrass.gdshader
+Ocean.tres::VisualShader::1494189796005549193::1703991972::0::1::::<><>::
+Toon.gdshader::Shader::-1::1703994060::0::1::::<><>::
+WaterShader.tres::VisualShader::4832348549642672900::1703991972::0::1::::<><>::
+::res://User/::1703941171
+UserData.cs::CSharpScript::-1::1703962992::0::1::::<><>::

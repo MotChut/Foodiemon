@@ -15,3 +15,4 @@ C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\refint\Foodi
 C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.pdb
 C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\Foodiemon.genruntimeconfig.cache
 C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\obj\Debug\ref\Foodiemon.dll
+C:\Users\Kiet\Documents\GitHub\Foodiemon\.godot\mono\temp\bin\Debug\Newtonsoft.Json.dll

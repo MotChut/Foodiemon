@@ -245,6 +245,7 @@ public partial class Chicpea : Entity
             }
             break;
 
+            case Task.CollectMaterial:
             case Task.CollectFood:
             case Task.CollectMaterialHome:
             case Task.RetrieveResource:
@@ -275,7 +276,7 @@ public partial class Chicpea : Entity
                 int amount = 0;
                 Task task = Task.Idle;
                 if(currentTask == Task.CollectFood) task = Task.RetrieveResource;
-                else if(currentTask == Task.CollectMaterialHome) task = Task.RetrieveResourceHome;
+                else if(new List<Task>(){Task.CollectMaterialHome, Task.CollectMaterial}.Contains(currentTask)) task = Task.RetrieveResourceHome;
 
                 if(mapSource.GetCurrentResources() == 0)
                 {
@@ -297,7 +298,8 @@ public partial class Chicpea : Entity
 
                 SetCurrentTask(Task.Idle);  
 				mapSource.CollectResource(amount);
-                LookAt(mapSource.GlobalPosition);
+                if(!GlobalTransform.Origin.IsEqualApprox(new Vector3(mapSource.GlobalPosition.X, GlobalPosition.Y, mapSource.GlobalPosition.Z)))
+                    LookAt(mapSource.GlobalPosition);
                 await ToSignal(GetTree().CreateTimer(FOOD_COLLECT_TIME), "timeout");
                 broughtType = mapSource.resourceType;
                 broughtAmount = amount;

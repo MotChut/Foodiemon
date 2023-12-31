@@ -6,6 +6,7 @@ public partial class MapSource : Object
 {
 	[Export] float TotalRegrowTime;
 	[Export] public bool isFoodSource;
+	[Export] public bool canDisappear;
 	[Export] public MaterialType resourceType;
 	[Export] int minResources;
 	[Export] int maxResources;
@@ -61,6 +62,8 @@ public partial class MapSource : Object
 	public void CollectResource(int value)
 	{
 		currentResources -= value;
+		if(currentResources <= 0 && canDisappear) Visible = false;
+		else if(currentResources > 0) Visible = true;
 		if(regrowTimer.IsStopped()) regrowTimer.Start();
 	}
 

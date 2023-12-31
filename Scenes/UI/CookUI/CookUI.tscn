@@ -1,14 +1,13 @@
-[gd_scene load_steps=28 format=3 uid="uid://drvotatijjc56"]
+[gd_scene load_steps=26 format=3 uid="uid://drvotatijjc56"]
 
 [ext_resource type="Script" path="res://Scenes/UI/CookUI/CookUI.cs" id="1_rv6yb"]
-[ext_resource type="PackedScene" uid="uid://2223d1dfhmfj" path="res://Scenes/UI/CookUI/IngredientButton.tscn" id="2_jmx26"]
 [ext_resource type="Texture2D" uid="uid://d3vg64p6rs3b3" path="res://Assets/UI/Cook left.png" id="2_wjx1v"]
-[ext_resource type="Texture2D" uid="uid://65hhpumcmtvu" path="res://Assets/Fruits and Vegetables/Apple Green.png" id="3_dctdk"]
 [ext_resource type="Texture2D" uid="uid://xtolnu1jcsxy" path="res://Assets/UI/Ếch/Ếch1.png" id="3_r6dcq"]
 [ext_resource type="Texture2D" uid="uid://dy2w8ave2inbx" path="res://Assets/UI/Ếch/Ếch2.png" id="4_0cu0t"]
-[ext_resource type="Texture2D" uid="uid://cx5xogols2jtg" path="res://Assets/Fruits and Vegetables/Apple Red.png" id="4_tqes5"]
 [ext_resource type="Texture2D" uid="uid://csmv6nvjfw518" path="res://Assets/UI/Cook right.png" id="5_kikii"]
 [ext_resource type="Texture2D" uid="uid://dtrkl8k3yohbm" path="res://Assets/UI/Cook button.png" id="8_uqarj"]
+[ext_resource type="Texture2D" uid="uid://dphl31bbc0xfv" path="res://Assets/UI/Cook button_pressed.png" id="10_ia1gq"]
+[ext_resource type="Texture2D" uid="uid://de3gv2xdwqhbe" path="res://Assets/UI/Cook button_hover.png" id="11_jmqo7"]
 
 [sub_resource type="Animation" id="Animation_qix83"]
 resource_name = "Cook"
@@ -153,8 +152,6 @@ font = SubResource("SystemFont_2sgsf")
 font_color = Color(0.439216, 0.403922, 0.780392, 1)
 shadow_size = 0
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqcnf"]
-
 [node name="CookUI" type="CanvasLayer"]
 script = ExtResource("1_rv6yb")
 
@@ -257,10 +254,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_hvwfm")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient1"]
 texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -278,10 +282,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient2"]
 texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -299,10 +310,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient3"]
 texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -320,10 +338,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient4"]
 texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -341,10 +366,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient5"]
 texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -390,135 +422,30 @@ theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="GridContainer" type="GridContainer" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer"]
+[node name="Ingredients" type="GridContainer" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 6
 
-[node name="Control" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer"]
+[node name="Control" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer"]
+[node name="Control2" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
 
-[node name="Control3" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer"]
+[node name="Control3" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
 
-[node name="Control4" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer"]
+[node name="Control4" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
 
-[node name="Control5" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer"]
+[node name="Control5" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
 
-[node name="Control6" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer"]
+[node name="Control6" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
-
-[node name="IngredientButton" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="IngredientButton2" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton2" index="0"]
-texture = ExtResource("3_dctdk")
-
-[node name="IngredientButton3" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton3" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton4" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton4" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton5" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton5" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton6" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton6" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton7" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton7" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton8" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton8" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton9" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton9" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton10" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton10" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton11" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton11" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton12" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton12" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton13" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton13" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton14" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton14" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton15" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton15" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton16" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton16" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton17" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton17" index="0"]
-texture = ExtResource("4_tqes5")
-
-[node name="IngredientButton18" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("2_jmx26")]
-layout_mode = 2
-
-[node name="Texture" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton18" index="0"]
-texture = ExtResource("4_tqes5")
 
 [node name="MarginContainer2" type="MarginContainer" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox"]
 layout_mode = 2
@@ -533,7 +460,7 @@ theme_override_constants/margin_bottom = 48
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.3
-text = "This is an egg from Chicpeas. It is delicious, everyone should try!"
+text = "This is some description."
 label_settings = SubResource("LabelSettings_njn1p")
 autowrap_mode = 3
 
@@ -542,43 +469,22 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="TextureRect" type="TextureRect" parent="Container/VBox/Footer"]
-clip_contents = true
-custom_minimum_size = Vector2(216.5, 97)
-layout_mode = 0
-offset_left = 464.0
-offset_top = 34.0
-offset_right = 504.0
-offset_bottom = 74.0
-texture = ExtResource("8_uqarj")
-expand_mode = 1
-
-[node name="CookBtn" type="Button" parent="Container/VBox/Footer/TextureRect"]
-clip_contents = true
-custom_minimum_size = Vector2(224, 64)
+[node name="TextureButton" type="TextureButton" parent="Container/VBox/Footer"]
+custom_minimum_size = Vector2(162.375, 72.75)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.00199, 1)
-theme_override_styles/normal = SubResource("StyleBoxEmpty_bqcnf")
-
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton2"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton3"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton4"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton5"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton6"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton7"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton8"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton9"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton10"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton11"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton12"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton13"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton14"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton15"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton16"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton17"]
-[editable path="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/GridContainer/IngredientButton18"]
+texture_normal = ExtResource("8_uqarj")
+texture_pressed = ExtResource("10_ia1gq")
+texture_hover = ExtResource("11_jmqo7")
+ignore_texture_size = true
+stretch_mode = 0

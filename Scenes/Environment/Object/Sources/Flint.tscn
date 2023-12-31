@@ -60,9 +60,11 @@ viewport_path = NodePath("InteractiveNotice/SubViewport")
 
 [node name="Flint" instance=ExtResource("1_ggfx6")]
 TotalRegrowTime = 180.0
+canDisappear = true
 resourceType = 2
 minResources = 1
 maxResources = 1
+objectSize = Vector3(1, 1, 1)
 
 [node name="Sprite" type="Node3D" parent="." index="0"]
 
