@@ -14,7 +14,7 @@
   {
     "id": 1,
     "terraintype": "Trees",
-    "objectrate": 10,
+    "objectrate": 5,
     "movablegrass": 10,
     "tree": 10,
     "berrybush": 1,

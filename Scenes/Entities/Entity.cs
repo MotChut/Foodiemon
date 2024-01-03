@@ -323,9 +323,12 @@ public partial class Entity : CharacterBody3D
 		}
 	}
 
-	public void Die()
+	public async void Die()
 	{
-		
+		GetNode<Node3D>("Sprite").Visible = false;
+		GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", true);
+		GetNode<GpuParticles3D>("HurtParticle").Emitting = true;
+		await ToSignal(GetTree().CreateTimer(GetNode<GpuParticles3D>("HurtParticle").Lifetime), "timeout");
 		pack.entities.Remove(this);
 		QueueFree();
 	}
@@ -343,6 +346,8 @@ public partial class Entity : CharacterBody3D
 	{
 		if(invincibleTimer.IsStopped())
 		{
+			GetNode<AnimationPlayer>("AnimationPlayer").Play("Hurt");
+
 			hp -= dmg;
 			if(hp <= 0)
 			{ 

@@ -72,6 +72,14 @@ public partial class Player : CharacterBody3D
 				GetTree().ChangeSceneToFile(LoadingScene_Path);
 				return;
 			}
+			else if(canCook)
+			{
+				canCook = false;
+				CookUI cookUI = (CookUI)((PackedScene)ResourceLoader.Load(CookScene_Path)).Instantiate();
+				GetParent().AddChild(cookUI);
+				GetTree().Paused = true;
+				canCook = true;
+			}
 		}
 
 		#endregion
@@ -90,7 +98,7 @@ public partial class Player : CharacterBody3D
 			Vector3 velocity = Velocity;
 			Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
 			Vector3 direction = (Transform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Rotated(Vector3.Up, GetParent().GetNode<Node3D>("Camera").Rotation.Y).Normalized();
-		
+
 			if(direction != Vector3.Zero)
 			{
 				if (direction != lastDirection) lastDirection = direction;
@@ -126,6 +134,7 @@ public partial class Player : CharacterBody3D
 			MoveAndSlide();
 		}
 
+		
 		RotateToDirection((float)delta);
 		
 		#endregion

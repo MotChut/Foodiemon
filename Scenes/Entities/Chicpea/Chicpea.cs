@@ -300,7 +300,7 @@ public partial class Chicpea : Entity
 				mapSource.CollectResource(amount);
                 if(!GlobalTransform.Origin.IsEqualApprox(new Vector3(mapSource.GlobalPosition.X, GlobalPosition.Y, mapSource.GlobalPosition.Z)))
                     LookAt(mapSource.GlobalPosition);
-                await ToSignal(GetTree().CreateTimer(FOOD_COLLECT_TIME), "timeout");
+                await ToSignal(GetTree().CreateTimer(mapSource.collectTime), "timeout");
                 broughtType = mapSource.resourceType;
                 broughtAmount = amount;
                 CarryMaterial();

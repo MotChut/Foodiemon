@@ -153,7 +153,16 @@ font_color = Color(0.439216, 0.403922, 0.780392, 1)
 shadow_size = 0
 
 [node name="CookUI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_rv6yb")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
 
 [node name="Container" type="MarginContainer" parent="."]
 offset_right = 1280.0
@@ -226,7 +235,7 @@ texture = ExtResource("3_r6dcq")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/Pot"]
-autoplay = "Cook"
+process_mode = 3
 libraries = {
 "": SubResource("AnimationLibrary_mmtm4")
 }
@@ -261,10 +270,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
@@ -469,7 +478,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="TextureButton" type="TextureButton" parent="Container/VBox/Footer"]
+[node name="CookBtn" type="TextureButton" parent="Container/VBox/Footer"]
 custom_minimum_size = Vector2(162.375, 72.75)
 layout_mode = 1
 anchors_preset = 8

@@ -64,6 +64,7 @@ canDisappear = true
 resourceType = 2
 minResources = 1
 maxResources = 1
+collectTime = 2.0
 objectSize = Vector3(1, 1, 1)
 
 [node name="Sprite" type="Node3D" parent="." index="0"]

@@ -22,6 +22,8 @@ public partial class Pack : Node
 	public Entity exploreLeader;
 	public Vector3 wanderDir = Vector3.Zero;
 	public int foods = 0;
+	public int weapons = 0;
+	public CraftType craftType = CraftType.BasicAxe;
 	public Dictionary<MaterialType?, int> materials = new Dictionary<MaterialType?, int>();
     
     public Pack()
@@ -90,7 +92,7 @@ public partial class Pack : Node
 	}
 
 	public Vector3 ChooseMaterialTarget()
-	{
+	{ 
 		List<MapSource> availableSources = new List<MapSource>();
 		materialSources.OrderBy(i => i.Value).ToList();
 		foreach(MapSource material in materialSources.Keys.ToList())
@@ -101,7 +103,8 @@ public partial class Pack : Node
 			}
 		}
 		if(availableSources.Count == 0) return new Vector3(0, -100, 0);
-		return availableSources.First().GlobalPosition;
+        Random rnd = new Random();
+		return availableSources.GetRange(0, 5)[rnd.Next(5)].GlobalPosition;
 	}
 
 	public Vector3 ChooseNaturalTarget()
@@ -139,5 +142,36 @@ public partial class Pack : Node
 				foods -= entity.statsSettings.nConsume;
 			}
         }
+	}
+
+	public void Craft()
+	{
+		Crafts crafts = CraftsList.Find(x => x.craft == craftType.ToString());
+		Dictionary<string, int> recipe = new Dictionary<string, int>();
+		
+		if (crafts.material1 != "") recipe.Add(crafts.material1, crafts.amount1);
+		if (crafts.material2 != "") recipe.Add(crafts.material2, crafts.amount2);
+		if (crafts.material3 != "") recipe.Add(crafts.material3, crafts.amount3);
+		if (crafts.material4 != "") recipe.Add(crafts.material4, crafts.amount4);
+		if (crafts.material5 != "") recipe.Add(crafts.material5, crafts.amount5);
+
+		while(true)
+		{
+			bool flag = true;
+			foreach(string material in recipe.Keys)
+			{
+				if(materials[(MaterialType)Enum.Parse(typeof(MaterialType), material)] < recipe[material])
+				{
+					flag = false;
+					break;
+				}
+			}
+			if(!flag) break;
+			foreach(string material in recipe.Keys)
+			{
+				materials[(MaterialType)Enum.Parse(typeof(MaterialType), material)] -= recipe[material];
+			}
+			weapons++;
+		} 
 	}
 }

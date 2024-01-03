@@ -1,0 +1,12 @@
+[
+    {
+      "id": 0,
+      "craft": "BasicAxe",
+      "material1": "Flint",
+      "amount1": 1,
+      "material2": "CutGrass",
+      "amount2": 1,
+      "material3": "Twig",
+      "amount3": 1
+    }
+  ]

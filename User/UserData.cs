@@ -4,7 +4,7 @@ using static Resources;
 
 public partial class UserData : Node
 {
-    private UserData(){}
+    private UserData(){GenerateUserData();}
     private static UserData _instance;
     public static UserData GetInstance()
     {
