@@ -18,7 +18,7 @@ public partial class EntitySettings : Node
 	{
 		houseScene = (PackedScene)ResourceLoader.Load(house);
 		foodSourceScene = (PackedScene)ResourceLoader.Load(foodSource);
-		leaderScene = (PackedScene)ResourceLoader.Load(leader);
+		if(leader != "") leaderScene = (PackedScene)ResourceLoader.Load(leader);
 		entityScene = (PackedScene)ResourceLoader.Load(entity);
 	}
 }

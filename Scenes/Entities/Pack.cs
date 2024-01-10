@@ -22,6 +22,8 @@ public partial class Pack : Node
 	public Entity exploreLeader;
 	public Vector3 wanderDir = Vector3.Zero;
 	public int foods = 0;
+	public int weapons = 0;
+	public CraftType craftType = CraftType.BasicAxe;
 	public Dictionary<MaterialType?, int> materials = new Dictionary<MaterialType?, int>();
     
     public Pack()
@@ -90,7 +92,7 @@ public partial class Pack : Node
 	}
 
 	public Vector3 ChooseMaterialTarget()
-	{
+	{ 
 		List<MapSource> availableSources = new List<MapSource>();
 		materialSources.OrderBy(i => i.Value).ToList();
 		foreach(MapSource material in materialSources.Keys.ToList())
@@ -101,7 +103,9 @@ public partial class Pack : Node
 			}
 		}
 		if(availableSources.Count == 0) return new Vector3(0, -100, 0);
-		return availableSources.First().GlobalPosition;
+        Random rnd = new Random();
+		int upper = availableSources.Count >= 5 ? 5 : availableSources.Count;
+		return availableSources.GetRange(0, upper)[rnd.Next(upper)].GlobalPosition;
 	}
 
 	public Vector3 ChooseNaturalTarget()
@@ -139,5 +143,10 @@ public partial class Pack : Node
 				foods -= entity.statsSettings.nConsume;
 			}
         }
+	}
+
+	public virtual void Craft()
+	{
+		
 	}
 }

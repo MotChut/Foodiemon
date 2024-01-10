@@ -7,14 +7,14 @@
     "tree": 1,
     "berrybush": 1,
     "rock1": 1,
-    "grassbush": 1,
+    "grassbush": 2,
     "flint": 3,
     "grasssource": 1
   },
   {
     "id": 1,
     "terraintype": "Trees",
-    "objectrate": 10,
+    "objectrate": 5,
     "movablegrass": 10,
     "tree": 10,
     "berrybush": 1,
@@ -43,8 +43,20 @@
     "tree": 2,
     "berrybush": 0,
     "rock1": 1,
-    "grassbush": 0,
+    "grassbush": 1,
     "flint": 2,
     "grasssource": 4
+  },
+  {
+    "id": 4,
+    "terraintype": "RawrberryBase",
+    "objectrate": 5,
+    "movablegrass": 5,
+    "tree": 1,
+    "berrybush": 0,
+    "rock1": 1,
+    "grassbush": 1,
+    "flint": 2,
+    "grasssource": 5
   }
 ]

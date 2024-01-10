@@ -10,5 +10,16 @@
     "entity": "res://Scenes/Entities/Chicpea/Chicpea.tscn",
     "minentities": 7,
     "maxentities": 11
+  },
+  {
+    "id": 1,
+    "terraintype": "RawrberryBase",
+    "house": "res://Scenes/Entities/RawrBerry/RawrberryHouse.tscn",
+    "foodsource": "res://Scenes/Environment/Object/Sources/BerryBush.tscn",
+    "minfoodsource": 1,
+    "maxfoodsource": 3,
+    "entity": "res://Scenes/Entities/RawrBerry/RawBerry.tscn",
+    "minentities": 1,
+    "maxentities": 1
   }
 ]

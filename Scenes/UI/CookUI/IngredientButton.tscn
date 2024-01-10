@@ -29,6 +29,7 @@ outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
 [node name="IngredientButton" type="Button"]
+visibility_layer = 524288
 clip_contents = true
 custom_minimum_size = Vector2(64, 64)
 offset_right = 48.0

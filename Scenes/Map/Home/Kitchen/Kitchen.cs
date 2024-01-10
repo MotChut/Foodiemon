@@ -15,7 +15,7 @@ public partial class Kitchen : Node3D
 		interactiveArea.Connect("body_exited", new Callable(this, "PlayerExit"));
 	}
 
-	void PlayerEnter(Node3D body)
+    void PlayerEnter(Node3D body)
 	{
 		Player player = (Player)body;
 		player.canCook = true;

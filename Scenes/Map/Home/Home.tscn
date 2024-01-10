@@ -189,11 +189,9 @@ transform = Transform3D(0.708303, 0, -0.705909, 0, 1, 0, 0.705909, 0, 0.708303, 
 [node name="Portal" parent="Mechanics" instance=ExtResource("7_0byep")]
 transform = Transform3D(0.644604, 0, 0.764517, 0, 1, 0, -0.764517, 0, 0.644604, 2.75439, 0.5, 2.62305)
 
-[node name="Player" parent="." instance=ExtResource("3_dnjr0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-maxSpd = 10.0
-
 [node name="Camera" parent="." instance=ExtResource("4_bcbme")]
-SPEED = 3.0
 
 [node name="DayNightCycle" parent="." instance=ExtResource("10_7j0st")]
+
+[node name="Player" parent="." instance=ExtResource("3_dnjr0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

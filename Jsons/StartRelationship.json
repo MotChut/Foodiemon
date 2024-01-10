@@ -1,0 +1,16 @@
+[
+    {
+      "id": 1,
+      "entity": "Chicpea",
+      "player": "Ignore",
+      "chicpea": "Ignore",
+      "rawrberry": "StayOutOfWay"
+    },
+    {
+      "id": 2,
+      "entity": "Rawrberry",
+      "player": "Eat",
+      "chicpea": "Eat",
+      "rawrberry": "Ignore"
+    }
+  ]

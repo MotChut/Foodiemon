@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bstuusaw7bfll"]
 
 [ext_resource type="PackedScene" uid="uid://d1dim43q6tf4p" path="res://Scenes/Environment/Material/Material.tscn" id="1_v0hb2"]
-[ext_resource type="Texture2D" uid="uid://bu6dg5afrxia6" path="res://Assets/Fruits and Vegetables/Blueberries.png" id="2_1d8tl"]
+[ext_resource type="Texture2D" uid="uid://dsm0purohvjfb" path="res://Assets/FoodIngredients/Berry.png" id="2_4r852"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_is4wl"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -13,4 +13,4 @@ isFood = true
 texture = SubResource("ViewportTexture_is4wl")
 
 [node name="Sprite2D" parent="Sprite3D/SubViewport" index="0"]
-texture = ExtResource("2_1d8tl")
+texture = ExtResource("2_4r852")

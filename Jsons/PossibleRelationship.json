@@ -1,0 +1,16 @@
+[
+    {
+      "id": 1,
+      "entity": "Chicpea",
+      "player": "Ignore;Afraid;StayOutOfWay;Attack",
+      "chicpea": "Ignore;Attack",
+      "rawrberry": "StayOutOfWay;Attack"
+    },
+    {
+      "id": 2,
+      "entity": "Rawrberry",
+      "player": "Eat;Attack",
+      "chicpea": "Eat;Attack",
+      "rawrberry": "Ignore"
+    }
+  ]

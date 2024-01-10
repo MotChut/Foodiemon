@@ -35,4 +35,9 @@ public partial class SteeringBehavior : Node
 
         return direction;
     }
+
+    public Vector3 Runaway()
+    {
+        return -entity.GlobalPosition.DirectionTo(entity.danger.GlobalPosition);
+    }
 }

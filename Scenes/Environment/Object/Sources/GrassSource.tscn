@@ -53,6 +53,7 @@ TotalRegrowTime = 180.0
 resourceType = 3
 minResources = 4
 maxResources = 8
+collectTime = 8.0
 objectSize = Vector3(2, 2, 2)
 
 [node name="Sprite" type="Node3D" parent="." index="0"]

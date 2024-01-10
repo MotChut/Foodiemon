@@ -1,13 +1,17 @@
-[gd_scene load_steps=15 format=3 uid="uid://5vufvv6y3jln"]
+[gd_scene load_steps=16 format=3 uid="uid://8p22m380a34f"]
 
-[ext_resource type="Script" path="res://Scenes/Environment/Object/EntityBase.cs" id="1_wxqjq"]
-[ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="2_uht8r"]
-[ext_resource type="Texture2D" uid="uid://csacxywnx5dxl" path="res://Assets/Environment/chicpea home_Untitled.png" id="2_yuv0x"]
-[ext_resource type="Texture2D" uid="uid://30nxbloamhse" path="res://Assets/Environment/chicpea home_Untitled_1.png" id="3_fgta8"]
+[ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="1_cdugh"]
+[ext_resource type="Script" path="res://Scenes/Environment/Object/EntityBase.cs" id="1_rhuir"]
+[ext_resource type="Texture2D" uid="uid://csacxywnx5dxl" path="res://Assets/Environment/chicpea home_Untitled.png" id="2_pubhp"]
+[ext_resource type="Texture2D" uid="uid://30nxbloamhse" path="res://Assets/Environment/chicpea home_Untitled_1.png" id="3_enjxv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qific"]
+transparency = 1
+albedo_color = Color(0.686275, 0.0941176, 0.266667, 0.560784)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_16m27"]
 render_priority = 0
-shader = ExtResource("2_uht8r")
+shader = ExtResource("1_cdugh")
 shader_parameter/albedo = Color(0.780392, 0.666667, 0.32549, 1)
 shader_parameter/clamp_diffuse_to_max = false
 shader_parameter/cuts = 3
@@ -26,7 +30,7 @@ shader_parameter/border_width = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_00w2i"]
 render_priority = 0
-shader = ExtResource("2_uht8r")
+shader = ExtResource("1_cdugh")
 shader_parameter/albedo = Color(0.470588, 0.643137, 0.356863, 1)
 shader_parameter/clamp_diffuse_to_max = false
 shader_parameter/cuts = 3
@@ -45,7 +49,7 @@ shader_parameter/border_width = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t756d"]
 render_priority = 0
-shader = ExtResource("2_uht8r")
+shader = ExtResource("1_cdugh")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/clamp_diffuse_to_max = false
 shader_parameter/cuts = 3
@@ -61,11 +65,11 @@ shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
-shader_parameter/albedo_texture = ExtResource("2_yuv0x")
+shader_parameter/albedo_texture = ExtResource("2_pubhp")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_snckx"]
 render_priority = 0
-shader = ExtResource("2_uht8r")
+shader = ExtResource("1_cdugh")
 shader_parameter/albedo = Color(1, 1, 1, 1)
 shader_parameter/clamp_diffuse_to_max = false
 shader_parameter/cuts = 3
@@ -81,7 +85,7 @@ shader_parameter/rim_color = Color(1, 1, 1, 1)
 shader_parameter/use_ramp = false
 shader_parameter/use_borders = false
 shader_parameter/border_width = 0.01
-shader_parameter/albedo_texture = ExtResource("3_fgta8")
+shader_parameter/albedo_texture = ExtResource("3_enjxv")
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_du21i"]
 _surfaces = [{
@@ -127,7 +131,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_sqwrn"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_wu4et"]
 resource_name = "chicpea home_Sphere_001"
 _surfaces = [{
 "aabb": AABB(-0.859506, -0.914764, -0.836892, 1.71901, 1.58136, 1.76298),
@@ -181,20 +185,20 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_du21i")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_cg8e5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_uavas"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_uq8cy"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ccok8"]
 size = Vector3(2, 2, 2)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5ewfd"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_1llbr"]
 viewport_path = NodePath("InteractiveNotice/SubViewport")
 
-[sub_resource type="LabelSettings" id="LabelSettings_8opa2"]
+[sub_resource type="LabelSettings" id="LabelSettings_ysqfb"]
 font_size = 48
 
-[node name="ChicpeaHouse" type="Node3D"]
-script = ExtResource("1_wxqjq")
+[node name="RawrberryHouse" type="Node3D"]
+script = ExtResource("1_rhuir")
 objectSize = Vector3(4, 4, 4)
 extend = 2
 isBlock = true
@@ -204,7 +208,8 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Sphere" type="MeshInstance3D" parent="Sprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.896941, 0)
-mesh = SubResource("ArrayMesh_sqwrn")
+material_overlay = SubResource("StandardMaterial3D_qific")
+mesh = SubResource("ArrayMesh_wu4et")
 skeleton = NodePath("")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sprite"]
@@ -213,7 +218,7 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite/StaticBody3D"]
-shape = SubResource("BoxShape3D_cg8e5")
+shape = SubResource("BoxShape3D_uavas")
 
 [node name="SelfArea" type="Area3D" parent="Sprite"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -221,12 +226,12 @@ collision_layer = 8
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite/SelfArea"]
-shape = SubResource("BoxShape3D_uq8cy")
+shape = SubResource("BoxShape3D_ccok8")
 
 [node name="InteractiveNotice" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 billboard = 1
-texture = SubResource("ViewportTexture_5ewfd")
+texture = SubResource("ViewportTexture_1llbr")
 
 [node name="SubViewport" type="SubViewport" parent="InteractiveNotice"]
 transparent_bg = true
@@ -245,5 +250,5 @@ offset_bottom = -229.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "E"
-label_settings = SubResource("LabelSettings_8opa2")
+label_settings = SubResource("LabelSettings_ysqfb")
 horizontal_alignment = 1

@@ -1,14 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://cadar5emaw6s6"]
+[gd_scene load_steps=30 format=3 uid="uid://cadar5emaw6s6"]
 
 [ext_resource type="Script" path="res://Scenes/Entities/Player/Player.cs" id="1_3f0jv"]
 [ext_resource type="Texture2D" uid="uid://cj18va36opovd" path="res://Assets/2D/Smear 01 Horizontal 1.png" id="2_6lkki"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0rkny"]
-transparency = 1
-blend_mode = 1
-no_depth_test = true
-albedo_color = Color(1, 1, 1, 0)
-rim = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l3c8b"]
 resource_name = "Material.001"
@@ -108,53 +101,6 @@ bind/21/pose = Transform3D(-5.20572, 0.317908, 0, 0, 0, 5.21542, 0.317908, 5.205
 bind/22/name = &"Target.L"
 bind/22/bone = -1
 bind/22/pose = Transform3D(-5.1981, 0.424679, 0, 0, 0, 5.21542, 0.424679, 5.1981, 0, -0.707331, -0.242408, -0.680697)
-
-[sub_resource type="Animation" id="Animation_prnn5"]
-resource_name = "Attack"
-
-[sub_resource type="Animation" id="Animation_2a3xd"]
-resource_name = "Dodge"
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ynsq5"]
-transparency = 1
-blend_mode = 1
-no_depth_test = true
-rim_enabled = true
-rim = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gew4r"]
-transparency = 1
-blend_mode = 3
-no_depth_test = true
-albedo_color = Color(0, 0, 0, 1)
-rim_enabled = true
-rim = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvl27"]
-transparency = 1
-blend_mode = 3
-no_depth_test = true
-albedo_color = Color(0.627451, 0, 0, 1)
-emission_energy_multiplier = 13.26
-rim_enabled = true
-rim = 0.5
-
-[sub_resource type="Animation" id="Animation_eqrb4"]
-resource_name = "Hurt"
-length = 0.2
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Armature/Skeleton3D/Cube:material_overlay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.0001, 0.1, 0.15, 0.2, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_ynsq5"), SubResource("StandardMaterial3D_gew4r"), SubResource("StandardMaterial3D_rvl27"), SubResource("StandardMaterial3D_0rkny"), SubResource("StandardMaterial3D_rvl27"), SubResource("StandardMaterial3D_gew4r")]
-}
 
 [sub_resource type="Animation" id="Animation_gqeol"]
 resource_name = "Idle"
@@ -321,9 +267,6 @@ tracks/10/keys = PackedFloat32Array(0, 1, -0.69378, -0.969077, -0.193418, 0.0333
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oq2i6"]
 _data = {
-"Attack": SubResource("Animation_prnn5"),
-"Dodge": SubResource("Animation_2a3xd"),
-"Hurt": SubResource("Animation_eqrb4"),
 "Idle": SubResource("Animation_gqeol"),
 "Walk": SubResource("Animation_3pypg")
 }
@@ -332,16 +275,27 @@ _data = {
 radius = 0.4
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6hqfn"]
-points = PackedVector3Array(0, 0, 0, 2, 0, -3, -2, 0, -3, 0, 0, -3)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0j8kp"]
-animation = &"Hurt"
+points = PackedVector3Array(0, 0, 0, 2, 0, -1, -2, 0, -1, 0, 0, -2)
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4fp6b"]
 animation = &"Walk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_17xg3"]
 animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_grtyd"]
+animation = &"Dodge"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0j8kp"]
+animation = &"Hurt"
+
+[sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_voxl6"]
+input_0/name = "dodge"
+input_0/auto_advance = false
+input_0/reset = true
+input_1/name = "hurt"
+input_1/auto_advance = false
+input_1/reset = true
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_lpv4y"]
 input_0/name = "idle"
@@ -355,19 +309,23 @@ input_1/reset = true
 mix_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_um1fc"]
-graph_offset = Vector2(-512.76, -124.107)
+graph_offset = Vector2(-655.827, -31.8906)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_17xg3")
 nodes/Animation/position = Vector2(-420, -40)
-"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_0j8kp")
-"nodes/Animation 2/position" = Vector2(-180, 200)
 "nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_4fp6b")
 "nodes/Animation 3/position" = Vector2(-420, 80)
+nodes/Dodge/node = SubResource("AnimationNodeAnimation_grtyd")
+nodes/Dodge/position = Vector2(-420, 200)
+nodes/Hurt/node = SubResource("AnimationNodeAnimation_0j8kp")
+nodes/Hurt/position = Vector2(-420, 320)
+nodes/HurtDodge/node = SubResource("AnimationNodeTransition_voxl6")
+nodes/HurtDodge/position = Vector2(-140, 180)
 nodes/Movement/node = SubResource("AnimationNodeTransition_lpv4y")
-nodes/Movement/position = Vector2(-180, -40)
+nodes/Movement/position = Vector2(-180, -20)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_h5pvd")
 nodes/OneShot/position = Vector2(40, 40)
 nodes/output/position = Vector2(340, 100)
-node_connections = [&"output", 0, &"OneShot", &"Movement", 0, &"Animation", &"Movement", 1, &"Animation 3", &"OneShot", 0, &"Movement", &"OneShot", 1, &"Animation 2"]
+node_connections = [&"output", 0, &"OneShot", &"HurtDodge", 0, &"Dodge", &"HurtDodge", 1, &"Hurt", &"Movement", 0, &"Animation", &"Movement", 1, &"Animation 3", &"OneShot", 0, &"Movement", &"OneShot", 1, &"HurtDodge"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_ymrj1"]
 viewport_path = NodePath("Effects/AttackEffect/SubViewport")
@@ -478,7 +436,7 @@ _data = {
 
 [node name="Player" type="CharacterBody3D"]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 37
 script = ExtResource("1_3f0jv")
 
 [node name="Sprite" type="Node3D" parent="."]
@@ -498,7 +456,7 @@ bones/1/name = "Spine.01"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, -1.50996e-07, 0, 0, 0, 1, -1.50996e-07, -1, 0, -2.28479e-07, -0.143732, -1.51315)
 bones/1/enabled = true
-bones/1/position = Vector3(-2.27584e-07, -0.143732, -1.50722)
+bones/1/position = Vector3(-2.28083e-07, -0.143732, -1.51053)
 bones/1/rotation = Quaternion(-0.707107, 5.33851e-08, 5.33851e-08, 0.707107)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "Spine.02"
@@ -520,7 +478,7 @@ bones/4/parent = 3
 bones/4/rest = Transform3D(1, 0, 0, 0, 1, 8.47033e-22, 0, -8.47033e-22, 1, 0, 0.343897, -1.49012e-08)
 bones/4/enabled = true
 bones/4/position = Vector3(0, 0.343897, -1.49012e-08)
-bones/4/rotation = Quaternion(-0.0202918, -6.39207e-27, -6.07844e-19, 0.999794)
+bones/4/rotation = Quaternion(-0.0216885, -1.93916e-26, 5.06156e-18, 0.999765)
 bones/4/scale = Vector3(1, 1, 1)
 bones/5/name = "Hair"
 bones/5/parent = 4
@@ -541,7 +499,7 @@ bones/7/parent = 6
 bones/7/rest = Transform3D(1, 1.21465e-08, 3.09267e-10, -1.2146e-08, 0.998616, 0.0525817, 3.29844e-10, -0.0525817, 0.998616, -5.60789e-10, 0.452113, -1.76834e-07)
 bones/7/enabled = true
 bones/7/position = Vector3(-5.60789e-10, 0.452113, -1.76834e-07)
-bones/7/rotation = Quaternion(0.0317843, -1.19143e-07, 3.98415e-09, 0.999495)
+bones/7/rotation = Quaternion(0.00531925, -1.19207e-07, 8.29364e-10, 0.999986)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "Bone.003"
 bones/8/parent = 7
@@ -562,7 +520,7 @@ bones/10/parent = 9
 bones/10/rest = Transform3D(1, -2.84416e-09, 1.23168e-11, 2.84419e-09, 0.999984, -0.00567688, 3.82938e-12, 0.00567688, 0.999984, -6.70699e-11, 0.385743, -4.90619e-08)
 bones/10/enabled = true
 bones/10/position = Vector3(-6.70699e-11, 0.385743, -4.90619e-08)
-bones/10/rotation = Quaternion(0.109058, 8.1289e-11, 2.67423e-08, 0.994035)
+bones/10/rotation = Quaternion(0.060338, 4.49889e-11, 1.51297e-08, 0.998178)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "Bone.006"
 bones/11/parent = 10
@@ -583,7 +541,7 @@ bones/13/parent = 12
 bones/13/rest = Transform3D(1, -2.99056e-08, 1.88223e-09, 2.99007e-08, 0.991787, -0.127901, 1.95818e-09, 0.127901, 0.991787, -4.6667e-10, 0.271627, -2.65129e-07)
 bones/13/enabled = true
 bones/13/position = Vector3(-4.6667e-10, 0.271627, -2.65129e-07)
-bones/13/rotation = Quaternion(0.10634, -1.18565e-07, 1.23817e-08, 0.99433)
+bones/13/rotation = Quaternion(0.0873899, -1.18779e-07, 1.01222e-08, 0.996174)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/name = "Bone.009"
 bones/14/parent = 13
@@ -597,28 +555,28 @@ bones/15/parent = 1
 bones/15/rest = Transform3D(-0.997092, 0.0743878, -0.0165645, -0.0762067, -0.975151, 0.208023, -0.000678508, 0.20868, 0.977987, 0.547289, 0.0323735, -0.0513334)
 bones/15/enabled = true
 bones/15/position = Vector3(0.547289, 0.0323735, -0.0513334)
-bones/15/rotation = Quaternion(0.00578574, 0.115272, 0.992548, -0.0390855)
+bones/15/rotation = Quaternion(0.00584737, 0.109903, 0.993167, -0.038822)
 bones/15/scale = Vector3(1, 1, 1)
 bones/16/name = "BottomLeg.R"
 bones/16/parent = 15
 bones/16/rest = Transform3D(0.999958, 0.00909149, 0.00141702, -0.00901365, 0.936943, 0.349366, 0.00184859, -0.349364, 0.936985, 1.59052e-08, 0.753987, 6.23986e-08)
 bones/16/enabled = true
 bones/16/position = Vector3(1.59052e-08, 0.753987, 6.23986e-08)
-bones/16/rotation = Quaternion(-0.197735, -0.000109204, -0.00512363, 0.980242)
+bones/16/rotation = Quaternion(-0.186992, -0.00010944, -0.00484525, 0.982349)
 bones/16/scale = Vector3(1, 1, 1)
 bones/17/name = "UpperLeg.L"
 bones/17/parent = 1
 bones/17/rest = Transform3D(-0.996237, -0.0847918, 0.0179533, 0.0866715, -0.974339, 0.207731, -0.000121263, 0.208506, 0.978019, -0.589518, 0.0323735, -0.0513334)
 bones/17/enabled = true
 bones/17/position = Vector3(-0.589518, 0.0323735, -0.0513334)
-bones/17/rotation = Quaternion(-0.00636118, 0.11506, 0.992318, 0.0449984)
+bones/17/rotation = Quaternion(-0.00641566, 0.10973, 0.992948, 0.044413)
 bones/17/scale = Vector3(1, 1, 0.999998)
 bones/18/name = "BottomLeg.L"
 bones/18/parent = 17
 bones/18/rest = Transform3D(0.999533, -0.0302272, -0.00443257, 0.0298714, 0.936556, 0.349243, -0.00640528, -0.349212, 0.937022, 4.76348e-08, 0.754616, 3.07336e-08)
 bones/18/enabled = true
 bones/18/position = Vector3(4.76348e-08, 0.754616, 3.07336e-08)
-bones/18/rotation = Quaternion(-0.197552, 0.000499225, 0.0169984, 0.980145)
+bones/18/rotation = Quaternion(-0.186871, 0.000500296, 0.0160793, 0.982253)
 bones/18/scale = Vector3(1, 1, 1)
 bones/19/name = "IK_Leg.R"
 bones/19/parent = 0
@@ -650,12 +608,10 @@ bones/22/rotation = Quaternion(0, 0.999169, 0, 0.0407475)
 bones/22/scale = Vector3(1, 1, 1)
 
 [node name="Cube" type="MeshInstance3D" parent="Sprite/Armature/Skeleton3D"]
-material_overlay = SubResource("StandardMaterial3D_0rkny")
 mesh = SubResource("ArrayMesh_ucko6")
 skin = SubResource("Skin_455vk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
-autoplay = "Idle"
 libraries = {
 "": SubResource("AnimationLibrary_oq2i6")
 }
@@ -678,6 +634,9 @@ shape = SubResource("ConvexPolygonShape3D_6hqfn")
 tree_root = SubResource("AnimationNodeBlendTree_um1fc")
 anim_player = NodePath("../Sprite/AnimationPlayer")
 active = true
+parameters/HurtDodge/current_state = "dodge"
+parameters/HurtDodge/transition_request = "hurt"
+parameters/HurtDodge/current_index = 0
 parameters/Movement/current_state = "idle"
 parameters/Movement/transition_request = ""
 parameters/Movement/current_index = 0

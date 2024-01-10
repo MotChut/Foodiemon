@@ -4,7 +4,7 @@ using static Resources;
 
 public partial class UserData : Node
 {
-    private UserData(){}
+    private UserData(){GenerateUserData();}
     private static UserData _instance;
     public static UserData GetInstance()
     {
@@ -30,7 +30,7 @@ public partial class UserData : Node
     {
         foreach(MaterialType? materialType in FoodMaterialType)
         {
-            userIngredients.Add(materialType, 1);
+            userIngredients.Add(materialType, 9);
         }
     }
 }

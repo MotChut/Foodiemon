@@ -10,6 +10,7 @@ public partial class MapSource : Object
 	[Export] public MaterialType resourceType;
 	[Export] int minResources;
 	[Export] int maxResources;
+	[Export] public float collectTime;
 	int resources;
 	int currentResources;
 	bool canInteract = false;

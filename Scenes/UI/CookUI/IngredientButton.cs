@@ -13,7 +13,7 @@ public partial class IngredientButton : Button
 	{
 		textureRect = GetNode<TextureRect>("Texture");
 		amountLabel = GetNode<Label>("Amount");
-		cookUI = (CookUI)GetTree().Root.GetNode<CanvasLayer>("CookUI");
+		cookUI = (CookUI)GetTree().Root.GetNode("Home").GetNode<CanvasLayer>("CookUI");
 		SetAmount(0);
 
 		Connect("pressed", new Callable(this, "Choose"));
@@ -46,13 +46,16 @@ public partial class IngredientButton : Button
 	void Choose()
 	{
 		if(cookUI.GetCurrentIngredients() < cookUI.MAX_INGREDIENTS)
-			cookUI.AssignIngredient(textureRect.Texture);
+		{
+			UpdateAmount(-1);
+			cookUI.AssignIngredient(textureRect.Texture, this);
+		}
 	}
 
 	void MouseEnter()
 	{
 		Scale = new Vector2(1.2f, 1.2f);
-		GetTree().Root.GetNode<CookUI>("CookUI").UpdateIngredientDescription(description);
+		cookUI.UpdateIngredientDescription(description);
 	}
 
 	void MouseLeave()
