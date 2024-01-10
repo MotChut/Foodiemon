@@ -95,6 +95,9 @@ public partial class Terrain : Node3D
 			case TerrainType.ChicpeaBase:
 			pack = new ChicpeaPack();
 			break;
+			case TerrainType.RawrberryBase:
+			pack = new RawrberryPack();
+			break;
 		}
 		
 		PackList.Add(pack);
@@ -145,6 +148,7 @@ public partial class Terrain : Node3D
 		// Spawn Leader
 		while(true)
 		{
+			if(entitySettings.leader == "") break;
 			// Check if position is available
 			int x =  rnd.Next(TILE_SIZE);
 			int z =  rnd.Next(TILE_SIZE);

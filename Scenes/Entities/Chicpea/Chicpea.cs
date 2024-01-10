@@ -6,7 +6,6 @@ using static Resources;
 
 public partial class Chicpea : Entity
 {
-    const float FOOD_COLLECT_TIME = 10;
     public Dictionary<string, List<string>> appearancesList = new Dictionary<string, List<string>>()
     {
         ["comb"] = new List<string>(){ "big", "hooded", "flowing", "flatten"},
@@ -62,7 +61,7 @@ public partial class Chicpea : Entity
         }
         else
         {
-            if(currentTask == Task.FollowExplore) UpdateTargetPos();
+            if(currentTask == Task.FollowExplore) UpdateFollowPos();
             if(currentState != States.Idle)
                 TaskHandler();
         }
@@ -79,7 +78,7 @@ public partial class Chicpea : Entity
     public override async void UpdateCurrentTask()
     {
         if(tasks[(int)CurrentTime] == Task.Continue) return;
-
+        
         if(isBusy) savedTask = tasks[(int)CurrentTime];
         else SetCurrentTask(tasks[(int)CurrentTime]);
 
@@ -128,7 +127,7 @@ public partial class Chicpea : Entity
             }
             else
             {
-                target = null;
+                followo = null;
                 targetPos = pack.structures[0].GlobalPosition;
             }
             break;
@@ -140,11 +139,12 @@ public partial class Chicpea : Entity
             float xOffset = (float)(rnd.NextDouble() * (statsSettings.maxFollowDistance - statsSettings.minFollowDistance) + statsSettings.minFollowDistance);
             float zOffset = (float)(rnd.NextDouble() * (statsSettings.maxFollowDistance - statsSettings.minFollowDistance) + statsSettings.minFollowDistance);
             if(followOffset == Vector3.Zero) followOffset = new Vector3(xOffset, 0, zOffset);
-            target = pack.leader;
+            followo = pack.leader;
             break;
 
         }
 
+        if(!new List<Task>(){Task.Idle, Task.Runaway}.Contains(task)) mainTask = task;
         currentTask = task;
     }
 
@@ -233,6 +233,9 @@ public partial class Chicpea : Entity
     {
         switch(currentTask)
         {
+            case Task.Runaway:
+            Runaway();
+            break;
             case Task.Explore:
             Wander();
             break;
@@ -240,7 +243,7 @@ public partial class Chicpea : Entity
             case Task.FollowExplore: 
             if(!GlobalPosition.IsEqualApprox(targetPos)) 
             {
-                UpdateTargetPos();
+                UpdateFollowPos();
                 Chase();
             }
             break;
@@ -382,7 +385,7 @@ public partial class Chicpea : Entity
 				}
                 if(CurrentTime != GameTime.Night && currentTask == Task.GoHome && mapSource.GetCurrentResources() > 0)
                 {
-                    target = null;
+                    followo = null;
                     targetPos = mapSource.GlobalPosition;
                     SetCurrentTask(Task.CollectMaterialHome);
                 }
@@ -395,7 +398,7 @@ public partial class Chicpea : Entity
 				}
                 if(CurrentTime != GameTime.Night && currentTask == Task.GoHome && mapSource.GetCurrentResources() > 0)
                 {
-                    target = null;
+                    followo = null;
                     targetPos = mapSource.GlobalPosition;
                     SetCurrentTask(Task.CollectMaterialHome);
                 }

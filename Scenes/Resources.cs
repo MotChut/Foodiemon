@@ -10,7 +10,7 @@ public partial class Resources : Node
 
 	#region Constants
 	public static string NextPath = "";
-	public const float SPEED_SCALE = 0.5f;
+	public const float SPEED_SCALE = 0.1f;
 	public const int MIN_REGION_SIZE = 15;
 	public const int MAX_REGION_SIZE = 20;
 	public const int TILE_SIZE = 20;
@@ -19,15 +19,23 @@ public partial class Resources : Node
 	public const string RegionSettingsJson = "res://Jsons/RegionSettings.json";
 	public const string StatsSettingsJson = "res://Jsons/StatsSettings.json";
 	public const string CraftsJson = "res://Jsons/Crafts.json";
+	public const string StartRelationshipJson = "res://Jsons/StartRelationship.json";
+	public const string PossibleRelationshipJson = "res://Jsons/PossibleRelationship.json";
 	public const string ForestRegion_Scene = "res://Scenes/Environment/Terrain/ForestRegion.tscn";
 	public const string ProceduralGeneration_Path = "res://Scenes/Map/ProceduralGeneration.tscn";
 	public const string LoadingScene_Path = "res://Scenes/UI/Loading/Loading.tscn";
 	public const string CookScene_Path = "res://Scenes/UI/CookUI/CookUI.tscn";
 	public static ProceduralGeneration proGen;
 
+	public enum Relationship
+	{
+		Ignore, Eat, Afraid, StayOutOfWay, AggressiveRival, Attack, 
+		Uncomfortable, Antagonize, PlayWith, SocialDependent, Pack
+	}
+
 	public enum Entities
 	{
-		BlueChicpea, Chicpea
+		BlueChicpea, Chicpea, Rawrberry
 	}
 
 	public enum RegionType {
@@ -35,7 +43,7 @@ public partial class Resources : Node
 	}
 	
 	public enum TerrainType {
-		Floor, Trees, ChicpeaBase, GrassLand
+		Floor, Trees, ChicpeaBase, GrassLand, RawrberryBase
 	}
 
 	public enum MaterialType 
@@ -50,7 +58,7 @@ public partial class Resources : Node
 
 	public static List<TerrainType> EntitiesTerrainType = new List<TerrainType>()
 	{
-		TerrainType.ChicpeaBase
+		TerrainType.ChicpeaBase, TerrainType.RawrberryBase
 	};
 	
 	public static List<MaterialType?> FoodMaterialType = new List<MaterialType?>()
@@ -134,16 +142,7 @@ public partial class Resources : Node
 			if(pack.entities.Count <= 0) continue;
 			pack.Craft();
 			pack.PackConsumeFoods();
-			pack.leader.IntoGroups();
-		}
-	}
-
-	static void ForceGroups()
-	{
-		foreach(Pack pack in PackList)
-		{
-			if(pack.entities.Count <= 0) continue;
-			pack.leader.IntoGroups();
+			if(pack.leader != null) pack.leader.IntoGroups();
 		}
 	}
 
@@ -165,6 +164,10 @@ public partial class Resources : Node
 	public static List<TerrainSettings> TerrainSettingsList = new List<TerrainSettings>(){};
 	public static List<RegionSettings> RegionSettingsList = new List<RegionSettings>(){};
 	public static List<Crafts> CraftsList = new List<Crafts>(){};
+
+	public static List<StartRelationship> StartRelationships = new List<StartRelationship>(){};
+	public static List<PossibleRelationship> PossibleRelationships = new List<PossibleRelationship>(){};
+
 	public static List<Pack> PackList = new List<Pack>();
 	
 	
@@ -182,6 +185,8 @@ public partial class Resources : Node
 		RegionSettingsList = new List<RegionSettings>(){};
 		CraftsList = new List<Crafts>(){};
 		PackList = new List<Pack>();
+		LoadStartRelationship();
+		LoadPossibleRelationship();
 		LoadStatsSettings();
 		LoadEntitySettings();
 		LoadTerrainSettings();
@@ -232,6 +237,26 @@ public partial class Resources : Node
     {
         var jsonString = FileAccess.GetFileAsString(CraftsJson);
         CraftsList = JsonConvert.DeserializeObject<List<Crafts>>(jsonString); 
+    }
+
+	static void LoadStartRelationship()
+    {
+        var jsonString = FileAccess.GetFileAsString(StartRelationshipJson);
+        StartRelationships = JsonConvert.DeserializeObject<List<StartRelationship>>(jsonString);
+		foreach(StartRelationship startRelationship in StartRelationships)
+		{
+			startRelationship.Init();
+		}
+    }
+
+	static void LoadPossibleRelationship()
+    {
+        var jsonString = FileAccess.GetFileAsString(PossibleRelationshipJson);
+        PossibleRelationships = JsonConvert.DeserializeObject<List<PossibleRelationship>>(jsonString); 
+		foreach(PossibleRelationship possibleRelationship in PossibleRelationships)
+		{
+			possibleRelationship.Init();
+		}
     }
 
 	#endregion

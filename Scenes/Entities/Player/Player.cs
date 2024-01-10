@@ -200,7 +200,7 @@ public partial class Player : CharacterBody3D
 			if(target is Entity)
 			{
 				Entity e = target as Entity;
-				e.GetHit(GlobalPosition, knockForce, attack);
+				e.GetHit(GlobalPosition, this, knockForce, attack);
 			}
 		}
 	}

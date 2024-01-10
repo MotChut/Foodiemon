@@ -104,7 +104,8 @@ public partial class Pack : Node
 		}
 		if(availableSources.Count == 0) return new Vector3(0, -100, 0);
         Random rnd = new Random();
-		return availableSources.GetRange(0, 5)[rnd.Next(5)].GlobalPosition;
+		int upper = availableSources.Count >= 5 ? 5 : availableSources.Count;
+		return availableSources.GetRange(0, upper)[rnd.Next(upper)].GlobalPosition;
 	}
 
 	public Vector3 ChooseNaturalTarget()
@@ -144,34 +145,8 @@ public partial class Pack : Node
         }
 	}
 
-	public void Craft()
+	public virtual void Craft()
 	{
-		Crafts crafts = CraftsList.Find(x => x.craft == craftType.ToString());
-		Dictionary<string, int> recipe = new Dictionary<string, int>();
 		
-		if (crafts.material1 != "") recipe.Add(crafts.material1, crafts.amount1);
-		if (crafts.material2 != "") recipe.Add(crafts.material2, crafts.amount2);
-		if (crafts.material3 != "") recipe.Add(crafts.material3, crafts.amount3);
-		if (crafts.material4 != "") recipe.Add(crafts.material4, crafts.amount4);
-		if (crafts.material5 != "") recipe.Add(crafts.material5, crafts.amount5);
-
-		while(true)
-		{
-			bool flag = true;
-			foreach(string material in recipe.Keys)
-			{
-				if(materials[(MaterialType)Enum.Parse(typeof(MaterialType), material)] < recipe[material])
-				{
-					flag = false;
-					break;
-				}
-			}
-			if(!flag) break;
-			foreach(string material in recipe.Keys)
-			{
-				materials[(MaterialType)Enum.Parse(typeof(MaterialType), material)] -= recipe[material];
-			}
-			weapons++;
-		} 
 	}
 }

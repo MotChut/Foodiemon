@@ -14,6 +14,8 @@ public partial class RegionSettings : Node
 	public int trees = 0;
 	public int chicpeaBase = 0;
 	public int grassLand = 0;
+    public int rawrberryMax = 0;
+	public int rawrberryBase = 0;
 
 
     // Local
@@ -48,7 +50,8 @@ public partial class RegionSettings : Node
             floor,
             trees,
             chicpeaBase,
-            grassLand
+            grassLand,
+            rawrberryBase
         };
 	}
 
@@ -66,6 +69,7 @@ public partial class RegionSettings : Node
     void GetUpBoundaries()
     {
         upBoundaries.Add(chicpeaMax);
+        upBoundaries.Add(rawrberryMax);
     }
 
     void CreateTypeControl()
@@ -82,7 +86,7 @@ public partial class RegionSettings : Node
     public bool SetTypeControlByIndex(int key, int value)
     {
         entityTypesControl[key] = value;
-        if(entityTypesControl[key] >= upBoundaries[key]) return false;
+        if(entityTypesControl[key] > upBoundaries[key]) return false;
         return true;
     }
 }

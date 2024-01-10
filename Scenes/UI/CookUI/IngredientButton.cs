@@ -46,7 +46,10 @@ public partial class IngredientButton : Button
 	void Choose()
 	{
 		if(cookUI.GetCurrentIngredients() < cookUI.MAX_INGREDIENTS)
-			cookUI.AssignIngredient(textureRect.Texture);
+		{
+			UpdateAmount(-1);
+			cookUI.AssignIngredient(textureRect.Texture, this);
+		}
 	}
 
 	void MouseEnter()

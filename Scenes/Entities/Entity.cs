@@ -21,7 +21,8 @@ public partial class Entity : CharacterBody3D
     {
         Idle, Continue, Explore, FollowExplore,
 		CollectFood, CollectMaterial, RetrieveResource, RetrieveResourceHome, CollectMaterialHome, CollectNatureFood,
-		GoHome, ForceHome, HomeRest
+		GoHome, ForceHome, HomeRest,
+		Runaway, Hunt
     }
 	
 	// Local
@@ -31,6 +32,7 @@ public partial class Entity : CharacterBody3D
 	public Dictionary<string, List<string>> gout = new Dictionary<string, List<string>>();
 	public List<Task> tasks = new List<Task>(3){ Task.Idle, Task.Idle, Task.Idle };
 	public Task savedTask = Task.Idle;
+	public Task mainTask = Task.Idle;
     public Task currentTask = Task.Idle;
 	public States currentState = States.Walk;
 	public Vector3 attackSourcePos;
@@ -49,7 +51,9 @@ public partial class Entity : CharacterBody3D
 	public int currentPregnant = 0;
 	public int currentGrow = 0;
 
+	public Node3D danger = null;
 	public Node3D target = null;
+	public Node3D followo = null;
 	public Vector3 targetPos = Vector3.Zero;
 	public SteeringBehavior steer;
 	List<Vector3> rayDirections = new List<Vector3>();
@@ -57,6 +61,7 @@ public partial class Entity : CharacterBody3D
 	Vector3 lastDir = Vector3.Zero;
 
 	[Export] public float speed;
+	[Export] public float runSpd;
 	Vector3 velocity;
 	public Random rnd;
     public Pack pack;
@@ -65,8 +70,8 @@ public partial class Entity : CharacterBody3D
 
 	// Nodes
 	public Node3D raycastsNode, trackersNode, timersNode;
-	Area3D vision, self;
-	Timer exploreTimer, invincibleTimer, knockbackTimer;
+	Area3D vision, self, dangersense;
+	Timer exploreTimer, invincibleTimer, knockbackTimer, huntTimer;
 	Marker3D carryPoint;
 
     public override void _Ready()
@@ -78,9 +83,11 @@ public partial class Entity : CharacterBody3D
         timersNode = GetNode<Node3D>("Timers");
 		vision = trackersNode.GetNode<Area3D>("Vision");
 		self = trackersNode.GetNode<Area3D>("Self");
+		dangersense = trackersNode.GetNode<Area3D>("Dangersense");
 		exploreTimer = timersNode.GetNode<Timer>("ExploreTimer");
 		invincibleTimer = timersNode.GetNode<Timer>("InvincibleTimer");
 		knockbackTimer = timersNode.GetNode<Timer>("KnockbackTimer");
+		huntTimer = timersNode.GetNode<Timer>("HuntTimer");
 		carryPoint = GetNode<Marker3D>("CarryPoint");
 
 		// Stats
@@ -88,6 +95,7 @@ public partial class Entity : CharacterBody3D
 		Random random = new Random();
 		speed = (float)(random.NextDouble() * 
 				(statsSettings.maxSpd - statsSettings.minSpd) + statsSettings.minSpd);
+		runSpd = speed * 1.5f;
 		currentHunger = statsSettings.maxHunger;
 		hp = statsSettings.maxHp;
 
@@ -101,9 +109,13 @@ public partial class Entity : CharacterBody3D
 		vision.Connect("area_entered", new Callable(this, "VisionEntered_Area"));
 		self.Connect("area_entered", new Callable(this, "SelfEntered_Area"));
 		self.Connect("area_exited", new Callable(this, "SelfExited_Area"));
+		//dangersense.Connect("body_entered", new Callable(this, "VisionEntered_Body"));
+		dangersense.Connect("body_exited", new Callable(this, "DangerExited_Body"));
+		dangersense.Connect("body_entered", new Callable(this, "DangerEntered_Body"));
 
 		exploreTimer.Connect("timeout", new Callable(this, "ExploreTimeout"));
 		knockbackTimer.Connect("timeout", new Callable(this, "KnockbackTimeout"));
+		huntTimer.Connect("timeout", new Callable(this, "GiveUpPrey"));
     }
 
     public override void _PhysicsProcess(double delta)
@@ -138,6 +150,14 @@ public partial class Entity : CharacterBody3D
 		UpdateMaxWanderDistance();
 	}
 
+	public void Runaway()
+	{
+		currentDir = Vector3.Zero;
+		currentDir += steer.Runaway();
+		currentDir += steer.Evade();
+		Move();
+	}
+
 	void UpdateMaxWanderDistance()
 	{
 		Vector3 housePos = pack.structures[0].GlobalPosition;
@@ -156,8 +176,18 @@ public partial class Entity : CharacterBody3D
 		currentDir = currentDir.Normalized();
 		if(!GlobalTransform.Origin.IsEqualApprox(new Vector3(currentDir.X + GlobalPosition.X, GlobalPosition.Y, currentDir.Z + GlobalPosition.Z)))
 			LookAt(new Vector3(currentDir.X + GlobalPosition.X, GlobalPosition.Y, currentDir.Z + GlobalPosition.Z), Vector3.Up);
-        velocity = currentDir * speed * ((float)currentHunger / statsSettings.maxHunger);
-		velocity.Clamp(Vector3.Zero, new Vector3(1, 0, 1) * speed * (currentHunger / statsSettings.maxHunger));
+
+		if(currentTask != Task.Runaway)
+		{
+			velocity = currentDir * speed * ((float)currentHunger / statsSettings.maxHunger);
+			velocity.Clamp(Vector3.Zero, new Vector3(1, 0, 1) * speed * (currentHunger / statsSettings.maxHunger));
+		}
+		else
+		{
+			velocity = currentDir * runSpd * ((float)currentHunger / statsSettings.maxHunger);
+			velocity.Clamp(Vector3.Zero, new Vector3(1, 0, 1) * runSpd * (currentHunger / statsSettings.maxHunger));
+		}
+		
 		Velocity = velocity + new Vector3(0, -10, 0);
 		MoveAndSlide();
 		if(GlobalPosition.Y <= 0.5f) GlobalPosition = new Vector3(GlobalPosition.X, 0.5f, GlobalPosition.Z);
@@ -176,6 +206,7 @@ public partial class Entity : CharacterBody3D
                 TargetPosition = new Vector3(statsSettings.raycastLength, 0, 0),
                 Rotation = new Vector3(0, angle, 0)
             };
+			rayCast3D.Position += new Vector3(0, 0.1f, 0);
 			rayCast3D.SetCollisionMaskValue(2, true);
 			rayCast3D.SetCollisionMaskValue(3, true);
             raycastsNode.AddChild(rayCast3D);
@@ -185,19 +216,40 @@ public partial class Entity : CharacterBody3D
 	#endregion
 
 	#region Signals
-	void VisionEntered_Body(Node3D body)
+	public virtual void VisionEntered_Body(Node3D body)
 	{
-		target = body;
+		if(body is Player)
+		{
+			huntTimer.Stop();
+		}
 	}
-	void VisionExited_Body(Node3D body)
+	public void VisionExited_Body(Node3D body)
 	{
-		target = null;
+		if(body == target)
+        {
+            target = null;
+            huntTimer.Start();
+        }
 	}
 	public virtual void VisionEntered_Area(Area3D area3D){}
 	public virtual void SelfEntered_Area(Area3D area3D){}
 	public virtual void SelfExited_Area(Area3D area3D){}
+	public virtual void DangerEntered_Body(Node3D body)
+	{
+		if(danger == body)
+		{
+			SetCurrentTask(Task.Runaway);
+		}
+	}
+	public virtual void DangerExited_Body(Node3D body)
+	{
+		if(danger == body)
+		{
+			SetCurrentTask(mainTask);
+		}
+	}
 
-	void KeepTrackOfTarget()
+	public void KeepTrackOfTarget()
 	{
 		PhysicsDirectSpaceState3D state = GetWorld3D().DirectSpaceState;
         var query = PhysicsRayQueryParameters3D.Create(
@@ -333,7 +385,7 @@ public partial class Entity : CharacterBody3D
 		QueueFree();
 	}
 	
-	public void UpdateTargetPos()
+	public void UpdateFollowPos()
     {
         targetPos = pack.leader.GlobalPosition + followOffset;
     }
@@ -342,12 +394,15 @@ public partial class Entity : CharacterBody3D
 		currentState = state;
 		//animationPlayer.Play(Enum.GetName(state));
 	}
-	public void GetHit(Vector3 source, float knockStr, int dmg)
+	public void GetHit(Vector3 source, Node3D danger, float knockStr, int dmg)
 	{
 		if(invincibleTimer.IsStopped())
 		{
 			GetNode<AnimationPlayer>("AnimationPlayer").Play("Hurt");
-
+			
+			this.danger = danger;
+			ScareOther(danger);
+			SetCurrentTask(Task.Runaway);
 			hp -= dmg;
 			if(hp <= 0)
 			{ 
@@ -359,6 +414,21 @@ public partial class Entity : CharacterBody3D
 			invincibleTimer.Start();
 			knockbackTimer.Start();
 			SetState(States.Hurt);
+		}
+	}
+	public void ScareOther(Node3D danger)
+	{
+		var entities = dangersense.GetOverlappingBodies();
+		if(entities.Count > 0)
+		{
+			foreach(var e in entities)
+			{
+				if(e.GetType() != GetType() || e == this) continue;
+				Entity entity = (Entity)e;
+				entity.danger = danger;
+				entity.savedTask = entity.currentTask;
+				entity.SetCurrentTask(Task.Runaway);
+			}
 		}
 	}
 	public void KnockbackTimeout()
@@ -383,5 +453,9 @@ public partial class Entity : CharacterBody3D
 		broughtType = null;
 		broughtAmount = 0;
 		GetNode<Material>("Material").QueueFree();
+	}
+	public void GiveUpPrey()
+	{
+		SetCurrentTask(mainTask);
 	}
 }

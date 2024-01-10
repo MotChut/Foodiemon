@@ -13,6 +13,7 @@ public partial class CookUI : CanvasLayer
 	bool canCook = true;
 	public int MAX_INGREDIENTS = 5;
 	List<Button> ingredientLists = new List<Button>();
+	List<IngredientButton> ingredientBtns = new List<IngredientButton>();
 	int assignedIngredients = 0;
 	BoxContainer container;
 	GridContainer ingredients;
@@ -74,8 +75,9 @@ public partial class CookUI : CanvasLayer
 		return assignedIngredients;
 	}
 
-	public void AssignIngredient(Texture2D texture)
+	public void AssignIngredient(Texture2D texture, IngredientButton ingredientButton)
 	{
+		ingredientBtns.Add(ingredientButton);
 		ingredientLists[assignedIngredients].GetNode<TextureRect>("TextureRect").Texture = texture;
 		assignedIngredients++;
 	}
@@ -84,6 +86,8 @@ public partial class CookUI : CanvasLayer
 	{
 		if(button.GetNode<TextureRect>("TextureRect").Texture == null) return;
 		button.GetNode<TextureRect>("TextureRect").Texture = null;
+		ingredientBtns[ingredientLists.IndexOf(button)].UpdateAmount(1);
+		ingredientBtns.RemoveAt(ingredientLists.IndexOf(button));
 		ReorderIngredient(ingredientLists.IndexOf(button));
 		assignedIngredients--;
 	}
