@@ -10,7 +10,7 @@ public partial class Resources : Node
 
 	#region Constants
 	public static string NextPath = "";
-	public const float SPEED_SCALE = 0.1f;
+	public const float SPEED_SCALE = 1f;
 	public const int MIN_REGION_SIZE = 15;
 	public const int MAX_REGION_SIZE = 20;
 	public const int TILE_SIZE = 20;
@@ -19,12 +19,14 @@ public partial class Resources : Node
 	public const string RegionSettingsJson = "res://Jsons/RegionSettings.json";
 	public const string StatsSettingsJson = "res://Jsons/StatsSettings.json";
 	public const string CraftsJson = "res://Jsons/Crafts.json";
+	public const string CooksJson = "res://Jsons/Cooks.json";
 	public const string StartRelationshipJson = "res://Jsons/StartRelationship.json";
 	public const string PossibleRelationshipJson = "res://Jsons/PossibleRelationship.json";
 	public const string ForestRegion_Scene = "res://Scenes/Environment/Terrain/ForestRegion.tscn";
 	public const string ProceduralGeneration_Path = "res://Scenes/Map/ProceduralGeneration.tscn";
 	public const string LoadingScene_Path = "res://Scenes/UI/Loading/Loading.tscn";
 	public const string CookScene_Path = "res://Scenes/UI/CookUI/CookUI.tscn";
+	public const string ForgeScene_Path = "res://Scenes/UI/ForgeUI/ForgeUI.tscn";
 	public static ProceduralGeneration proGen;
 
 	public enum Relationship
@@ -56,6 +58,11 @@ public partial class Resources : Node
 		BasicAxe
 	}
 
+	public enum DishType
+	{
+		ChickenBerrySauce
+	}
+
 	public static List<TerrainType> EntitiesTerrainType = new List<TerrainType>()
 	{
 		TerrainType.ChicpeaBase, TerrainType.RawrberryBase
@@ -66,20 +73,46 @@ public partial class Resources : Node
 		MaterialType.Berry, MaterialType.ChicNugget, MaterialType.ChicEgg, MaterialType.ChicLeg
 	};
 
-	public static Dictionary<MaterialType?, Texture2D> FoodMaterialAsset = new Dictionary<MaterialType?, Texture2D>()
+	public static List<MaterialType?> CraftMaterialType = new List<MaterialType?>()
+	{
+		MaterialType.Twig, MaterialType.Flint, MaterialType.CutGrass
+	};
+
+	public static Dictionary<MaterialType?, Texture2D> MaterialAssets = new Dictionary<MaterialType?, Texture2D>()
 	{
 		[MaterialType.Berry] = (Texture2D)GD.Load("res://Assets/FoodIngredients/Berry.png"),
 		[MaterialType.ChicNugget] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicNugget.png"),
 		[MaterialType.ChicLeg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicLeg.png"),
-		[MaterialType.ChicEgg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png")
+		[MaterialType.ChicEgg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
+		[MaterialType.Twig] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
+		[MaterialType.Flint] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
+		[MaterialType.CutGrass] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png")
 	};
 
-	public static Dictionary<MaterialType?, string> FoodMaterialDescription = new Dictionary<MaterialType?, string>()
+	public static Dictionary<MaterialType?, string> MaterialDescriptions = new Dictionary<MaterialType?, string>()
 	{
 		[MaterialType.Berry] = "This is a cool fresh berry, barely hatched from the bush!",
 		[MaterialType.ChicNugget] = "This is nugget that makes u nutttttt!",
 		[MaterialType.ChicLeg] = "Big juicy Chicpea Leg!",
-		[MaterialType.ChicEgg] = "Delicious extra protein!"
+		[MaterialType.ChicEgg] = "Delicious extra protein!",
+		[MaterialType.Twig] = "Just a boring dry twig.",
+		[MaterialType.Flint] = "Flint can be very useful in multiple aspects.",
+		[MaterialType.CutGrass] = "1 cutgrass can do nothing but 3 cutgrass can become a rope."
+	};
+
+	public static Dictionary<DishType, Texture2D> DishAsset = new Dictionary<DishType, Texture2D>()
+	{
+		[DishType.ChickenBerrySauce] = (Texture2D)GD.Load("res://Assets/Dish/ChickenBerrySauce.png"),
+	};
+
+	public static Dictionary<CraftType, Texture2D> CraftAsset = new Dictionary<CraftType, Texture2D>()
+	{
+		[CraftType.BasicAxe] = (Texture2D)GD.Load("res://Assets/Dish/ChickenBerrySauce.png"),
+	};
+
+	public static Dictionary<DishType, string> DishDescription = new Dictionary<DishType, string>()
+	{
+		[DishType.ChickenBerrySauce] = "Kill Chicpeas and appreciate their juicy meaty chunky legs."
 	};
 
 	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
@@ -168,6 +201,8 @@ public partial class Resources : Node
 	public static List<StartRelationship> StartRelationships = new List<StartRelationship>(){};
 	public static List<PossibleRelationship> PossibleRelationships = new List<PossibleRelationship>(){};
 
+	public static List<Cooks> CookList = new List<Cooks>(){};
+
 	public static List<Pack> PackList = new List<Pack>();
 	
 	
@@ -184,14 +219,17 @@ public partial class Resources : Node
 		TerrainSettingsList = new List<TerrainSettings>(){};
 		RegionSettingsList = new List<RegionSettings>(){};
 		CraftsList = new List<Crafts>(){};
+		CookList = new List<Cooks>(){};
 		PackList = new List<Pack>();
+		LoadCraftsList();
+		LoadCookList();
 		LoadStartRelationship();
 		LoadPossibleRelationship();
 		LoadStatsSettings();
 		LoadEntitySettings();
 		LoadTerrainSettings();
 		LoadRegionSettings();
-		LoadCraftsList();
+		
 	}
 
 	static void LoadStatsSettings()
@@ -257,6 +295,12 @@ public partial class Resources : Node
 		{
 			possibleRelationship.Init();
 		}
+    }
+
+	static void LoadCookList()
+    {
+        var jsonString = FileAccess.GetFileAsString(CooksJson);
+        CookList = JsonConvert.DeserializeObject<List<Cooks>>(jsonString); 
     }
 
 	#endregion

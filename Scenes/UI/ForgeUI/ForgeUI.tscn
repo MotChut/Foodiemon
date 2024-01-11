@@ -1,16 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://btu0sx4qj88a1"]
+[gd_scene load_steps=32 format=3 uid="uid://btu0sx4qj88a1"]
 
 [ext_resource type="Script" path="res://Scenes/UI/ForgeUI/ForgeUI.cs" id="1_egjdf"]
-[ext_resource type="Texture2D" uid="uid://d3vg64p6rs3b3" path="res://Assets/UI/Cook left.png" id="1_v2dlw"]
-[ext_resource type="Texture2D" uid="uid://xtolnu1jcsxy" path="res://Assets/UI/Ếch/Ếch1.png" id="2_ngogw"]
-[ext_resource type="Texture2D" uid="uid://dy2w8ave2inbx" path="res://Assets/UI/Ếch/Ếch2.png" id="3_dasnn"]
+[ext_resource type="Texture2D" uid="uid://d4grnsxwpq53j" path="res://Assets/UI/Crafting left.png" id="2_yqd6s"]
 [ext_resource type="Texture2D" uid="uid://csmv6nvjfw518" path="res://Assets/UI/Cook right.png" id="4_76vvb"]
-[ext_resource type="Texture2D" uid="uid://dtrkl8k3yohbm" path="res://Assets/UI/Cook button.png" id="5_l1ahe"]
-[ext_resource type="Texture2D" uid="uid://dphl31bbc0xfv" path="res://Assets/UI/Cook button_pressed.png" id="6_c3xcm"]
-[ext_resource type="Texture2D" uid="uid://de3gv2xdwqhbe" path="res://Assets/UI/Cook button_hover.png" id="7_loy7y"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_4uscl"]
-load_path = "res://.godot/imported/Ếch1.png-4e37bd56261eb80f42e160eba5481718.ctex"
+[ext_resource type="Texture2D" uid="uid://c05xqgq6ftrv5" path="res://Assets/UI/Chicpea đâp đá/Smith1.png" id="4_c5c8j"]
+[ext_resource type="Texture2D" uid="uid://c5gjapofmthkr" path="res://Assets/UI/Chicpea đâp đá/Smith2.png" id="5_44ij7"]
+[ext_resource type="Texture2D" uid="uid://dpc1c76kgcia8" path="res://Assets/UI/CRAFT button.png" id="6_452yx"]
+[ext_resource type="Texture2D" uid="uid://csjicajp5mvxm" path="res://Assets/UI/CRAFT button_pressed.png" id="7_24485"]
+[ext_resource type="Texture2D" uid="uid://dpltf46mtt3a6" path="res://Assets/UI/CRAFT button_hover.png" id="8_4c8cc"]
+[ext_resource type="Texture2D" uid="uid://dsm0purohvjfb" path="res://Assets/FoodIngredients/Berry.png" id="9_7qs6b"]
 
 [sub_resource type="Animation" id="Animation_qix83"]
 resource_name = "Cook"
@@ -27,7 +25,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("2_ngogw"), ExtResource("3_dasnn")]
+"values": [ExtResource("4_c5c8j"), ExtResource("5_44ij7")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mmtm4"]
@@ -155,7 +153,76 @@ font = SubResource("SystemFont_2sgsf")
 font_color = Color(0.439216, 0.403922, 0.780392, 1)
 shadow_size = 0
 
+[sub_resource type="SystemFont" id="SystemFont_66ccb"]
+font_names = PackedStringArray("Motley Forces")
+
+[sub_resource type="LabelSettings" id="LabelSettings_ncswu"]
+font = SubResource("SystemFont_66ccb")
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_ixfbx"]
+font = SubResource("SystemFont_66ccb")
+font_size = 32
+
+[sub_resource type="Animation" id="Animation_a3r4a"]
+resource_name = "Appear"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VBoxContainer/ItemBG/Item:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 6.28319, 12.5664, 18.8496, 25.1327]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VBoxContainer/ItemBG/Item:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer/NameLabel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("VBoxContainer/Continue:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l5coa"]
+_data = {
+"Appear": SubResource("Animation_a3r4a")
+}
+
 [node name="ForgeUI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_egjdf")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -198,7 +265,7 @@ theme_override_constants/separation = 32
 [node name="Left" type="TextureRect" parent="Container/VBox/Body/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("1_v2dlw")
+texture = ExtResource("2_yqd6s")
 expand_mode = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Container/VBox/Body/HBoxContainer/Left"]
@@ -220,20 +287,20 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="PotTex" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/Pot"]
-custom_minimum_size = Vector2(300, 300)
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -130.0
-offset_top = -143.0
-offset_right = 170.0
-offset_bottom = 157.0
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("CompressedTexture2D_4uscl")
+texture = ExtResource("4_c5c8j")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/Pot"]
@@ -261,6 +328,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4hq7q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3865i")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_cp016")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient1"]
@@ -289,6 +357,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4hq7q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3865i")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bgh7b")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient2"]
@@ -317,6 +386,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_0suax")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4hq7q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3865i")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bgh7b")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient3"]
@@ -345,6 +415,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_0suax")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4hq7q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3865i")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bgh7b")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient4"]
@@ -373,6 +444,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_0suax")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4hq7q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_3865i")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_fhs8r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bgh7b")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient5"]
@@ -480,7 +552,7 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 0.2
 
-[node name="CookBtn" type="TextureButton" parent="Container/VBox/Footer"]
+[node name="CraftBtn" type="TextureButton" parent="Container/VBox/Footer"]
 custom_minimum_size = Vector2(162.375, 72.75)
 layout_mode = 1
 anchors_preset = 8
@@ -494,8 +566,83 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("5_l1ahe")
-texture_pressed = ExtResource("6_c3xcm")
-texture_hover = ExtResource("7_loy7y")
+texture_normal = ExtResource("6_452yx")
+texture_pressed = ExtResource("7_24485")
+texture_hover = ExtResource("8_4c8cc")
 ignore_texture_size = true
 stretch_mode = 0
+
+[node name="NewItem" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+pivot_offset = Vector2(640, 360)
+
+[node name="BG" type="ColorRect" parent="NewItem"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.490196)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NewItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.0
+offset_top = -135.5
+offset_right = 122.0
+offset_bottom = 135.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 50
+
+[node name="NameLabel" type="Label" parent="NewItem/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Tomato salad"
+label_settings = SubResource("LabelSettings_ncswu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemBG" type="ColorRect" parent="NewItem/VBoxContainer"]
+custom_minimum_size = Vector2(244, 244)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+color = Color(1, 1, 1, 0)
+
+[node name="Item" type="TextureRect" parent="NewItem/VBoxContainer/ItemBG"]
+custom_minimum_size = Vector2(244, 244)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(122, 122)
+texture = ExtResource("9_7qs6b")
+expand_mode = 1
+
+[node name="Continue" type="Label" parent="NewItem/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Click any key to continue"
+label_settings = SubResource("LabelSettings_ixfbx")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NewItem"]
+autoplay = "Appear"
+libraries = {
+"": SubResource("AnimationLibrary_l5coa")
+}

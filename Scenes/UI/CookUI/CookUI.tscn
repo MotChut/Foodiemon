@@ -65,9 +65,9 @@ corner_radius_top_right = 12
 corner_radius_bottom_right = 12
 corner_radius_bottom_left = 12
 
-[sub_resource type="ImageTexture" id="ImageTexture_yunjt"]
+[sub_resource type="ImageTexture" id="ImageTexture_svwef"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ixjy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_701ch"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -78,7 +78,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_11yqd"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onllu"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -89,7 +89,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60837"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tyxut"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -100,7 +100,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tjbwy"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s3pkn"]
 content_margin_left = 4.0
 content_margin_top = 0.0
 content_margin_right = 4.0
@@ -111,7 +111,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b7pg3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n23rd"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -132,24 +132,24 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="Theme" id="Theme_eky87"]
-VScrollBar/icons/decrement = SubResource("ImageTexture_yunjt")
-VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_yunjt")
-VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_yunjt")
-VScrollBar/icons/increment = SubResource("ImageTexture_yunjt")
-VScrollBar/icons/increment_highlight = SubResource("ImageTexture_yunjt")
-VScrollBar/icons/increment_pressed = SubResource("ImageTexture_yunjt")
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_8ixjy")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_11yqd")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_60837")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_tjbwy")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_b7pg3")
+VScrollBar/icons/decrement = SubResource("ImageTexture_svwef")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_svwef")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_svwef")
+VScrollBar/icons/increment = SubResource("ImageTexture_svwef")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_svwef")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_svwef")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_701ch")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_onllu")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_tyxut")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_s3pkn")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_n23rd")
 
-[sub_resource type="SystemFont" id="SystemFont_2sgsf"]
+[sub_resource type="SystemFont" id="SystemFont_wxa4t"]
 font_names = PackedStringArray("Montserrat")
 font_weight = 500
 
 [sub_resource type="LabelSettings" id="LabelSettings_njn1p"]
-font = SubResource("SystemFont_2sgsf")
+font = SubResource("SystemFont_wxa4t")
 font_color = Color(0.439216, 0.403922, 0.780392, 1)
 shadow_size = 0
 
@@ -170,7 +170,7 @@ length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("VBoxContainer/DishBG/TextureRect:rotation")
+tracks/0/path = NodePath("VBoxContainer/DishBG/Dish:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -182,7 +182,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("VBoxContainer/DishBG/TextureRect:scale")
+tracks/1/path = NodePath("VBoxContainer/DishBG/Dish:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -328,6 +328,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fp7ih")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdj3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_hvwfm")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient1"]
@@ -356,6 +357,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fp7ih")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdj3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient2"]
@@ -384,6 +386,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilvj7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fp7ih")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdj3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient3"]
@@ -412,6 +415,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilvj7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fp7ih")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdj3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient4"]
@@ -440,6 +444,7 @@ size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_ilvj7")
 theme_override_styles/hover = SubResource("StyleBoxFlat_fp7ih")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_rpdj3")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_opmn8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sxsc4")
 
 [node name="TextureRect" type="TextureRect" parent="Container/VBox/Body/HBoxContainer/Left/VBoxContainer/IngredientBtns/HBox/CookedIngredient5"]
@@ -570,11 +575,10 @@ stretch_mode = 0
 [node name="NewDish" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 1280.0
+offset_bottom = 720.0
+pivot_offset = Vector2(640, 360)
 
 [node name="BG" type="ColorRect" parent="NewDish"]
 layout_mode = 1
@@ -598,13 +602,15 @@ offset_right = 122.0
 offset_bottom = 135.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 25
+theme_override_constants/separation = 50
 
 [node name="NameLabel" type="Label" parent="NewDish/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Tomato salad"
 label_settings = SubResource("LabelSettings_0n8rc")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="DishBG" type="ColorRect" parent="NewDish/VBoxContainer"]
 custom_minimum_size = Vector2(244, 244)
@@ -613,7 +619,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 6
 color = Color(1, 1, 1, 0)
 
-[node name="TextureRect" type="TextureRect" parent="NewDish/VBoxContainer/DishBG"]
+[node name="Dish" type="TextureRect" parent="NewDish/VBoxContainer/DishBG"]
 custom_minimum_size = Vector2(244, 244)
 layout_mode = 1
 anchors_preset = 8
@@ -623,18 +629,20 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-rotation = 25.1327
+scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(122, 122)
 texture = ExtResource("9_o5fme")
 expand_mode = 1
 
 [node name="Continue" type="Label" parent="NewDish/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Click any key to continue"
 label_settings = SubResource("LabelSettings_t1wbn")
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="NewDish"]
+autoplay = "Appear"
 libraries = {
 "": SubResource("AnimationLibrary_l5coa")
 }

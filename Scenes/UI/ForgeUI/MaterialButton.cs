@@ -1,11 +1,11 @@
 using Godot;
 using static Resources;
 
-public partial class IngredientButton : Button
+public partial class MaterialButton : Button
 {
 	TextureRect textureRect;
 	Label amountLabel;
-	CookUI cookUI;
+	ForgeUI forgeUI;
 	int amount = 0;
 	string description;
 	public MaterialType? materialType;
@@ -14,7 +14,7 @@ public partial class IngredientButton : Button
 	{
 		textureRect = GetNode<TextureRect>("Texture");
 		amountLabel = GetNode<Label>("Amount");
-		cookUI = (CookUI)GetTree().Root.GetNode("Home").GetNode<CanvasLayer>("CookUI");
+		forgeUI = (ForgeUI)GetTree().Root.GetNode("Home").GetNode<CanvasLayer>("ForgeUI");
 		SetAmount(0);
 
 		Connect("pressed", new Callable(this, "Choose"));
@@ -46,10 +46,10 @@ public partial class IngredientButton : Button
 
 	void Choose()
 	{
-		if(cookUI.GetCurrentIngredients() < cookUI.MAX_INGREDIENTS)
+		if(forgeUI.GetCurrentIngredients() < forgeUI.MAX_INGREDIENTS)
 		{
 			UpdateAmount(-1);
-			cookUI.AssignIngredient(textureRect.Texture, this);
+			forgeUI.AssignIngredient(textureRect.Texture, this);
 		}
 	}
 
@@ -57,7 +57,7 @@ public partial class IngredientButton : Button
 	{
 		if(Disabled) return;
 		Scale = new Vector2(1.2f, 1.2f);
-		cookUI.UpdateIngredientDescription(description);
+		forgeUI.UpdateIngredientDescription(description);
 	}
 
 	void MouseLeave()

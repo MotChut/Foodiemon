@@ -10,10 +10,6 @@ public partial class SocialMemory : Node
 
 	public SocialMemory()
 	{
-		foreach(Entities e in Enum.GetValues(typeof(Entities)))
-		{
-			if (e != entityType)
-				socialMemory.Add(e, new AIPoints(0, 0));
-		}
+		
 	}
 }

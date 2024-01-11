@@ -2,6 +2,7 @@ using static Entity;
 using static Resources;
 using System.Collections.Generic;
 using System;
+using Godot;
 
 
 public partial class ChicpeaPack : Pack
@@ -17,9 +18,8 @@ public partial class ChicpeaPack : Pack
 
     public override void Craft()
     {
-        Crafts crafts = CraftsList.Find(x => x.craft == craftType.ToString());
+        Crafts crafts = CraftsList.Find(x => System.Text.RegularExpressions.Regex.Replace(x.craft, @"\s+", "") == craftType.ToString());
 		Dictionary<string, int> recipe = new Dictionary<string, int>();
-		
 		if (crafts.material1 != "") recipe.Add(crafts.material1, crafts.amount1);
 		if (crafts.material2 != "") recipe.Add(crafts.material2, crafts.amount2);
 		if (crafts.material3 != "") recipe.Add(crafts.material3, crafts.amount3);

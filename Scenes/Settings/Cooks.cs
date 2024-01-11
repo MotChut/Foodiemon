@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Foods : Node
+public partial class Cooks : Node
 {
 	public int id = 0;
 	public string food = "";

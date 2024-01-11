@@ -1,7 +1,8 @@
 using Godot;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
+using static Resources;
 
 public partial class CookUI : CanvasLayer
 {
@@ -11,17 +12,21 @@ public partial class CookUI : CanvasLayer
 	const int SIZEX = 1280;
 	const int SIZEY = 720;
 	bool canCook = true;
+	bool clickRequired = false;
 	public int MAX_INGREDIENTS = 5;
+	List<MaterialType?> materialTypes = new List<MaterialType?>();
 	List<Button> ingredientLists = new List<Button>();
 	List<IngredientButton> ingredientBtns = new List<IngredientButton>();
 	int assignedIngredients = 0;
 	BoxContainer container;
 	GridContainer ingredients;
-	Label ingredientDescription;
+	Label ingredientDescription, newDishName;
 	AnimationPlayer animationPlayer;
 	TextureButton cookBtn;
-	TextureRect cookTexture;
+	TextureRect cookTexture, dishTexture;
 	HBoxContainer hBoxContainer;
+	Control newDishUI;
+	UserData userdata;
 
 	public override void _Ready()
 	{
@@ -32,6 +37,10 @@ public partial class CookUI : CanvasLayer
 		animationPlayer = GetNode<AnimationPlayer>("Container/VBox/Body/HBoxContainer/Left/VBoxContainer/Pot/AnimationPlayer");
 		cookBtn = GetNode<TextureButton>("Container/VBox/Footer/CookBtn");
 		cookTexture = GetNode<TextureRect>("Container/VBox/Body/HBoxContainer/Left/VBoxContainer/Pot/PotTex");
+		newDishUI = GetNode<Control>("NewDish");
+		newDishName = newDishUI.GetNode<Label>("VBoxContainer/NameLabel");
+		dishTexture = GetNode<TextureRect>("NewDish/VBoxContainer/DishBG/Dish");
+		
 		foreach(Button button in hBoxContainer.GetChildren())
 		{
 			ingredientLists.Add(button);
@@ -42,6 +51,8 @@ public partial class CookUI : CanvasLayer
 
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
+
+		userdata = UserData.GetInstance();
 		LoadUserIngredients();
 	}
 
@@ -52,20 +63,25 @@ public partial class CookUI : CanvasLayer
 			GetTree().Paused = false;
 			QueueFree();
 		}
+		if(Input.IsActionJustPressed("attack") && clickRequired)
+		{
+			clickRequired = false;
+			newDishUI.Visible = false;
+		}
     }
 
     void LoadUserIngredients()
 	{
-		UserData userData = UserData.GetInstance();
-		foreach(var i in userData.userIngredients.Keys.ToList())
+		foreach(var i in userdata.userIngredients.Keys.ToList())
 		{
-			if(userData.userIngredients[i] > 0)
+			if(userdata.userIngredients[i] > 0)
 			{
 				IngredientButton ingredientButton = (IngredientButton)ingredientButtonScene.Instantiate();
 				ingredients.AddChild(ingredientButton);
-				ingredientButton.SetTexture(Resources.FoodMaterialAsset[i]);
-				ingredientButton.SetAmount(userData.userIngredients[i]);
-				ingredientButton.SetDescription(Resources.FoodMaterialDescription[i]);
+				ingredientButton.materialType = i;
+				ingredientButton.SetTexture(MaterialAssets[i]);
+				ingredientButton.SetAmount(userdata.userIngredients[i]);
+				ingredientButton.SetDescription(MaterialDescriptions[i]);
 			}
 		}
 	}
@@ -79,6 +95,7 @@ public partial class CookUI : CanvasLayer
 	{
 		ingredientBtns.Add(ingredientButton);
 		ingredientLists[assignedIngredients].GetNode<TextureRect>("TextureRect").Texture = texture;
+		materialTypes.Add(ingredientButton.materialType);
 		assignedIngredients++;
 	}
 
@@ -86,6 +103,7 @@ public partial class CookUI : CanvasLayer
 	{
 		if(button.GetNode<TextureRect>("TextureRect").Texture == null) return;
 		button.GetNode<TextureRect>("TextureRect").Texture = null;
+		materialTypes.RemoveAt(ingredientLists.IndexOf(button));
 		ingredientBtns[ingredientLists.IndexOf(button)].UpdateAmount(1);
 		ingredientBtns.RemoveAt(ingredientLists.IndexOf(button));
 		ReorderIngredient(ingredientLists.IndexOf(button));
@@ -110,9 +128,34 @@ public partial class CookUI : CanvasLayer
 		ingredientDescription.Text = s;
 	}
 
+	void DisableIngredients()
+	{
+		foreach(var button in ingredients.GetChildren())
+		{
+			button.SetDeferred("disabled", true);
+		}
+		foreach(var button in hBoxContainer.GetChildren())
+		{
+			button.SetDeferred("disabled", true);
+		}
+	}
+
+	void EnableIngredients()
+	{
+		foreach(var button in ingredients.GetChildren())
+		{
+			button.SetDeferred("disabled", false);
+		}
+		foreach(var button in hBoxContainer.GetChildren())
+		{
+			button.SetDeferred("disabled", false);
+		}
+	}
+
 	void StartToCook()
 	{
 		canCook = false;
+		DisableIngredients();
 		ConsumeIngredients();
 	}
 
@@ -134,7 +177,7 @@ public partial class CookUI : CanvasLayer
 				await ToSignal(GetTree().CreateTimer(TweenTime), "timeout");		
 			}
 		}
-		
+		ingredientBtns.Clear();
 		assignedIngredients = 0;
 		await ToSignal(GetTree().CreateTimer(TweenTime), "timeout");
 		Cooking();
@@ -145,6 +188,85 @@ public partial class CookUI : CanvasLayer
 		animationPlayer.Play("Cook");
 		await ToSignal(GetTree().CreateTimer(CookTime), "timeout");
 		animationPlayer.Stop();
+		CreateDish();
+	}
+
+	void CreateDish()
+	{
+		Dictionary<MaterialType?, int> materials = new Dictionary<MaterialType?, int>();
+		foreach(MaterialType? materialType in materialTypes)
+		{
+			userdata.userIngredients[materialType] -= 1;
+			if(!materials.Keys.Contains(materialType))
+			{
+				materials.Add(materialType, 1);
+			}
+			else
+			{
+				materials[materialType] += 1;
+			}
+		}
+
+		bool hasPossibleDish = false;
+		Cooks possibleDish = null;
+		foreach(Cooks recipe in CookList)
+		{
+			Dictionary<string, int> r = new Dictionary<string, int>();
+			if (recipe.material1 != "") r.Add(recipe.material1, recipe.amount1);
+			if (recipe.material2 != "") r.Add(recipe.material2, recipe.amount2);
+			if (recipe.material3 != "") r.Add(recipe.material3, recipe.amount3);
+			if (recipe.material4 != "") r.Add(recipe.material4, recipe.amount4);
+			if (recipe.material5 != "") r.Add(recipe.material5, recipe.amount5);
+
+			while(true)
+			{
+				bool flag = true;
+				foreach(string material in r.Keys)
+				{
+					if(!materials.Keys.Contains((MaterialType)Enum.Parse(typeof(MaterialType), material)) ||
+					materials[(MaterialType)Enum.Parse(typeof(MaterialType), material)] < r[material])
+					{
+						flag = false;
+						break;
+					}
+				}
+				if(!flag) break;
+				else
+				{
+					possibleDish = recipe;
+					hasPossibleDish = true;
+					break;
+				}
+			} 
+		}
+
+		if(hasPossibleDish) // Has some dishes
+		{
+			string type = System.Text.RegularExpressions.Regex.Replace(possibleDish.food, @"\s+", "");
+			RunDishAnimation((DishType)Enum.Parse(typeof(DishType), type), possibleDish.food);
+		}
+		else // No possible dishes
+		{
+			RunDishAnimation(DishType.ChickenBerrySauce, "");
+		}
+	}
+
+	void RunDishAnimation(DishType dish, string name = "")
+	{
+		if(name == "")
+		{
+			newDishName.Text = "Failed!";
+			dishTexture.Texture = null;
+		}
+		else
+		{
+			newDishName.Text = name;
+			dishTexture.Texture = DishAsset[dish];
+		}
+		newDishUI.Visible = true;
+		GetNode<AnimationPlayer>("NewDish/AnimationPlayer").Play();
+		clickRequired = true;
+		EnableIngredients();
 		canCook = true;
 	}
 }

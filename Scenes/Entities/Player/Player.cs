@@ -22,6 +22,8 @@ public partial class Player : CharacterBody3D
 	int attack = 1;
 	float knockForce = 3;
 
+	BookUI bookUI;
+
 	Node3D sprite, areas, timers;
 	AnimationPlayer effectPlayer;
 	AnimationTree animationTree;
@@ -58,6 +60,8 @@ public partial class Player : CharacterBody3D
 		dodgeTimer = timers.GetNode<Timer>("DodgeTimer");
 
 		dodgeTimer.Connect("timeout", new Callable(this, "DodgeTimeout"));
+
+		bookUI = GetTree().Root.GetNode<BookUI>("BookUi");
     }
 
     public override void _PhysicsProcess(double delta)
@@ -72,6 +76,14 @@ public partial class Player : CharacterBody3D
 				GetTree().ChangeSceneToFile(LoadingScene_Path);
 				return;
 			}
+			else if(canSmith)
+			{
+				canSmith = false;
+				ForgeUI forgeUI = (ForgeUI)((PackedScene)ResourceLoader.Load(ForgeScene_Path)).Instantiate();
+				GetParent().AddChild(forgeUI);
+				GetTree().Paused = true;
+				canSmith = true;
+			}
 			else if(canCook)
 			{
 				canCook = false;
@@ -79,6 +91,14 @@ public partial class Player : CharacterBody3D
 				GetParent().AddChild(cookUI);
 				GetTree().Paused = true;
 				canCook = true;
+			}
+		}
+		if(Input.IsActionJustPressed("book"))
+		{
+			if(!bookUI.Visible)
+			{
+				bookUI.Visible = true;
+				GetTree().Paused = true;
 			}
 		}
 
