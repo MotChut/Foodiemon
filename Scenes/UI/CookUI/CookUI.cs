@@ -8,6 +8,7 @@ public partial class CookUI : CanvasLayer
 {
 	[Export] const float TweenTime = 0.25f;
 	[Export] const float CookTime = 3f;
+	Texture2D failTexture = (Texture2D)GD.Load("res://Assets/Dish/Fail dish.png");
 	PackedScene ingredientButtonScene = (PackedScene)ResourceLoader.Load("res://Scenes/UI/CookUI/IngredientButton.tscn");
 	const int SIZEX = 1280;
 	const int SIZEY = 720;
@@ -206,6 +207,7 @@ public partial class CookUI : CanvasLayer
 				materials[materialType] += 1;
 			}
 		}
+		materialTypes.Clear();
 
 		bool hasPossibleDish = false;
 		Cooks possibleDish = null;
@@ -256,7 +258,7 @@ public partial class CookUI : CanvasLayer
 		if(name == "")
 		{
 			newDishName.Text = "Failed!";
-			dishTexture.Texture = null;
+			dishTexture.Texture = failTexture;
 		}
 		else
 		{

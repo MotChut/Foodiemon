@@ -5,18 +5,24 @@ using static Resources;
 
 public partial class Player : CharacterBody3D
 {
+	[Export] public int maxHP = 5;
 	[Export] public float maxSpd = 3.0f;
 	[Export] public float dodgeSpd = 12.0f;
 	[Export] public float accel = 3.0f;
 	[Export] public float friction = 3.0f;
+	[Export] public float attackSpeed = 0.5f;
 	public const float JumpVelocity = 4.5f;
 	public const float AngularAccel = 8.0f;
 	public const float AttackAngularAccel = 15.0f;
+	int hp;
 	public float gravity = ProjectSettings.GetSetting("physics/3d/default_gravity").AsSingle();
 
 	public bool canCook = false;
 	public bool canSmith = false;
 	public bool canTeleport = false;
+
+	public Vector3 attackSourcePos;
+	public float attackSourceKnock;
 
 	float angular = AngularAccel;
 	int attack = 1;
@@ -31,15 +37,15 @@ public partial class Player : CharacterBody3D
 	Sprite3D effectNode;
 	Camera3D camera;
 	Area3D attackArea;
-	Timer dodgeTimer;
+	Timer dodgeTimer, invincibleTimer, knockbackTimer;
 
 	public enum States
 	{
-		Idle, Walk, Attack, Dodge
+		Idle, Walk, Attack, Dodge, Hurt
 	}
 	List<States> notInteruptedStates = new List<States>()
 	{
-		States.Attack, States.Dodge
+		States.Attack, States.Dodge, States.Hurt
 	};
 
 	public States currentState = States.Idle;
@@ -51,6 +57,8 @@ public partial class Player : CharacterBody3D
 		sprite = GetNode<Node3D>("Sprite");
 		areas = GetNode<Node3D>("Areas");
 		timers = GetNode<Node3D>("Timers");
+		invincibleTimer = timers.GetNode<Timer>("InvincibleTimer");
+		knockbackTimer = timers.GetNode<Timer>("KnockbackTimer");
 		attackArea = areas.GetNode<Area3D>("AttackArea");
 		effectNode = GetNode<Sprite3D>("Effects/AttackEffect");
 		effectPlayer = GetNode<AnimationPlayer>("Effects/AttackEffect/SubViewport/AnimationPlayer");
@@ -60,12 +68,16 @@ public partial class Player : CharacterBody3D
 		dodgeTimer = timers.GetNode<Timer>("DodgeTimer");
 
 		dodgeTimer.Connect("timeout", new Callable(this, "DodgeTimeout"));
+		knockbackTimer.Connect("timeout", new Callable(this, "KnockbackTimeout"));
 
 		bookUI = GetTree().Root.GetNode<BookUI>("BookUi");
+
+		hp = maxHP;
     }
 
     public override void _PhysicsProcess(double delta)
 	{
+		GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentState.ToString();
 		#region Interact
 		if(Input.IsActionJustPressed("interact"))
 		{
@@ -105,7 +117,11 @@ public partial class Player : CharacterBody3D
 		#endregion
 
 		#region Movement
-		if(!notInteruptedStates.Contains(currentState) && Input.IsActionJustPressed("dodge"))
+		if(currentState == States.Hurt)
+        {
+            KnockBack();
+        }
+		else if(!notInteruptedStates.Contains(currentState) && Input.IsActionJustPressed("dodge"))
 		{
 			Dodge();
 		}
@@ -184,7 +200,7 @@ public partial class Player : CharacterBody3D
 
 	void PlayEffect()
 	{
-		effectSprite.Play(currentState.ToString());
+		effectSprite.Play("Attack");
 	}
 
 	async void Attack()
@@ -205,14 +221,14 @@ public partial class Player : CharacterBody3D
 			var difference = Mathf.Abs(Mathf.Wrap(Mathf.Atan2(lastDirection.X, lastDirection.Z) - sprite.Rotation.Y, 0.0f, Mathf.Tau));
    			var distance = Mathf.Abs(Mathf.Wrap(2.0 * difference, 0.0f, Mathf.Tau) - difference);
 			await ToSignal(GetTree().CreateTimer(distance * 0.05f), "timeout");
-			effectPlayer.Play(currentState.ToString());
+			effectPlayer.Play("Attack");
 			DealDamage();
 			angular = AngularAccel;
 		}
 		
 	}
 
-	void DealDamage()
+	async void DealDamage()
 	{
 		var targets = attackArea.GetOverlappingBodies();
 		foreach(var target in targets)
@@ -223,6 +239,8 @@ public partial class Player : CharacterBody3D
 				e.GetHit(GlobalPosition, this, knockForce, attack);
 			}
 		}
+		await ToSignal(GetTree().CreateTimer(attackSpeed), "timeout");
+		SetState(States.Idle);
 	}
 
 	void Dodge()
@@ -234,6 +252,39 @@ public partial class Player : CharacterBody3D
 		}
 	}
 	void DodgeTimeout()
+	{
+		SetState(States.Idle);
+	}
+
+	public void GetHit(Vector3 source, Node3D danger, float knockStr, int dmg)
+	{
+		if(invincibleTimer.IsStopped())
+		{
+			animationTree.Set("parameters/HurtDodge/transition_request", "hurt");
+			animationTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+
+			hp -= dmg;
+			if(hp <= 0)
+			{ 
+				//Die();
+				return;
+			}
+			attackSourcePos = source;
+			attackSourceKnock = knockStr;
+			invincibleTimer.Start();
+			knockbackTimer.Start();
+			SetState(States.Hurt);
+		}
+	}
+
+	public void KnockBack()
+	{
+		Vector3 velocity = attackSourcePos.DirectionTo(GlobalPosition) * attackSourceKnock;
+		Velocity = velocity + new Vector3(0, -10, 0);
+		MoveAndSlide();
+	}
+
+	public void KnockbackTimeout()
 	{
 		SetState(States.Idle);
 	}

@@ -22,6 +22,9 @@ public partial class Loading : CanvasLayer
 
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		GetNode<Control>("Control").Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
+
+		Random random = new Random();
+		GetNode<AnimationPlayer>("Control/AnimationPlayer").Play(random.Next(2).ToString());
 	}
 
 	void TextChange()

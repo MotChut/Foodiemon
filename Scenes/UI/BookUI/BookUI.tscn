@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c4fkh0jxdlw5j"]
+[gd_scene load_steps=24 format=3 uid="uid://c4fkh0jxdlw5j"]
 
 [ext_resource type="Script" path="res://Scenes/UI/BookUI/BookUI.cs" id="1_0flai"]
 [ext_resource type="Texture2D" uid="uid://dpg7mgkodhp3h" path="res://Assets/UI/Book Tabs/Creatures.png" id="1_g20b0"]
@@ -11,6 +11,8 @@
 [ext_resource type="Texture2D" uid="uid://egrt3sme52wt" path="res://Assets/UI/Book Tabs/Gears_selected.png" id="6_5t0d6"]
 [ext_resource type="Texture2D" uid="uid://canfdq2voppy" path="res://Assets/UI/Book Tabs/Creatures_hover.png" id="7_3nq5l"]
 [ext_resource type="Texture2D" uid="uid://c367fxu1yn3ok" path="res://Assets/UI/Book Tabs/Gears_hover.png" id="10_3caju"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_m3x3c"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_7xcfe"]
 
@@ -110,6 +112,7 @@ font_color = Color(0.686275, 0.52549, 0.380392, 1)
 
 [node name="BookUI" type="CanvasLayer"]
 process_mode = 3
+visible = false
 script = ExtResource("1_0flai")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -131,6 +134,8 @@ grow_vertical = 2
 rotation = 0.0349066
 size_flags_horizontal = 4
 size_flags_vertical = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_m3x3c")
 texture_normal = ExtResource("3_jjqpd")
 texture_pressed = ExtResource("4_8mkg3")
 texture_hover = ExtResource("4_fixov")
@@ -149,6 +154,8 @@ grow_vertical = 2
 rotation = 0.0349066
 size_flags_horizontal = 4
 size_flags_vertical = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_m3x3c")
 texture_normal = ExtResource("1_g20b0")
 texture_pressed = ExtResource("2_lcxr0")
 texture_hover = ExtResource("7_3nq5l")
@@ -166,6 +173,8 @@ grow_vertical = 2
 rotation = 0.0349066
 size_flags_horizontal = 4
 size_flags_vertical = 8
+toggle_mode = true
+button_group = SubResource("ButtonGroup_m3x3c")
 texture_normal = ExtResource("5_6st2m")
 texture_pressed = ExtResource("6_5t0d6")
 texture_hover = ExtResource("10_3caju")
@@ -291,5 +300,5 @@ theme_override_constants/margin_bottom = 24
 
 [node name="Recipes" type="HBoxContainer" parent="Container/BookTexture/Twosides/Right/VBoxContainer/RecipeContainer"]
 layout_mode = 2
-theme_override_constants/separation = 0
+theme_override_constants/separation = 4
 alignment = 2

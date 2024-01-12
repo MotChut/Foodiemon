@@ -9,15 +9,18 @@ public partial class StartRelationship : Node
 	public string entity = "";
 	public string player = "";
 	public string chicpea = "";
+	public string bluechicpea = "";
 	public string rawrberry = "";
     public List<Relationship> playerRelationship = new List<Relationship>();
     public List<Relationship> chicpeaRelationship = new List<Relationship>();
+    public List<Relationship> bluechicpeaRelationship = new List<Relationship>();
     public List<Relationship> rawrberryRelationship = new List<Relationship>();
 
     public void Init()
     {
         GetStartRelationship(player, playerRelationship);
         GetStartRelationship(chicpea, chicpeaRelationship);
+        GetStartRelationship(bluechicpea, bluechicpeaRelationship);
         GetStartRelationship(rawrberry, rawrberryRelationship);
     }
 

@@ -1,14 +1,23 @@
 using Godot;
 using System;
-using System.Collections.Generic;
 using static Resources;
 
-public partial class RawBerry : Entity
+public partial class RawrBerry : Entity
 {
-	 #region Init
+    #region Init
+    AnimationPlayer effectPlayer;
+	AnimationTree animationTree;
+	AnimatedSprite2D effectSprite;
+	Sprite3D effectNode;
+
     public override void _Ready()
     {
         base._Ready();
+        effectNode = GetNode<Sprite3D>("Effects/AttackEffect");
+		effectPlayer = GetNode<AnimationPlayer>("Effects/AttackEffect/SubViewport/AnimationPlayer");
+		effectSprite = GetNode<AnimatedSprite2D>("Effects/AttackEffect/SubViewport/AnimatedSprite2D");
+		animationTree = GetNode<AnimationTree>("AnimationTree");
+
         rnd = new Random();
         TaskByGroup(Task.Explore, this);
     }
@@ -19,6 +28,10 @@ public partial class RawBerry : Entity
         if(currentState == States.Hurt)
         {
             KnockBack();
+        }
+        if(isAttacking)
+        {
+            return;
         }
         else
         {
@@ -152,7 +165,15 @@ public partial class RawBerry : Entity
         base.VisionEntered_Body(body);
         if(body is Player)
         {
+            if(target != null) return;
             mainTask = currentTask;
+            target = body;
+            SetCurrentTask(Task.Hunt);
+        }
+        else if(body is Entity)
+        {
+            Entity entity = (Entity)body;
+            if(entity.entityType == Entities.Rawrberry || target != null) return;
             target = body;
             SetCurrentTask(Task.Hunt);
         }
@@ -167,4 +188,61 @@ public partial class RawBerry : Entity
         SetCurrentTask(Task.Idle);
         Visible = false;
     }
+
+    void PlayEffect()
+	{
+		effectSprite.Play("Attack");
+	}
+
+    public override void AttackArea_Body(Node3D body)
+    {
+        if(canAttack)
+        {
+            canAttack = false;
+            isAttacking = true;
+            GetNode<AnimationPlayer>("AnimationPlayer").Play("AttackReady");
+        }
+    }
+
+    async void DealDamage()
+    {            
+        effectPlayer.Play("Attack");
+        var targets = attackArea.GetOverlappingBodies();
+		foreach(var target in targets)
+		{
+			if(target is Entity)
+			{
+				Entity e = target as Entity;
+				e.GetHit(GlobalPosition, this, statsSettings.force, statsSettings.attackPoint);
+			}
+            if(target is Player)
+			{
+				Player e = target as Player;
+				e.GetHit(GlobalPosition, this, statsSettings.force, statsSettings.attackPoint);
+			}
+		}
+
+        await ToSignal(GetTree().CreateTimer(statsSettings.attackSpd), "timeout");
+        isAttacking = false;
+        canAttack = true;
+    }
+
+    public override void GetHit(Vector3 source, Node3D danger, float knockStr, int dmg)
+	{
+		if(invincibleTimer.IsStopped())
+		{
+			if(!GetNode<AnimationPlayer>("AnimationPlayer").IsPlaying()) GetNode<AnimationPlayer>("AnimationPlayer").Play("Hurt");
+			hp -= dmg;
+			if(hp <= 0)
+			{ 
+				Die();
+				return;
+			}
+			attackSourcePos = source;
+			attackSourceKnock = knockStr;
+			invincibleTimer.Start();
+			knockbackTimer.Start();
+			SetState(States.Hurt);
+		}
+	}
 }

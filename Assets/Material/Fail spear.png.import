@@ -2,27 +2,26 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c05xqgq6ftrv5"
-path.s3tc="res://.godot/imported/Smith1.png-288959432ba0a947bbe1de8c25a45027.s3tc.ctex"
+uid="uid://fppl6o8k2fqq"
+path="res://.godot/imported/Fail spear.png-002fcfecfbc62eee13c64cdadbc336eb.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/UI/Chicpea đâp đá/Smith1.png"
-dest_files=["res://.godot/imported/Smith1.png-288959432ba0a947bbe1de8c25a45027.s3tc.ctex"]
+source_file="res://Assets/Material/Fail spear.png"
+dest_files=["res://.godot/imported/Fail spear.png-002fcfecfbc62eee13c64cdadbc336eb.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -32,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

@@ -1,16 +1,26 @@
 [
-    {
-      "id": 1,
-      "entity": "Chicpea",
-      "player": "Ignore",
-      "chicpea": "Ignore",
-      "rawrberry": "StayOutOfWay"
-    },
-    {
-      "id": 2,
-      "entity": "Rawrberry",
-      "player": "Eat",
-      "chicpea": "Eat",
-      "rawrberry": "Ignore"
-    }
-  ]
+  {
+    "id": 1,
+    "entity": "Chicpea",
+    "player": "Ignore",
+    "chicpea": "Ignore",
+    "bluechicpea": "Ignore",
+    "rawrberry": "StayOutOfWay"
+  },
+  {
+    "id": 2,
+    "entity": "BlueChicpea",
+    "player": "Ignore",
+    "chicpea": "Ignore",
+    "bluechicpea": "Ignore",
+    "rawrberry": "StayOutOfWay"
+  },
+  {
+    "id": 3,
+    "entity": "Rawrberry",
+    "player": "Eat",
+    "chicpea": "Eat",
+    "bluechicpea": "Eat",
+    "rawrberry": "Ignore"
+  }
+]

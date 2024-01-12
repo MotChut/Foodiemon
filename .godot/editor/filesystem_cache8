@@ -1,9 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1703998201
+::res://::1705026564
 icon.svg::CompressedTexture2D::8403530608082025044::1694940008::1698132524::1::::<><>::
 Montserrat-VariableFont_wght_0.ttf::FontFile::926328436868501563::1681360988::1703938617::1::::<><>::
 MotleyForcesRegular-w1rZ3.ttf::FontFile::6852599012374244560::1670096114::1703933012::1::::<><>::
-::res://Assets/::1703986446
+::res://Assets/::1705025433
 chicpea.glb::PackedScene::4581973939860779328::1703941986::1703941986::1::::<><>::
 chicpea_eye.png::CompressedTexture2D::284202856729992599::1703941986::1703941986::1::::<><>::
 chicpea_xanh.glb::PackedScene::2169027231773181350::1703941986::1703941986::1::::<><>::
@@ -16,10 +16,19 @@ grass_3_noisse.png::CompressedTexture2D::2550528108131285078::1703941986::170394
 model3.glb::PackedScene::3812236982183864795::1703941986::1703941986::1::::<><>::
 ::res://Assets/2D/::1703989490
 Smear 01 Horizontal 1.png::CompressedTexture2D::5460255988849680829::1703989488::1703989490::1::::<><>::
-::res://Assets/Environment/::1703941986
+::res://Assets/Character/::1704256022
+Rawrberry.glb::PackedScene::3211292017665565484::1704255776::1704256022::1::::<><>::
+::res://Assets/Dish/::1705027605
+ChickenBerrySauce.png::CompressedTexture2D::8506978715263389536::1704964531::1704964534::1::::<><>::
+dui ga berry.jpg::CompressedTexture2D::2270763082320731871::1704911963::1704911982::1::::<><>::
+Fail dish.png::CompressedTexture2D::4126116580346416901::1705027605::1705027609::1::::<><>::
+::res://Assets/Environment/::1704256023
 bush.glb::PackedScene::3354930804186766764::1703941986::1703941986::1::::<><>::
 cay cao.glb::PackedScene::7542308503206606905::1703941986::1703941986::1::::<><>::
 cay cao_cay.png::CompressedTexture2D::7235067430861892106::1703941986::1703941986::1::::<><>::
+chicpea home.glb::PackedScene::8359416103437770310::1704255776::1704256023::1::::<><>::uid://csacxywnx5dxl
+chicpea home_Untitled.png::CompressedTexture2D::6036404355284810789::1704256022::1704256023::1::::<><>::
+chicpea home_Untitled_1.png::CompressedTexture2D::2017727530034952804::1704256022::1704256023::1::::<><>::
 grass nhon.glb::PackedScene::2534910600665513501::1703941986::1703941986::1::::<><>::
 rock.glb::PackedScene::2624304124799128507::1703941986::1703941986::1::::<><>::
 ::res://Assets/FoodIngredients/::1703967469
@@ -98,6 +107,12 @@ Wild Berries.png::CompressedTexture2D::6702006827191771427::1703941986::17039419
 Wild Herb.png::CompressedTexture2D::2174060400313371180::1703941986::1703941986::1::::<><>::
 Yam.png::CompressedTexture2D::8505809436815684939::1703941986::1703941986::1::::<><>::
 Zucchini.png::CompressedTexture2D::5904253316114343765::1703941986::1703941986::1::::<><>::
+::res://Assets/Material/::1705027605
+Cut grass.png::CompressedTexture2D::1020266944343078355::1705025433::1705025437::1::::<><>::
+Fail spear.png::CompressedTexture2D::382841934490425564::1705027605::1705027608::1::::<><>::
+Flint.png::CompressedTexture2D::3824463558401720029::1705025433::1705025438::1::::<><>::
+Spear.png::CompressedTexture2D::8501013226350311344::1705025433::1705025437::1::::<><>::
+Twig.png::CompressedTexture2D::8542613716622694737::1705025433::1705025437::1::::<><>::
 ::res://Assets/Tools/::1703941986
 Axe.png::CompressedTexture2D::8114490237564491188::1703941986::1703941986::1::::<><>::
 Hammer.png::CompressedTexture2D::2276127070052245761::1703941986::1703941986::1::::<><>::
@@ -107,119 +122,162 @@ Scythe.png::CompressedTexture2D::2927338602927521357::1703941986::1703941986::1:
 Seed Bag.png::CompressedTexture2D::873374717211630925::1703941986::1703941986::1::::<><>::
 Shovel.png::CompressedTexture2D::139368775073222723::1703941986::1703941986::1::::<><>::
 Watering Can.png::CompressedTexture2D::5215034174226409045::1703941986::1703941986::1::::<><>::
-::res://Assets/UI/::1703966688
+::res://Assets/UI/::1704962294
+BOOK.png::CompressedTexture2D::7457581771673632559::1704956993::1704956998::1::::<><>::
 Cook button.png::CompressedTexture2D::8528573065704974394::1703941986::1703941986::1::::<><>::
 Cook button_hover.png::CompressedTexture2D::7498223260201006146::1703941986::1703941991::1::::<><>::
 Cook button_pressed.png::CompressedTexture2D::8227264606279001187::1703941986::1703941991::1::::<><>::
 Cook left.png::CompressedTexture2D::9168322815128291950::1703941986::1703941986::1::::<><>::
 Cook right.png::CompressedTexture2D::6062344218039595245::1703941986::1703941986::1::::<><>::
+CRAFT button.png::CompressedTexture2D::8217807403656247985::1704911963::1704911981::1::::<><>::
+CRAFT button_hover.png::CompressedTexture2D::8235966984414019479::1704911963::1704911981::1::::<><>::
+CRAFT button_pressed.png::CompressedTexture2D::6055309274812622414::1704911963::1704911981::1::::<><>::
+Crafting left.png::CompressedTexture2D::9208181169275487529::1704911963::1704911981::1::::<><>::
+Overlay.png::CompressedTexture2D::2782072675928297565::1704962292::1704962294::1::::<><>::
+::res://Assets/UI/Book Tabs/::1704961092
+Creatures.png::CompressedTexture2D::8226445676698076579::1704956993::1704956998::1::::<><>::
+Creatures_hover.png::CompressedTexture2D::141176120693862002::1704961085::1704961092::1::::<><>::
+Creatures_selected.png::CompressedTexture2D::3731508266519457868::1704956993::1704956998::1::::<><>::
+Gears.png::CompressedTexture2D::6862782539101892605::1704956993::1704956998::1::::<><>::
+Gears_hover.png::CompressedTexture2D::6804077812512091774::1704961085::1704961092::1::::<><>::
+Gears_selected.png::CompressedTexture2D::294209259049776155::1704956993::1704956998::1::::<><>::
+Recipes.png::CompressedTexture2D::8143757398343221439::1704956993::1704956998::1::::<><>::
+Recipes_hover.png::CompressedTexture2D::3343947859527394899::1704961085::1704961092::1::::<><>::
+Recipes_selected.png::CompressedTexture2D::1133816901857188531::1704956993::1704956998::1::::<><>::
+::res://Assets/UI/Chicpea đâp đá/::1705021417
+Smith1.png::CompressedTexture2D::6590919195767830516::1704911963::1705021414::1::::<><>::
+Smith2.png::CompressedTexture2D::6891440205707912825::1704911963::1705021417::1::::<><>::
 ::res://Assets/UI/Ếch/::1703941986
 Ếch1.png::CompressedTexture2D::1654436977526653390::1703941986::1703941986::1::::<><>::
 Ếch2.png::CompressedTexture2D::8900927235450463133::1703941986::1703941986::1::::<><>::
-::res://Jsons/::1700624450
-EntitySettings.json::JSON::-1::1701241429::0::1::::<><>::
-RegionSettings.json::JSON::-1::1703918271::0::1::::<><>::
-StatsSettings.json::JSON::-1::1703091695::0::1::::<><>::
-TerrainSettings.json::JSON::-1::1703993924::0::1::::<><>::
+::res://Jsons/::1704711871
+Cooks.json::JSON::-1::1704910003::0::1::::<><>::
+Crafts.json::JSON::-1::1705024771::0::1::::<><>::
+EntitySettings.json::JSON::-1::1704274742::0::1::::<><>::
+PossibleRelationship.json::JSON::-1::1704715065::0::1::::<><>::
+RegionSettings.json::JSON::-1::1704274773::0::1::::<><>::
+StartRelationship.json::JSON::-1::1705022707::0::1::::<><>::
+StatsSettings.json::JSON::-1::1704696652::0::1::::<><>::
+TerrainSettings.json::JSON::-1::1704708276::0::1::::<><>::
 ::res://Scenes/::1702461823
 Game.cs::CSharpScript::-1::1703146777::0::1::::<><>::
 Game.tscn::PackedScene::3978218602523986825::1702461823::0::1::::<><>::res://Scenes/Game.cs<>uid://cadar5emaw6s6
-Resources.cs::CSharpScript::-1::1703993256::0::1::::<><>::
+Resources.cs::CSharpScript::-1::1705025531::0::1::::<><>::
 ::res://Scenes/AI/::1699758156
-AIPoints.cs::CSharpScript::-1::1698993758::0::1::::<><>::
-SocialMemory.cs::CSharpScript::-1::1699180926::0::1::::<><>::
-SteeringBehavior.cs::CSharpScript::-1::1701282191::0::1::::<><>::
+AIPoints.cs::CSharpScript::-1::1704880542::0::1::::<><>::
+SocialMemory.cs::CSharpScript::-1::1704910385::0::1::::<><>::
+SteeringBehavior.cs::CSharpScript::-1::1704268396::0::1::::<><>::
 ::res://Scenes/Components/::1703953598
-::res://Scenes/Components/Camera/::1703942168
+::res://Scenes/Components/Camera/::1704355529
 Camera.cs::CSharpScript::-1::1702550369::0::1::::<><>::
-Camera.tscn::PackedScene::2100873378805464730::1703942168::0::1::::<><>::res://Scenes/Components/Camera/Camera.cs
-::res://Scenes/Components/DayNightCycle/::1703993925
+Camera.tscn::PackedScene::2100873378805464730::1704355529::0::1::::<><>::res://Scenes/Components/Camera/Camera.cs
+::res://Scenes/Components/DayNightCycle/::1704004150
 DayNightCycle.cs::CSharpScript::-1::1702571007::0::1::::<><>::
-DayNightCycle.tscn::PackedScene::3680944520621925505::1703993925::0::1::::<><>::res://Scenes/Components/DayNightCycle/DayNightCycle.cs
-::res://Scenes/Entities/::1703264483
-Entity.cs::CSharpScript::-1::1703274685::0::1::::<><>::
-Entity.tscn::PackedScene::2213487918746349974::1703264483::0::1::::<><>::res://Scenes/Entities/Entity.cs
-Pack.cs::CSharpScript::-1::1703760797::0::1::::<><>::
+DayNightCycle.tscn::PackedScene::3680944520621925505::1704004150::0::1::::<><>::res://Scenes/Components/DayNightCycle/DayNightCycle.cs
+::res://Scenes/Entities/::1705027523
+Entity.cs::CSharpScript::-1::1705027534::0::1::::<><>::
+Entity.tscn::PackedScene::2213487918746349974::1705027523::0::1::::<><>::res://Scenes/Entities/Entity.cs
+Pack.cs::CSharpScript::-1::1705024547::0::1::::<><>::
 TestModel.tscn::PackedScene::7294172849251288781::1698142949::0::1::::<><>::uid://0qwv2pus5gmv
-::res://Scenes/Entities/Chicpea/::1703994060
-BlueChicpea.tscn::PackedScene::8945845405650406053::1703942168::0::1::::<><>::uid://6sh277sh87vu
-Chicpea.cs::CSharpScript::-1::1703960880::0::1::::<><>::
-Chicpea.gdshader::Shader::-1::1703994060::0::1::::<><>::
-Chicpea.tscn::PackedScene::5740905913509361226::1703993925::0::1::::<><>::uid://6sh277sh87vu::::res://Scenes/Entities/Entity.tscn<>res://Scenes/Entities/Chicpea/Chicpea.cs<>res://Shaders/Toon.gdshader
-ChicpeaHouse.tscn::PackedScene::2150241647674007847::1703993925::0::1::::<><>::res://Scenes/Environment/Object/EntityBase.cs
-ChicpeaPack.cs::CSharpScript::-1::1703148691::0::1::::<><>::
-::res://Scenes/Entities/Player/::1703993925
-Player.cs::CSharpScript::-1::1703992638::0::1::::<><>::
-Player.tscn::PackedScene::4779066441570612911::1703993925::0::1::::<><>::res://Scenes/Entities/Player/Player.cs<>uid://cj18va36opovd::::res://Assets/2D/Smear 01 Horizontal 1.png
+::res://Scenes/Entities/Chicpea/::1705027523
+BlueChicpea.tscn::PackedScene::8945845405650406053::1704220599::0::1::::<><>::uid://6sh277sh87vu
+Chicpea.cs::CSharpScript::-1::1704706447::0::1::::<><>::
+Chicpea.gdshader::Shader::-1::1705027523::0::1::::<><>::
+Chicpea.tscn::PackedScene::5740905913509361226::1705025092::0::1::::<><>::uid://6sh277sh87vu::::res://Scenes/Entities/Entity.tscn<>res://Scenes/Entities/Chicpea/Chicpea.cs<>res://Shaders/Toon.gdshader
+ChicpeaHouse.tscn::PackedScene::2150241647674007847::1704267954::0::1::::<><>::res://Scenes/Environment/Object/EntityBase.cs<>res://Shaders/Toon.gdshader<>uid://csacxywnx5dxl
+ChicpeaPack.cs::CSharpScript::-1::1704963691::0::1::::<><>::
+::res://Scenes/Entities/Player/::1705025092
+Player.cs::CSharpScript::-1::1704969664::0::1::::<><>::
+Player.tscn::PackedScene::4779066441570612911::1705025092::0::1::::<><>::res://Scenes/Entities/Player/Player.cs<>uid://cj18va36opovd::::res://Assets/2D/Smear 01 Horizontal 1.png
 Smear 01 Horizontal 1.png::CompressedTexture2D::2297709306240671117::1703986971::1703986971::1::::<><>::
+::res://Scenes/Entities/RawrBerry/::1705027357
+RawrBerry.cs::CSharpScript::-1::1705027317::0::1::::<><>::
+RawrBerry.tscn::PackedScene::9092011387325021209::1705027357::0::1::::<><>::uid://6sh277sh87vu::::res://Scenes/Entities/Entity.tscn<>res://Scenes/Entities/RawrBerry/RawrBerry.cs<>res://Shaders/Toon.gdshader
+RawrberryHouse.tscn::PackedScene::2348885756673628159::1704267954::0::1::::<><>::res://Shaders/Toon.gdshader<>res://Scenes/Environment/Object/EntityBase.cs<>uid://csacxywnx5dxl
+RawrberryPack.cs::CSharpScript::-1::1704273172::0::1::::<><>::
 ::res://Scenes/Environment/::1702811615
-::res://Scenes/Environment/Material/::1703274914
-Berry.tscn::PackedScene::3690294048700937053::1703273178::0::1::::<><>::uid://d1dim43q6tf4p
-CutGrass.tscn::PackedScene::7635326065205989751::1703264483::0::1::::<><>::uid://d1dim43q6tf4p
-Flint.tscn::PackedScene::6229198613032156799::1703264483::0::1::::<><>::uid://d1dim43q6tf4p
+::res://Scenes/Environment/Material/::1704220599
+Berry.tscn::PackedScene::3690294048700937053::1704220599::0::1::::<><>::uid://d1dim43q6tf4p
+CutGrass.tscn::PackedScene::7635326065205989751::1704004150::0::1::::<><>::uid://d1dim43q6tf4p
+Flint.tscn::PackedScene::6229198613032156799::1704220599::0::1::::<><>::uid://d1dim43q6tf4p
 Material.cs::CSharpScript::-1::1703151821::0::1::::<><>::
 Material.tscn::PackedScene::8990873851600139525::1703274914::0::1::::<><>::uid://65hhpumcmtvu
 Twig.tscn::PackedScene::8709474931359097200::1703150209::0::1::::<><>::uid://d1dim43q6tf4p
 ::res://Scenes/Environment/Object/::1700725874
-EntityBase.cs::CSharpScript::-1::1703986113::0::1::::<><>::
+EntityBase.cs::CSharpScript::-1::1704694347::0::1::::<><>::
 Object.cs::CSharpScript::-1::1702617829::0::1::::<><>::
 ::res://Scenes/Environment/Object/Decorations/::1702616317
 GrassLike.cs::CSharpScript::-1::1700913133::0::1::::<><>::
 MovableGrass.tscn::PackedScene::5067098365333188267::1702616317::0::1::::<><>::res://Scenes/Environment/Object/Decorations/GrassLike.cs<>res://Shaders/Toon.gdshader<>uid://bclq3cb0t2qx7
-::res://Scenes/Environment/Object/Obstacles/::1703993925
+::res://Scenes/Environment/Object/Obstacles/::1704004150
 Mound.tscn::PackedScene::5011113289183900134::1700798870::0::1::::<><>::res://Scenes/Environment/Object/Object.cs
-Rock1.tscn::PackedScene::53612115641186254::1703993925::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>res://Shaders/Toon.gdshader
-Tree.tscn::PackedScene::3862354751438633889::1703993925::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>res://Shaders/Toon.gdshader
-::res://Scenes/Environment/Object/Sources/::1703993926
-BerryBush.tscn::PackedScene::3005890921038821814::1703993925::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn<>res://Shaders/Toon.gdshader
-Flint.tscn::PackedScene::4762335129849423341::1703993926::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn<>res://Shaders/Toon.gdshader
-GrassBush.tscn::PackedScene::5253431606515765350::1703993925::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn<>res://Shaders/Toon.gdshader
-GrassSource.tscn::PackedScene::5908031492376733735::1703993925::0::1::::<><>::uid://wc5roxvbcsm6::::res://Scenes/Environment/Object/Sources/MapSource.tscn
-MapSource.cs::CSharpScript::-1::1703152551::0::1::::<><>::
-MapSource.tscn::PackedScene::1550135955637192831::1703274915::0::1::::<><>::res://Scenes/Environment/Object/Sources/MapSource.cs
+Rock1.tscn::PackedScene::53612115641186254::1704004150::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>res://Shaders/Toon.gdshader
+Tree.tscn::PackedScene::3862354751438633889::1704004150::0::1::::<><>::res://Scenes/Environment/Object/Object.cs<>res://Shaders/Toon.gdshader
+::res://Scenes/Environment/Object/Sources/::1704256970
+BerryBush.tscn::PackedScene::3005890921038821814::1704256970::0::1::::<><>::uid://wc5roxvbcsm6
+Flint.tscn::PackedScene::4762335129849423341::1704220710::0::1::::<><>::uid://wc5roxvbcsm6
+GrassBush.tscn::PackedScene::5253431606515765350::1704220776::0::1::::<><>::uid://wc5roxvbcsm6
+GrassSource.tscn::PackedScene::5908031492376733735::1704220779::0::1::::<><>::uid://wc5roxvbcsm6
+MapSource.cs::CSharpScript::-1::1704220683::0::1::::<><>::
+MapSource.tscn::PackedScene::1550135955637192831::1704020007::0::1::::<><>::res://Scenes/Environment/Object/Sources/MapSource.cs
 ::res://Scenes/Environment/Ocean/::1701754455
 Ocean.tscn::PackedScene::519946713161935514::1701754455::0::1::::<><>::uid://ca33csh8sek3e
 ::res://Scenes/Environment/Terrain/::1703981642
 ForestRegion.tscn::PackedScene::3967257182747892347::1703981642::0::1::::<><>::uid://6f5n8plhjlno
-Terrain.cs::CSharpScript::-1::1703274142::0::1::::<><>::
+Terrain.cs::CSharpScript::-1::1704273315::0::1::::<><>::
 Terrain.tscn::PackedScene::2188022523605192268::1700701348::0::1::::<><>::res://Scenes/Environment/Terrain/Terrain.cs
-::res://Scenes/Map/::1703993925
+::res://Scenes/Map/::1705027358
 ProceduralGeneration.cs::CSharpScript::-1::1703958622::0::1::::<><>::
-ProceduralGeneration.tscn::PackedScene::5316707890584533834::1703993925::0::1::::<><>::res://Scenes/Map/ProceduralGeneration.cs<>uid://cadar5emaw6s6::::res://Scenes/Entities/Player/Player.tscn<>uid://hn4pgblhccso::::res://Scenes/Environment/Ocean/Ocean.tscn<>uid://46xcvyjw68io::::res://Scenes/Components/Camera/Camera.tscn<>uid://cv0cjmroueusj::::res://Scenes/UI/PlayerHUD/PlayerHUD.tscn<>uid://bspcva7a6qk4p::::res://Scenes/Components/DayNightCycle/DayNightCycle.tscn
+ProceduralGeneration.tscn::PackedScene::5316707890584533834::1705027358::0::1::::<><>::res://Scenes/Map/ProceduralGeneration.cs<>uid://cadar5emaw6s6::::res://Scenes/Entities/Player/Player.tscn<>uid://hn4pgblhccso::::res://Scenes/Environment/Ocean/Ocean.tscn<>uid://46xcvyjw68io::::res://Scenes/Components/Camera/Camera.tscn<>uid://cv0cjmroueusj::::res://Scenes/UI/PlayerHUD/PlayerHUD.tscn<>uid://bspcva7a6qk4p::::res://Scenes/Components/DayNightCycle/DayNightCycle.tscn
 Region.cs::CSharpScript::-1::1700633132::0::1::::<><>::
-::res://Scenes/Map/Home/::1703993925
-Home.tscn::PackedScene::5975930426455706127::1703993925::0::1::::<><>::uid://hn4pgblhccso::::res://Scenes/Environment/Ocean/Ocean.tscn<>uid://bva7oh0d71emj::::res://Scenes/Environment/Object/Obstacles/Tree.tscn<>uid://cegsmtph48v0n::::res://Scenes/Environment/Object/Decorations/MovableGrass.tscn<>uid://cadar5emaw6s6::::res://Scenes/Entities/Player/Player.tscn<>uid://078pf2p6ibe::::res://Scenes/Environment/Object/Obstacles/Rock1.tscn<>uid://46xcvyjw68io::::res://Scenes/Components/Camera/Camera.tscn<>uid://bv4ct70b3y3n6::::res://Scenes/Map/Home/Kitchen/Kitchen.tscn<>uid://b4mcmjjg4iavh::::res://Scenes/Map/Home/Blacksmith/Blacksmith.tscn<>uid://4gi584yg5hpp::::res://Scenes/Map/Home/Portal/Portal.tscn<>uid://bspcva7a6qk4p::::res://Scenes/Components/DayNightCycle/DayNightCycle.tscn
+::res://Scenes/Map/Home/::1705027357
+Home.tscn::PackedScene::5975930426455706127::1705027357::0::1::::<><>::uid://hn4pgblhccso::::res://Scenes/Environment/Ocean/Ocean.tscn<>uid://bva7oh0d71emj::::res://Scenes/Environment/Object/Obstacles/Tree.tscn<>uid://cegsmtph48v0n::::res://Scenes/Environment/Object/Decorations/MovableGrass.tscn<>uid://cadar5emaw6s6::::res://Scenes/Entities/Player/Player.tscn<>uid://078pf2p6ibe::::res://Scenes/Environment/Object/Obstacles/Rock1.tscn<>uid://46xcvyjw68io::::res://Scenes/Components/Camera/Camera.tscn<>uid://bv4ct70b3y3n6::::res://Scenes/Map/Home/Kitchen/Kitchen.tscn<>uid://b4mcmjjg4iavh::::res://Scenes/Map/Home/Blacksmith/Blacksmith.tscn<>uid://4gi584yg5hpp::::res://Scenes/Map/Home/Portal/Portal.tscn<>uid://bspcva7a6qk4p::::res://Scenes/Components/DayNightCycle/DayNightCycle.tscn
 ::res://Scenes/Map/Home/Blacksmith/::1703954373
 Blacksmith.cs::CSharpScript::-1::1703943721::0::1::::<><>::
 Blacksmith.tscn::PackedScene::4446813032682221665::1703954373::0::1::::<><>::res://Scenes/Map/Home/Blacksmith/Blacksmith.cs
-::res://Scenes/Map/Home/Kitchen/::1703954373
-Kitchen.cs::CSharpScript::-1::1703943623::0::1::::<><>::
-Kitchen.tscn::PackedScene::3920410438480384553::1703954373::0::1::::<><>::res://Scenes/Map/Home/Kitchen/Kitchen.cs
+::res://Scenes/Map/Home/Kitchen/::1704355528
+Kitchen.cs::CSharpScript::-1::1704221419::0::1::::<><>::
+Kitchen.tscn::PackedScene::3920410438480384553::1704355528::0::1::::<><>::res://Scenes/Map/Home/Kitchen/Kitchen.cs
 ::res://Scenes/Map/Home/Portal/::1703981976
 Portal.cs::CSharpScript::-1::1703949700::0::1::::<><>::
 Portal.tscn::PackedScene::2048403820956115129::1703981976::0::1::::<><>::res://Scenes/Map/Home/Portal/Portal.cs
-::res://Scenes/Settings/::1700623273
-EntitySettings.cs::CSharpScript::-1::1700462902::0::1::::<><>::
-RegionSettings.cs::CSharpScript::-1::1702783990::0::1::::<><>::
+::res://Scenes/Settings/::1704711839
+Cooks.cs::CSharpScript::-1::1705014163::0::1::::<><>::
+Crafts.cs::CSharpScript::-1::1704247455::0::1::::<><>::
+EntitySettings.cs::CSharpScript::-1::1704273039::0::1::::<><>::
+PossibleRelationship.cs::CSharpScript::-1::1704716973::0::1::::<><>::
+RegionSettings.cs::CSharpScript::-1::1704274217::0::1::::<><>::
+StartRelationship.cs::CSharpScript::-1::1705022693::0::1::::<><>::
 StatsSettings.cs::CSharpScript::-1::1702539534::0::1::::<><>::
 TerrainSettings.cs::CSharpScript::-1::1703981594::0::1::::<><>::
-::res://Scenes/UI/::1703949800
-::res://Scenes/UI/CookUI/::1703981976
-CookUI.cs::CSharpScript::-1::1703963712::0::1::::<><>::
-CookUI.tscn::PackedScene::8396708323471183931::1703981976::0::1::::<><>::res://Scenes/UI/CookUI/CookUI.cs<>uid://d3vg64p6rs3b3
-IngredientButton.cs::CSharpScript::-1::1703963737::0::1::::<><>::
-IngredientButton.tscn::PackedScene::1952526536498762315::1703981976::0::1::::<><>::res://Scenes/UI/CookUI/IngredientButton.cs<>uid://dsm0purohvjfb
-::res://Scenes/UI/Loading/::1703981976
-Loading.cs::CSharpScript::-1::1703954069::0::1::::<><>::
-Loading.tscn::PackedScene::2241194465272870446::1703981976::0::1::::<><>::res://Scenes/UI/Loading/Loading.cs<>uid://xtolnu1jcsxy
+::res://Scenes/UI/::1704957598
+::res://Scenes/UI/BookUI/::1705027357
+BookButton.cs::CSharpScript::-1::1705018887::0::1::::<><>::
+BookButton.tscn::PackedScene::3214557405029766666::1705027357::0::1::::<><>::res://Scenes/UI/BookUI/BookButton.cs<>uid://dsm0purohvjfb::::res://Assets/FoodIngredients/Berry.png
+BookUI.cs::CSharpScript::-1::1705024526::0::1::::<><>::
+BookUI.tscn::PackedScene::6819260720180914949::1705027357::0::1::::<><>::res://Scenes/UI/BookUI/BookUI.cs<>uid://dpg7mgkodhp3h::::res://Assets/UI/Book Tabs/Creatures.png<>uid://deirjuidtkred::::res://Assets/UI/BOOK.png<>uid://btftnp0gflxno::::res://Assets/UI/Book Tabs/Creatures_selected.png<>uid://doa5q2xecp31d::::res://Assets/UI/Book Tabs/Recipes.png<>uid://qfh2fk6pgafj::::res://Assets/UI/Book Tabs/Recipes_selected.png<>uid://bnv3lkua8ncrr::::res://Assets/UI/Book Tabs/Recipes_hover.png<>uid://c41na41h51dvx::::res://Assets/UI/Book Tabs/Gears.png<>uid://egrt3sme52wt::::res://Assets/UI/Book Tabs/Gears_selected.png<>uid://canfdq2voppy::::res://Assets/UI/Book Tabs/Creatures_hover.png<>uid://c367fxu1yn3ok::::res://Assets/UI/Book Tabs/Gears_hover.png
+RecipeComponent.tscn::PackedScene::5582444390258859444::1705025092::0::1::::<><>::uid://dsm0purohvjfb::::res://Assets/FoodIngredients/Berry.png
+::res://Scenes/UI/CookUI/::1705027357
+CookUI.cs::CSharpScript::-1::1705026540::0::1::::<><>::
+CookUI.tscn::PackedScene::8396708323471183931::1705027357::0::1::::<><>::res://Scenes/UI/CookUI/CookUI.cs<>uid://d3vg64p6rs3b3::::res://Assets/UI/Cook left.png<>uid://xtolnu1jcsxy::::res://Assets/UI/Ếch/Ếch1.png<>uid://dy2w8ave2inbx::::res://Assets/UI/Ếch/Ếch2.png<>uid://csmv6nvjfw518::::res://Assets/UI/Cook right.png<>uid://dtrkl8k3yohbm::::res://Assets/UI/Cook button.png<>uid://dsm0purohvjfb::::res://Assets/FoodIngredients/Berry.png<>uid://dphl31bbc0xfv::::res://Assets/UI/Cook button_pressed.png<>uid://de3gv2xdwqhbe::::res://Assets/UI/Cook button_hover.png
+IngredientButton.cs::CSharpScript::-1::1704917750::0::1::::<><>::
+IngredientButton.tscn::PackedScene::1952526536498762315::1705027357::0::1::::<><>::res://Scenes/UI/CookUI/IngredientButton.cs<>uid://dsm0purohvjfb::::res://Assets/FoodIngredients/Berry.png<>uid://c4vpkmcj5mjrk::::res://MotleyForcesRegular-w1rZ3.ttf
+::res://Scenes/UI/ForgeUI/::1705027357
+ForgeUI.cs::CSharpScript::-1::1705025780::0::1::::<><>::
+ForgeUI.tscn::PackedScene::3762847590583071990::1705027357::0::1::::<><>::res://Scenes/UI/ForgeUI/ForgeUI.cs<>uid://d4grnsxwpq53j::::res://Assets/UI/Crafting left.png<>uid://csmv6nvjfw518::::res://Assets/UI/Cook right.png<>uid://c05xqgq6ftrv5::::res://Assets/UI/Chicpea đâp đá/Smith1.png<>uid://c5gjapofmthkr::::res://Assets/UI/Chicpea đâp đá/Smith2.png<>uid://dpc1c76kgcia8::::res://Assets/UI/CRAFT button.png<>uid://csjicajp5mvxm::::res://Assets/UI/CRAFT button_pressed.png<>uid://dpltf46mtt3a6::::res://Assets/UI/CRAFT button_hover.png<>uid://dsm0purohvjfb::::res://Assets/FoodIngredients/Berry.png
+MaterialButton.cs::CSharpScript::-1::1704947647::0::1::::<><>::
+MaterialButton.tscn::PackedScene::6480249443693944099::1705027357::0::1::::<><>::uid://dsm0purohvjfb::::res://Assets/FoodIngredients/Berry.png<>res://Scenes/UI/ForgeUI/MaterialButton.cs<>uid://c4vpkmcj5mjrk::::res://MotleyForcesRegular-w1rZ3.ttf
+::res://Scenes/UI/Loading/::1705025092
+Loading.cs::CSharpScript::-1::1705021653::0::1::::<><>::
+Loading.tscn::PackedScene::2241194465272870446::1705025092::0::1::::<><>::res://Scenes/UI/Loading/Loading.cs<>uid://xtolnu1jcsxy::::res://Assets/UI/Ếch/Ếch1.png<>uid://dy2w8ave2inbx::::res://Assets/UI/Ếch/Ếch2.png<>uid://c4vpkmcj5mjrk::::res://MotleyForcesRegular-w1rZ3.ttf<>uid://c05xqgq6ftrv5::::res://Assets/UI/Chicpea đâp đá/Smith1.png<>uid://c5gjapofmthkr::::res://Assets/UI/Chicpea đâp đá/Smith2.png
 ::res://Scenes/UI/PlayerHUD/::1703088724
 PlayerHUD.cs::CSharpScript::-1::1702804898::0::1::::<><>::
 PlayerHUD.tscn::PackedScene::6298554690971933981::1703088724::0::1::::<><>::res://Scenes/UI/PlayerHUD/PlayerHUD.cs
-::res://Shaders/::1703994060
-MovableGrass.gdshader::Shader::-1::1703994060::0::1::::<><>::
+::res://Shaders/::1705027523
+MovableGrass.gdshader::Shader::-1::1705027523::0::1::::<><>::
 MovableGrass.tres::ShaderMaterial::7341899982606324046::1702461318::0::1::::<><>::res://Shaders/MovableGrass.gdshader
-Ocean.tres::VisualShader::1494189796005549193::1703991972::0::1::::<><>::
-Toon.gdshader::Shader::-1::1703994060::0::1::::<><>::
-WaterShader.tres::VisualShader::4832348549642672900::1703991972::0::1::::<><>::
+Ocean.tres::VisualShader::1494189796005549193::1705023332::0::1::::<><>::
+Toon.gdshader::Shader::-1::1705027523::0::1::::<><>::
+WaterShader.tres::VisualShader::4832348549642672900::1705023332::0::1::::<><>::
 ::res://User/::1703941171
-UserData.cs::CSharpScript::-1::1703962992::0::1::::<><>::
+UserData.cs::CSharpScript::-1::1705018733::0::1::::<><>::

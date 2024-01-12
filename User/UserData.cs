@@ -20,7 +20,7 @@ public partial class UserData : Node
 
     public Dictionary<MaterialType?, int> userIngredients = new Dictionary<MaterialType?, int>();
     public Dictionary<MaterialType?, int> userMaterials = new Dictionary<MaterialType?, int>();
-    public List<string> userDishes = new List<DishType>();
+    public List<string> userDishes = new List<string>();
     public void SaveGame()
     {
 
@@ -41,6 +41,7 @@ public partial class UserData : Node
         {
             userMaterials.Add(materialType, 9);
         }
+        userDishes.Add("Chicken Berry Sauce");
         userDishes.Add("Chicken Berry Sauce");
     }
 }

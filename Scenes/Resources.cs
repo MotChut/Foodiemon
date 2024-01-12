@@ -55,7 +55,7 @@ public partial class Resources : Node
 
 	public enum CraftType
 	{
-		BasicAxe
+		BasicSpear
 	}
 
 	public enum DishType
@@ -84,9 +84,9 @@ public partial class Resources : Node
 		[MaterialType.ChicNugget] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicNugget.png"),
 		[MaterialType.ChicLeg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicLeg.png"),
 		[MaterialType.ChicEgg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
-		[MaterialType.Twig] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
-		[MaterialType.Flint] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
-		[MaterialType.CutGrass] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png")
+		[MaterialType.Twig] = (Texture2D)GD.Load("res://Assets/Material/Twig.png"),
+		[MaterialType.Flint] = (Texture2D)GD.Load("res://Assets/Material/Flint.png"),
+		[MaterialType.CutGrass] = (Texture2D)GD.Load("res://Assets/Material/Cut grass.png")
 	};
 
 	public static Dictionary<MaterialType?, string> MaterialDescriptions = new Dictionary<MaterialType?, string>()
@@ -107,7 +107,7 @@ public partial class Resources : Node
 
 	public static Dictionary<CraftType, Texture2D> CraftAsset = new Dictionary<CraftType, Texture2D>()
 	{
-		[CraftType.BasicAxe] = (Texture2D)GD.Load("res://Assets/Dish/ChickenBerrySauce.png"),
+		[CraftType.BasicSpear] = (Texture2D)GD.Load("res://Assets/Material/Spear.png"),
 	};
 
 	public static Dictionary<DishType, string> DishDescription = new Dictionary<DishType, string>()

@@ -7,6 +7,8 @@ using static Resources;
 
 public partial class Pack : Node
 {
+	Dictionary<Entities, Relationship> relationships = new Dictionary<Entities, Relationship>();
+	Dictionary<Entities, AIPoints> aiPoints = new Dictionary<Entities, AIPoints>();
 	bool justSpawn = true;
 	public float maxExploreDistance = 0;
     const int nDirections = 16;
@@ -23,13 +25,14 @@ public partial class Pack : Node
 	public Vector3 wanderDir = Vector3.Zero;
 	public int foods = 0;
 	public int weapons = 0;
-	public CraftType craftType = CraftType.BasicAxe;
+	public CraftType craftType = CraftType.BasicSpear;
 	public Dictionary<MaterialType?, int> materials = new Dictionary<MaterialType?, int>();
     
     public Pack()
     {
         GenerateDirections();
         GetRate();
+		GenerateAIPoints();
     }
 
     void GenerateDirections()
@@ -145,8 +148,19 @@ public partial class Pack : Node
         }
 	}
 
-	public virtual void Craft()
+	public virtual void Craft(){}
+
+	public virtual void GenerateStartRelationship()
 	{
-		
+		Random rnd = new Random();
+		foreach(Entities entity in Enum.GetValues(typeof(Entities)))
+		{
+			StartRelationship startRelationship = StartRelationships.Find(x => x.entity == entity.ToString());
+
+		}
+	}
+
+	public void GenerateAIPoints()
+	{
 	}
 }

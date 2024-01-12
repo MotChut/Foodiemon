@@ -28,6 +28,13 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/Dangersense"]
 
+[node name="AttackArea" type="Area3D" parent="Trackers"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.5, 0)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Trackers/AttackArea"]
+
 [node name="Timers" type="Node3D" parent="."]
 
 [node name="ExploreTimer" type="Timer" parent="Timers"]
@@ -47,6 +54,10 @@ wait_time = 10.0
 one_shot = true
 
 [node name="HuntTimer" type="Timer" parent="Timers"]
+wait_time = 5.0
+one_shot = true
+
+[node name="GiveupTimer" type="Timer" parent="Timers"]
 wait_time = 5.0
 one_shot = true
 

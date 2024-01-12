@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bl2fj5f6mq0u5"]
+[gd_scene load_steps=6 format=3 uid="uid://bl2fj5f6mq0u5"]
 
 [ext_resource type="Script" path="res://Scenes/UI/BookUI/BookButton.cs" id="1_aq37n"]
 [ext_resource type="Texture2D" uid="uid://dsm0purohvjfb" path="res://Assets/FoodIngredients/Berry.png" id="2_3qwl5"]
@@ -19,8 +19,6 @@ corner_radius_top_right = 999
 corner_radius_bottom_right = 999
 corner_radius_bottom_left = 999
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwjds"]
-
 [node name="BookButton" type="Button"]
 visibility_layer = 524288
 clip_contents = true
@@ -34,7 +32,8 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_0cdh5")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4hy1d")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wim53")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_0cdh5")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_gwjds")
+theme_override_styles/focus = SubResource("StyleBoxFlat_4hy1d")
+toggle_mode = true
 script = ExtResource("1_aq37n")
 
 [node name="Texture" type="TextureRect" parent="."]

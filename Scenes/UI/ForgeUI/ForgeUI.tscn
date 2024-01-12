@@ -633,6 +633,7 @@ scale = Vector2(1e-05, 1e-05)
 pivot_offset = Vector2(122, 122)
 texture = ExtResource("9_7qs6b")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Continue" type="Label" parent="NewItem/VBoxContainer"]
 visible = false

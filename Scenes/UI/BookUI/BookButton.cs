@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using static Resources;
 
 public partial class BookButton : Button
 {
@@ -8,11 +9,12 @@ public partial class BookButton : Button
 	TextureRect textureRect;
 	string name;
 	string description;
+	
 	public override void _Ready()
 	{
 		textureRect = GetNode<TextureRect>("Texture");
 
-		bookUI = (BookUI)GetTree().Root.GetNode<CanvasLayer>("BookUI");
+		bookUI = (BookUI)GetTree().Root.GetNode<CanvasLayer>("BookUi");
 		Connect("pressed", new Callable(this, "Choose"));
 	}
 
@@ -41,5 +43,13 @@ public partial class BookButton : Button
 		bookUI.UpdateName(name);
 		bookUI.UpdateDescription(description);
 		bookUI.UpdateTexture(textureRect.Texture);
+		bookUI.ClearRecipe();
+
+		string editedName = System.Text.RegularExpressions.Regex.Replace(name, @"\s+", "");
+		if(Enum.IsDefined(typeof(DishType), 
+		(DishType)Enum.Parse(typeof(DishType), editedName)))
+		{
+			bookUI.UpdateRecipe(name);
+		}
 	}
 }

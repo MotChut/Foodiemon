@@ -8,6 +8,7 @@ public partial class ForgeUI : CanvasLayer
 {
 	[Export] const float TweenTime = 0.25f;
 	[Export] const float CraftTime = 3f;
+	Texture2D failTexture = (Texture2D)GD.Load("res://Assets/Material/Fail spear.png");
 	PackedScene materialButtonScene = (PackedScene)ResourceLoader.Load("res://Scenes/UI/ForgeUI/MaterialButton.tscn");
 	const int SIZEX = 1280;
 	const int SIZEY = 720;
@@ -26,6 +27,7 @@ public partial class ForgeUI : CanvasLayer
 	TextureRect craftTexture, itemTexture;
 	HBoxContainer hBoxContainer;
 	Control newItemUI;
+	UserData userdata;
 
 	public override void _Ready()
 	{
@@ -50,6 +52,8 @@ public partial class ForgeUI : CanvasLayer
 
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
+
+		userdata = UserData.GetInstance();
 		LoadUserIngredients();
 	}
 
@@ -194,6 +198,7 @@ public partial class ForgeUI : CanvasLayer
 		Dictionary<MaterialType?, int> materials = new Dictionary<MaterialType?, int>();
 		foreach(MaterialType? materialType in materialTypes)
 		{
+			userdata.userMaterials[materialType] -= 1;
 			if(!materials.Keys.Contains(materialType))
 			{
 				materials.Add(materialType, 1);
@@ -203,6 +208,7 @@ public partial class ForgeUI : CanvasLayer
 				materials[materialType] += 1;
 			}
 		}
+		materialTypes.Clear();
 
 		bool hasPossibleItem = false;
 		Crafts possibleItem = null;
@@ -244,7 +250,7 @@ public partial class ForgeUI : CanvasLayer
 		}
 		else // No possible dishes
 		{
-			RunDishAnimation(CraftType.BasicAxe, "");
+			RunDishAnimation(CraftType.BasicSpear);
 		}
 	}
 
@@ -253,7 +259,7 @@ public partial class ForgeUI : CanvasLayer
 		if(name == "")
 		{
 			newItemName.Text = "Failed!";
-			itemTexture.Texture = null;
+			itemTexture.Texture = failTexture;
 		}
 		else
 		{

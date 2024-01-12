@@ -15,7 +15,7 @@ public partial class Entity : CharacterBody3D
 
 	public enum States
 	{
-		Idle, Walk, Hurt
+		Idle, Walk, Hurt, AttackReady, Attack
 	}
 	public enum Task
     {
@@ -38,9 +38,11 @@ public partial class Entity : CharacterBody3D
 	public Vector3 attackSourcePos;
 	public float attackSourceKnock;
 	public int hp;
+	public bool canAttack = true;
 	public bool isHome = false;
 	[Export] public int currentHunger;
 	public bool isBusy = false;
+	public bool isAttacking = false;
 	public bool isKid = false;
 	public bool isPregnant = false;
 	public float workPoint = 0;
@@ -70,8 +72,8 @@ public partial class Entity : CharacterBody3D
 
 	// Nodes
 	public Node3D raycastsNode, trackersNode, timersNode;
-	Area3D vision, self, dangersense;
-	Timer exploreTimer, invincibleTimer, knockbackTimer, huntTimer;
+	public Area3D vision, self, dangersense, attackArea;
+	public Timer exploreTimer, invincibleTimer, knockbackTimer, huntTimer, giveupTimer;
 	Marker3D carryPoint;
 
     public override void _Ready()
@@ -84,10 +86,12 @@ public partial class Entity : CharacterBody3D
 		vision = trackersNode.GetNode<Area3D>("Vision");
 		self = trackersNode.GetNode<Area3D>("Self");
 		dangersense = trackersNode.GetNode<Area3D>("Dangersense");
+		attackArea = trackersNode.GetNode<Area3D>("AttackArea");
 		exploreTimer = timersNode.GetNode<Timer>("ExploreTimer");
 		invincibleTimer = timersNode.GetNode<Timer>("InvincibleTimer");
 		knockbackTimer = timersNode.GetNode<Timer>("KnockbackTimer");
 		huntTimer = timersNode.GetNode<Timer>("HuntTimer");
+		giveupTimer = timersNode.GetNode<Timer>("GiveupTimer");
 		carryPoint = GetNode<Marker3D>("CarryPoint");
 
 		// Stats
@@ -112,10 +116,12 @@ public partial class Entity : CharacterBody3D
 		//dangersense.Connect("body_entered", new Callable(this, "VisionEntered_Body"));
 		dangersense.Connect("body_exited", new Callable(this, "DangerExited_Body"));
 		dangersense.Connect("body_entered", new Callable(this, "DangerEntered_Body"));
+		attackArea.Connect("body_entered", new Callable(this, "AttackArea_Body"));
 
 		exploreTimer.Connect("timeout", new Callable(this, "ExploreTimeout"));
 		knockbackTimer.Connect("timeout", new Callable(this, "KnockbackTimeout"));
 		huntTimer.Connect("timeout", new Callable(this, "GiveUpPrey"));
+		giveupTimer.Connect("timeout", new Callable(this, "LoseTarget"));
     }
 
     public override void _PhysicsProcess(double delta)
@@ -220,6 +226,7 @@ public partial class Entity : CharacterBody3D
 	{
 		if(body is Player)
 		{
+			giveupTimer.Stop();
 			huntTimer.Stop();
 		}
 	}
@@ -227,7 +234,7 @@ public partial class Entity : CharacterBody3D
 	{
 		if(body == target)
         {
-            target = null;
+            giveupTimer.Start();
             huntTimer.Start();
         }
 	}
@@ -248,6 +255,7 @@ public partial class Entity : CharacterBody3D
 			SetCurrentTask(mainTask);
 		}
 	}
+	public virtual void AttackArea_Body(Node3D body){}
 
 	public void KeepTrackOfTarget()
 	{
@@ -389,12 +397,12 @@ public partial class Entity : CharacterBody3D
     {
         targetPos = pack.leader.GlobalPosition + followOffset;
     }
-	void SetState(States state)
+	public void SetState(States state)
 	{
 		currentState = state;
 		//animationPlayer.Play(Enum.GetName(state));
 	}
-	public void GetHit(Vector3 source, Node3D danger, float knockStr, int dmg)
+	public virtual void GetHit(Vector3 source, Node3D danger, float knockStr, int dmg)
 	{
 		if(invincibleTimer.IsStopped())
 		{
@@ -457,5 +465,9 @@ public partial class Entity : CharacterBody3D
 	public void GiveUpPrey()
 	{
 		SetCurrentTask(mainTask);
+	}
+	public void LoseTarget()
+	{
+		target = null;
 	}
 }

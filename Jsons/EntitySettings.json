@@ -18,7 +18,7 @@
     "foodsource": "res://Scenes/Environment/Object/Sources/BerryBush.tscn",
     "minfoodsource": 1,
     "maxfoodsource": 3,
-    "entity": "res://Scenes/Entities/RawrBerry/RawBerry.tscn",
+    "entity": "res://Scenes/Entities/RawrBerry/RawrBerry.tscn",
     "minentities": 1,
     "maxentities": 1
   }

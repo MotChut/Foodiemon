@@ -58,6 +58,7 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("1_8c6sj")
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Amount" type="Label" parent="."]
 layout_mode = 1

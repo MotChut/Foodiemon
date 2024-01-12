@@ -15,6 +15,7 @@ public partial class StatsSettings : Node
 	public float accel;
 	public float friction;
 	public int maxHp;
+	public float force;
 	public int attackPoint;
 	public int attackSpd;
 	public int maxHunger;
