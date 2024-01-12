@@ -116,7 +116,7 @@ public partial class BookUI : CanvasLayer
 		ClearItems();
 		if(btn == gearTab)
 		{
-			
+			LoadGears();
 		}
 		if(btn == creatureTab)
 		{
@@ -138,12 +138,32 @@ public partial class BookUI : CanvasLayer
 
 	void LoadGears()
 	{
-
+		ButtonGroup buttonGroup = new ButtonGroup();
+		foreach(var i in userdata.userCrafts)
+		{
+			BookButton bookButton = (BookButton)buttonScene.Instantiate();
+			itemContainer.AddChild(bookButton);
+			bookButton.SetType("Craft");
+			bookButton.SetName(i.ToString());
+			bookButton.SetTexture(CraftAsset[(CraftType)Enum.Parse(typeof(CraftType), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
+			bookButton.SetDescription(CraftDescription[(CraftType)Enum.Parse(typeof(CraftType), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
+			bookButton.ButtonGroup = buttonGroup;
+		}
 	}
 
 	void LoadCreatures()
 	{
-
+		ButtonGroup buttonGroup = new ButtonGroup();
+		foreach(var i in userdata.userCreatures)
+		{
+			BookButton bookButton = (BookButton)buttonScene.Instantiate();
+			itemContainer.AddChild(bookButton);
+			bookButton.SetType("Creature");
+			bookButton.SetName(i.ToString());
+			bookButton.SetTexture(CreatureAsset[(Entities)Enum.Parse(typeof(Entities), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
+			bookButton.SetDescription(CreatureDescription[(Entities)Enum.Parse(typeof(Entities), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
+			bookButton.ButtonGroup = buttonGroup;
+		}
 	}
 
 	void LoadRecipes()
@@ -153,6 +173,7 @@ public partial class BookUI : CanvasLayer
 		{
 			BookButton bookButton = (BookButton)buttonScene.Instantiate();
 			itemContainer.AddChild(bookButton);
+			bookButton.SetType("Recipe");
 			bookButton.SetName(i.ToString());
 			bookButton.SetTexture(DishAsset[(DishType)Enum.Parse(typeof(DishType), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
 			bookButton.SetDescription(DishDescription[(DishType)Enum.Parse(typeof(DishType), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
@@ -174,6 +195,28 @@ public partial class BookUI : CanvasLayer
 	{
 		// Create materials list
 		Cooks recipe = CookList.Find(x => x.food == name);
+		Dictionary<string, int> r = new Dictionary<string, int>();
+		if (recipe.material1 != "") r.Add(recipe.material1, recipe.amount1);
+		if (recipe.material2 != "") r.Add(recipe.material2, recipe.amount2);
+		if (recipe.material3 != "") r.Add(recipe.material3, recipe.amount3);
+		if (recipe.material4 != "") r.Add(recipe.material4, recipe.amount4);
+		if (recipe.material5 != "") r.Add(recipe.material5, recipe.amount5);
+		
+		// Load into UI
+		foreach(string material in r.Keys.ToList())
+		{
+			var component = recipeComScene.Instantiate();
+			components.AddChild(component);
+			MaterialType materialType = (MaterialType)Enum.Parse(typeof(MaterialType), material);
+			component.GetNode<TextureRect>("Texture").Texture = MaterialAssets[materialType];
+			component.GetNode<Label>("Label").Text = "x " + r[material].ToString();
+		}
+	}
+
+	public void UpdateMaterials(string name)
+	{
+		// Create materials list
+		Crafts recipe = CraftsList.Find(x => x.craft == name);
 		Dictionary<string, int> r = new Dictionary<string, int>();
 		if (recipe.material1 != "") r.Add(recipe.material1, recipe.amount1);
 		if (recipe.material2 != "") r.Add(recipe.material2, recipe.amount2);

@@ -9,6 +9,7 @@ font_size = 24
 script = ExtResource("1_8h4gp")
 
 [node name="FPS" type="Label" parent="."]
+visible = false
 offset_left = 33.0
 offset_top = 29.0
 offset_right = 609.0

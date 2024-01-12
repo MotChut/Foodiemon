@@ -239,6 +239,16 @@ points = PackedVector3Array(0, 0, 0, -4, 0, -3, 4, 0, -3, -10, 0, -12, 10, 0, -1
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_641p1"]
 points = PackedVector3Array(-1, 0, 1, 1, 0, 1, 1, 0, 3, -1, 0, 3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xl70p"]
+transparency = 1
+blend_mode = 3
+no_depth_test = true
+albedo_color = Color(0.603922, 0.45098, 1, 1)
+emission_enabled = true
+emission = Color(0.603922, 0.45098, 1, 1)
+emission_energy_multiplier = 16.0
+rim = 0.5
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b0rco"]
 transparency = 1
 blend_mode = 1
@@ -248,6 +258,46 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 0.0
 rim = 0.25
 grow_amount = -0.958
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vepue"]
+transparency = 1
+blend_mode = 3
+no_depth_test = true
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 0.0
+rim_enabled = true
+
+[sub_resource type="Animation" id="Animation_m3c0g"]
+resource_name = "AttackReady"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite/Cylinder:material_overlay")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [SubResource("StandardMaterial3D_xfsxk"), SubResource("StandardMaterial3D_xl70p"), SubResource("StandardMaterial3D_b0rco"), SubResource("StandardMaterial3D_vepue"), SubResource("StandardMaterial3D_b0rco"), SubResource("StandardMaterial3D_vepue"), SubResource("StandardMaterial3D_xfsxk")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"DealDamage"
+}]
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgrxp"]
 transparency = 1
@@ -290,56 +340,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [SubResource("StandardMaterial3D_b0rco"), SubResource("StandardMaterial3D_vgrxp"), SubResource("StandardMaterial3D_yb7hx"), SubResource("StandardMaterial3D_mn5dk"), SubResource("StandardMaterial3D_yb7hx"), SubResource("StandardMaterial3D_xfsxk")]
-}
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xl70p"]
-transparency = 1
-blend_mode = 3
-no_depth_test = true
-albedo_color = Color(0.603922, 0.45098, 1, 1)
-emission_enabled = true
-emission = Color(0.603922, 0.45098, 1, 1)
-emission_energy_multiplier = 16.0
-rim = 0.5
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vepue"]
-transparency = 1
-blend_mode = 3
-no_depth_test = true
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.0
-rim_enabled = true
-
-[sub_resource type="Animation" id="Animation_m3c0g"]
-resource_name = "AttackReady"
-length = 0.35
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite/Cylinder:material_overlay")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [SubResource("StandardMaterial3D_xfsxk"), SubResource("StandardMaterial3D_xl70p"), SubResource("StandardMaterial3D_b0rco"), SubResource("StandardMaterial3D_vepue"), SubResource("StandardMaterial3D_b0rco"), SubResource("StandardMaterial3D_vepue"), SubResource("StandardMaterial3D_xfsxk")]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.35),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"DealDamage"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_vspoq"]
@@ -522,7 +522,11 @@ skeleton = NodePath("")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, -0.1)
+visible = false
 shape = SubResource("CapsuleShape3D_h2rr5")
+
+[node name="Trackers" parent="." index="3"]
+visible = false
 
 [node name="CollisionShape3D" parent="Trackers/Self" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.7, -0.1)
@@ -554,6 +558,7 @@ parameters/OneShot/internal_active = false
 parameters/OneShot/request = 0
 
 [node name="HurtParticle" type="GPUParticles3D" parent="." index="8"]
+visible = false
 emitting = false
 amount = 25
 lifetime = 0.65
@@ -565,6 +570,7 @@ draw_pass_1 = SubResource("SphereMesh_txeql")
 
 [node name="InteractiveNotice" type="Sprite3D" parent="." index="9"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.137115, 0.418945, -0.126831)
+visible = false
 billboard = 1
 texture = SubResource("ViewportTexture_du2d3")
 

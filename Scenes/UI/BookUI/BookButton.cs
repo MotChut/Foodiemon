@@ -9,6 +9,7 @@ public partial class BookButton : Button
 	TextureRect textureRect;
 	string name;
 	string description;
+	string type;
 	
 	public override void _Ready()
 	{
@@ -21,6 +22,11 @@ public partial class BookButton : Button
 	public void SetTexture(Texture2D texture2D)
 	{	
 		textureRect.Texture = texture2D;
+	}
+
+	public void SetType(string s)
+	{
+		type = s;
 	}
 
 	public void SetName(string s)
@@ -40,16 +46,40 @@ public partial class BookButton : Button
 
 	public void Choose()
 	{
-		bookUI.UpdateName(name);
-		bookUI.UpdateDescription(description);
-		bookUI.UpdateTexture(textureRect.Texture);
-		bookUI.ClearRecipe();
-
-		string editedName = System.Text.RegularExpressions.Regex.Replace(name, @"\s+", "");
-		if(Enum.IsDefined(typeof(DishType), 
-		(DishType)Enum.Parse(typeof(DishType), editedName)))
+		switch(type)
 		{
-			bookUI.UpdateRecipe(name);
+			case "Recipe":
+			bookUI.UpdateName(name);
+			bookUI.UpdateDescription(description);
+			bookUI.UpdateTexture(textureRect.Texture);
+			bookUI.ClearRecipe();
+
+			string editedName = System.Text.RegularExpressions.Regex.Replace(name, @"\s+", "");
+			if(Enum.IsDefined(typeof(DishType), 
+			(DishType)Enum.Parse(typeof(DishType), editedName)))
+			{
+				bookUI.UpdateRecipe(name);
+			}
+			break;
+			case "Creature":
+			bookUI.UpdateName(name);
+			bookUI.UpdateDescription(description);
+			bookUI.UpdateTexture(textureRect.Texture);
+			break;
+			case "Craft":
+			bookUI.UpdateName(name);
+			bookUI.UpdateDescription(description);
+			bookUI.UpdateTexture(textureRect.Texture);
+			bookUI.ClearRecipe();
+
+			string editedName2 = System.Text.RegularExpressions.Regex.Replace(name, @"\s+", "");
+			if(Enum.IsDefined(typeof(CraftType), 
+			(CraftType)Enum.Parse(typeof(CraftType), editedName2)))
+			{
+				bookUI.UpdateMaterials(name);
+			}
+			break;
 		}
+		
 	}
 }

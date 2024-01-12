@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 using static Resources;
 
@@ -21,6 +22,11 @@ public partial class UserData : Node
     public Dictionary<MaterialType?, int> userIngredients = new Dictionary<MaterialType?, int>();
     public Dictionary<MaterialType?, int> userMaterials = new Dictionary<MaterialType?, int>();
     public List<string> userDishes = new List<string>();
+    public List<string> userCreatures = new List<string>();
+    public List<string> userCrafts = new List<string>();
+    public List<string> userChest = new List<string>();
+    public List<string> userInventory = new List<string>();
+
     public void SaveGame()
     {
 
@@ -42,6 +48,9 @@ public partial class UserData : Node
             userMaterials.Add(materialType, 9);
         }
         userDishes.Add("Chicken Berry Sauce");
-        userDishes.Add("Chicken Berry Sauce");
+        userCreatures.Add("Chicpea");
+        userCreatures.Add("Blue Chicpea");
+        userCreatures.Add("Rawrberry");
+        userCrafts.Add("Basic Spear");
     }
 }

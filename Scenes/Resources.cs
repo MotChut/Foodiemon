@@ -110,6 +110,25 @@ public partial class Resources : Node
 		[CraftType.BasicSpear] = (Texture2D)GD.Load("res://Assets/Material/Spear.png"),
 	};
 
+	public static Dictionary<CraftType, string> CraftDescription = new Dictionary<CraftType, string>()
+	{
+		[CraftType.BasicSpear] = "Basic spear than a Chicpea can also make it.",
+	};
+
+	public static Dictionary<Entities, Texture2D> CreatureAsset = new Dictionary<Entities, Texture2D>()
+	{
+		[Entities.Chicpea] = (Texture2D)GD.Load("res://Assets/2D/Chicpea.png"),
+		[Entities.BlueChicpea] = (Texture2D)GD.Load("res://Assets/2D/BlueChicpea.png"),
+		[Entities.Rawrberry] = (Texture2D)GD.Load("res://Assets/2D/Rawrberry.png"),
+	};
+
+	public static Dictionary<Entities, string> CreatureDescription = new Dictionary<Entities, string>()
+	{
+		[Entities.Chicpea] = "A creature mixed from chicken & pea.",
+		[Entities.BlueChicpea] = "Chicpea leader, the one that leads the whole pack.",
+		[Entities.Rawrberry] = "Not so easy-going. Like to hunt everything down, no matter chics or you.",
+	};
+
 	public static Dictionary<DishType, string> DishDescription = new Dictionary<DishType, string>()
 	{
 		[DishType.ChickenBerrySauce] = "Kill Chicpeas and appreciate their juicy meaty chunky legs."
