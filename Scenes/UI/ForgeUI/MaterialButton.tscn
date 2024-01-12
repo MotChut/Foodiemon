@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://2223d1dfhmfj"]
+[gd_scene load_steps=9 format=3 uid="uid://cylc05mn3xk8b"]
 
-[ext_resource type="Script" path="res://Scenes/UI/CookUI/IngredientButton.cs" id="1_1py85"]
-[ext_resource type="Texture2D" uid="uid://dsm0purohvjfb" path="res://Assets/FoodIngredients/Berry.png" id="2_doyus"]
-[ext_resource type="FontFile" uid="uid://c4vpkmcj5mjrk" path="res://MotleyForcesRegular-w1rZ3.ttf" id="3_vftf1"]
+[ext_resource type="Texture2D" uid="uid://dsm0purohvjfb" path="res://Assets/FoodIngredients/Berry.png" id="1_8c6sj"]
+[ext_resource type="Script" path="res://Scenes/UI/ForgeUI/MaterialButton.cs" id="1_e5ka4"]
+[ext_resource type="FontFile" uid="uid://c4vpkmcj5mjrk" path="res://MotleyForcesRegular-w1rZ3.ttf" id="2_fj852"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0cdh5"]
 
@@ -23,12 +23,12 @@ corner_radius_bottom_left = 999
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gwjds"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_4qsu0"]
-font = ExtResource("3_vftf1")
+font = ExtResource("2_fj852")
 font_size = 24
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="IngredientButton" type="Button"]
+[node name="MaterialButton" type="Button"]
 visibility_layer = 524288
 clip_contents = true
 custom_minimum_size = Vector2(64, 64)
@@ -42,7 +42,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_4hy1d")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wim53")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_0cdh5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gwjds")
-script = ExtResource("1_1py85")
+script = ExtResource("1_e5ka4")
 
 [node name="Texture" type="TextureRect" parent="."]
 texture_filter = 1
@@ -55,7 +55,8 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_doyus")
+mouse_filter = 2
+texture = ExtResource("1_8c6sj")
 expand_mode = 1
 
 [node name="Amount" type="Label" parent="."]

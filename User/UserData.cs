@@ -4,7 +4,10 @@ using static Resources;
 
 public partial class UserData : Node
 {
-    private UserData(){GenerateUserData();}
+    private UserData()
+    {
+        GenerateUserData();
+    }
     private static UserData _instance;
     public static UserData GetInstance()
     {
@@ -16,6 +19,8 @@ public partial class UserData : Node
     }
 
     public Dictionary<MaterialType?, int> userIngredients = new Dictionary<MaterialType?, int>();
+    public Dictionary<MaterialType?, int> userMaterials = new Dictionary<MaterialType?, int>();
+    public List<string> userDishes = new List<DishType>();
     public void SaveGame()
     {
 
@@ -32,5 +37,10 @@ public partial class UserData : Node
         {
             userIngredients.Add(materialType, 9);
         }
+        foreach(MaterialType? materialType in CraftMaterialType)
+        {
+            userMaterials.Add(materialType, 9);
+        }
+        userDishes.Add("Chicken Berry Sauce");
     }
 }
