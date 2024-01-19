@@ -16,7 +16,11 @@ public partial class RegionSettings : Node
 	public int grassLand = 0;
     public int rawrberryMax = 0;
 	public int rawrberryBase = 0;
-
+	public int desert = 0;
+    public int potatoonMax = 0;
+    public int potatoon = 0;
+    public int floweeMax = 0;
+    public int flowee = 0;
 
     // Local
 	public PackedScene terrain;
@@ -51,7 +55,10 @@ public partial class RegionSettings : Node
             trees,
             chicpeaBase,
             grassLand,
-            rawrberryBase
+            rawrberryBase,
+            desert,
+            potatoon,
+            flowee
         };
 	}
 
@@ -70,6 +77,8 @@ public partial class RegionSettings : Node
     {
         upBoundaries.Add(chicpeaMax);
         upBoundaries.Add(rawrberryMax);
+        upBoundaries.Add(potatoonMax);
+        upBoundaries.Add(floweeMax);
     }
 
     void CreateTypeControl()

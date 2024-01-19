@@ -2,15 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://6f5n8plhjlno" path="res://Scenes/Environment/Terrain/Terrain.tscn" id="1_1d31h"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kt5py"]
-albedo_color = Color(0.588235, 0.521569, 0.32549, 1)
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ae44u"]
+albedo_color = Color(0.364706, 0.470588, 0.329412, 1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_s3kf0"]
-material = SubResource("StandardMaterial3D_kt5py")
+[sub_resource type="BoxMesh" id="BoxMesh_epj76"]
+material = SubResource("StandardMaterial3D_ae44u")
 size = Vector3(20, 1, 20)
 
 [node name="ForestRegion" instance=ExtResource("1_1d31h")]
 visible = false
 
 [node name="Mesh" parent="." index="0"]
-mesh = SubResource("BoxMesh_s3kf0")
+mesh = SubResource("BoxMesh_epj76")

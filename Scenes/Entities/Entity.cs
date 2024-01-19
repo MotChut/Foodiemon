@@ -6,12 +6,14 @@ using static Resources;
 
 public partial class Entity : CharacterBody3D
 {
+	[Export] AudioStreamWav hitSound;
 	[Export] public Vector3 objectSize;
 	[Export] public Entities entityType;
 	[Export] public int nFormation;
 	[Export] public bool isLeader = false;
 	[Export] public float waitFormationTime;
 	public Vector3 followOffset = Vector3.Zero;
+	AudioStreamPlayer audioPlayer;
 
 	public enum States
 	{
@@ -74,7 +76,10 @@ public partial class Entity : CharacterBody3D
 	public Node3D raycastsNode, trackersNode, timersNode;
 	public Area3D vision, self, dangersense, attackArea;
 	public Timer exploreTimer, invincibleTimer, knockbackTimer, huntTimer, giveupTimer;
+	public Sprite3D healthContainer;
+	public ProgressBar healthBar;
 	Marker3D carryPoint;
+	public AnimationTree animationTree;
 
     public override void _Ready()
     {
@@ -93,6 +98,11 @@ public partial class Entity : CharacterBody3D
 		huntTimer = timersNode.GetNode<Timer>("HuntTimer");
 		giveupTimer = timersNode.GetNode<Timer>("GiveupTimer");
 		carryPoint = GetNode<Marker3D>("CarryPoint");
+		healthContainer = GetNode<Sprite3D>("InteractiveNotice");
+		healthBar = GetNode<ProgressBar>("InteractiveNotice/SubViewport/HealthBar");
+		animationTree = GetNode<AnimationTree>("Sprite/AnimationTree");
+		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
+
 
 		// Stats
 		statsSettings = StatsSettingsList[(int)entityType];
@@ -102,6 +112,8 @@ public partial class Entity : CharacterBody3D
 		runSpd = speed * 1.5f;
 		currentHunger = statsSettings.maxHunger;
 		hp = statsSettings.maxHp;
+		healthBar.MaxValue = statsSettings.maxHp;
+		healthBar.Value = hp;
 
 		// Steering Behaviors
 		GenerateRaycasts();
@@ -264,7 +276,7 @@ public partial class Entity : CharacterBody3D
             GlobalPosition + new Vector3(0, 0.5f, 0), 
             target.GlobalPosition + new Vector3(0, 0.5f, 0));
         var result = state.IntersectRay(query);
-		if(result == null) return;
+		if(result.Count <= 0) return;
         if((Node3D)result["collider"] == target)
 			targetPos = target.GlobalPosition;
 	}
@@ -385,11 +397,14 @@ public partial class Entity : CharacterBody3D
 
 	public async void Die()
 	{
+		if(!userdata.userCreatures[entityType.ToString()]) userdata.userCreatures[entityType.ToString()] = true;
 		GetNode<Node3D>("Sprite").Visible = false;
 		GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", true);
 		GetNode<GpuParticles3D>("HurtParticle").Emitting = true;
 		await ToSignal(GetTree().CreateTimer(GetNode<GpuParticles3D>("HurtParticle").Lifetime), "timeout");
+		if(isLeader) pack.ChooseNewLeader();
 		pack.entities.Remove(this);
+		GiveMaterials();
 		QueueFree();
 	}
 	
@@ -406,12 +421,13 @@ public partial class Entity : CharacterBody3D
 	{
 		if(invincibleTimer.IsStopped())
 		{
-			GetNode<AnimationPlayer>("AnimationPlayer").Play("Hurt");
+			PlayHurt();
 			
 			this.danger = danger;
 			ScareOther(danger);
 			SetCurrentTask(Task.Runaway);
 			hp -= dmg;
+			healthBar.Value = hp;
 			if(hp <= 0)
 			{ 
 				Die();
@@ -469,5 +485,13 @@ public partial class Entity : CharacterBody3D
 	public void LoseTarget()
 	{
 		target = null;
+	}
+
+	public virtual void PlayHurt(){}
+	public virtual void GiveMaterials(){}
+
+	public void HurtSound()
+	{
+		audioPlayer.Play();
 	}
 }

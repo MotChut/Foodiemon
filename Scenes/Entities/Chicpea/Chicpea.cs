@@ -55,6 +55,8 @@ public partial class Chicpea : Entity
 
     public override void _PhysicsProcess(double delta)
     {
+        healthContainer.Visible = GetTree().Root.GetNode<SettingUI>("SettingUi").showHP;
+
         if(currentState == States.Hurt)
         {
             KnockBack();
@@ -65,11 +67,6 @@ public partial class Chicpea : Entity
             if(currentState != States.Idle)
                 TaskHandler();
         }
-        
-            
-        GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentTask.ToString();
-        if(isPregnant) GetNode<Label>("InteractiveNotice/SubViewport/Label").Modulate = new Color("#964943");
-        else GetNode<Label>("InteractiveNotice/SubViewport/Label").Modulate = new Color("#ffffff");
     }
 
     #endregion
@@ -303,7 +300,9 @@ public partial class Chicpea : Entity
 				mapSource.CollectResource(amount);
                 if(!GlobalTransform.Origin.IsEqualApprox(new Vector3(mapSource.GlobalPosition.X, GlobalPosition.Y, mapSource.GlobalPosition.Z)))
                     LookAt(mapSource.GlobalPosition);
+                animationTree.Set("parameters/Transition/transition_request", "Collect");
                 await ToSignal(GetTree().CreateTimer(mapSource.collectTime), "timeout");
+                animationTree.Set("parameters/Transition/transition_request", "Carry");
                 broughtType = mapSource.resourceType;
                 broughtAmount = amount;
                 CarryMaterial();
@@ -358,6 +357,7 @@ public partial class Chicpea : Entity
                     SetCurrentTask(Task.CollectMaterial);
                 }
             }
+            animationTree.Set("parameters/Transition/transition_request", "Walk");
         }
     }
 
@@ -469,5 +469,22 @@ public partial class Chicpea : Entity
         chicpea.GetNode<CollisionShape3D>("BodyCollision").SetDeferred("disabled", true);
         pack.entities.Add(chicpea);
         chicpea.pack = pack;
+    }
+
+    public override void PlayHurt()
+    {
+        animationTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
+        animationTree.Set("parameters/Transition/transition_request", "Carry");
+    }
+
+    public override void GiveMaterials()
+    {
+        List<MaterialType?> dropList = new List<MaterialType?>(){ MaterialType.ChicEgg, MaterialType.ChicLeg, MaterialType.ChicNugget};
+        MaterialType? materialType =  dropList[rnd.Next(dropList.Count)];
+        int amount = rnd.Next(3) + 1;
+        if(userdata.userIngredients.ContainsKey(materialType))
+            userdata.userIngredients[materialType] += amount;
+        else
+            userdata.userIngredients.Add(materialType, amount);
     }
 }

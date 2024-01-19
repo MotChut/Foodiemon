@@ -98,6 +98,12 @@ public partial class Terrain : Node3D
 			case TerrainType.RawrberryBase:
 			pack = new RawrberryPack();
 			break;
+			case TerrainType.Potatoon:
+			pack = new PotatoonPack();
+			break;
+			case TerrainType.Flowee:
+			pack = new FloweePack();
+			break;
 		}
 		
 		PackList.Add(pack);
@@ -108,9 +114,12 @@ public partial class Terrain : Node3D
 
 	void GenerateHouse(Pack pack) // Generate first so required no checking
 	{
+		if(entitySettings.house == "") return;
+		PackedScene packedScene = entitySettings.houseScene;
+		
 		int x =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
 		int z =  rnd.Next(TILE_SIZE / 3, TILE_SIZE * 2 / 3);
-		PackedScene packedScene = entitySettings.houseScene;
+		
 		EntityBase house = (EntityBase)packedScene.Instantiate();
 		house.Position = new Vector3(x - (TILE_SIZE - 1) / 2.0f, 0.5f, 
 									z - (TILE_SIZE - 1) / 2.0f);
@@ -123,6 +132,8 @@ public partial class Terrain : Node3D
 
 	void GenerateSources(Pack pack) // Generate second so required no break when not finding possible cell
 	{
+		if(entitySettings.foodSource == "") return;
+
 		int nFoodSource = rnd.Next(entitySettings.minFoodSource, entitySettings.maxFoodSource + 1);
 		while(nFoodSource > 0)
 		{

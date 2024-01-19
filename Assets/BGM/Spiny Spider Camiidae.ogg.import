@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://canixx8wjaob3"
+path="res://.godot/imported/Spiny Spider Camiidae.ogg-13bf1dfc2fc446410e5daf95c1ef6424.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/BGM/Spiny Spider Camiidae.ogg"
+dest_files=["res://.godot/imported/Spiny Spider Camiidae.ogg-13bf1dfc2fc446410e5daf95c1ef6424.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

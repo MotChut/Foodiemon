@@ -1,9 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv0cjmroueusj"]
+[gd_scene load_steps=10 format=3 uid="uid://cv0cjmroueusj"]
 
 [ext_resource type="Script" path="res://Scenes/UI/PlayerHUD/PlayerHUD.cs" id="1_8h4gp"]
+[ext_resource type="Texture2D" uid="uid://f6kwkg38b6p4" path="res://Assets/UI/Health.png" id="2_47hb4"]
+[ext_resource type="Texture2D" uid="uid://bq2ser838jf1p" path="res://Assets/UI/Health2.png" id="3_l4npa"]
+[ext_resource type="Texture2D" uid="uid://nkr3kg6svfy0" path="res://Assets/UI/Health3.png" id="4_tgasw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_y76ra"]
 font_size = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qau4u"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h6ye0"]
+bg_color = Color(0.270588, 0.270588, 0.270588, 1)
+corner_radius_top_left = 999
+corner_radius_top_right = 999
+corner_radius_bottom_right = 999
+corner_radius_bottom_left = 999
+
+[sub_resource type="SystemFont" id="SystemFont_358q7"]
+font_names = PackedStringArray("Montserrat")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wvpim"]
+font = SubResource("SystemFont_358q7")
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
 
 [node name="PlayerHUD" type="CanvasLayer"]
 script = ExtResource("1_8h4gp")
@@ -15,3 +40,202 @@ offset_top = 29.0
 offset_right = 609.0
 offset_bottom = 310.0
 label_settings = SubResource("LabelSettings_y76ra")
+
+[node name="PlayerHP" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 35.0
+offset_top = 461.0
+offset_right = 131.0
+offset_bottom = 683.0
+scale = Vector2(0.65, 0.65)
+pivot_offset = Vector2(0, 250)
+
+[node name="Bar" type="TextureRect" parent="PlayerHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -9.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_47hb4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Health" type="VBoxContainer" parent="PlayerHP"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 0
+offset_left = 13.0
+offset_top = -135.0
+offset_right = 63.0
+offset_bottom = 117.0
+scale = Vector2(1.4, 1.4)
+theme_override_constants/separation = -32
+alignment = 2
+
+[node name="4" type="TextureRect" parent="PlayerHP/Health"]
+custom_minimum_size = Vector2(50, 72)
+layout_mode = 2
+texture = ExtResource("4_tgasw")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="3" type="TextureRect" parent="PlayerHP/Health"]
+custom_minimum_size = Vector2(50, 60)
+layout_mode = 2
+texture = ExtResource("3_l4npa")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="2" type="TextureRect" parent="PlayerHP/Health"]
+custom_minimum_size = Vector2(50, 60)
+layout_mode = 2
+texture = ExtResource("3_l4npa")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="1" type="TextureRect" parent="PlayerHP/Health"]
+custom_minimum_size = Vector2(50, 60)
+layout_mode = 2
+texture = ExtResource("3_l4npa")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ItemBox" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1048.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 96.0
+
+[node name="Item1" type="Panel" parent="ItemBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_right = 64.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qau4u")
+
+[node name="TextureRect" type="TextureRect" parent="ItemBox/Item1"]
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Item2" type="Panel" parent="ItemBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_left = 68.0
+offset_right = 132.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qau4u")
+
+[node name="TextureRect" type="TextureRect" parent="ItemBox/Item2"]
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Item3" type="Panel" parent="ItemBox"]
+clip_contents = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_left = 136.0
+offset_right = 200.0
+offset_bottom = 64.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_qau4u")
+
+[node name="TextureRect" type="TextureRect" parent="ItemBox/Item3"]
+texture_filter = 1
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="ItemBox2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1048.0
+offset_top = 32.0
+offset_right = 1248.0
+offset_bottom = 141.0
+
+[node name="Label" type="Label" parent="ItemBox2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_left = 37.0
+offset_top = 41.0
+offset_right = 69.0
+offset_bottom = 73.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6ye0")
+text = "1"
+label_settings = SubResource("LabelSettings_wvpim")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="ItemBox2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_left = 105.0
+offset_top = 41.0
+offset_right = 137.0
+offset_bottom = 73.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6ye0")
+text = "2"
+label_settings = SubResource("LabelSettings_wvpim")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label3" type="Label" parent="ItemBox2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+offset_left = 168.0
+offset_top = 41.0
+offset_right = 200.0
+offset_bottom = 73.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_h6ye0")
+text = "3"
+label_settings = SubResource("LabelSettings_wvpim")
+horizontal_alignment = 1
+vertical_alignment = 1

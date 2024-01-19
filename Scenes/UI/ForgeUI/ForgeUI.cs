@@ -27,7 +27,6 @@ public partial class ForgeUI : CanvasLayer
 	TextureRect craftTexture, itemTexture;
 	HBoxContainer hBoxContainer;
 	Control newItemUI;
-	UserData userdata;
 
 	public override void _Ready()
 	{
@@ -53,7 +52,6 @@ public partial class ForgeUI : CanvasLayer
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
 
-		userdata = UserData.GetInstance();
 		LoadUserIngredients();
 	}
 
@@ -63,6 +61,7 @@ public partial class ForgeUI : CanvasLayer
 		{
 			GetTree().Paused = false;
 			QueueFree();
+			GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = true;
 		}
 		if(Input.IsActionJustPressed("attack") && clickRequired)
 		{
@@ -73,16 +72,15 @@ public partial class ForgeUI : CanvasLayer
 
     void LoadUserIngredients()
 	{
-		UserData userData = UserData.GetInstance();
-		foreach(var i in userData.userMaterials.Keys.ToList())
+		foreach(var i in userdata.userMaterials.Keys.ToList())
 		{
-			if(userData.userMaterials[i] > 0)
+			if(userdata.userMaterials[i] > 0)
 			{
 				MaterialButton ingredientButton = (MaterialButton)materialButtonScene.Instantiate();
 				ingredients.AddChild(ingredientButton);
 				ingredientButton.materialType = i;
 				ingredientButton.SetTexture(MaterialAssets[i]);
-				ingredientButton.SetAmount(userData.userMaterials[i]);
+				ingredientButton.SetAmount(userdata.userMaterials[i]);
 				ingredientButton.SetDescription(MaterialDescriptions[i]);
 			}
 		}
@@ -245,6 +243,7 @@ public partial class ForgeUI : CanvasLayer
 
 		if(hasPossibleItem) // Has some dishes
 		{
+			userdata.userCrafts[possibleItem.craft] = true;
 			string type = System.Text.RegularExpressions.Regex.Replace(possibleItem.craft, @"\s+", "");
 			RunDishAnimation((CraftType)Enum.Parse(typeof(CraftType), type), possibleItem.craft);
 		}

@@ -25,7 +25,6 @@ public partial class BookUI : CanvasLayer
 
 	PackedScene buttonScene = (PackedScene)ResourceLoader.Load("res://Scenes/UI/BookUI/BookButton.tscn");
 	PackedScene recipeComScene = (PackedScene)ResourceLoader.Load("res://Scenes/UI/BookUI/RecipeComponent.tscn");
-	UserData userdata;
 	TextureRect textureRect;
 	TextureButton creatureTab, recipeTab, gearTab;
 	GridContainer itemContainer;
@@ -51,23 +50,22 @@ public partial class BookUI : CanvasLayer
 		recipeTab.Pressed += () => TabPressed(recipeTab);
 		gearTab.Pressed += () => TabPressed(gearTab);
 
-		Connect("visibility_changed", new Callable(this, "ChangeVisibleState"));
-		
-		userdata = UserData.GetInstance();
-		TabPressed(recipeTab);
+		Connect("visibility_changed", new Callable(this, "ChangeVisibleState"));		
 
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
 
 	}
 
-    public override void _PhysicsProcess(double delta)
+    public override async void _PhysicsProcess(double delta)
     {
-        if(Input.IsActionJustPressed("escape"))
+        if(Input.IsActionJustPressed("book") && Visible)
 		{
 			Visible = false;
+			await ToSignal(GetTree().CreateTimer(0.1f), "timeout");
 			if(current == recipeTab) TabPressed(gearTab);
 			GetTree().Paused = false;
+			GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = true;
 		}
     }
 
@@ -139,10 +137,11 @@ public partial class BookUI : CanvasLayer
 	void LoadGears()
 	{
 		ButtonGroup buttonGroup = new ButtonGroup();
-		foreach(var i in userdata.userCrafts)
+		foreach(var i in userdata.userCrafts.Keys)
 		{
 			BookButton bookButton = (BookButton)buttonScene.Instantiate();
 			itemContainer.AddChild(bookButton);
+			bookButton.SetAvailable(userdata.userCrafts[i]);
 			bookButton.SetType("Craft");
 			bookButton.SetName(i.ToString());
 			bookButton.SetTexture(CraftAsset[(CraftType)Enum.Parse(typeof(CraftType), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
@@ -154,10 +153,11 @@ public partial class BookUI : CanvasLayer
 	void LoadCreatures()
 	{
 		ButtonGroup buttonGroup = new ButtonGroup();
-		foreach(var i in userdata.userCreatures)
+		foreach(var i in userdata.userCreatures.Keys)
 		{
 			BookButton bookButton = (BookButton)buttonScene.Instantiate();
 			itemContainer.AddChild(bookButton);
+			bookButton.SetAvailable(userdata.userCreatures[i]);
 			bookButton.SetType("Creature");
 			bookButton.SetName(i.ToString());
 			bookButton.SetTexture(CreatureAsset[(Entities)Enum.Parse(typeof(Entities), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);
@@ -169,10 +169,11 @@ public partial class BookUI : CanvasLayer
 	void LoadRecipes()
 	{
 		ButtonGroup buttonGroup = new ButtonGroup();
-		foreach(var i in userdata.userDishes)
+		foreach(var i in userdata.userDishes.Keys)
 		{
 			BookButton bookButton = (BookButton)buttonScene.Instantiate();
 			itemContainer.AddChild(bookButton);
+			bookButton.SetAvailable(userdata.userDishes[i]);
 			bookButton.SetType("Recipe");
 			bookButton.SetName(i.ToString());
 			bookButton.SetTexture(DishAsset[(DishType)Enum.Parse(typeof(DishType), System.Text.RegularExpressions.Regex.Replace(i, @"\s+", ""))]);

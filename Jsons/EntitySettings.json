@@ -16,10 +16,26 @@
     "terraintype": "RawrberryBase",
     "house": "res://Scenes/Entities/RawrBerry/RawrberryHouse.tscn",
     "foodsource": "res://Scenes/Environment/Object/Sources/BerryBush.tscn",
-    "minfoodsource": 1,
-    "maxfoodsource": 3,
+    "minfoodsource": 7,
+    "maxfoodsource": 11,
     "entity": "res://Scenes/Entities/RawrBerry/RawrBerry.tscn",
     "minentities": 1,
     "maxentities": 1
+  },
+  {
+    "id": 2,
+    "terraintype": "Potatoon",
+    "house": "res://Scenes/Entities/Potatoon/PotatoonHouse.tscn",
+    "entity": "res://Scenes/Entities/Potatoon/Potatoon.tscn",
+    "minentities": 1,
+    "maxentities": 1
+  },
+  {
+    "id": 3,
+    "terraintype": "Flowee",
+    "house": "res://Scenes/Entities/Flowee/FloweeHouse.tscn",
+    "entity": "res://Scenes/Entities/Flowee/Flowee.tscn",
+    "minentities": 1,
+    "maxentities": 5
   }
 ]

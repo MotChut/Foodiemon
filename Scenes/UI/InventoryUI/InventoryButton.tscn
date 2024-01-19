@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://chro7uitsr387"]
+
+[ext_resource type="Script" path="res://Scenes/UI/InventoryUI/InventoryButton.cs" id="1_tmbwa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4b2hp"]
+bg_color = Color(1, 0.941176, 0.854902, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77fhu"]
+bg_color = Color(1, 0.866667, 0.658824, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_atpgh"]
+bg_color = Color(1, 0.788235, 0.435294, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o55l5"]
+
+[node name="InventoryButton" type="Button"]
+clip_contents = true
+custom_minimum_size = Vector2(82, 82)
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_4b2hp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_77fhu")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_atpgh")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_4b2hp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_o55l5")
+script = ExtResource("1_tmbwa")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -24.0
+offset_right = 24.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1

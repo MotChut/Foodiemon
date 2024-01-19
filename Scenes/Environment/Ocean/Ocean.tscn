@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://hn4pgblhccso"]
 
-[ext_resource type="Shader" uid="uid://ca33csh8sek3e" path="res://Shaders/WaterShader.tres" id="1_qxs08"]
+[ext_resource type="Shader" uid="uid://vj2c8kpuyw7r" path="res://Shaders/Ocean.tres" id="1_6ywgi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f5dh4"]
 render_priority = 0
-shader = ExtResource("1_qxs08")
+shader = ExtResource("1_6ywgi")
 shader_parameter/ColorParameter = Color(0, 0.266667, 0.533333, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_2rt2n"]

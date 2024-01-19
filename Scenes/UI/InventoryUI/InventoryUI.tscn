@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://7amt0kkvg20j" path="res://Assets/UI/Chest.png" id="2_ktw87"]
 [ext_resource type="Texture2D" uid="uid://capopuh8oldg1" path="res://Assets/UI/backpack.png" id="3_kmua1"]
 
-[sub_resource type="ImageTexture" id="ImageTexture_7xcfe"]
+[sub_resource type="ImageTexture" id="ImageTexture_3ptch"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3ha8"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wwk1h"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -17,7 +17,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcfm7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w8l3o"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -28,7 +28,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkkxt"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3cved"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -39,7 +39,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3whsb"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i4wr1"]
 content_margin_left = 4.0
 content_margin_top = 0.0
 content_margin_right = 4.0
@@ -50,7 +50,7 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yis1"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v5hif"]
 content_margin_left = 4.0
 content_margin_top = 4.0
 content_margin_right = 4.0
@@ -71,17 +71,17 @@ expand_margin_right = 2.0
 expand_margin_bottom = 2.0
 
 [sub_resource type="Theme" id="Theme_87wou"]
-VScrollBar/icons/decrement = SubResource("ImageTexture_7xcfe")
-VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_7xcfe")
-VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_7xcfe")
-VScrollBar/icons/increment = SubResource("ImageTexture_7xcfe")
-VScrollBar/icons/increment_highlight = SubResource("ImageTexture_7xcfe")
-VScrollBar/icons/increment_pressed = SubResource("ImageTexture_7xcfe")
-VScrollBar/styles/grabber = SubResource("StyleBoxFlat_a3ha8")
-VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_tcfm7")
-VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_xkkxt")
-VScrollBar/styles/scroll = SubResource("StyleBoxFlat_3whsb")
-VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_8yis1")
+VScrollBar/icons/decrement = SubResource("ImageTexture_3ptch")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_3ptch")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_3ptch")
+VScrollBar/icons/increment = SubResource("ImageTexture_3ptch")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_3ptch")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_3ptch")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_wwk1h")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_w8l3o")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_3cved")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_i4wr1")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_v5hif")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wy8go"]
 bg_color = Color(1, 0.941176, 0.854902, 1)
@@ -107,6 +107,8 @@ corner_radius_bottom_left = 12
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xrljq"]
 
 [node name="InventoryUI" type="CanvasLayer"]
+process_mode = 3
+visible = false
 script = ExtResource("1_7o2wp")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -118,11 +120,8 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.392157)
 
 [node name="Container" type="MarginContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = 1280.0
+offset_bottom = 720.0
 pivot_offset = Vector2(640, 360)
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -171,7 +170,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
-columns = 2
 
 [node name="Inventory" type="Button" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
 clip_contents = true
@@ -201,6 +199,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Inventory2" type="Button" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
 clip_contents = true
@@ -230,6 +229,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+stretch_mode = 5
 
 [node name="Inventory3" type="Button" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
 clip_contents = true
@@ -259,93 +259,7 @@ offset_bottom = 24.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
-
-[node name="Inventory4" type="Button" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
-clip_contents = true
-custom_minimum_size = Vector2(82, 82)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/hover = SubResource("StyleBoxFlat_nvv2m")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_s5sym")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xrljq")
-
-[node name="TextureRect" type="TextureRect" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory/Inventory4"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-
-[node name="Inventory5" type="Button" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
-clip_contents = true
-custom_minimum_size = Vector2(82, 82)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/hover = SubResource("StyleBoxFlat_nvv2m")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_s5sym")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xrljq")
-
-[node name="TextureRect" type="TextureRect" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory/Inventory5"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-
-[node name="Inventory6" type="Button" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
-clip_contents = true
-custom_minimum_size = Vector2(82, 82)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/hover = SubResource("StyleBoxFlat_nvv2m")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_s5sym")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xrljq")
-
-[node name="TextureRect" type="TextureRect" parent="Container/HBoxContainer/Left/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory/Inventory6"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
+stretch_mode = 5
 
 [node name="Right" type="MarginContainer" parent="Container/HBoxContainer"]
 layout_mode = 2
@@ -387,32 +301,3 @@ size_flags_vertical = 0
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 4
-
-[node name="Inventory" type="Button" parent="Container/HBoxContainer/Right/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
-clip_contents = true
-custom_minimum_size = Vector2(82, 82)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_styles/normal = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/hover = SubResource("StyleBoxFlat_nvv2m")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_s5sym")
-theme_override_styles/disabled = SubResource("StyleBoxFlat_wy8go")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xrljq")
-
-[node name="TextureRect" type="TextureRect" parent="Container/HBoxContainer/Right/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory/Inventory"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = -24.0
-offset_right = 24.0
-offset_bottom = 24.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1

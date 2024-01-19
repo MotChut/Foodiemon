@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cre1x3ni1mk2r"]
+[gd_scene load_steps=15 format=3 uid="uid://cre1x3ni1mk2r"]
 
 [ext_resource type="PackedScene" uid="uid://hn4pgblhccso" path="res://Scenes/Environment/Ocean/Ocean.tscn" id="1_5vpfo"]
 [ext_resource type="PackedScene" uid="uid://bva7oh0d71emj" path="res://Scenes/Environment/Object/Obstacles/Tree.tscn" id="2_6cjxe"]
@@ -9,10 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://bv4ct70b3y3n6" path="res://Scenes/Map/Home/Kitchen/Kitchen.tscn" id="5_f5x7j"]
 [ext_resource type="PackedScene" uid="uid://b4mcmjjg4iavh" path="res://Scenes/Map/Home/Blacksmith/Blacksmith.tscn" id="6_kxe6j"]
 [ext_resource type="PackedScene" uid="uid://4gi584yg5hpp" path="res://Scenes/Map/Home/Portal/Portal.tscn" id="7_0byep"]
+[ext_resource type="PackedScene" uid="uid://bi8qalkecpdtw" path="res://Scenes/Map/Home/House/House.tscn" id="8_by0of"]
 [ext_resource type="PackedScene" uid="uid://bspcva7a6qk4p" path="res://Scenes/Components/DayNightCycle/DayNightCycle.tscn" id="10_7j0st"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ejymt"]
-albedo_color = Color(0.588235, 0.521569, 0.32549, 1)
+albedo_color = Color(0.921569, 0.72549, 0.470588, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_vstxm"]
 material = SubResource("StandardMaterial3D_ejymt")
@@ -105,7 +106,7 @@ transform = Transform3D(1.73205, 0, -1, 0, 2, 0, 1, 0, 1.73205, 9, 0.5, 8)
 transform = Transform3D(1.41421, 0, 1.41421, 0, 2, 0, -1.41421, 0, 1.41421, -9, 0.5, -7)
 
 [node name="Tree15" parent="Objects" instance=ExtResource("2_6cjxe")]
-transform = Transform3D(1.73205, 0, -1, 0, 2, 0, 1, 0, 1.73205, -8, 0.5, -4)
+transform = Transform3D(0.174311, 0, -1.99239, 0, 2, 0, 1.99239, 0, 0.174311, -8, 0.5, -4)
 
 [node name="Tree16" parent="Objects" instance=ExtResource("2_6cjxe")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -9, 0.5, -1)
@@ -147,7 +148,7 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 9, 0.5, -9)
 transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 7, 0.5, 2)
 
 [node name="Rock2" parent="Objects" instance=ExtResource("3_wb4an")]
-transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, -5, 0.5, -6)
+transform = Transform3D(-0.5, 0, -0.866025, 0, 1, 0, 0.866025, 0, -0.5, 5, 0.5, 2)
 
 [node name="Rock3" parent="Objects" instance=ExtResource("3_wb4an")]
 transform = Transform3D(-0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -6, 0.5, 6)
@@ -181,13 +182,16 @@ shape = SubResource("BoxShape3D_y4o5o")
 [node name="Mechanics" type="Node3D" parent="."]
 
 [node name="Kitchen" parent="Mechanics" instance=ExtResource("5_f5x7j")]
-transform = Transform3D(0.581072, 0, 0.813852, 0, 1, 0, -0.813852, 0, 0.581072, -5.98694, 0.5, -2.29724)
+transform = Transform3D(0.882127, 0, 0.471012, 0, 1, 0, -0.471012, 0, 0.882127, -0.68694, 0.5, -6.29724)
 
 [node name="Blacksmith" parent="Mechanics" instance=ExtResource("6_kxe6j")]
-transform = Transform3D(0.708303, 0, -0.705909, 0, 1, 0, 0.705909, 0, 0.708303, -5.7988, 0.5, 1.7659)
+transform = Transform3D(0.708303, 0, -0.705909, 0, 1, 0, 0.705909, 0, 0.708303, 3, 0.5, -5)
 
 [node name="Portal" parent="Mechanics" instance=ExtResource("7_0byep")]
-transform = Transform3D(0.644604, 0, 0.764517, 0, 1, 0, -0.764517, 0, 0.644604, 2.75439, 0.5, 2.62305)
+transform = Transform3D(0.644604, 0, 0.764517, 0, 1, 0, -0.764517, 0, 0.644604, -6.74561, 0.5, -5.77695)
+
+[node name="House" parent="Mechanics" instance=ExtResource("8_by0of")]
+transform = Transform3D(0.0871557, 0, 0.996195, 0, 1, 0, -0.996195, 0, 0.0871557, -6.4, 0.5, 0)
 
 [node name="Camera" parent="." instance=ExtResource("4_bcbme")]
 

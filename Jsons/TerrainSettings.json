@@ -3,25 +3,31 @@
     "id": 0,
     "terraintype": "Floor",
     "objectrate": 5,
-    "movablegrass": 10,
+    "movablegrass": 15,
     "tree": 1,
     "berrybush": 1,
     "rock1": 1,
     "grassbush": 2,
     "flint": 3,
-    "grasssource": 1
+    "grasssource": 1,
+    "tree2": 0,
+    "dune": 0,
+    "grass2": 0
   },
   {
     "id": 1,
     "terraintype": "Trees",
     "objectrate": 5,
-    "movablegrass": 10,
+    "movablegrass": 15,
     "tree": 10,
     "berrybush": 1,
     "rock1": 1,
     "grassbush": 1,
     "flint": 3,
-    "grasssource": 1
+    "grasssource": 1,
+    "tree2": 0,
+    "dune": 0,
+    "grass2": 0
   },
   {
     "id": 2,
@@ -33,19 +39,25 @@
     "rock1": 0,
     "grassbush": 1,
     "flint": 1,
-    "grasssource": 1
+    "grasssource": 1,
+    "tree2": 0,
+    "dune": 0,
+    "grass2": 0
   },
   {
     "id": 3,
     "terraintype": "GrassLand",
-    "objectrate": 5,
-    "movablegrass": 5,
+    "objectrate": 10,
+    "movablegrass": 20,
     "tree": 2,
     "berrybush": 0,
     "rock1": 1,
     "grassbush": 1,
     "flint": 2,
-    "grasssource": 4
+    "grasssource": 4,
+    "tree2": 0,
+    "dune": 0,
+    "grass2": 0
   },
   {
     "id": 4,
@@ -57,6 +69,54 @@
     "rock1": 1,
     "grassbush": 1,
     "flint": 2,
-    "grasssource": 5
+    "grasssource": 5,
+    "tree2": 0,
+    "dune": 0,
+    "grass2": 0
+  },
+  {
+    "id": 5,
+    "terraintype": "Desert",
+    "objectrate": 5,
+    "movablegrass": 0,
+    "tree": 0,
+    "berrybush": 0,
+    "rock1": 0,
+    "grassbush": 0,
+    "flint": 0,
+    "grasssource": 0,
+    "tree2": 5,
+    "dune": 1,
+    "grass2": 5
+  },
+  {
+    "id": 6,
+    "terraintype": "Potatoon",
+    "objectrate": 5,
+    "movablegrass": 0,
+    "tree": 0,
+    "berrybush": 0,
+    "rock1": 0,
+    "grassbush": 0,
+    "flint": 0,
+    "grasssource": 0,
+    "tree2": 1,
+    "dune": 5,
+    "grass2": 5
+  },
+  {
+    "id": 7,
+    "terraintype": "Flowee",
+    "objectrate": 5,
+    "movablegrass": 0,
+    "tree": 0,
+    "berrybush": 0,
+    "rock1": 0,
+    "grassbush": 0,
+    "flint": 0,
+    "grasssource": 0,
+    "tree2": 1,
+    "dune": 5,
+    "grass2": 5
   }
 ]

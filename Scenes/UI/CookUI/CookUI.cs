@@ -27,7 +27,6 @@ public partial class CookUI : CanvasLayer
 	TextureRect cookTexture, dishTexture;
 	HBoxContainer hBoxContainer;
 	Control newDishUI;
-	UserData userdata;
 
 	public override void _Ready()
 	{
@@ -53,7 +52,6 @@ public partial class CookUI : CanvasLayer
 		Vector2 viewportSize = GetViewport().GetVisibleRect().Size;
 		Scale = new Vector2(viewportSize.X / SIZEX, viewportSize.Y / SIZEY);
 
-		userdata = UserData.GetInstance();
 		LoadUserIngredients();
 	}
 
@@ -63,6 +61,7 @@ public partial class CookUI : CanvasLayer
 		{
 			GetTree().Paused = false;
 			QueueFree();
+			GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = true;
 		}
 		if(Input.IsActionJustPressed("attack") && clickRequired)
 		{
@@ -244,7 +243,9 @@ public partial class CookUI : CanvasLayer
 
 		if(hasPossibleDish) // Has some dishes
 		{
+			userdata.userDishes[possibleDish.food] = true;
 			string type = System.Text.RegularExpressions.Regex.Replace(possibleDish.food, @"\s+", "");
+			userdata.userInventory.Add((DishType)Enum.Parse(typeof(DishType), type));
 			RunDishAnimation((DishType)Enum.Parse(typeof(DishType), type), possibleDish.food);
 		}
 		else // No possible dishes

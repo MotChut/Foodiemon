@@ -1,0 +1,243 @@
+[gd_scene load_steps=15 format=3 uid="uid://dc12i74lghi7f"]
+
+[ext_resource type="Texture2D" uid="uid://capopuh8oldg1" path="res://Assets/UI/backpack.png" id="1_ivpyg"]
+[ext_resource type="Script" path="res://Scenes/UI/SettingUI/SettingUI.cs" id="1_vdi71"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_7xcfe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3ha8"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.941176, 0.733333, 0.337255, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcfm7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkkxt"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.75, 0.75, 0.75, 0.75)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3whsb"]
+content_margin_left = 4.0
+content_margin_top = 0.0
+content_margin_right = 4.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8yis1"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.75)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="Theme" id="Theme_66fr8"]
+VScrollBar/icons/decrement = SubResource("ImageTexture_7xcfe")
+VScrollBar/icons/decrement_highlight = SubResource("ImageTexture_7xcfe")
+VScrollBar/icons/decrement_pressed = SubResource("ImageTexture_7xcfe")
+VScrollBar/icons/increment = SubResource("ImageTexture_7xcfe")
+VScrollBar/icons/increment_highlight = SubResource("ImageTexture_7xcfe")
+VScrollBar/icons/increment_pressed = SubResource("ImageTexture_7xcfe")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_a3ha8")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_tcfm7")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_xkkxt")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_3whsb")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_8yis1")
+
+[sub_resource type="SystemFont" id="SystemFont_w3wpl"]
+font_names = PackedStringArray("Montserrat")
+font_weight = 600
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tigvp"]
+bg_color = Color(1, 0.941176, 0.854902, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0hf06"]
+bg_color = Color(1, 0.866667, 0.658824, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7m5a"]
+bg_color = Color(1, 0.752941, 0.317647, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g17ya"]
+
+[node name="SettingUI" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_vdi71")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+pivot_offset = Vector2(640, 360)
+color = Color(0, 0, 0, 0.392157)
+
+[node name="Menu" type="MarginContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+pivot_offset = Vector2(640, 360)
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="TextureRect" type="TextureRect" parent="Menu"]
+layout_mode = 2
+texture = ExtResource("1_ivpyg")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 160
+theme_override_constants/margin_bottom = 70
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Menu/TextureRect/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_66fr8")
+
+[node name="MarginContainer" type="MarginContainer" parent="Menu/TextureRect/MarginContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+
+[node name="Inventory" type="GridContainer" parent="Menu/TextureRect/MarginContainer/ScrollContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="Resolution" type="Button" parent="Menu/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_w3wpl")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0hf06")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j7m5a")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g17ya")
+text = "1280 x 720
+"
+
+[node name="Volumn" type="Button" parent="Menu/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_w3wpl")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0hf06")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j7m5a")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g17ya")
+text = "Volumn: 100%
+"
+
+[node name="ShowHP" type="Button" parent="Menu/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_w3wpl")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0hf06")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j7m5a")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g17ya")
+text = "Show Enemy HP
+"
+
+[node name="ToTitle" type="Button" parent="Menu/TextureRect/MarginContainer/ScrollContainer/MarginContainer/Inventory"]
+clip_contents = true
+custom_minimum_size = Vector2(320, 48)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.239216, 0.239216, 0.239216, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = SubResource("SystemFont_w3wpl")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/hover = SubResource("StyleBoxFlat_0hf06")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_j7m5a")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_tigvp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_g17ya")
+text = "To Title Screen"

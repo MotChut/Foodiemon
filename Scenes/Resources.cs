@@ -11,8 +11,8 @@ public partial class Resources : Node
 	#region Constants
 	public static string NextPath = "";
 	public const float SPEED_SCALE = 1f;
-	public const int MIN_REGION_SIZE = 15;
-	public const int MAX_REGION_SIZE = 20;
+	public const int MIN_REGION_SIZE = 7;
+	public const int MAX_REGION_SIZE = 14;
 	public const int TILE_SIZE = 20;
 	public const string EntitySettingsJson = "res://Jsons/EntitySettings.json";
 	public const string TerrainSettingsJson = "res://Jsons/TerrainSettings.json";
@@ -24,10 +24,13 @@ public partial class Resources : Node
 	public const string PossibleRelationshipJson = "res://Jsons/PossibleRelationship.json";
 	public const string ForestRegion_Scene = "res://Scenes/Environment/Terrain/ForestRegion.tscn";
 	public const string ProceduralGeneration_Path = "res://Scenes/Map/ProceduralGeneration.tscn";
+	public const string TitleScreen_Path = "res://Scenes/UI/TitleScreen/TitleScreen.tscn";
+	public const string Home_Path = "res://Scenes/Map/Home/Home.tscn";
 	public const string LoadingScene_Path = "res://Scenes/UI/Loading/Loading.tscn";
 	public const string CookScene_Path = "res://Scenes/UI/CookUI/CookUI.tscn";
 	public const string ForgeScene_Path = "res://Scenes/UI/ForgeUI/ForgeUI.tscn";
 	public static ProceduralGeneration proGen;
+	public static UserData userdata;
 
 	public enum Relationship
 	{
@@ -37,20 +40,22 @@ public partial class Resources : Node
 
 	public enum Entities
 	{
-		BlueChicpea, Chicpea, Rawrberry
+		BlueChicpea, Chicpea, Rawrberry, Potatoon, Flowee
 	}
 
 	public enum RegionType {
-		ForestRegion
+		ForestRegion, DesertRegion
 	}
 	
 	public enum TerrainType {
-		Floor, Trees, ChicpeaBase, GrassLand, RawrberryBase
+		Floor, Trees, ChicpeaBase, GrassLand, RawrberryBase, 
+		Desert, Potatoon, Flowee
 	}
 
 	public enum MaterialType 
 	{
-		Berry, Twig, Flint, CutGrass, ChicNugget, ChicEgg, ChicLeg
+		Berry, Twig, Flint, CutGrass, ChicNugget, ChicEgg, ChicLeg, SrawrBerry, RawrMeat,
+		RawrHorn
 	}
 
 	public enum CraftType
@@ -60,22 +65,23 @@ public partial class Resources : Node
 
 	public enum DishType
 	{
-		ChickenBerrySauce
+		ChickenBerrySauce, Salad, BerrySoup
 	}
 
 	public static List<TerrainType> EntitiesTerrainType = new List<TerrainType>()
 	{
-		TerrainType.ChicpeaBase, TerrainType.RawrberryBase
+		TerrainType.ChicpeaBase, TerrainType.RawrberryBase, TerrainType.Potatoon, TerrainType.Flowee
 	};
 	
 	public static List<MaterialType?> FoodMaterialType = new List<MaterialType?>()
 	{
-		MaterialType.Berry, MaterialType.ChicNugget, MaterialType.ChicEgg, MaterialType.ChicLeg
+		MaterialType.Berry, MaterialType.ChicNugget, MaterialType.ChicEgg, MaterialType.ChicLeg,
+		MaterialType.RawrMeat, MaterialType.SrawrBerry
 	};
 
 	public static List<MaterialType?> CraftMaterialType = new List<MaterialType?>()
 	{
-		MaterialType.Twig, MaterialType.Flint, MaterialType.CutGrass
+		MaterialType.Twig, MaterialType.Flint, MaterialType.CutGrass, MaterialType.RawrHorn
 	};
 
 	public static Dictionary<MaterialType?, Texture2D> MaterialAssets = new Dictionary<MaterialType?, Texture2D>()
@@ -86,7 +92,10 @@ public partial class Resources : Node
 		[MaterialType.ChicEgg] = (Texture2D)GD.Load("res://Assets/FoodIngredients/ChicEgg.png"),
 		[MaterialType.Twig] = (Texture2D)GD.Load("res://Assets/Material/Twig.png"),
 		[MaterialType.Flint] = (Texture2D)GD.Load("res://Assets/Material/Flint.png"),
-		[MaterialType.CutGrass] = (Texture2D)GD.Load("res://Assets/Material/Cut grass.png")
+		[MaterialType.CutGrass] = (Texture2D)GD.Load("res://Assets/Material/Cut grass.png"),
+		[MaterialType.RawrHorn] = (Texture2D)GD.Load("res://Assets/Material/Rawr horn.png"),
+		[MaterialType.RawrMeat] = (Texture2D)GD.Load("res://Assets/FoodIngredients/Rawrmeat.png"),
+		[MaterialType.SrawrBerry] = (Texture2D)GD.Load("res://Assets/FoodIngredients/Srawr berry.png"),
 	};
 
 	public static Dictionary<MaterialType?, string> MaterialDescriptions = new Dictionary<MaterialType?, string>()
@@ -97,12 +106,17 @@ public partial class Resources : Node
 		[MaterialType.ChicEgg] = "Delicious extra protein!",
 		[MaterialType.Twig] = "Just a boring dry twig.",
 		[MaterialType.Flint] = "Flint can be very useful in multiple aspects.",
-		[MaterialType.CutGrass] = "1 cutgrass can do nothing but 3 cutgrass can become a rope."
+		[MaterialType.CutGrass] = "1 cutgrass can do nothing but 3 cutgrass can become a rope.",
+		[MaterialType.RawrHorn] = "Could be extremely expensive!",
+		[MaterialType.RawrMeat] = "The flesh of the dangerous predator!",
+		[MaterialType.SrawrBerry] = "Cool to eat no matter hot or cold the weather is."
 	};
 
 	public static Dictionary<DishType, Texture2D> DishAsset = new Dictionary<DishType, Texture2D>()
 	{
 		[DishType.ChickenBerrySauce] = (Texture2D)GD.Load("res://Assets/Dish/ChickenBerrySauce.png"),
+		[DishType.Salad] = (Texture2D)GD.Load("res://Assets/Dish/Salad.png"),
+		[DishType.BerrySoup] = (Texture2D)GD.Load("res://Assets/Dish/Berry soup.png")
 	};
 
 	public static Dictionary<CraftType, Texture2D> CraftAsset = new Dictionary<CraftType, Texture2D>()
@@ -120,6 +134,8 @@ public partial class Resources : Node
 		[Entities.Chicpea] = (Texture2D)GD.Load("res://Assets/2D/Chicpea.png"),
 		[Entities.BlueChicpea] = (Texture2D)GD.Load("res://Assets/2D/BlueChicpea.png"),
 		[Entities.Rawrberry] = (Texture2D)GD.Load("res://Assets/2D/Rawrberry.png"),
+		[Entities.Potatoon] = (Texture2D)GD.Load("res://Assets/2D/Potatoon.png"),
+		[Entities.Flowee] = (Texture2D)GD.Load("res://Assets/2D/Flowee.png"),
 	};
 
 	public static Dictionary<Entities, string> CreatureDescription = new Dictionary<Entities, string>()
@@ -127,11 +143,15 @@ public partial class Resources : Node
 		[Entities.Chicpea] = "A creature mixed from chicken & pea.",
 		[Entities.BlueChicpea] = "Chicpea leader, the one that leads the whole pack.",
 		[Entities.Rawrberry] = "Not so easy-going. Like to hunt everything down, no matter chics or you.",
+		[Entities.Potatoon] = "Potatatatatatooooon. A creature that likes hot sand and warm sunlight.",
+		[Entities.Flowee] = "POISON ALERT! KEEP AWAY FROM IT!"
 	};
 
 	public static Dictionary<DishType, string> DishDescription = new Dictionary<DishType, string>()
 	{
-		[DishType.ChickenBerrySauce] = "Kill Chicpeas and appreciate their juicy meaty chunky legs."
+		[DishType.ChickenBerrySauce] = "Kill Chicpeas and appreciate their juicy meaty chunky legs.",
+		[DishType.Salad] = "A combination of natural materials! (not all but kinda)",
+		[DishType.BerrySoup] = "Warm soup is made using a dangerous creature - RAWRBERRY!."
 	};
 
 	public static Dictionary<string, PackedScene> ObjectSceneDictionary = new Dictionary<string, PackedScene>()
@@ -142,7 +162,10 @@ public partial class Resources : Node
 		["Rock1"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Rock1.tscn"),
 		["GrassBush"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassBush.tscn"),
 		["Flint"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/Flint.tscn"),
-		["GrassSource"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassSource.tscn")
+		["GrassSource"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Sources/GrassSource.tscn"),
+		["Tree2"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Tree2.tscn"),
+		["Dune"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Obstacles/Dune.tscn"),
+		["Grass2"] = (PackedScene)ResourceLoader.Load("res://Scenes/Environment/Object/Decorations/Grass2.tscn"),
 	};
 
 	public static Dictionary<MaterialType?, PackedScene> MaterialSceneDictionary = new Dictionary<MaterialType?, PackedScene>()
@@ -248,7 +271,7 @@ public partial class Resources : Node
 		LoadEntitySettings();
 		LoadTerrainSettings();
 		LoadRegionSettings();
-		
+		userdata = UserData.GetInstance();
 	}
 
 	static void LoadStatsSettings()

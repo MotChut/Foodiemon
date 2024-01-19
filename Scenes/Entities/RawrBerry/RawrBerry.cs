@@ -1,22 +1,15 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using static Resources;
 
 public partial class RawrBerry : Entity
 {
     #region Init
-    AnimationPlayer effectPlayer;
-	AnimationTree animationTree;
-	AnimatedSprite2D effectSprite;
-	Sprite3D effectNode;
 
     public override void _Ready()
     {
         base._Ready();
-        effectNode = GetNode<Sprite3D>("Effects/AttackEffect");
-		effectPlayer = GetNode<AnimationPlayer>("Effects/AttackEffect/SubViewport/AnimationPlayer");
-		effectSprite = GetNode<AnimatedSprite2D>("Effects/AttackEffect/SubViewport/AnimatedSprite2D");
-		animationTree = GetNode<AnimationTree>("AnimationTree");
 
         rnd = new Random();
         TaskByGroup(Task.Explore, this);
@@ -24,7 +17,8 @@ public partial class RawrBerry : Entity
 
     public override void _PhysicsProcess(double delta)
     {
-        GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentTask.ToString();
+        healthContainer.Visible = GetTree().Root.GetNode<SettingUI>("SettingUi").showHP;
+
         if(currentState == States.Hurt)
         {
             KnockBack();
@@ -42,7 +36,7 @@ public partial class RawrBerry : Entity
 
     #endregion
 
-     #region Tasks Related
+    #region Tasks Related
     public override async void UpdateCurrentTask()
     {
         if(tasks[(int)CurrentTime] == Task.Continue) return;
@@ -93,7 +87,7 @@ public partial class RawrBerry : Entity
     public override void TaskByGroup(Task task, Entity rawrberry)
     {
         GiveTask(rawrberry, GameTime.Day, Task.Explore);
-        GiveTask(rawrberry, GameTime.Noon, Task.Continue);
+        GiveTask(rawrberry, GameTime.Noon, Task.Explore);
         GiveTask(rawrberry, GameTime.Night, Task.HomeRest);
     }
 
@@ -107,6 +101,7 @@ public partial class RawrBerry : Entity
         switch(currentTask)
         {
             case Task.Hunt:
+            animationTree.Set("parameters/Transition/transition_request", "Chase");
             if(target != null) KeepTrackOfTarget();
 		    if(targetPos != Vector3.Zero) Chase();
             break;
@@ -114,6 +109,7 @@ public partial class RawrBerry : Entity
             Runaway();
             break;
             case Task.Explore:
+            animationTree.Set("parameters/Transition/transition_request", "Walk");
             Wander();
             break;
             case Task.HomeRest:
@@ -189,28 +185,22 @@ public partial class RawrBerry : Entity
         Visible = false;
     }
 
-    void PlayEffect()
-	{
-		effectSprite.Play("Attack");
-	}
-
     public override void AttackArea_Body(Node3D body)
     {
         if(canAttack)
         {
             canAttack = false;
             isAttacking = true;
-            GetNode<AnimationPlayer>("AnimationPlayer").Play("AttackReady");
+            animationTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
         }
     }
 
     async void DealDamage()
     {            
-        effectPlayer.Play("Attack");
         var targets = attackArea.GetOverlappingBodies();
 		foreach(var target in targets)
 		{
-			if(target is Entity)
+			if(target is Entity && target != this)
 			{
 				Entity e = target as Entity;
 				e.GetHit(GlobalPosition, this, statsSettings.force, statsSettings.attackPoint);
@@ -221,9 +211,8 @@ public partial class RawrBerry : Entity
 				e.GetHit(GlobalPosition, this, statsSettings.force, statsSettings.attackPoint);
 			}
 		}
-
-        await ToSignal(GetTree().CreateTimer(statsSettings.attackSpd), "timeout");
         isAttacking = false;
+        await ToSignal(GetTree().CreateTimer(statsSettings.attackSpd), "timeout");
         canAttack = true;
     }
 
@@ -231,8 +220,9 @@ public partial class RawrBerry : Entity
 	{
 		if(invincibleTimer.IsStopped())
 		{
-			if(!GetNode<AnimationPlayer>("AnimationPlayer").IsPlaying()) GetNode<AnimationPlayer>("AnimationPlayer").Play("Hurt");
+			animationTree.Set("parameters/HurtShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
 			hp -= dmg;
+            healthBar.Value = hp;
 			if(hp <= 0)
 			{ 
 				Die();
@@ -245,4 +235,15 @@ public partial class RawrBerry : Entity
 			SetState(States.Hurt);
 		}
 	}
+
+    public override void GiveMaterials()
+    {
+        List<MaterialType?> dropList = new List<MaterialType?>(){ MaterialType.RawrMeat, MaterialType.SrawrBerry};
+        MaterialType? materialType =  dropList[rnd.Next(dropList.Count)];
+        int amount = rnd.Next(3) + 1;
+        if(userdata.userIngredients.ContainsKey(materialType))
+            userdata.userIngredients[materialType] += amount;
+        else
+            userdata.userIngredients.Add(materialType, amount);
+    }
 }

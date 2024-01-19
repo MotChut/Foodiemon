@@ -8,7 +8,7 @@ public partial class Kitchen : Node3D
 
 	public override void _Ready()
 	{
-		interactiveArea = GetNode<Area3D>("MeshInstance3D/InteractiveArea");
+		interactiveArea = GetNode<Area3D>("InteractiveArea");
 		notice = GetNode<Node3D>("InteractiveNotice");
 
 		interactiveArea.Connect("body_entered", new Callable(this, "PlayerEnter"));

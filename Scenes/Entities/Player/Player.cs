@@ -1,10 +1,10 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using static Resources;
 
 public partial class Player : CharacterBody3D
 {
+	[Export] AudioStreamWav slashSound;
 	[Export] public int maxHP = 5;
 	[Export] public float maxSpd = 3.0f;
 	[Export] public float dodgeSpd = 12.0f;
@@ -23,12 +23,15 @@ public partial class Player : CharacterBody3D
 
 	public Vector3 attackSourcePos;
 	public float attackSourceKnock;
+	MapSource currentMapSource;
 
 	float angular = AngularAccel;
 	int attack = 1;
 	float knockForce = 3;
 
 	BookUI bookUI;
+	SettingUI settingUI;
+	InventoryUI inventoryUI;
 
 	Node3D sprite, areas, timers;
 	AnimationPlayer effectPlayer;
@@ -38,6 +41,7 @@ public partial class Player : CharacterBody3D
 	Camera3D camera;
 	Area3D attackArea;
 	Timer dodgeTimer, invincibleTimer, knockbackTimer;
+	AudioStreamPlayer audioPlayer;
 
 	public enum States
 	{
@@ -66,23 +70,52 @@ public partial class Player : CharacterBody3D
 		animationTree = GetNode<AnimationTree>("AnimationTree");
 		camera = GetParent().GetNode<Camera>("Camera").GetNode<Camera3D>("Camera3D");
 		dodgeTimer = timers.GetNode<Timer>("DodgeTimer");
+		audioPlayer = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
 		dodgeTimer.Connect("timeout", new Callable(this, "DodgeTimeout"));
 		knockbackTimer.Connect("timeout", new Callable(this, "KnockbackTimeout"));
 
 		bookUI = GetTree().Root.GetNode<BookUI>("BookUi");
+		settingUI = GetTree().Root.GetNode<SettingUI>("SettingUi");
+		inventoryUI = GetTree().Root.GetNode<InventoryUI>("InventoryUi");
 
 		hp = maxHP;
     }
 
     public override void _PhysicsProcess(double delta)
-	{
+	{ 
 		GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentState.ToString();
 		#region Interact
+		if(Input.IsActionJustPressed("escape"))
+		{
+			if(!settingUI.Visible)
+			{
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
+				settingUI.Visible = true;
+				GetTree().Paused = true;
+			}
+		}
+		if(Input.IsActionJustPressed("home"))
+		{
+			GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
+			Resources.Generate();
+			NextPath = Home_Path;
+			GetTree().ChangeSceneToFile(LoadingScene_Path);
+			return;
+		}
 		if(Input.IsActionJustPressed("interact"))
 		{
+			if(currentMapSource != null)
+			{
+				currentMapSource.CollectResource(1);
+
+				if(currentMapSource.isFoodSource) userdata.userIngredients[currentMapSource.resourceType] += 1;
+				else userdata.userMaterials[currentMapSource.resourceType] += 1;
+			}
 			if(canTeleport)
 			{
+				GetTree().Root.GetNode<AudioController>("AudioController").Stop();
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
 				canTeleport = false;
 				NextPath = ProceduralGeneration_Path;
 				GetTree().ChangeSceneToFile(LoadingScene_Path);
@@ -90,6 +123,7 @@ public partial class Player : CharacterBody3D
 			}
 			else if(canSmith)
 			{
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
 				canSmith = false;
 				ForgeUI forgeUI = (ForgeUI)((PackedScene)ResourceLoader.Load(ForgeScene_Path)).Instantiate();
 				GetParent().AddChild(forgeUI);
@@ -98,6 +132,7 @@ public partial class Player : CharacterBody3D
 			}
 			else if(canCook)
 			{
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
 				canCook = false;
 				CookUI cookUI = (CookUI)((PackedScene)ResourceLoader.Load(CookScene_Path)).Instantiate();
 				GetParent().AddChild(cookUI);
@@ -109,11 +144,51 @@ public partial class Player : CharacterBody3D
 		{
 			if(!bookUI.Visible)
 			{
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
 				bookUI.Visible = true;
 				GetTree().Paused = true;
 			}
 		}
-
+		if(Input.IsActionJustPressed("inventory"))
+		{
+			if(!inventoryUI.Visible)
+			{
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Visible = false;
+				inventoryUI.Visible = true;
+				GetTree().Paused = true;
+			}
+		}
+		if(Input.IsActionJustPressed("item3"))
+		{
+			if(hp >= maxHP) return;
+			if(userdata.userEquipment.Count >= 3)
+			{
+				Heal();
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Reorder(2);
+				userdata.userEquipment.RemoveAt(2);
+			}
+		}
+		if(Input.IsActionJustPressed("item2"))
+		{
+			if(hp >= maxHP) return;
+			if(userdata.userEquipment.Count >= 2)
+			{
+				Heal();
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Reorder(1);
+				userdata.userEquipment.RemoveAt(1);
+			}
+		}
+		if(Input.IsActionJustPressed("item1"))
+		{
+			if(hp >= maxHP) return;
+			if(userdata.userEquipment.Count >= 1)
+			{
+				Heal();
+				GetTree().Root.GetNode<PlayerHUD>("PlayerHud").Reorder(0);
+				userdata.userEquipment.RemoveAt(0);
+			}
+		}
+	
 		#endregion
 
 		#region Movement
@@ -222,10 +297,17 @@ public partial class Player : CharacterBody3D
    			var distance = Mathf.Abs(Mathf.Wrap(2.0 * difference, 0.0f, Mathf.Tau) - difference);
 			await ToSignal(GetTree().CreateTimer(distance * 0.05f), "timeout");
 			effectPlayer.Play("Attack");
+			PlayAudio(slashSound);
 			DealDamage();
 			angular = AngularAccel;
 		}
 		
+	}
+
+	public void Heal()
+	{
+		hp += 1;
+		GetTree().Root.GetNode<PlayerHUD>("PlayerHud").UpdateHealth(hp);
 	}
 
 	async void DealDamage()
@@ -237,6 +319,7 @@ public partial class Player : CharacterBody3D
 			{
 				Entity e = target as Entity;
 				e.GetHit(GlobalPosition, this, knockForce, attack);
+				e.HurtSound();
 			}
 		}
 		await ToSignal(GetTree().CreateTimer(attackSpeed), "timeout");
@@ -264,6 +347,7 @@ public partial class Player : CharacterBody3D
 			animationTree.Set("parameters/OneShot/request", (int)AnimationNodeOneShot.OneShotRequest.Fire);
 
 			hp -= dmg;
+			GetTree().Root.GetNode<PlayerHUD>("PlayerHud").UpdateHealth(hp);
 			if(hp <= 0)
 			{ 
 				//Die();
@@ -287,5 +371,21 @@ public partial class Player : CharacterBody3D
 	public void KnockbackTimeout()
 	{
 		SetState(States.Idle);
+	}
+
+	public void SetCurrentMapSource(MapSource mapSource)
+	{
+		currentMapSource = mapSource;
+	}
+
+	public MapSource GetCurrentMapSource()
+	{
+		return currentMapSource;
+	}
+
+	void PlayAudio(AudioStreamWav sound)
+	{
+		audioPlayer.Stream = sound;
+		audioPlayer.Play();
 	}
 }

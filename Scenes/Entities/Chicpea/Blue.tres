@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://csodykea2ddj"]
+
+[resource]
+resource_name = "cai mao"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.294118, 0.721569, 0.85098, 1)

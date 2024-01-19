@@ -6,5 +6,25 @@
       "amount1": 2,
       "material2": "Berry",
       "amount2": 2
+    }, 
+    {
+      "id": 1,
+      "food": "Salad",
+      "material1": "SrawrBerry",
+      "amount1": 2,
+      "material2": "Berry",
+      "amount2": 2,
+      "material3": "ChicEgg",
+      "amount3": 1
+    }, 
+    {
+      "id": 2,
+      "food": "Berry Soup",
+      "material1": "RawrMeat",
+      "amount1": 1,
+      "material2": "SrawrBerry",
+      "amount2": 2,
+      "material3": "ChicEgg",
+      "amount3": 1
     }
   ]

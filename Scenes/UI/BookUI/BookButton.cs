@@ -10,6 +10,7 @@ public partial class BookButton : Button
 	string name;
 	string description;
 	string type;
+	bool available;
 	
 	public override void _Ready()
 	{
@@ -22,6 +23,18 @@ public partial class BookButton : Button
 	public void SetTexture(Texture2D texture2D)
 	{	
 		textureRect.Texture = texture2D;
+	}
+
+	public void SetAvailable(bool b)
+	{
+		available = b;
+
+		if(!available)
+		{
+			Modulate = new Color(0, 0, 0, 1);
+			Disabled = true;
+			FocusMode = FocusModeEnum.None;
+		}
 	}
 
 	public void SetType(string s)

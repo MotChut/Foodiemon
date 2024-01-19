@@ -9,9 +9,9 @@ public partial class ProceduralGeneration : Node3D
 
 	#region Constants
 	const int MIN_DISTANCE = 1;
-	const int MAX_DISTANCE = 3;
-	const int MIN_REGION = 3;
-	const int MAX_REGION = 6;
+	const int MAX_DISTANCE = 2;
+	const int MIN_REGION = 2;
+	const int MAX_REGION = 4;
 	List<Vector2> availableDirection4 = new List<Vector2>() 
 	{
 		new Vector2(-1, 0), new Vector2(1, 0), new Vector2(0, -1), new Vector2(0, 1)
@@ -80,7 +80,8 @@ public partial class ProceduralGeneration : Node3D
 		List<Vector2> tree = new List<Vector2>();
 	
 		nRegion = rnd.Next(MIN_REGION, MAX_REGION + 1);
-		Region region = new Region(RegionType.ForestRegion);
+		var regionList = Enum.GetValues(typeof(RegionType));
+		Region region = new Region((RegionType)regionList.GetValue(rnd.Next(regionList.Length)));
 		tree.Add(Vector2.Zero);
 		regions.Add(region);
 
@@ -95,7 +96,7 @@ public partial class ProceduralGeneration : Node3D
 				if(newCell != new Vector2(-1, -1))
 				{
 					tree.Add(newCell);
-					Region newRegion = new Region(RegionType.ForestRegion);
+					Region newRegion = new Region((RegionType)regionList.GetValue(rnd.Next(regionList.Length)));
 					regions[tree.IndexOf(selectedCell)].AddNeighbor(newRegion, newCell - selectedCell);
 					regions.Add(newRegion);
 					break;

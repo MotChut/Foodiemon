@@ -190,9 +190,5 @@ shape = SubResource("CylinderShape3D_or2q5")
 layers = 512
 texture = SubResource("ViewportTexture_c5opg")
 
-[node name="Label" parent="InteractiveNotice/SubViewport" index="0"]
-text = "
-"
-
 [node name="RegrowTimer" parent="." index="5"]
 wait_time = 10.0

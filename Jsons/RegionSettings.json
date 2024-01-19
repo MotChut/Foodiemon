@@ -9,6 +9,28 @@
     "chicpeabase": 5,
     "grassland": 1,
     "rawrberrymax": 4,
-    "rawrberrybase": 5
+    "rawrberrybase": 5,
+    "desert": 0,
+    "potatoonmax": 0,
+    "potatoon": 0,
+    "floweemax": 0,
+    "flowee": 0
+  },
+  {
+    "id": 1,
+    "regiontype": "Desert",
+    "path": "res://Scenes/Environment/Terrain/DesertRegion.tscn",
+    "chicpeamax": 0,
+    "floor": 0,
+    "trees": 0,
+    "chicpeabase": 0,
+    "grassland": 0,
+    "rawrberrymax": 0,
+    "rawrberrybase": 0,
+    "desert": 1,
+    "potatoonmax": 10,
+    "potatoon": 1,
+    "floweemax": 10,
+    "flowee": 1
   }
 ]

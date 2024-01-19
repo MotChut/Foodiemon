@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://cu0p8xwui8god"]
 
 [ext_resource type="PackedScene" uid="uid://d1dim43q6tf4p" path="res://Scenes/Environment/Material/Material.tscn" id="1_ppomt"]
-[ext_resource type="Texture2D" uid="uid://cwdttew1v8yho" path="res://Assets/Fruits and Vegetables/Pumpkin.png" id="2_bohg1"]
+[ext_resource type="Texture2D" uid="uid://buqumdua07tab" path="res://Assets/Material/Flint.png" id="2_og2f1"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kii5v"]
 viewport_path = NodePath("Sprite3D/SubViewport")
@@ -13,4 +13,6 @@ materialType = 2
 texture = SubResource("ViewportTexture_kii5v")
 
 [node name="Sprite2D" parent="Sprite3D/SubViewport" index="0"]
-texture = ExtResource("2_bohg1")
+texture_filter = 0
+texture = ExtResource("2_og2f1")
+stretch_mode = 5

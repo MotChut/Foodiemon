@@ -32,7 +32,6 @@ public partial class Pack : Node
     {
         GenerateDirections();
         GetRate();
-		GenerateAIPoints();
     }
 
     void GenerateDirections()
@@ -160,7 +159,16 @@ public partial class Pack : Node
 		}
 	}
 
-	public void GenerateAIPoints()
+	public void ChooseNewLeader()
 	{
+		Random rnd = new Random();
+		var entityList = new List<Entity>(entities).OrderByDescending(i => i.speed 
+                                                        * ((float)i.currentHunger / i.statsSettings.maxHunger)).ToList();
+		Entity entity = entityList[rnd.Next(entityList.Count)];
+		if(entity == leader) ChooseNewLeader();
+		else
+		{
+			leader = entity;
+		}
 	}
 }

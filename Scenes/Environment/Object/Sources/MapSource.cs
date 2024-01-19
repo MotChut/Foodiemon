@@ -33,8 +33,8 @@ public partial class MapSource : Object
 		subViewport.Size =(Vector2I)GetNode<Label>("InteractiveNotice/SubViewport/Label").GetRect().Size;
 		subViewport.Size = new Vector2I(subViewport.Size.X, subViewport.Size.Y * 6);
 
-		//detectArea.Connect("body_entered", new Callable(this, "DetectArea_Enter"));
-		//detectArea.Connect("body_exited", new Callable(this, "DetectArea_Exit"));
+		detectArea.Connect("body_entered", new Callable(this, "DetectArea_Enter"));
+		detectArea.Connect("body_exited", new Callable(this, "DetectArea_Exit"));
 		regrowTimer.Connect("timeout", new Callable(this, "Regrow"));
 
         rnd = new Random();
@@ -45,7 +45,7 @@ public partial class MapSource : Object
 
     public override void _PhysicsProcess(double delta)
     {
-		GetNode<Label>("InteractiveNotice/SubViewport/Label").Text = currentResources.ToString();
+		
     }
 
     void RegenerateResource()
@@ -75,6 +75,7 @@ public partial class MapSource : Object
 		{
 			canInteract = true;
 			interactiveNotice.Show();
+			((Player)body).SetCurrentMapSource(this);
 		}
 	}
 	void DetectArea_Exit(Node3D body)
@@ -83,6 +84,7 @@ public partial class MapSource : Object
 		{
 			canInteract = false;
 			interactiveNotice.Hide();
+			if(((Player)body).GetCurrentMapSource() == this) ((Player)body).SetCurrentMapSource(null);
 		}
 	}
 

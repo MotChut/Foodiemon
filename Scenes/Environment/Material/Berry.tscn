@@ -14,3 +14,4 @@ texture = SubResource("ViewportTexture_is4wl")
 
 [node name="Sprite2D" parent="Sprite3D/SubViewport" index="0"]
 texture = ExtResource("2_4r852")
+stretch_mode = 5

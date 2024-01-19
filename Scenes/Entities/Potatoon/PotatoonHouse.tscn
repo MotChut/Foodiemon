@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qyjfk5uml4fp"]
+
+[ext_resource type="Script" path="res://Scenes/Environment/Object/EntityBase.cs" id="1_2smo4"]
+
+[node name="PotatoonHouse" type="Node3D"]
+script = ExtResource("1_2smo4")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg32isghsnq3g"]
+[gd_scene load_steps=10 format=3 uid="uid://cg32isghsnq3g"]
 
 [ext_resource type="PackedScene" uid="uid://wc5roxvbcsm6" path="res://Scenes/Environment/Object/Sources/MapSource.tscn" id="1_54mhx"]
 [ext_resource type="Shader" path="res://Shaders/Toon.gdshader" id="3_2iwrk"]
@@ -96,6 +96,10 @@ shadow_mesh = SubResource("ArrayMesh_wcm0l")
 [sub_resource type="SphereShape3D" id="SphereShape3D_eowjd"]
 radius = 0.75
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_uni7q"]
+height = 1.0
+radius = 1.0
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_fq4fj"]
 viewport_path = NodePath("InteractiveNotice/SubViewport")
 
@@ -119,6 +123,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D" parent="SelfArea" index="0"]
 shape = SubResource("SphereShape3D_eowjd")
+
+[node name="CollisionShape3D" parent="DetectArea" index="0"]
+shape = SubResource("CylinderShape3D_uni7q")
 
 [node name="InteractiveNotice" parent="." index="4"]
 texture = SubResource("ViewportTexture_fq4fj")

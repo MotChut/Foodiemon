@@ -510,7 +510,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
-columns = 6
+columns = 5
 
 [node name="Control" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
@@ -525,9 +525,6 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Control5" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
-layout_mode = 2
-
-[node name="Control6" type="Control" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox/MarginContainer/ScrollContainer/MarginContainer/Ingredients"]
 layout_mode = 2
 
 [node name="MarginContainer2" type="MarginContainer" parent="Container/VBox/Body/HBoxContainer/MarginContainer/Right/VBox"]
